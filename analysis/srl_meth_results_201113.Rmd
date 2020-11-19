@@ -1,0 +1,967 @@
+---
+title: "Serial Reversal Learning in wild nectar-feeding bats - Draft 1"
+author: "Shambhavi"
+output: html_document
+fig_caption: yes
+---
+<style>
+body {
+text-align: justify}
+</style>
+---
+#Materials and Methods
+
+## Study site and subjects
+The experiment was done in June and July 2017 at La Selva Biological Field Station, Province Heredia, Costa Rica. Male and female individuals of the species *Glossophaga commissarisi* (**the questionable Garner reference**), were captured from the wild for the experiment at a few different in batches of 8 at a . The bats were attracted to a particular location in the forest using sugar-water (see **Reward** below) as bait and then caught in mist-nets. The bats were sexed and the selected individuals were were then taken to flight cages at another location in the rainforest. These were 4 x 6 m cabins with mesh walls, and thus with the same climactic conditions as the surrounding environment. The bats were weighed, radio frequency identification (RFID) tags were placed around their necks as collars (assigned uniquely to each bat) and released into the flight cages so they could fly within them freely. 4 bats at a time were put into a flight cage. These were called 'groups' and all the individuals in a group were the same sex. 
+
+Before the start of the experiment the procedure was tested with 4 females or 'beta bats' and refinements were made. The data from these individuals were not analysed. Of the bats that participated in the main experiment, most completed it and a few did not. The bats were released back into the forest upon completing the experiment, or as soon as we noticed they were not consuming a sufficient number of calories to maintain a healthy weight (see **Supplementary Information - Table 1** for details). Prior to release the RFID collars were removed, the bats were weighed and a small part of the hair on their backs was clipped to indicate that these individuals had participated in the experiment in case they were caught in the mist-nets again. (**are we allowed to mention this?**) No blinding was done as all the data collection was completely automatized. 
+Animal experimental procedures were reviewed and permission for animal experimentation and RFID-tagging was granted by Sistema Nacional de Areas de Conservación (SINAC) at the Ministerio de
+Ambiente y Energía (MINAE) Costa Rica.
+
+## Cage and feeder system
+### Reward
+The reward received by the bats during the experiment was also their main source of food. The reward was a 17% by weight solution of sugar dissolved in water (prepared fresh everyday), hereafter referred to as 'nectar'. The sugar consisted of a 1:1:1 mass-mixture of sucrose, fructose and dextrose. The nectar was thus similar in composition and concentration to the nectar produced by wild chiropterophilous plants (Baker et al., 1998).
+
+### Experimental Apparatus
+Each flight cage had a square plastic frame in the center (2x2x1.5m). 8 reward-dispensing devices - hereafter referred to as 'flowers' - were fixed in a radial pattern on this frame, two on each side of the square (see Figure 1) with a minimum distance of 40 cm between adjacent flowers. This is known to be a distance discriminable by these bats (insert reference here - Winter and Stich?). Each flower had the following parts: 
+
+* An RFID reader mounted on a plastic cylinder around the head of the flower 
+* An infra-red light-barrier beam
+* An electronic pinch valve through which a PVC tube was placed and fixed to the head of the flower
+
+Nectar was pumped through the tubes to the flowers by a single stepper-motor syringe pump which was placed at the center of the plastic frame, and the flow was controlled by the pinch valves. When an RFID-tagged bat approached a flower, the individual RFID number was read by the reader. If the bat then poked its nose into the flower and broke the light barrier, it triggered the release of a reward: the pinch valve opened and the pump moved a pre-programmed number of steps to dispense the correct volume of nectar to the head of the flower. The bat could lick this up and then fly away. The bats had to hover to trigger and collect a reward, and could not sit on the flowers. 
+
+The flowers were connected to a Lenovo ThinkPad laptop computer, which ran the experimental program: PhenoSoft Control 16, PhenoSoft GmBH, Berlin, Germany. The raw data were also recorded to this computer as Comma-separated values (CSV) files. 
+
+## Experimental design and schedule
+Each bat was uniquely assigned 2 adjacent flowers on the same side of the square frame, out of the array of 8. These flowers were programmed to reward only 1 of the 4 bats in the cage. Data collection was done between 6 PM and 6 AM, when the experimental program ran. In the morning the old nectar was emptied from the system, and then the system was rinsed and filled with plain water until 3 PM in the afternoon, when it was filled with fresh nectar. Twice a week the system was filled with 70% ethanol for an hour to guard against fungal growth. Every day the bats were also given ad-libitum supplemental food:  3.5g of hummingbird food (NektarPlus, Nekton) in 100 mL of water and 3.5g of milk powder (Nido 1+, Nestle) in 100 mL of water. They were also given a small bowl of local bee-collected pollen. 
+
+The experiment proceeded through the following stages. 
+
+### Ad-lib reward
+On the night the naive bats were captured and placed into the flight cages they received ad-libitum reward from all the flowers all night long. To enable the bats to find the flowers a small cotton pad soaked in dimethyl disulphide (a chemical attractant produced by many bat-pollinated flowers - von Helversen et al., 2000) was placed on the flowers. A small drop of honey was applied to the inside of the flowers to encourage the bats to place their heads inside, break the light-barrier and trigger a nectar reward. The bats nearly always found the flowers and learned to trigger rewards quickly. 
+
+### Flower training
+After the bats had learned to trigger rewards, the next stage of training involved assigning the bats uniquely to 2 out of the 8 flowers in the array. This stage was similar to Ad-libitum, except the bats could only trigger a reward at their assigned flowers. 
+
+### Alternation
+To ensure that the bats were familiar with both flowers assigned to them they went through one final stage of training: forced alternation between the two assigned flowers all night long. 
+For all three training stages the bats received x $/mu$L of reward on every visit. 
+
+### Main Experiment
+In this serial reversal learning task the bats had to choose between a flower that gave 40 $/mu$L of nectar (S+) and one that gave 10 $/mu$L of nectar (S-). The spatial locations of the two flowers served as the cues indicating which flower was more profitable. After a bat had made 50 visits in total to the two flowers a reversal occurred: the previously less rewarding flower became the more rewarding flower and vice versa. This occurred at regular intervals of 50 visits until the bat either stopped making visits or reached a maximum of 300 visits in a night. Thus there were 5 reversals per night. At that point no more rewards were given to that particular bat. This stage of the experiment was repeated for 3 nights in a row to see the effect of day on the animals' performance. 
+
+## Analysis 
+This bit to be written a little later. 
+
+## Mathematical modeling
+# Results and summary figures
+```{r global_options, echo=FALSE, warning=FALSE, message=FALSE, include=FALSE}
+# clearing the environment
+rm(list = ls())
+
+# checking if rmarkdown and reshape2 are installed, and installing them if they are not
+load.lib <- c("rmarkdown", "reshape2", "scales", "caTools", "stringr", "mgcv", "gridExtra", "tidyverse", "ggplot2", "tidyr", "lubridate", "extrafont", "extrafontdb", "betareg", "lme4", "rstanarm", "Hmisc", "knitr", "kableExtra")
+
+install.lib <- load.lib[!load.lib %in% installed.packages(lib.loc = NULL)]
+for (lib in install.lib) install.packages(lib, dependencies = TRUE)
+sapply(load.lib, require, character = TRUE)
+```
+
+``` {r setup, include = FALSE}
+# setting the working directory just once - set this separately if needed
+opts_knit$set(root.dir = "/Users/shambhavi/Google Drive/Experiments & Data/Serial_reversal_learning_2017/analysis/data/raw_data")
+```
+
+```{r echo=FALSE, warning=FALSE, message=FALSE, include=FALSE}
+#------------------
+# Compiling of data
+#------------------
+# checking to see if the working directory is set correctly
+getwd()
+# loading MasterTable that includes names of csv files, day, experimental condition,
+# Group and flight cage
+
+root_dir <- "/Users/shambhavi/Google Drive/Experiments & Data/Serial_reversal_learning_2017/analysis/data"
+
+MasterTable <- read.csv2(file = paste0(root_dir, "meta_data/MasterTable.csv"), header = TRUE, sep = ";", na.strings = "NA")
+
+daypathlist <- read.csv2(
+  file = paste0("MasterTableSerialReversal.csv", sep = ""),
+  header = TRUE, sep = ",", na.strings = "NA"
+)
+
+# determining the number of days
+ndays <- c()
+ndays <- length(daypathlist[, 2])
+# resetting alldays in case it exists already. This will be the sink for the daily data
+alldays <- c()
+
+# combining all files into one table
+
+if (ndays > 0) {
+  for (i in 1:ndays) {
+    nthday <- read.csv2(
+      file = as.character(daypathlist$path[i]), sep = ";", dec = ".", header = TRUE,
+      fileEncoding = "UTF-16LE", as.is = T, row.names = NULL
+    )
+    nthday <- nthday[, -c(18)]
+    # making a separate vector with the column names
+    mastercolnames <- c(
+      "DateTime", "IdRFID", "IdLabel",
+      "unitLabel", "eventDuration", "sense1duration",
+      "sense1Events", "senseRFIDrecords", "reinforce1value",
+      "reinforce1Total", "reinforce1Account", "outFuncLabel",
+      "outLabel", "SystemMsg", "MsgValue1", "MsgValue2", "MsgValue3"
+    )
+
+    colnames(nthday) <- mastercolnames
+
+    firstrow <- c()
+    lastrow <- c()
+
+
+    firstrow <- max(which(nthday$MsgValue1 == "start")) + 1
+    lastrow <- nrow(nthday)
+
+    if (is.na(lastrow) | is.infinite(lastrow)) {
+      lastrow <- nrow(nthday)
+    }
+
+    nthday <- nthday %>%
+      slice(firstrow:lastrow)
+
+    nthday$Day <- daypathlist[i, 1]
+
+    nthday <- nthday %>%
+      arrange(DateTime)
+
+    if (i > 1) {
+      alldays <- bind_rows(alldays, nthday)
+    } else {
+      alldays <- nthday
+    }
+
+    # making a day column with the day number
+    nthday$day <- daypathlist[i, 1]
+
+    nthday$Condition <- daypathlist[i, 3]
+    nthday$Group <- daypathlist[i, 4]
+    nthday$Cage <- daypathlist[i, 5]
+
+    if (i > 1) {
+      alldays <- bind_rows(alldays, nthday)
+    } else {
+      alldays <- nthday
+    }
+  }
+}
+
+# reformatting DateTime and display properly, as characters
+alldays$DateTime <- sub(",", ".", alldays$DateTime)
+alldays$DateTime <- as.POSIXct(as.numeric(alldays$DateTime) * (60 * 60 * 24),
+  origin = "1899-12-30", tz = "GMT"
+)
+
+
+# removing columns with irrelevant data
+alldays <- alldays %>%
+  select(
+    -sense1duration, -sense1Events, -senseRFIDrecords,
+    -reinforce1Total, -reinforce1Account, -MsgValue2, -MsgValue3
+  )
+
+# assigning the proper IdLabel to the RFID numbers during the exploration stages
+# Group 1 Flight cage 1 Alternate Training day 4 Bat3 changes from 0417690155 to 041769264F
+
+Exploration <- alldays %>%
+  filter(Condition == "Exploration") %>%
+  select(-IdLabel)
+
+Non_exp <- alldays %>%
+  filter(Condition != "Exploration")
+
+Labels <- data.frame(
+  IdLabel = c(
+    "Bat1", "Bat2", "Bat3", "Bat4", "Bat5", "Bat6",
+    "Bat7", "Bat8", "Bat9", "Bat10", "Bat11", "Bat12",
+    "Bat13", "Bat14", "Bat15", "Bat16",
+    "Bat17", "Bat18", "Bat19", "Bat20"
+  ),
+  IdRFID = c(
+    "04176924DC", "04176904DD", "0417690155", "0417691B6F",
+    "041768FE9E", "04176912CA", "041768FDDF", "041768F309",
+    "0417690887", "0417692FCB", "04176914E8", "0417691A07",
+    "0417693122", "041768F88F", "0417690CF1", "0416ECE147",
+    "0416D4F295", "041768FF3B", "041768FF4E", "04176917C8"
+  )
+)
+
+Exploration <- merge(Exploration, Labels, by = "IdRFID", all.x = TRUE)
+
+# putting all the data back together
+
+raw_data <- rbind(Exploration, Non_exp)
+raw_data <- raw_data %>%
+  arrange(Group, day)
+
+# removing the now superfluous dataframes
+rm(
+  daypathlist, Labels, nthday, i, mastercolnames, ndays, alldays, Exploration,
+  Non_exp
+)
+
+# filtering out only the visits made by the bats to flowers that were assigned to them,
+# and removing the small subset of visits where the bats didn't get rewarded at the assigned flowers
+
+raw_data <- raw_data %>%
+  mutate(
+    # adding a column that marks the rows to include: the visits to the correct flowers and
+    # the rows marking a reversal
+    choice_switch = ifelse(MsgValue1 == "switch", 1,
+      ifelse(str_detect(outLabel, "positive"), 1, 0)
+    ),
+    # assigning rows marking a reversal with an event Duration of 0
+    eventDuration = ifelse(MsgValue1 == "switch", 0, eventDuration)
+  ) %>%
+  filter(
+    # removing visits made by a test transponder
+    IdLabel != "Test",
+    # filtering the visits to be included
+    choice_switch == 1,
+    # filtering out unusually long signal interruptions as faulty
+    eventDuration < 15000
+  ) %>%
+  select(-choice_switch) %>%
+  mutate(
+    # adding columns with the day number and group written out
+    day = paste("Day", day, sep = " "),
+    Group = paste("Group", Group, sep = " ")
+  )
+
+# generating a CSV file of the raw data
+write.csv2(raw_data, file = "raw_data.csv", row.names = FALSE)
+
+#----------------------------------------
+# Preparing data from the main experiment
+#----------------------------------------
+# checking that the working directory is correctly set
+getwd()
+# loading the prepared CSV file of raw data 
+raw_data <- read.csv2("Raw_data.csv", sep = ";", header = TRUE)
+
+# The following terms are used in the analysis of the data:
+# 1. visits: each individual flower visit
+# 2. block: a group of 50 visits between each reversal where the same flower is rewarding
+# 3. bin: a smaller group of visits within a block, the size of which can be set in the code below
+
+# creating a vector of the bats to be excluded from the main analysis
+
+# creating a vector of the bats to be excluded from the main analysis
+bats_incomp <- c("Bat7", "Bat19")
+
+# creating a vector of the main experimental days
+main_days <- c("Day 1", "Day 2", "Day 3")
+
+# setting binsize and breaks for cutting up the data into block and bins
+binsize <- 10
+breaks <- seq(0, 3000, binsize)
+
+# preparing the data from the main experiment in a data table
+rev_learning_all <- raw_data %>%
+  mutate(
+    # marking the difference between the normal visits in a block and the switch points
+    MsgValue1 = ifelse(MsgValue1 == "switch", MsgValue1, "block")
+  ) %>%
+  filter(
+    # removing the bats that did not complete the experiment
+    !IdLabel %in% bats_incomp,
+    # filtering out the main experimental data
+    Condition == "SerialReversalCounter"
+  ) %>%
+  rename(Bat = IdLabel) %>%
+  arrange(Group, day, Bat, DateTime) %>%
+  # grouping the data to count the visits, noting the reversals separately
+  group_by(Bat, day) %>%
+  mutate(
+    # noting whether the bat made a visit to the more or less rewarding flower
+    reward_status = ifelse(is.na(reinforce1value), 0, 1),
+    # creating a column with the total number of visits made by a bat per day
+    count_vis = ifelse(MsgValue1 == "switch", 0, 1), 
+    count_vis = cumsum(count_vis)
+  ) %>%
+  # setting the maximum number of visits a night
+  filter(count_vis <= 300) %>%
+  ungroup() %>%
+  # creating a column with the reversal block number, marking the reversals
+  mutate(block = ifelse(MsgValue1 == "switch", 1, 0)) %>%
+  group_by(day, Bat) %>%
+  mutate(block = cumsum(block)) %>%
+  ungroup() %>% 
+  group_by(day, Bat, block) %>%
+  # creating a column with the number of visits within each block
+  mutate(block_vis = ifelse(MsgValue1 == "switch", 0, 1), 
+         block_vis = cumsum(block_vis), 
+  # creating a new column for visits in each block to be binned
+         bins = "") %>%
+  ungroup() %>%
+  group_by(day, Bat, block) %>%
+  # cutting the visits inside each block into bins of the size set earlier
+  mutate(bins = as.numeric(cut(block_vis, breaks, include.lowest = TRUE)))
+
+# creating a vector with the beta bats
+
+bats_beta <- c("Bat1", "Bat2", "Bat3", "Bat4")
+
+# creating a data frame with just the beta bats
+rev_learning_beta <- rev_learning_all %>%
+  filter(Bat %in% bats_beta)
+
+# creating a data frame with the alpha bats and the three main days of the experiment
+rev_learning_ind <- rev_learning_all %>%
+  filter(!Bat %in% bats_beta)
+
+# averaging the bats' performance over day, block and bin
+
+rev_learning_avg <- rev_learning_ind %>%
+  group_by(day, block, bins) %>%
+  # calculating the 95% confidence intervals 
+  group_modify(~ mean_cl_boot(.x$reward_status, conf.int = 0.95)) %>%
+  ungroup() %>%
+  group_by(day) %>%
+  mutate(
+    day_bin = 1:n(),
+    day_bin_vis = day_bin * binsize,
+    reversal = ifelse(block != lead(block), "switch", "block")
+  )
+
+# calculating the bats' 'errors', i.e., the inverse of the previous calculation, and averaging 
+# over day, block and bin
+
+rev_learning_err <- rev_learning_ind %>%
+  mutate (error = 1-(reward_status)) %>% 
+  group_by (day, block, bins) %>%
+  # calculating the 95% confidence intervals 
+  group_modify(~ mean_cl_boot(.x$error, conf.int = 0.95)) %>%
+  ungroup() %>%
+  group_by(day) %>%
+  mutate(
+    day_bin = 1:n(),
+    day_bin_vis = day_bin * binsize,
+    reversal = ifelse(block != lead(block), "switch", "block")
+  )
+```
+
+```{r echo=FALSE, warning=FALSE, message=FALSE, fig.align='center', fig.cap="Figure 1: All individual choices of the bats for the rewarding and non-rewarding options", fig.width = 12, fig.height = 7}
+#--------------
+# Summary plots
+#--------------
+
+# plot 1: plotting the individual bats' choices for the profitable option for every visit
+
+# creating a look-up table so the reversals can be marked in the plots for the main experimental bats
+rev_main <- rev_learning_ind %>%
+  filter(
+    MsgValue1 == "switch",
+    day %in% main_days
+  ) %>%
+  select(day, Bat, count_vis, block, bins, MsgValue1)
+
+rev_learning_ind %>%
+  filter(day %in% main_days) %>%
+  ggplot(aes(count_vis, reward_status)) +
+  geom_line() +
+  facet_grid(Bat ~ day) +
+  geom_vline(aes(xintercept = count_vis), rev_main, colour = "red") +
+  ylab("Choice for the more profitable option") +
+  xlab("Visits") +
+  theme_classic()
+```
+
+```{r echo=FALSE, warning=FALSE, message=FALSE, fig.align = 'center', fig.cap = "Figure 2: a) Average preferences of the bats for the rewarding option; b) Average preferences of the bats for the less rewarding option - the 'errors'", fig.width = 12, fig.height = 3}
+
+# plot 2a: averaging the bats' preferences over day, block and bin
+# creating a look-up table for the reversals
+
+rev_main_avg <- rev_learning_avg %>%
+  filter(
+    reversal == "switch",
+    day %in% main_days
+  ) %>%
+  select(day, block, day_bin, day_bin_vis)
+
+p1 <- rev_learning_avg %>%
+  # filtering only the first three main days of the experiment:
+  # one group had the experiment extended a further three days
+  filter(day %in% main_days) %>%
+  # mutate(visits = bins * 10) %>%
+  ggplot(aes(day_bin_vis, y)) +
+  geom_point() +
+  geom_line() +
+  geom_ribbon(aes(ymin = ymin, ymax = ymax), alpha = 0.3) +
+  facet_grid(. ~ day) +
+  scale_x_continuous(breaks = seq(50, 300, by = 50)) +
+  ylim(0, 1.05) +
+  geom_hline(yintercept = c(0.25, 0.5, 0.75, 1), linetype = "dotted") +
+  geom_vline(aes(xintercept = day_bin_vis), rev_main_avg, linetype = "dashed") +
+  # geom_vline(xintercept = seq(50, 300, by = 50), linetype = "dashed") +
+  theme_classic() +
+  labs(x = "Visits", y = "Avg choice for the more profitable option ± 95% CIs") + 
+  annotate(geom = "text", x = 0, y = 1.04, label = "a)", size = 3)
+
+# plot 2b: plotting the individual bats' choices for the less profitable option, the inverse of plot 1
+
+rev_main_err <- rev_learning_err %>%
+  filter(
+    reversal == "switch",
+    day %in% main_days
+  ) %>%
+  select(day, block, day_bin, day_bin_vis)
+
+p2 <- rev_learning_err %>%
+  # filtering only the first three main days of the experiment:
+  # one group had the experiment extended a further three days
+  filter(day %in% main_days) %>%
+  ggplot(aes(day_bin_vis, y)) +
+  geom_point() +
+  geom_line() +
+  geom_ribbon(aes(ymin = ymin, ymax = ymax), alpha = 0.3) +
+  facet_grid(. ~ day) +
+  scale_x_continuous(breaks = seq(50, 300, by = 50)) +
+  ylim(0, 1.05) +
+  geom_hline(yintercept = c(0.25, 0.5, 0.75, 1), linetype = "dotted") +
+  geom_vline(aes(xintercept = day_bin_vis), rev_main_avg, linetype = "dashed") +
+  # geom_vline(xintercept = seq(50, 300, by = 50), linetype = "dashed") +
+  theme_classic() +
+  labs(x = "Visits", y = "Avg choice for the more profitable option ± 95% CIs") + 
+  annotate(geom = "text", x = 0, y = 1.04, label = "b)", size = 4)
+
+grid.arrange(p1, p2, ncol = 2)
+```
+
+## 2. The effect of day, block and bin on the behaviour of the bats
+```{r message = FALSE, warning = FALSE, message = FALSE, echo=FALSE, results='hide'}
+#--------------------------------------------------
+# Fitting a Bayesian generalized linear mixed model
+#--------------------------------------------------
+
+rev_learning_stat <- rev_learning_ind %>%
+  ungroup() %>%
+  filter(day %in% main_days) %>%
+  mutate(
+    day = ifelse(day == "Day 1", 1, ifelse(day == "Day 2", 2, 3)),
+    bins = bins %% 5,
+    bins = ifelse(bins == 0, 5, bins)
+  ) %>%
+  group_by(Bat, day, block, bins) %>% 
+  summarise(avg_prof = mean(reward_status))
+
+prof <- stan_glmer(avg_prof ~ (1 | Bat) + day + block + bins + day * block + block * bins,
+  data = rev_learning_stat,
+  family = binomial
+)
+
+```
+
+```{r message = FALSE, warning = FALSE, message = FALSE, echo=FALSE, results='asis'}
+
+summary_prof <- as.data.frame(summary(prof, probs = c(0.025, 0.5, 0.975), digits = 3)) %>% 
+  filter(row_number() < 7) %>% 
+  select(5, 4, 6) %>% 
+  rename(Estimate = 1)
+kable(summary_prof, align = 'l', padding = 0, caption = 'Model summary') %>%
+    kable_styling(position = "center", full_width = F)
+```
+
+# Supplementary Information 
+
+**Table 1 - Summary of characteristics of bats that participated in the experiment**
+```{r message = FALSE, warning = FALSE, message = FALSE, echo=FALSE, results='asis'}
+
+table1 <- data.frame(
+  Individual = c("Bat1", "Bat2", "Bat3", "Bat4", "Bat5", "Bat6", "Bat7", "Bat8", "Bat9", "Bat10", "Bat11", "Bat12", "Bat13", "Bat14", "Bat15", "Bat16", "Bat17", "Bat18", "Bat19", "Bat20"),
+  Sex = c(rep(c("Female", "Male"), 2, each = 4), rep(c("Female"), 4)),
+  Flightcage = c(rep(c(1:2), 2, each = 4), rep(c(1), 4)),
+  Status = c(rep(c("Beta bat"), 4), "Completed", "Completed", "Did not complete", rep(c("Completed"), 11), "Did not complete", "Completed")
+)
+kable(table1, align = 'l', padding = 0) %>%
+    kable_styling(position = "center", full_width = F)
+```
+
+**Figure 1 - Performance in the training stages ** 
+
+**Figure 2 - Inter-visit intervals** 
+```{r echo=FALSE, warning=FALSE, message=FALSE, fig.align='center', fig.cap="Figure 1: All individual choices of the bats for the rewarding and non-rewarding options"}
+#-----------------------
+# Inter-visit intervals
+#-----------------------
+# calculating the inter-visit intervals of all the bats 
+
+rev_learning_ivi <- rev_learning_ind %>%
+  group_by(day, Bat) %>%
+  mutate(interval = as.integer(difftime(lead(DateTime), DateTime, units = "secs"))) 
+
+rev_learning_ivi %>% 
+  filter(day %in% main_days) %>% 
+  ggplot(aes(interval, group = Bat)) +
+  geom_density(fill = "black", color = "transparent", alpha = 0.08) +
+  facet_grid(. ~ day) +
+  scale_x_log10() +
+  theme_bw() +
+  xlab("intervisit intervals [s]") +
+  scale_fill_viridis_d()
+```
+# Results and summary figures
+```{r global_options, echo=FALSE, warning=FALSE, message=FALSE, include=FALSE}
+# clearing the environment
+rm(list = ls())
+
+# checking if rmarkdown and reshape2 are installed, and installing them if they are not
+load.lib <- c("rmarkdown", "reshape2", "scales", "caTools", "stringr", "mgcv", "gridExtra", "tidyverse", "ggplot2", "tidyr", "lubridate", "extrafont", "extrafontdb", "betareg", "lme4", "rstanarm", "Hmisc", "knitr", "kableExtra")
+
+install.lib <- load.lib[!load.lib %in% installed.packages(lib.loc = NULL)]
+for (lib in install.lib) install.packages(lib, dependencies = TRUE)
+sapply(load.lib, require, character = TRUE)
+
+# setting the working directory just once
+#knitr::opts_knit$set(root.dir = "/Users/shambhavi/Google Drive/Experiments & Data/Reversal Learning - La Selva_2017/reversal_learning/Analysis/Analysis/Raw Data")
+
+# set this line here
+knitr::opts_knit$set(root.dir = "/Reversal Learning - La Selva_2017/Analysis/Analysis/Raw Data")
+
+```
+
+```{r echo=FALSE, warning=FALSE, message=FALSE, include=FALSE}
+#------------------
+# Compiling of data
+#------------------
+# checking to see if the working directory is set correctly
+getwd()
+# loading MasterTable that includes names of csv files, day, experimental condition,
+# Group and flight cage
+daypathlist <- read.csv2(
+  file = paste("MasterTableSerialReversal.csv", sep = ""),
+  header = TRUE, sep = ",", na.strings = "NA"
+)
+# determining the number of days
+ndays <- c()
+ndays <- length(daypathlist[, 2])
+# resetting alldays in case it exists already. This will be the sink for the daily data
+alldays <- c()
+
+# combining all files into one table
+
+if (ndays > 0) {
+  for (i in 1:ndays) {
+    nthday <- read.csv2(
+      file = as.character(daypathlist$path[i]), sep = ";", dec = ".", header = TRUE,
+      fileEncoding = "UTF-16LE", as.is = T, row.names = NULL
+    )
+    nthday <- nthday[, -c(18)]
+    # making a separate vector with the column names
+    mastercolnames <- c(
+      "DateTime", "IdRFID", "IdLabel",
+      "unitLabel", "eventDuration", "sense1duration",
+      "sense1Events", "senseRFIDrecords", "reinforce1value",
+      "reinforce1Total", "reinforce1Account", "outFuncLabel",
+      "outLabel", "SystemMsg", "MsgValue1", "MsgValue2", "MsgValue3"
+    )
+
+    colnames(nthday) <- mastercolnames
+
+    firstrow <- c()
+    lastrow <- c()
+
+
+    firstrow <- max(which(nthday$MsgValue1 == "start")) + 1
+    lastrow <- nrow(nthday)
+
+    if (is.na(lastrow) | is.infinite(lastrow)) {
+      lastrow <- nrow(nthday)
+    }
+
+    nthday <- nthday %>%
+      slice(firstrow:lastrow)
+
+    nthday$Day <- daypathlist[i, 1]
+
+    nthday <- nthday %>%
+      arrange(DateTime)
+
+    if (i > 1) {
+      alldays <- bind_rows(alldays, nthday)
+    } else {
+      alldays <- nthday
+    }
+
+    # making a day column with the day number
+    nthday$day <- daypathlist[i, 1]
+
+    nthday$Condition <- daypathlist[i, 3]
+    nthday$Group <- daypathlist[i, 4]
+    nthday$Cage <- daypathlist[i, 5]
+
+    if (i > 1) {
+      alldays <- bind_rows(alldays, nthday)
+    } else {
+      alldays <- nthday
+    }
+  }
+}
+
+# reformatting DateTime and display properly, as characters
+alldays$DateTime <- sub(",", ".", alldays$DateTime)
+alldays$DateTime <- as.POSIXct(as.numeric(alldays$DateTime) * (60 * 60 * 24),
+  origin = "1899-12-30", tz = "GMT"
+)
+
+
+# removing columns with irrelevant data
+alldays <- alldays %>%
+  select(
+    -sense1duration, -sense1Events, -senseRFIDrecords,
+    -reinforce1Total, -reinforce1Account, -MsgValue2, -MsgValue3
+  )
+
+# assigning the proper IdLabel to the RFID numbers during the exploration stages
+# Group 1 Flight cage 1 Alternate Training day 4 Bat3 changes from 0417690155 to 041769264F
+
+Exploration <- alldays %>%
+  filter(Condition == "Exploration") %>%
+  select(-IdLabel)
+
+Non_exp <- alldays %>%
+  filter(Condition != "Exploration")
+
+Labels <- data.frame(
+  IdLabel = c(
+    "Bat1", "Bat2", "Bat3", "Bat4", "Bat5", "Bat6",
+    "Bat7", "Bat8", "Bat9", "Bat10", "Bat11", "Bat12",
+    "Bat13", "Bat14", "Bat15", "Bat16",
+    "Bat17", "Bat18", "Bat19", "Bat20"
+  ),
+  IdRFID = c(
+    "04176924DC", "04176904DD", "0417690155", "0417691B6F",
+    "041768FE9E", "04176912CA", "041768FDDF", "041768F309",
+    "0417690887", "0417692FCB", "04176914E8", "0417691A07",
+    "0417693122", "041768F88F", "0417690CF1", "0416ECE147",
+    "0416D4F295", "041768FF3B", "041768FF4E", "04176917C8"
+  )
+)
+
+Exploration <- merge(Exploration, Labels, by = "IdRFID", all.x = TRUE)
+
+# putting all the data back together
+
+raw_data <- rbind(Exploration, Non_exp)
+raw_data <- raw_data %>%
+  arrange(Group, day)
+
+# removing the now superfluous dataframes
+rm(
+  daypathlist, Labels, nthday, i, mastercolnames, ndays, alldays, Exploration,
+  Non_exp
+)
+
+# filtering out only the visits made by the bats to flowers that were assigned to them,
+# and removing the small subset of visits where the bats didn't get rewarded at the assigned flowers
+
+raw_data <- raw_data %>%
+  mutate(
+    # adding a column that marks the rows to include: the visits to the correct flowers and
+    # the rows marking a reversal
+    choice_switch = ifelse(MsgValue1 == "switch", 1,
+      ifelse(str_detect(outLabel, "positive"), 1, 0)
+    ),
+    # assigning rows marking a reversal with an event Duration of 0
+    eventDuration = ifelse(MsgValue1 == "switch", 0, eventDuration)
+  ) %>%
+  filter(
+    # removing visits made by a test transponder
+    IdLabel != "Test",
+    # filtering the visits to be included
+    choice_switch == 1,
+    # filtering out unusually long signal interruptions as faulty
+    eventDuration < 15000
+  ) %>%
+  select(-choice_switch) %>%
+  mutate(
+    # adding columns with the day number and group written out
+    day = paste("Day", day, sep = " "),
+    Group = paste("Group", Group, sep = " ")
+  )
+
+# generating a CSV file of the raw data
+write.csv2(raw_data, file = "raw_data.csv", row.names = FALSE)
+
+#----------------------------------------
+# Preparing data from the main experiment
+#----------------------------------------
+# checking that the working directory is correctly set
+getwd()
+# loading the prepared CSV file of raw data 
+raw_data <- read.csv2("Raw_data.csv", sep = ";", header = TRUE)
+
+# The following terms are used in the analysis of the data:
+# 1. visits: each individual flower visit
+# 2. block: a group of 50 visits between each reversal where the same flower is rewarding
+# 3. bin: a smaller group of visits within a block, the size of which can be set in the code below
+
+# creating a vector of the bats to be excluded from the main analysis
+
+# creating a vector of the bats to be excluded from the main analysis
+bats_incomp <- c("Bat7", "Bat19")
+
+# creating a vector of the main experimental days
+main_days <- c("Day 1", "Day 2", "Day 3")
+
+# setting binsize and breaks for cutting up the data into block and bins
+binsize <- 10
+breaks <- seq(0, 3000, binsize)
+
+# preparing the data from the main experiment in a data table
+rev_learning_all <- raw_data %>%
+  mutate(
+    # marking the difference between the normal visits in a block and the switch points
+    MsgValue1 = ifelse(MsgValue1 == "switch", MsgValue1, "block")
+  ) %>%
+  filter(
+    # removing the bats that did not complete the experiment
+    !IdLabel %in% bats_incomp,
+    # filtering out the main experimental data
+    Condition == "SerialReversalCounter"
+  ) %>%
+  rename(Bat = IdLabel) %>%
+  arrange(Group, day, Bat, DateTime) %>%
+  # grouping the data to count the visits, noting the reversals separately
+  group_by(Bat, day) %>%
+  mutate(
+    # noting whether the bat made a visit to the more or less rewarding flower
+    reward_status = ifelse(is.na(reinforce1value), 0, 1),
+    # creating a column with the total number of visits made by a bat per day
+    count_vis = ifelse(MsgValue1 == "switch", 0, 1), 
+    count_vis = cumsum(count_vis)
+  ) %>%
+  # setting the maximum number of visits a night
+  filter(count_vis <= 300) %>%
+  ungroup() %>%
+  # creating a column with the reversal block number, marking the reversals
+  mutate(block = ifelse(MsgValue1 == "switch", 1, 0)) %>%
+  group_by(day, Bat) %>%
+  mutate(block = cumsum(block)) %>%
+  ungroup() %>% 
+  group_by(day, Bat, block) %>%
+  # creating a column with the number of visits within each block
+  mutate(block_vis = ifelse(MsgValue1 == "switch", 0, 1), 
+         block_vis = cumsum(block_vis), 
+  # creating a new column for visits in each block to be binned
+         bins = "") %>%
+  ungroup() %>%
+  group_by(day, Bat, block) %>%
+  # cutting the visits inside each block into bins of the size set earlier
+  mutate(bins = as.numeric(cut(block_vis, breaks, include.lowest = TRUE)))
+
+# creating a vector with the beta bats
+
+bats_beta <- c("Bat1", "Bat2", "Bat3", "Bat4")
+
+# creating a data frame with just the beta bats
+rev_learning_beta <- rev_learning_all %>%
+  filter(Bat %in% bats_beta)
+
+# creating a data frame with the alpha bats and the three main days of the experiment
+rev_learning_ind <- rev_learning_all %>%
+  filter(!Bat %in% bats_beta)
+
+# averaging the bats' performance over day, block and bin
+
+rev_learning_avg <- rev_learning_ind %>%
+  group_by(day, block, bins) %>%
+  # calculating the 95% confidence intervals 
+  group_modify(~ mean_cl_boot(.x$reward_status, conf.int = 0.95)) %>%
+  ungroup() %>%
+  group_by(day) %>%
+  mutate(
+    day_bin = 1:n(),
+    day_bin_vis = day_bin * binsize,
+    reversal = ifelse(block != lead(block), "switch", "block")
+  )
+
+# calculating the bats' 'errors', i.e., the inverse of the previous calculation, and averaging 
+# over day, block and bin
+
+rev_learning_err <- rev_learning_ind %>%
+  mutate (error = 1-(reward_status)) %>% 
+  group_by (day, block, bins) %>%
+  # calculating the 95% confidence intervals 
+  group_modify(~ mean_cl_boot(.x$error, conf.int = 0.95)) %>%
+  ungroup() %>%
+  group_by(day) %>%
+  mutate(
+    day_bin = 1:n(),
+    day_bin_vis = day_bin * binsize,
+    reversal = ifelse(block != lead(block), "switch", "block")
+  )
+```
+
+```{r echo=FALSE, warning=FALSE, message=FALSE, fig.align='center', fig.cap="Figure 1: All individual choices of the bats for the rewarding and non-rewarding options", fig.width = 12, fig.height = 7}
+#--------------
+# Summary plots
+#--------------
+
+# plot 1: plotting the individual bats' choices for the profitable option for every visit
+
+# creating a look-up table so the reversals can be marked in the plots for the main experimental bats
+rev_main <- rev_learning_ind %>%
+  filter(
+    MsgValue1 == "switch",
+    day %in% main_days
+  ) %>%
+  select(day, Bat, count_vis, block, bins, MsgValue1)
+
+rev_learning_ind %>%
+  filter(day %in% main_days) %>%
+  ggplot(aes(count_vis, reward_status)) +
+  geom_line() +
+  facet_grid(Bat ~ day) +
+  geom_vline(aes(xintercept = count_vis), rev_main, colour = "red") +
+  ylab("Choice for the more profitable option") +
+  xlab("Visits") +
+  theme_classic()
+```
+
+```{r echo=FALSE, warning=FALSE, message=FALSE, fig.align = 'center', fig.cap = "Figure 2: a) Average preferences of the bats for the rewarding option; b) Average preferences of the bats for the less rewarding option - the 'errors'", fig.width = 12, fig.height = 3}
+
+# plot 2a: averaging the bats' preferences over day, block and bin
+# creating a look-up table for the reversals
+
+rev_main_avg <- rev_learning_avg %>%
+  filter(
+    reversal == "switch",
+    day %in% main_days
+  ) %>%
+  select(day, block, day_bin, day_bin_vis)
+
+p1 <- rev_learning_avg %>%
+  # filtering only the first three main days of the experiment:
+  # one group had the experiment extended a further three days
+  filter(day %in% main_days) %>%
+  # mutate(visits = bins * 10) %>%
+  ggplot(aes(day_bin_vis, y)) +
+  geom_point() +
+  geom_line() +
+  geom_ribbon(aes(ymin = ymin, ymax = ymax), alpha = 0.3) +
+  facet_grid(. ~ day) +
+  scale_x_continuous(breaks = seq(50, 300, by = 50)) +
+  ylim(0, 1.05) +
+  geom_hline(yintercept = c(0.25, 0.5, 0.75, 1), linetype = "dotted") +
+  geom_vline(aes(xintercept = day_bin_vis), rev_main_avg, linetype = "dashed") +
+  # geom_vline(xintercept = seq(50, 300, by = 50), linetype = "dashed") +
+  theme_classic() +
+  labs(x = "Visits", y = "Avg choice for the more profitable option ± 95% CIs") + 
+  annotate(geom = "text", x = 0, y = 1.04, label = "a)", size = 3)
+
+# plot 2b: plotting the individual bats' choices for the less profitable option, the inverse of plot 1
+
+rev_main_err <- rev_learning_err %>%
+  filter(
+    reversal == "switch",
+    day %in% main_days
+  ) %>%
+  select(day, block, day_bin, day_bin_vis)
+
+p2 <- rev_learning_err %>%
+  # filtering only the first three main days of the experiment:
+  # one group had the experiment extended a further three days
+  filter(day %in% main_days) %>%
+  ggplot(aes(day_bin_vis, y)) +
+  geom_point() +
+  geom_line() +
+  geom_ribbon(aes(ymin = ymin, ymax = ymax), alpha = 0.3) +
+  facet_grid(. ~ day) +
+  scale_x_continuous(breaks = seq(50, 300, by = 50)) +
+  ylim(0, 1.05) +
+  geom_hline(yintercept = c(0.25, 0.5, 0.75, 1), linetype = "dotted") +
+  geom_vline(aes(xintercept = day_bin_vis), rev_main_avg, linetype = "dashed") +
+  # geom_vline(xintercept = seq(50, 300, by = 50), linetype = "dashed") +
+  theme_classic() +
+  labs(x = "Visits", y = "Avg choice for the more profitable option ± 95% CIs") + 
+  annotate(geom = "text", x = 0, y = 1.04, label = "b)", size = 4)
+
+grid.arrange(p1, p2, ncol = 2)
+```
+
+## 2. The effect of day, block and bin on the behaviour of the bats
+```{r message = FALSE, warning = FALSE, message = FALSE, echo=FALSE, results='hide'}
+#--------------------------------------------------
+# Fitting a Bayesian generalized linear mixed model
+#--------------------------------------------------
+
+rev_learning_stat <- rev_learning_ind %>%
+  ungroup() %>%
+  filter(day %in% main_days) %>%
+  mutate(
+    day = ifelse(day == "Day 1", 1, ifelse(day == "Day 2", 2, 3)),
+    bins = bins %% 5,
+    bins = ifelse(bins == 0, 5, bins)
+  ) %>%
+  group_by(Bat, day, block, bins) %>% 
+  summarise(avg_prof = mean(reward_status))
+
+prof <- stan_glmer(avg_prof ~ (1 | Bat) + day + block + bins + day * block + block * bins,
+  data = rev_learning_stat,
+  family = binomial
+)
+
+```
+
+```{r message = FALSE, warning = FALSE, message = FALSE, echo=FALSE, results='asis'}
+
+summary_prof <- as.data.frame(summary(prof, probs = c(0.025, 0.5, 0.975), digits = 3)) %>% 
+  filter(row_number() < 7) %>% 
+  select(5, 4, 6) %>% 
+  rename(Estimate = 1)
+kable(summary_prof, align = 'l', padding = 0, caption = 'Model summary') %>%
+    kable_styling(position = "center", full_width = F)
+```
+
+# Supplementary Information 
+
+**Table 1 - Summary of characteristics of bats that participated in the experiment**
+```{r message = FALSE, warning = FALSE, message = FALSE, echo=FALSE, results='asis'}
+
+table1 <- data.frame(
+  Individual = c("Bat1", "Bat2", "Bat3", "Bat4", "Bat5", "Bat6", "Bat7", "Bat8", "Bat9", "Bat10", "Bat11", "Bat12", "Bat13", "Bat14", "Bat15", "Bat16", "Bat17", "Bat18", "Bat19", "Bat20"),
+  Sex = c(rep(c("Female", "Male"), 2, each = 4), rep(c("Female"), 4)),
+  Flightcage = c(rep(c(1:2), 2, each = 4), rep(c(1), 4)),
+  Status = c(rep(c("Beta bat"), 4), "Completed", "Completed", "Did not complete", rep(c("Completed"), 11), "Did not complete", "Completed")
+)
+kable(table1, align = 'l', padding = 0) %>%
+    kable_styling(position = "center", full_width = F)
+```
+
+** Table 2 - Occurrence of events other than rewarded events at the flowers ** 
+
+**Figure 1 - Performance in the training stages ** 
+
+**Figure 2 - Inter-visit intervals** 
+```{r echo=FALSE, warning=FALSE, message=FALSE, fig.align='center', fig.cap="Figure 1: All individual choices of the bats for the rewarding and non-rewarding options"}
+#-----------------------
+# Inter-visit intervals
+#-----------------------
+# calculating the inter-visit intervals of all the bats 
+
+rev_learning_ivi <- rev_learning_ind %>%
+  group_by(day, Bat) %>%
+  mutate(interval = as.integer(difftime(lead(DateTime), DateTime, units = "secs"))) 
+
+rev_learning_ivi %>% 
+  filter(day %in% main_days) %>% 
+  ggplot(aes(interval, group = Bat)) +
+  geom_density(fill = "black", color = "transparent", alpha = 0.08) +
+  facet_grid(. ~ day) +
+  scale_x_log10() +
+  theme_bw() +
+  xlab("intervisit intervals [s]") +
+  scale_fill_viridis_d()
+```
