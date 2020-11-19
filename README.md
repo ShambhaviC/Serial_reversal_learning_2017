@@ -1,1 +1,1 @@
-# Serial_reversal_learning_2017
+# reversal_learning
