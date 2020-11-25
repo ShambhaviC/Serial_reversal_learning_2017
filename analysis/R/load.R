@@ -1,150 +1,106 @@
 rm(list = ls())
 require(tidyverse)
-require(ggplot2)
-require(tidyr)
-require(lubridate)
 
-# setwd("C:/Users/Sam/Google Drive/Experiments & Data/Reversal Learning - La Selva_2017/Analysis/Analysis/Raw Data")
-# getwd()
+# setting analysis folder
 
-setwd("/Users/shambhavi/Google Drive/Experiments & Data/Reversal Learning - La Selva_2017/Analysis/Analysis/Raw Data")
-getwd()
+folder <- "analysis/data/"
 
 #------------------
 # Compiling of data
 #------------------
+# reading in the MasterTable
 
-# loading MasterTable that includes names of csv files, day, experimental condition,
-# Group and flight cage
-daypathlist <- read.csv2(
-  file = paste("MasterTableSerialReversal.csv", sep = ""),
+MasterTable <- read.csv2(
+  file = paste0(folder, "meta_data/MasterTableSerialReversal.csv", sep = ""),
   header = TRUE, sep = ",", na.strings = "NA"
 )
-# determining the number of days
-ndays <- c()
-ndays <- length(daypathlist[, 2])
-# resetting alldays in case it exists already. This will be the sink for the daily data
-alldays <- c()
 
-# combining all files into one table
-
-if (ndays > 0) {
-  for (i in 1:ndays) {
-    nthday <- read.csv2(
-      file = as.character(daypathlist$path[i]), sep = ";", dec = ".", header = TRUE,
-      fileEncoding = "UTF-16LE", as.is = T, row.names = NULL
-    )
-    nthday <- nthday[, -c(18)]
-    # making a separate vector with the column names
-    mastercolnames <- c(
-      "DateTime", "IdRFID", "IdLabel",
-      "unitLabel", "eventDuration", "sense1duration",
-      "sense1Events", "senseRFIDrecords", "reinforce1value",
-      "reinforce1Total", "reinforce1Account", "outFuncLabel",
-      "outLabel", "SystemMsg", "MsgValue1", "MsgValue2", "MsgValue3"
-    )
-
-    colnames(nthday) <- mastercolnames
-
-    firstrow <- c()
-    lastrow <- c()
-
-
-    firstrow <- max(which(nthday$MsgValue1 == "start")) + 1
-    lastrow <- nrow(nthday)
-
-    if (is.na(lastrow) | is.infinite(lastrow)) {
-      lastrow <- nrow(nthday)
-    }
-
-    nthday <- nthday %>%
-      slice(firstrow:lastrow)
-
-    nthday$Day <- daypathlist[i, 1]
-
-    nthday <- nthday %>%
-      arrange(DateTime)
-
-    if (i > 1) {
-      alldays <- bind_rows(alldays, nthday)
-    } else {
-      alldays <- nthday
-    }
-
-    # making a day column with the day number
-    nthday$day <- daypathlist[i, 1]
-
-    nthday$Condition <- daypathlist[i, 3]
-    nthday$Group <- daypathlist[i, 4]
-    nthday$Cage <- daypathlist[i, 5]
-
-    if (i > 1) {
-      alldays <- bind_rows(alldays, nthday)
-    } else {
-      alldays <- nthday
-    }
-  }
-}
-
-# reformatting DateTime and display properly, as characters
-alldays$DateTime <- sub(",", ".", alldays$DateTime)
-alldays$DateTime <- as.POSIXct(as.numeric(alldays$DateTime) * (60 * 60 * 24),
-  origin = "1899-12-30", tz = "GMT"
+# reading in the table of conditions
+Conditions <- read.csv2(
+  file = paste0(folder, "meta_data/ConditionsSerialReversal.csv", sep = ""),
+  header = TRUE, sep = ",", na.strings = "NA"
 )
 
+# setting the colnames
 
-# removing columns with irrelevant data
-alldays <- alldays %>%
+mastercolnames <- c(
+  "DateTime", "IdRFID", "IdLabel",
+  "unitLabel", "eventDuration", "sense1duration",
+  "sense1Events", "senseRFIDrecords", "reinforce1value",
+  "reinforce1Total", "reinforce1Account", "outFuncLabel",
+  "outLabel", "SystemMsg", "MsgValue1", "MsgValue2", "MsgValue3"
+)
+
+# writing a function to prepare the raw data from a single day
+
+load_raw_csv <- function(path) {
+  nthday <- read.csv2(
+    file = path, sep = ";", dec = ".", header = TRUE,
+    fileEncoding = "UTF-16LE", as.is = TRUE, row.names = NULL
+  ) %>%
+    select(1:17)
+
+  # renaming the columns
+  if (exists("mastercolnames")) {
+    colnames(nthday) <- mastercolnames
+  }
+
+  # extracting the relevant rows
+
+  firstrow <- c()
+  lastrow <- c()
+  firstrow <- max(which(nthday$MsgValue1 == "start")) + 1
+  lastrow <- nrow(nthday)
+
+  if (is.na(lastrow) | is.infinite(lastrow)) {
+    lastrow <- nrow(nthday)
+  }
+
+  nthday <- nthday %>%
+    slice(firstrow:lastrow)
+}
+
+# taking the list of days from the master table
+days <- as.list(MasterTable$day)
+# taking the list of file paths from the master table
+paths <- as.list(paste0(folder, MasterTable$path))
+
+# writing a function to aggregate the data from many days
+
+aggregate_days <- function(paths, days) {
+  map(paths, load_raw_csv) %>%
+    set_names(days) %>%
+    enframe("day", "day_data") %>%
+    unnest(day_data) %>%
+    mutate(day = as.numeric(day))
+}
+
+# using the functions that were written to create one big data frame of raw data
+
+alldays <- aggregate_days(paths, days) %>%
+  # removing the columns with irrelevant data 
   select(
     -sense1duration, -sense1Events, -senseRFIDrecords,
     -reinforce1Total, -reinforce1Account, -MsgValue2, -MsgValue3
   )
 
-# assigning the proper IdLabel to the RFID numbers during the exploration stages
-# Group 1 Flight cage 1 Alternate Training day 4 Bat3 changes from 0417690155 to 041769264F
+# joining the Conditions table to the prepared raw data table 
 
-Exploration <- alldays %>%
-  filter(Condition == "Exploration") %>%
-  select(-IdLabel)
+alldays <- left_join(alldays, Conditions, by = c("day"))
 
-Non_exp <- alldays %>%
-  filter(Condition != "Exploration")
+#-----------------------------
+# Preparing the raw data table
+#----------------------------- 
 
-Labels <- data.frame(
-  IdLabel = c(
-    "Bat1", "Bat2", "Bat3", "Bat4", "Bat5", "Bat6",
-    "Bat7", "Bat8", "Bat9", "Bat10", "Bat11", "Bat12",
-    "Bat13", "Bat14", "Bat15", "Bat16",
-    "Bat17", "Bat18", "Bat19", "Bat20"
-  ),
-  IdRFID = c(
-    "04176924DC", "04176904DD", "0417690155", "0417691B6F",
-    "041768FE9E", "04176912CA", "041768FDDF", "041768F309",
-    "0417690887", "0417692FCB", "04176914E8", "0417691A07",
-    "0417693122", "041768F88F", "0417690CF1", "0416ECE147",
-    "0416D4F295", "041768FF3B", "041768FF4E", "04176917C8"
-  )
-)
-
-Exploration <- merge(Exploration, Labels, by = "IdRFID", all.x = TRUE)
-
-# putting all the data back together
-
-raw_data <- rbind(Exploration, Non_exp)
-raw_data <- raw_data %>%
-  arrange(Group, day)
-
-# removing the now superfluous dataframes
-rm(
-  daypathlist, Labels, nthday, i, mastercolnames, ndays, alldays, Exploration,
-  Non_exp
-)
-
-# filtering out only the visits made by the bats to flowers that were assigned to them,
-# and removing the small subset of visits where the bats didn't get rewarded at the assigned flowers
-
-raw_data <- raw_data %>%
+alldays <- alldays  %>%
+  # sorting the data chronologically
+  arrange(DateTime) %>%
+  # changing the format of the DateTime column to show the date and time clearly
   mutate(
+    DateTime = as.numeric(str_replace(DateTime, ",", ".")),
+    DateTime = as.POSIXct(as.numeric(DateTime) * (60 * 60 * 24),
+      origin = "1899-12-30", tz = "UTC"
+    ),
     # adding a column that marks the rows to include: the visits to the correct flowers and
     # the rows marking a reversal
     choice_switch = ifelse(MsgValue1 == "switch", 1,
@@ -161,12 +117,13 @@ raw_data <- raw_data %>%
     # filtering out unusually long signal interruptions as faulty
     eventDuration < 15000
   ) %>%
-  select(-choice_switch) %>%
+  # removing now unnecessary columns
+  select(-choice_switch, -day) %>%
   mutate(
-    # adding columns with the day number and group written out
-    day = paste("Day", day, sep = " "),
+    # adding a column with the group written out
     Group = paste("Group", Group, sep = " ")
   )
 
-# generating a CSV file of the raw data
-write.csv2(raw_data, file = "raw_data.csv", row.names = FALSE)
+# writing the csv table
+
+write.csv2(alldays, file = paste0(folder, "raw_data.csv"), row.names = FALSE)

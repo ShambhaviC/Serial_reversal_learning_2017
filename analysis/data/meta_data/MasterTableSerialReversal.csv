@@ -1,47 +1,47 @@
-day,path,Condition,Group,Cage
-1,/raw_data/G1_1_Exploration-17.06.28.csv,Exploration,1,1
-1,/raw_data/G1_2_Flower Training 1_170629-17.06.29.csv,FlowerTraining,1,1
-1,/raw_data/G1_3_AlternateTraining_170630-17.06.30.csv,Alternation,1,1
-2,/raw_data/G1_4_AlternateTraining_170701-17.07.01.csv,Alternation,1,1
-3,/raw_data/G1_5_AlternateTraining_170701-17.07.02.csv,Alternation,1,1
-4,/raw_data/G1_6_AlternateTraining_170703-17.07.03.csv,Alternation,1,1
-5,/raw_data/G1_7_AlternateTraining_170704-17.07.04.csv,Alternation,1,1
-1,/raw_data/G1_8_SerialReversal_170705-17.07.05.csv,SerialReversal,1,1
-1,/raw_data/G1_9_SerialReversalCounter_170706-17.07.06.csv,SerialReversalCounter,1,1
-2,/raw_data/G1_10_SerialReversalCounter_170707-17.07.07.csv,SerialReversalCounter,1,1
-3,/raw_data/G1_11_SerialReversalCounter_170708-17.07.08.csv,SerialReversalCounter,1,1
-1,/raw_data/G2_1_Exploration_170706-17.07.06.csv,Exploration,2,2
-2,/raw_data/G2_2_Exploration_170707-17.07.07.csv,Exploration,2,2
-3,/raw_data/G2_3_Exploration_170708-17.07.08.csv,Exploration,2,2
-1,/raw_data/G2_4_Flower Training_170709-17.07.09.csv,FlowerTraining,2,2
-1,/raw_data/G2_5_Alternation_170710-17.07.10.csv,Alternation,2,2
-1,/raw_data/G2_6_SerialReversalCounter_170711-17.07.11.csv,SerialReversalCounter,2,2
-2,/raw_data/G2_7_SerialReversalCounter_170712-17.07.12.csv,SerialReversalCounter,2,2
-3,/raw_data/G2_8_SerialReversalCounter_170713-17.07.13.csv,SerialReversalCounter,2,2
-1,/raw_data/G3_1_Exploration_170709-17.07.09.csv,Exploration,3,1
-1,/raw_data/G3_2_Flower Training_170710-17.07.10.csv,FlowerTraining,3,1
-1,/raw_data/G3_3_Alternation_170711-17.07.11.csv,Alternation,3,1
-2,/raw_data/G3_4_Alternation_170711-17.07.12.csv,Alternation,3,1
-1,/raw_data/G3_5_SerialReversalCounter_170713-17.07.13.csv,SerialReversalCounter,3,1
-2,/raw_data/G3_6_SerialReversalCounter_170714-17.07.14.csv,SerialReversalCounter,3,1
-3,/raw_data/G3_7_SerialReversalCounter_170715-17.07.15.csv,SerialReversalCounter,3,1
-1,/raw_data/G4_1_Exploration_170714-17.07.14.csv,Exploration,4,2
-2,/raw_data/G4_2_Exploration_170715-17.07.15.csv,Exploration,4,2
-1,/raw_data/G4_3_Flower Training_170716-17.07.16.csv,FlowerTraining,4,2
-1,/raw_data/G4_4_Alternation_170717-17.07.17.csv,Alternation,4,2
-2,/raw_data/G4_5_Alternation_170718-17.07.18.csv,Alternation,4,2
-1,/raw_data/G4_6_SerialReversalCounter_170719-17.07.19.csv,SerialReversalCounter,4,2
-2,/raw_data/G4_7_SerialReversalCounter_170721-17.07.21.csv,SerialReversalCounter,4,2
-3,/raw_data/G4_8_SerialReversalCounter_170722-17.07.22.csv,SerialReversalCounter,4,2
-4,/raw_data/G4_9_SerialReversalCounter_170723-17.07.23.csv,SerialReversalCounter,4,2
-5,/raw_data/G4_10_SerialReversalCounter_170724-17.07.24.csv,SerialReversalCounter,4,2
-6,/raw_data/G4_11_SerialReversalCounter_170725-17.07.25.csv,SerialReversalCounter,4,2
-1,/raw_data/G5_1_Exploration_170716-17.07.16.csv,Exploration,5,2
-2,/raw_data/G5_2_Exploration_170717-17.07.17.csv,Exploration,5,2
-1,/raw_data/G5_3_Flower Training_170718-17.07.18.csv,FlowerTraining,5,2
-1,/raw_data/G5_4_Alternation_170719-17.07.19.csv,Alternation,5,2
-1,/raw_data/G5_5_SerialReversalCounter_Alternation_170721-17.07.21.csv,SerialReversalCounterAlternation,5,2
-1,/raw_data/G5_6_SerialReversalCounter_170722-17.07.22.csv,SerialReversalCounter,5,2
-2,/raw_data/G5_7_SerialReversalCounter_170723-17.07.23.csv,SerialReversalCounter,5,2
-3,/raw_data/G5_8_SerialReversalCounter_170724-17.07.24.csv,SerialReversalCounter,5,2
-4,/raw_data/G5_9_SerialReversalCounter_170725-17.07.25.csv,SerialReversalCounter,5,2
+day,path
+1,raw_data/G1_1_Exploration-17.06.28.csv
+2,raw_data/G1_2_Flower Training 1_170629-17.06.29.csv
+3,raw_data/G1_3_AlternateTraining_170630-17.06.30.csv
+4,raw_data/G1_4_AlternateTraining_170701-17.07.01.csv
+5,raw_data/G1_5_AlternateTraining_170701-17.07.02.csv
+6,raw_data/G1_6_AlternateTraining_170703-17.07.03.csv
+7,raw_data/G1_7_AlternateTraining_170704-17.07.04.csv
+8,raw_data/G1_8_SerialReversal_170705-17.07.05.csv
+9,raw_data/G1_9_SerialReversalCounter_170706-17.07.06.csv
+10,raw_data/G1_10_SerialReversalCounter_170707-17.07.07.csv
+11,raw_data/G1_11_SerialReversalCounter_170708-17.07.08.csv
+12,raw_data/G2_1_Exploration_170706-17.07.06.csv
+13,raw_data/G2_2_Exploration_170707-17.07.07.csv
+14,raw_data/G2_3_Exploration_170708-17.07.08.csv
+15,raw_data/G2_4_Flower Training_170709-17.07.09.csv
+16,raw_data/G2_5_Alternation_170710-17.07.10.csv
+17,raw_data/G2_6_SerialReversalCounter_170711-17.07.11.csv
+18,raw_data/G2_7_SerialReversalCounter_170712-17.07.12.csv
+19,raw_data/G2_8_SerialReversalCounter_170713-17.07.13.csv
+20,raw_data/G3_1_Exploration_170709-17.07.09.csv
+21,raw_data/G3_2_Flower Training_170710-17.07.10.csv
+22,raw_data/G3_3_Alternation_170711-17.07.11.csv
+23,raw_data/G3_4_Alternation_170711-17.07.12.csv
+24,raw_data/G3_5_SerialReversalCounter_170713-17.07.13.csv
+25,raw_data/G3_6_SerialReversalCounter_170714-17.07.14.csv
+26,raw_data/G3_7_SerialReversalCounter_170715-17.07.15.csv
+27,raw_data/G4_1_Exploration_170714-17.07.14.csv
+28,raw_data/G4_2_Exploration_170715-17.07.15.csv
+29,raw_data/G4_3_Flower Training_170716-17.07.16.csv
+30,raw_data/G4_4_Alternation_170717-17.07.17.csv
+31,raw_data/G4_5_Alternation_170718-17.07.18.csv
+32,raw_data/G4_6_SerialReversalCounter_170719-17.07.19.csv
+33,raw_data/G4_7_SerialReversalCounter_170721-17.07.21.csv
+34,raw_data/G4_8_SerialReversalCounter_170722-17.07.22.csv
+35,raw_data/G4_9_SerialReversalCounter_170723-17.07.23.csv
+36,raw_data/G4_10_SerialReversalCounter_170724-17.07.24.csv
+37,raw_data/G4_11_SerialReversalCounter_170725-17.07.25.csv
+38,raw_data/G5_1_Exploration_170716-17.07.16.csv
+39,raw_data/G5_2_Exploration_170717-17.07.17.csv
+40,raw_data/G5_3_Flower Training_170718-17.07.18.csv
+41,raw_data/G5_4_Alternation_170719-17.07.19.csv
+42,raw_data/G5_5_SerialReversalCounter_Alternation_170721-17.07.21.csv
+43,raw_data/G5_6_SerialReversalCounter_170722-17.07.22.csv
+44,raw_data/G5_7_SerialReversalCounter_170723-17.07.23.csv
+45,raw_data/G5_8_SerialReversalCounter_170724-17.07.24.csv
+46,raw_data/G5_9_SerialReversalCounter_170725-17.07.25.csv
