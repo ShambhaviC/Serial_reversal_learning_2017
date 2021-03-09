@@ -12,9 +12,7 @@ require(Hmisc)
 #-----------------------------------------
 # Loading the data
 #-----------------------------------------
-setwd("/Users/shambhavi/Google Drive/Experiments & Data/Reversal Learning - La Selva_2017/Analysis/Analysis/Raw Data")
-getwd()
-raw_data <- read.csv2("Raw_data.csv", sep = ";", header = TRUE)
+raw_data <- read.csv2(file = "/Users/shambhavi/Google Drive/Experiments & Data/SRL_2017/analysis/data/raw_data.csv", sep = ";", header = TRUE)
 #--------------------------------------------------------------------------------------------------
 # Visualising the data from the three training phases: exploration, flower training and alternation
 #--------------------------------------------------------------------------------------------------
@@ -25,31 +23,71 @@ raw_data <- read.csv2("Raw_data.csv", sep = ";", header = TRUE)
 training <- raw_data %>%
   filter(
     # the condition in the following line can be adjusted to the training phase to be visualised
-    Condition == "Alternation",
+    Condition == "Exploration", 
     !is.na(reinforce1value)
   ) %>%
-  group_by(Group, day, IdLabel) %>%
+  group_by(Group, Day, IdLabel) %>% 
   # counting the number of visits made to the different flowers by the different bats
   count(unitLabel) %>%
   ungroup() %>%
-  group_by(Group, day, IdLabel) %>%
+  group_by(Group, Day, IdLabel) %>%
   # counting the total number of visits made by the bats to all the flowers
   mutate(
     total_vis = sum(n),
     unitLabel = as.factor(as.numeric(str_extract(unitLabel, "[0-9]+")))
-  )
+  ) 
 
-# visualising the training data
-
-training %>%
+training %>% 
   filter(Group != "Group 1") %>% # removing the beta bats
   ggplot(aes(unitLabel, n)) +
   geom_jitter(aes(group = IdLabel, colour = IdLabel)) +
-  facet_grid(Group ~ day) +
+  facet_grid(Group ~ Day) +
   xlab("Flower number") +
   ylab("Visits") +
   theme_bw() +
   scale_fill_viridis_d()
+
+# examining the strategies of the bats 
+
+binsize <- 10
+breaks <- seq(0, 3000, binsize)
+
+alternation <- raw_data %>% 
+  rename(Bat = IdLabel) %>%
+  filter(Condition == "Alternation", 
+         eventDuration > 0) %>%
+  group_by(Group, Day, Bat) %>%
+  mutate(reward_status = ifelse(is.na(reinforce1value), 0, 1), 
+         count_vis = 1:n()) %>% 
+  group_by(Group, Day, Bat, reward_status)
+
+
+alternation %>%
+  filter(Group == "Group 1", 
+         Day == "Day 5") %>%
+  ggplot(aes(count_vis, reward_status)) +
+  geom_line() +
+  facet_grid(Bat ~ Day) +
+  ylab("Choice for the rewarding option") +
+  xlab("Visits") +
+  theme_classic()
+
+alt_summary <- alternation %>%
+  group_by(Group, Day, Bat) %>% 
+  summarise(pref = mean(reward_status)) %>% 
+  mutate(Bat = as.factor(Bat), 
+         keep = ifelse(Group == "Group 1" & Day == "Day 1", 0, 1)) %>% 
+  filter(keep == 1) %>% 
+  select(-keep)
+
+alt_summary %>% 
+  ggplot(aes(Day, pref)) + 
+  geom_point(aes(group = Bat, colour = Bat)) +
+  geom_line(aes(group = Bat, colour = Bat)) +
+  ylim(0, 1) + 
+  facet_grid(.~Group) +
+  geom_hline(yintercept = 0.5, linetype = "dashed") + 
+  theme_bw()
 
 #---------------------------------------
 # The main experiment - overall choices
@@ -137,6 +175,15 @@ rev_learning_avg <- rev_learning_ind %>%
     day_bin_vis = day_bin * binsize,
     reversal = ifelse(block != lead(block), "switch", "block")
   )
+
+# calculating the asymptote
+asymptote <- rev_learning_avg %>% 
+  group_by(Day, block) %>% 
+  mutate(avg_block_pref = mean(y), 
+         over_mean = ifelse(y > avg_block_pref, 1, 0), 
+         over_crit = ifelse(over_mean + lag(over_mean, default = 0) == 2, 1, 0)) %>% 
+  select(-avg_block_pref, -over_mean) %>% 
+  mutate(slip = ifelse(over_crit == 0 & bins > 5, 1, 0))
 
 # calculating the bats' 'errors', i.e., the inverse of the previous calculation, and averaging 
 # over day, block and bin

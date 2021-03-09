@@ -80,13 +80,9 @@ packages <- c("rmarkdown", "reshape2", "knitr", "kableExtra", "scales", "caTools
 # loading the required packages 
 lapply(packages, library, character.only = TRUE)
 
-#install.lib <- packages[!packages %in% installed.packages(lib.loc = NULL)]
-#for (lib in install.lib) install.packages(lib, dependencies = TRUE)
-#sapply(packages, require, character = TRUE)
-
 ```
-## Preference for the rewarding option
-The bats' individual choices for the S+ are shown in Figure 1. There appears to be a great deal of individual variation in the animals' behaviour, from near-perfect adherence to the 'win-stay, lose-shift' strategy on some days to repeated visits to the unrewarding option on others. 
+## The bats show a high preference for S+ and sometimes nearly 'error-free' performance 
+The average preference of the bats for the S+ and the S- are shown in Figures 1a and 1b. Within the first 10 visits of a reversal block the animals' preference for the S+ is above 75%. In many blocks, especially on days 2 and 3, this preference for the S+ is close to 95%. This is nearly 'error-free' performance, as about 95% of the animals' visits are made to the rewarding option. 
 ```{r}
 #----------------------------------------
 # Preparing data from the main experiment
@@ -108,7 +104,7 @@ bats_incomp <- c("Bat7", "Bat19")
 main_days <- c("Day 1", "Day 2", "Day 3")
 
 # setting binsize and breaks for cutting up the data into block and bins
-binsize <- 10
+binsize <- 5
 breaks <- seq(0, 3000, binsize)
 
 # preparing the data from the main experiment in a data table
@@ -152,7 +148,8 @@ rev_learning_all <- raw_data %>%
   ungroup() %>%
   group_by(Day, Bat, block) %>%
   # cutting the visits inside each block into bins of the size set earlier
-  mutate(bins = as.numeric(cut(block_vis, breaks, include.lowest = TRUE)))
+  mutate(bins = as.numeric(cut(block_vis, breaks, include.lowest = TRUE)), 
+         bin_count = as.numeric(cut(count_vis, breaks, include.lowest = TRUE)))
 
 # creating a vector with the beta bats
 
@@ -162,9 +159,16 @@ bats_beta <- c("Bat1", "Bat2", "Bat3", "Bat4")
 rev_learning_beta <- rev_learning_all %>%
   filter(Bat %in% bats_beta)
 
-# creating a data frame with the alpha bats and the three main Days of the experiment
+# creating a data frame with the individual alpha bats and the three main Days of the experiment
 rev_learning_ind <- rev_learning_all %>%
-  filter(!Bat %in% bats_beta)
+  filter(!Bat %in% bats_beta) %>% 
+  group_by(Day, Bat, block) %>% 
+  # calculating the average preference for the S+ within each block
+  group_by(Day, Bat, block) %>% 
+  mutate(block_avg = mean(reward_status)) %>% 
+  # calculating the average preference for the S+ within each bin 
+  group_by(Day, Bat, block, bins) %>% 
+  mutate(bin_avg = mean(reward_status)) 
 
 # averaging the bats' performance over Day, block and bin
 
@@ -178,7 +182,9 @@ rev_learning_avg <- rev_learning_ind %>%
     Day_bin = 1:n(),
     Day_bin_vis = Day_bin * binsize,
     reversal = ifelse(block != lead(block), "switch", "block")
-  )
+  ) %>% 
+  group_by(Day, block) %>% 
+  mutate(avg_block_pref = mean(y))
 
 # calculating the bats' 'errors', i.e., the inverse of the previous calculation, and averaging
 # over Day, block and bin
@@ -197,37 +203,14 @@ rev_learning_err <- rev_learning_ind %>%
   )
 ```
 
-```{r, fig.cap="Figure 1: All individual choices of the bats for the rewarding and non-rewarding options", fig.width = 12, fig.height = 7}
+```{r, fig.cap = "Figure 1: a) Average preferences of the bats for the rewarding option; b) Average preferences of the bats for the less rewarding option - the 'errors'", fig.width = 12, fig.height = 3}
+
 #--------------
 # Summary plots
 #--------------
+# plot 1a: averaging the bats' preferences over Day, block and bin
 
-# plot 1: plotting the individual bats' choices for the profitable option for every visit
-
-# creating a look-up table so the reversals can be marked in the plots for the main experimental bats
-rev_main <- rev_learning_ind %>%
-  filter(
-    MsgValue1 == "switch",
-    Day %in% main_days
-  ) %>%
-  select(Day, Bat, count_vis, block, bins, MsgValue1)
-
-rev_learning_ind %>%
-  filter(Day %in% main_days) %>%
-  ggplot(aes(count_vis, reward_status)) +
-  geom_line() +
-  facet_grid(Bat ~ Day) +
-  geom_vline(aes(xintercept = count_vis), rev_main, colour = "red") +
-  ylab("Choice for the rewarding option") +
-  xlab("Visits") +
-  theme_classic()
-```
-The average preference of the bats for the rewarding option and the non-rewarding option are shown in Figures 2a and 2b respectively. Overall, it appears the bats discriminate between the two options with a high rate of success in choosing the S + and continue to do with each successive reversal. 
-```{r, fig.cap = "Figure 2: a) Average preferences of the bats for the rewarding option; b) Average preferences of the bats for the less rewarding option - the 'errors'", fig.width = 12, fig.height = 3}
-
-# plot 2a: averaging the bats' preferences over Day, block and bin
 # creating a look-up table for the reversals
-
 rev_main_avg <- rev_learning_avg %>%
   filter(
     reversal == "switch",
@@ -248,13 +231,14 @@ p1 <- rev_learning_avg %>%
   scale_x_continuous(breaks = seq(50, 300, by = 50)) +
   ylim(0, 1.05) +
   geom_hline(yintercept = c(0.25, 0.5, 0.75, 1), linetype = "dotted") +
+  geom_hline(yintercept = 0.95, linetype = "dotted", colour = "red") + 
   geom_vline(aes(xintercept = Day_bin_vis), rev_main_avg, linetype = "dashed") +
   theme_classic() +
   labs(x = "Visits", y = "Avg choice for the rewarding option \n ± 95% CIs") +
   ggtitle("a)") 
   #annotate(geom = "text", x = 0, y = 1.04, label = "a)", size = 4)
 
-# plot 2b: plotting the individual bats' choices for the less profitable option, the inverse of plot 1
+# plot 1b: plotting the individual bats' choices for the less profitable option, the inverse of plot 1
 
 rev_main_err <- rev_learning_err %>%
   filter(
@@ -284,8 +268,9 @@ p2 <- rev_learning_err %>%
 ggarrange(p1, p2, ncol = 2, nrow = 1)
 ```
 
-## The effect of serial reversals on choice behaviour
-The fixed effect bins significantly influenced the preference of the bats, as did the interaction of reversal block with bin, but the fixed effects day and block and their interactions did not (see Table 1). The bats' choice for the rewarding option increased within each reversal block, from a high number of choices for the S- in the bin immediately after the reversal to near 100% preference for the S+ as the reversal block progressed. However, their preference for the S+ within each block decreased as they experienced successive blocks. 
+## The bats' preference for the S+ increases in a reversal block and reaches an asymptote
+The fixed effects day and bins significantly influenced the preference of the bats, as did the interaction of reversal block with bin, but the effect block and the interaction of day and block did not (see Table 1). The bats' choice for the rewarding option increased within each reversal block, from a high number of choices for the S- in the bin immediately after the reversal to near 100% preference for the S+ as the reversal block progressed. However, their overall preference for the S+ within each block decreased as they experienced successive blocks. 
+
 ```{r message = FALSE, warning = FALSE, message = FALSE, echo=FALSE, results='hide'}
 #--------------------------------------------------
 # Fitting a Bayesian generalized linear mixed model
@@ -308,7 +293,6 @@ prof <- stan_glmer(avg_prof ~ (1 | Bat) + Day + block + bins + Day * block + blo
 )
 
 ```
-
 ```{r message = FALSE, warning = FALSE, message = FALSE, echo=FALSE, results='asis'}
 
 summary_prof <- as.data.frame(summary(prof, probs = c(0.025, 0.5, 0.975), digits = 3)) %>%
@@ -316,9 +300,63 @@ summary_prof <- as.data.frame(summary(prof, probs = c(0.025, 0.5, 0.975), digits
   select(5, 4, 6) %>%
   rename(Estimate = 1)
 
-kable(summary_prof, align = "l", padding = 0, caption = "Table 1: Results of the Bayesian Generalized Linear Mixed Model testing for the effect of Day, block, bin (fixed effects) and Individual (random effect) on choice for the S+ (dependent variable)") %>%
+kable(summary_prof, align = "l", 
+      padding = 0, 
+      caption = "Table 1: Results of the Bayesian Generalized Linear Mixed Model testing for the effect of Day, block, bin (fixed effects) and Individual (random effect) on choice for the S+ (dependent variable)") %>%
   kable_styling(position = "center", full_width = F)
 ```
+Immediately after a reversal the bats made visits to the flower that was previously the S+ to learn that this was no longer the rewarding flower. Following this, for the rest of the block, relatively few visits were made to the S- flower, as the preference of the animals reached an asymptote. The asymptotic phase was defined as beginning when the average preference within each bin was never lower than the average preference for that block for more than two consecutive bins. Each bat reached an asymptotic phase within each block for all three days of the experiment (see Figure 2).
+
+```{r, fig.cap="Figure 2: All individual choices of the bats for the rewarding and non-rewarding options", fig.width = 12, fig.height = 7}
+
+# plot 2: plotting the individual bats' choices for the profitable option for every visit
+
+# creating a look-up table so the reversals can be marked in the plots for the main experimental bats
+rev_main <- rev_learning_ind %>%
+  filter(
+    MsgValue1 == "switch",
+    Day %in% main_days
+  ) %>%
+  select(Day, Bat, count_vis, block, bins, bin_count, MsgValue1)
+
+rev_learning_ind %>%
+  filter(Day %in% main_days) %>%
+  ggplot(aes(count_vis, reward_status)) +
+  geom_line() +
+  facet_grid(Bat ~ Day) +
+  geom_vline(aes(xintercept = count_vis), rev_main, colour = "red") +
+  ylab("Choice for the rewarding option") +
+  xlab("Visits") +
+  theme_classic()
+
+# plot 3: plotting the bin averages and asymptotic phases for each bat 
+
+rev_block_avg <- rev_learning_ind %>% 
+  ungroup() %>%  
+  select(Day, Bat, block, block_avg) %>% 
+  distinct()
+
+rev_learning_ind %>% 
+  filter(Day %in% main_days) %>% 
+  ggplot(aes(bin_count, bin_avg)) + 
+  geom_line() + 
+  geom_point() + 
+  facet_grid(Bat ~ Day) + 
+  geom_vline(aes(xintercept = bin_count), rev_main, colour = "red") + 
+  #geom_segment(aes(x = y = xend = yend = ), data = rev_block_avg, colour = "black", linetype = #"dashed")
+  ylab("Bin average") + 
+  xlab ("Bins") + 
+  theme_classic()
+
+
+```
+The bats never demonstrated behaviour to show they had learned the 'rule' of reversal, i.e., a win-stay lose-shift strategy. The bats continued to make sampling errors and needed several unrewarded visits to learn that the reward contingencies had changed. 
+
+## A model of the bats' behaviour
+
+
+
+
 
 # Supplementary Information 
 
@@ -334,7 +372,9 @@ table1 <- data.frame(
   `Weight on release [g]` = c(8.5, 8.5, 8.5, 8, 8, 8.5, 9, 8, 8, 8, 9.5, 8, 8.5, 8.5),
   check.names = FALSE
 )
-kable(table1, align = "c", padding = 0) %>%
+kable(table1, align = "c", 
+      padding = 0
+      ) %>%
   kable_styling(position = "center", full_width = F)
 ```
 **Figure 1 - Performance in the training stages **
