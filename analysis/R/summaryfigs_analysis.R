@@ -333,10 +333,9 @@ rev_learning_zoom <- rev_learning_ind %>%
   # figure out how to calculate the reversal and finish it 
   mutate(reversal = count_vis %/% 50)
 
-
-%>% 
-  filter(keep == 0) %>% 
-  select(-keep)
+# 
+#   filter(keep == 0) %>% 
+#   select(-keep)
 
 reversal <- rep(c(1:5), 3, each = (wdw*2)+1)
 
