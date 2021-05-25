@@ -2,12 +2,12 @@
 title: "Serial reversal learning in nectar-feeding bats"
 always_allow_html: yes
 output:
-  bookdown::word_document2:
-    number_sections: no
-    toc: no
   bookdown::html_document2:
      number_sections: no
      toc: no
+  bookdown::word_document2:
+    number_sections: no
+    toc: no
 bibliography: srl.bib
  #csl: animal-cognition.csl
 ---
@@ -79,11 +79,11 @@ Reversal learning is essentially a specific type of discrimination learning, whi
 
 The serial reversal learning protocol can be adapted to the behaviour and sensory physiology of many different species, thus allowing comparative research. It has been done using visual stimuli in bumblebees [@strang_serial_2014] and guppies [@boussard_brain_2020]; visual and spatial stimuli in corvids [@bond_serial_2007-1]; spatial stimuli in rats [@boulougouris_effects_2007], great tits [@hermer_elevation-related_2018] and gray squirrels [@chow_serial_2015]; and olfactory stimuli in rats [@kinoshita_effects_2008]. Reversal learning, specifically serial reversal, has been used as an explicit comparative measure of animal 'intelligence' [@bitterman_evolution_1964]: 'higher' animals like pigeons, rats and monkeys showed a progressive improvement on the task and 'lower' animals like turtles and fish did not. Though the idea of such a hierarchy is outdated, comparative research using reversal learning can reveal important differences in behaviour and learning that have evolved under the selection pressures faced by different species.
 
-Learning in the reversal learning task is clearly demonstrable, and is therefore a meaningful criterion when comparing the performance of different animals. First-order learning happens when an animal learns the stimulus-reward association and changes its behaviour according to the strength of this reinforcement. Higher-order or second-order learning is the learning of rules or strategies; in serial reversal learning the same stimuli are successively paired with a reward and then not paired with a reward, so a strategy can be very profitable. The optimal rule in reversal learning is 'win-stay; lose-shift', which means in practice one 'error' per reversal. After learning the task, the perfectly optimal animal will first exclusively choose the stimulus that is paired with reward. At the first choice of this stimulus that does not give a reward (the error), the animal will change its preference and exclusively choose the other stimulus which is now paired with a reward. Progressive 'improvement' in this task, where an animal makes fewer and fewer errors per reversal is indication that the animal is learning the rule of reversal, or 'learning to learn' (Shettleworth, 2010). 
+Learning in the reversal learning task is clearly demonstrable, and is therefore a meaningful criterion when comparing the performance of different animals. First-order learning happens when an animal learns the stimulus-reward association and changes its behaviour according to the strength of this reinforcement. Higher-order or second-order learning is the learning of rules or strategies; in serial reversal learning the same stimuli are successively paired with a reward and then not paired with a reward, so a strategy can be very profitable. The optimal rule in reversal learning is 'win-stay; lose-shift', which means in practice one 'error' per reversal. After learning the task, the perfectly optimal animal will first exclusively choose the stimulus that is paired with reward. At the first choice of this stimulus that does not give a reward (the error), the animal will change its preference and exclusively choose the other stimulus which is now paired with a reward. Progressive 'improvement' in this task, where an animal makes fewer and fewer errors per reversal is indication that the animal is learning the rule of reversal, or 'learning to learn' (**Shettleworth, 2010** - how to cite a book?). 
 
 Comparative research from the primate literature reveals a very interesting difference in these two types of learning (first- and second-order). Thirteen different species of primates were compared on a visual reversal learning task [@rumbaugh_toward_1996], where they were trained to discriminate a pair of stimuli to either 67% or 84% choice for the rewarded option, and then given a single reversal of reward contingencies. If the primates' behaviour was driven mainly by first-order learning, they should make fewer errors after the reversal when the criterion was 67% rather than 84%, and *vice versa* if second-order learning or rule-learning was occurring. The results showed that Prosimian species tended to perform better when trained to 67%; apes when trained to 84%; and monkeys were intermediate. 
 
-Progressive improvement on the serial reversal task as more reversals are experienced, evidence of rule-learning, has been shown in many different species: bumblebees [@strang_serial_2014], guppies [@boussard_brain_2020], two different species of great tits [@hermer_elevation-related_2018] and three different species of corvids [@bond_serial_2007-1]. Guppies, in fact, show an increase in their choice for the rewarded option; and corvids show significant transfer across stimulus modality, which is strong evidence for rule-learning. 
+Progressive improvement on the serial reversal task as more reversals are experienced, evidence of rule-learning, has been shown in many different species: bumblebees [@strang_serial_2014], two different species of great tits [@hermer_elevation-related_2018] and three different species of corvids [@bond_serial_2007-1]. Corvids in fact show significant transfer across stimulus modality, which is strong evidence for rule-learning. 
 
 What performance on the serial reversal task says about the deeper cognitive mechanisms at work, and whether the task is a measure of cognitive or behavioural flexibility, are not completely settled questions. Cognitive flexibility cannot be directly observed; it is inferred to have occurred through changes in behaviour, or behavioural flexibility [@tait_assessment_2018]. However, just because behavioural flexibility has been observed does not necessarily indicate cognitive flexibility [@dhawan_more_2019]. The term 'behavioural flexibility' itself has been used widely but inconsistently, applied to many traits that have different underlying neural mechanisms or do not co-vary [@audet_whats_2017]. Behavioural flexibility in animals has evolved in response to selection pressures from different foraging environments: the flexibility required to deal with seasonal changes in fruit availability is not the same kind of flexibility required to deal with capturing a prey animal intent on escaping. 
 
@@ -1250,33 +1250,33 @@ p12
 
 # Discussion 
 
-## A brief recap of what the bats did 
-* Learned where the rewarding location was and made near exclusive visits to it until they experienced a reversal on a particular night. 
-* As they experienced reversals the bats learned to switch back more and more rapidly, topping out thanks to a ceiling effect  
+In our experiment wild nectar-feeding bats participated in a serial reversal learning task, the first time, to our knowledge, such an experiment has been done with bats. It was clear that the bats detected and responded to the changing reward contingencies, evident first-order learning. As the animals experienced more reversals on more experimental nights, their performance improved in two significant ways. 
 
-* **GUIDING LIGHT: In short, near-perfect performance achieved through decreasing the number of perseverative visits and increasing the overall proportion of visits to the rewarding option with just a little bit of sampling leftover**
-  
-  ## Rapid switching versus gradual switching
-  
-  * Averaging data vs the individual data - talk about the model fits
+## A faster switch
 
-## The role of unrewarded visits
-* Mention this briefly if it impacts the interpretation of the data 
+After each reversal they are quicker to switch from the previously-rewarding option to the newly-rewarding option. This was demonstrated in two ways. Firstly, after a reversal, the number of perseverative visits, i.e., the visits the bats make to the previously-rewarding option before their first visit to the newly-rewarding option decreases (as shown by the confirmatory analysis). Secondly, the proportion of visits to the newly-rewarding option in the first bin of ten visits after a reversal increases (as shown in the exploratory analysis - **Figure 11**). 
 
-## A task relevant to their foraging ecology 
-* Quick detection and response to a changing environment
+It is true that the bats faced a relatively simple discrimination task: there were only two available options, so if one of them was perceived to be non-rewarding, there was only one possible alternative. The change from one option to another by the animals is less remarkable than the fact that this change happened more and more rapidly: more experience of the reversal led to better exploitation of the particular type of change the environment was undergoing. 
 
-## A comparison along relevant dimensions with the other animals that have done this task
-* Corvids and their spatial abilities 
-* The other nectar-feeders 
-* Other mammals? 
-  * Contrast with the spatial memory demands of passerines and chickadees - see discussion of the passerine paper
+## Improved 'performance'
 
+The bats' preference for the rewarding option, i.e., their task performance, increased overall until it reached a 'ceiling'. This improvement in performance is strong evidence of second-order learning, or learning the rule behind the environmental change. The conclusion that the bats learn that reversals can occur is further supported by the results of the exploratory analysis: the highest proportion of visits to the rewarding option occurs before any reversals have been experienced at all. In a way this is unsurprising, as at this point in the experiment the bats are only discriminating between an option that delivers a substantial reward and an option that delivers nothing - the easiest possible discrimination - and have no information yet about the way the environment changes.  
 
-## What have we actually discovered about the animals' abilities? 
-* Cognitive flexibility vs behavioural flexibility
-* Exploration and exploitation 
-* They learn that a reversal is something that can happen in this world 
-* They learned this pretty quickly: something that works with their foraging ecology
+## The asymptote and immediate post-reversal performance 
+The exploratory analysis shed a little more light on the effect of the reversal on the animals' performance just before and after the reversal. While the proportion of visits to the rewarding option at the end of a reversal block progressively increased, and the the number of perseverative errors decreased, the correlation between the performance just after a reversal and just before a reversal was negative on the first and third nights, and the correlation was close to zero on the second night. The correlation was most negative on the first night compared to the other two nights, suggesting that by the second night at least some learning had occurred. 
+
+Thus, the bats learn to take the regular occurrence of reversals into account as they discriminate between potentially rewarding options: they show a high preference for the rewarding option with the occasional exploratory visit to the non-rewarding option. 
+
+## How do other animal species compare with the bats? 
+There are several key points of similarity between the bats' performance on the serial reversal task and that of other animals. Bumblebees showed improvement primarily through a reduction in the perseverative errors [@strang_serial_2014, @chittka_sensorimotor_nodate-1] on a colour reversal task. Notably, this ability to improve at the task seems to be due to a large number of trials, just as we had in our experiment. When the task was done with very small trials numbers, both bumblebees [@couvillon_performance_1986] and honeybees [@mota_multiple_2010] stopped discriminating and began responding to both the rewarding and non-rewarding stimuli at chance levels. Several different species of birds also showed performance on this task that was similar to the bats. Corvids [@bond_serial_2007-1] showed both a decrease in perseverative errors as well as an increase in performance as they experienced successive reversals. The improvement in performance however was seen only in a colour reversal task and not a spatial reversal task. Two species of Great Tits did even better on a spatial reversal task than the Corvids: both trials within a reversal block and reversal number had a positive effect on the proportion of visits to the rewarding option [@hermer_elevation-related_2018-1], and similar performance was seen in pigeons on a colour reversal task [@diekamp_functional_1999]. Among mammals, a decrease in perseverative errors was seen both in marmosets on a visual reversal task [@clarke_lesions_2008] and in rats on a spatial reversal task [@castane_selective_2010]. 
+
+## 'Reveral learning' in the wild 
+Under natural conditions bats exploit the flowers of many different species of plants that vary in the flowering season, flowering duration, the number of flowers that bloom per night, and the quantity of nectar they provide. Observations of foraging behaviour at *Agave desmettiana* flowers show that the visitation rates of bats to flowers depends heavily on nectar volume [@lemke_foraging_1984]. Feeding rates are high in the first four hours of the night after sunset, and decline sharply when nectar volumes approach 50% of what they were at the start of the night. However when a nectar source is non-depleting, bats visit them at a significantly higher frequency, and for 3-5 hours longer than flowers that were depleted normally. The opposite pattern was seen when flowers were prematurely depleted: bats stopped feeding at these flowers earlier than at control flowers, and visited neighbouring flowers with a higher frequency. This is a sensible strategy, given that Agave flowers only replenish their nectar levels at a rate of 30% in 20 hours (equally over day and night). When rates of nectar replenishment are higher, bats are capable of detecting it and returning the same flowers sooner [**Ulf's thesis** - how to cite a thesis?], utilizing their excellent spatial memory to find the flower again, adjusting the time interval between successive visits based on the secretion rate of the experimental flowers. It would seem that a 'win-stay; lose-shift' strategy is ideal for the bats' natural foraging ecology. But flower nectar levels in nature are more likely to decline at a perceptible rate, rather than suddenly drop to zero; furthermore, the perception of flower nectar volume is subject to Weber's Law [@toelch_psychometric_2007]. Thanks to these factors, a foraging bat would need to make more than one visit to a flower (as the optimal 'win-stay; lose-shift' strategy requires) to perceive that nectar levels have been depleted so much that future visits will not be profitable.
+
+## Learning mechanisms in a reveral learning task 
+
+Previous work has shown that the bats' behaviour can be described well by a choice-history dependent behavioural model [@nachev_cognition-mediated_2017]. In such a model, an animal has a estimate of the profitability of the available option, based on its memory of past reward at these options. The past experiences are weighted by recency: the most recent experience affects the estimate of the option more than those in the past. The animal updates these estimates faster or slower depending upon a parameter for learning rate. The animal then makes a choice based on these estimates using a Softmax decision rule. An additional parameter, the exploration rate or 'temperature' parameter determines how frequently an animal makes an exploratory visit, i.e., a visit to an option that is estimated at the time of choice to be the less rewarding or non-rewarding one.
+
+Our results, both from the confirmatory and the exploratory analyses seem to indicate that that reinforcement learning, which is choice-history dependent [@worthy_comparison_2014] is playing a role in the animals' behaviour, especially at the beginning of the experiment before second-order learning has happened. As they learn the task the bats appear to approach the strategy of win-stay; lose-shift, wherein decision-making is dependent only on the last one experience and not on previous choice-history. The key word is *approach*. We suggest that through second-order learning, the bats shift from a reinforcement-learning strategy to a strategy that approximates win-stay; lose-shift. That is, the estimate of the profitability of an option is weighted more and more towards the most recent experience of that option as the animals learn the rule behind the reversals. 
 
 # References 
