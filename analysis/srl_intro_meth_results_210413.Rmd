@@ -2,12 +2,12 @@
 title: "Serial reversal learning in nectar-feeding bats"
 always_allow_html: yes
 output:
-  bookdown::word_document2:
-    number_sections: no
-    toc: no
   bookdown::html_document2:
      number_sections: no
      toc: no
+  bookdown::word_document2:
+    number_sections: no
+    toc: no
 bibliography: srl.bib
  #csl: animal-cognition.csl
 ---
@@ -83,7 +83,7 @@ Learning in the reversal learning task is clearly demonstrable, and is therefore
 
 Comparative research from the primate literature reveals a very interesting difference in these two types of learning (first- and second-order). Thirteen different species of primates were compared on a visual reversal learning task [@rumbaugh_toward_1996], where they were trained to discriminate a pair of stimuli to either 67% or 84% choice for the rewarded option, and then given a single reversal of reward contingencies. If the primates' behaviour was driven mainly by first-order learning, they should make fewer errors after the reversal when the criterion was 67% rather than 84%, and *vice versa* if second-order learning or rule-learning was occurring. The results showed that Prosimian species tended to perform better when trained to 67%; apes when trained to 84%; and monkeys were intermediate. 
 
-Progressive improvement on the serial reversal task as more reversals are experienced, evidence of rule-learning, has been shown in many different species: bumblebees [@strang_serial_2014], guppies [@boussard_brain_2020], two different species of great tits [@hermer_elevation-related_2018] and three different species of corvids [@bond_serial_2007-1]. Guppies, in fact, show an increase in their choice for the rewarded option; and corvids show significant transfer across stimulus modality, which is strong evidence for rule-learning. 
+Progressive improvement on the serial reversal task as more reversals are experienced, evidence of rule-learning, has been shown in many different species: bumblebees [@strang_serial_2014], two different species of great tits [@hermer_elevation-related_2018] and three different species of corvids [@bond_serial_2007-1]. Corvids in fact show significant transfer across stimulus modality, which is strong evidence for rule-learning. 
 
 What performance on the serial reversal task says about the deeper cognitive mechanisms at work, and whether the task is a measure of cognitive or behavioural flexibility, are not completely settled questions. Cognitive flexibility cannot be directly observed; it is inferred to have occurred through changes in behaviour, or behavioural flexibility [@tait_assessment_2018]. However, just because behavioural flexibility has been observed does not necessarily indicate cognitive flexibility [@dhawan_more_2019]. The term 'behavioural flexibility' itself has been used widely but inconsistently, applied to many traits that have different underlying neural mechanisms or do not co-vary [@audet_whats_2017]. Behavioural flexibility in animals has evolved in response to selection pressures from different foraging environments: the flexibility required to deal with seasonal changes in fruit availability is not the same kind of flexibility required to deal with capturing a prey animal intent on escaping. 
 
@@ -1250,33 +1250,530 @@ p12
 
 # Discussion 
 
-## A brief recap of what the bats did 
-* Learned where the rewarding location was and made near exclusive visits to it until they experienced a reversal on a particular night. 
-* As they experienced reversals the bats learned to switch back more and more rapidly, topping out thanks to a ceiling effect  
+## Results summary, point by point
 
-* **GUIDING LIGHT: In short, near-perfect performance achieved through decreasing the number of perseverative visits and increasing the overall proportion of visits to the rewarding option with just a little bit of sampling leftover**
-  
-  ## Rapid switching versus gradual switching
-  
-  * Averaging data vs the individual data - talk about the model fits
+* **GUIDING LIGHT: In short, near-perfect performance achieved through decreasing the number of perseverative visits and increasing the overall proportion of visits to the rewarding option with just a little bit of sampling leftover. The bats learn that reversals are a feature of the environment and this shows in their behaviour**
+In our experiment wild nectar-feeding bats participated in a serial reversal learning task. To our knowledge this was the first time such an experiment has been done with bats. It was clear that the bats detected and responded to the changing reward contingencies. As the bats experienced more reversals on more experimental nights, their performance improved in two important ways: after each reversal they are quicker to switch from the previously-rewarding option to the newly-rewarding option; their preference for the rewarding option increased overall until it reached a 'ceiling'. This improvement in performance is strong evidence of higher-order learning, i.e., learning the rule behind the environmental change. The conclusion that the bats learn that reversals can occur is further supported by the fact that the highest proportion of visits to the rewarding option occurs before any reversals have been experienced at all. In summary, the bats learn that reversals occur in their foraging environment, and respond to them by switching faster to a newly-rewarding option and increase the proportion of visits they make to the rewarding option until near-exclusivity.
 
-## The role of unrewarded visits
-* Mention this briefly if it impacts the interpretation of the data 
+## Point 1 from the results - more rapid switching
+
+As the bats experience more reversals they are quicker to visit the newly-rewarding option, and this was demonstrated in two ways. Firstly, after a reversal, the number of perseverative visits, i.e., the visits the bats make to the previously-rewarding option before their first visit to the newly-rewarding option decreases. Secondly, the proportion of visits to the newly-rewarding option in the first bin of ten visits after a reversal increases (**Figure 11**). 
+
+It is true that the bats faced a relatively simple discrimination task: there were only two available options, so if one of them was perceived to be non-rewarding, there was only one possible alternative. The change from one option to another by the animals is less remarkable than the fact that this change happened more and more rapidly: more experience of the reversal led to better exploitation of the particular type of change the environment was undergoing. 
+
+## Point 2 - Topping out and the pre-reversal performance 
+
+The proportion of visits to the rewarding option, after the initial dip just after the reversal increased with each successive reversal. Yet, as the exploratory analysis showed, this proportion was highest of all in the very first reversal block, before the bats had experienced any reversals at all. 
+
+## Point 3 - The asymptote 
+The exploratory analysis shed a little more light on the effect of the reversal on the animals' performance just before and after the reversal. While the proportion of visits to the rewarding option at the end of a reversal block progressively increased, and the the number of perseverative errors decreased, the correlation between the performance just after a reversal and just before a reversal was negative on the first and third nights, and the correlation was close to 0 on the second night. This result must be interpreted with caution, but is nevertheless suggestive: it indicates that reinforcement learning is still playing a role in the animals' behaviour, even as they shift towards a 'win-stay;lose-shift' strategy. Certainly the correlation is most negative on the first night compared to the other two nights, by which time at least some learning had occurred. We expand on this point in later sections of this Discussion. 
+
+## Overall interpretation
+Our overall interpretation of our results is as follows. The bats need to differentiate between an option that delivers a substantial reward and an option that delivers nothing, the easiest possible discrimination, and so make visits exclusively to the rewarding option at first. This is evident first-order learning. After experiencing the reversals, the bats learn in every reversal block which of the two options is the rewarding one, but occasionally make exploratory visits to the non-rewarding option, as they have now learned that the rewarding properties of an option can change compared to their last experience of it. After the initial dip in performance, the bats' choice for the rewarding option increases with each experience of a reversal as the animals begin to learn the rule behind the reversals, which is second-order learning. This improvement slows down, very likely because of a ceiling effect: preference for the rewarding option is so close to 100% that it cannot get much higher. In this way, the bats learn to take the regular occurrence of reversals into account in their behaviour: a high preference for the rewarding option with the occasional exploratory visit to the non-rewarding option. 
+
+## Comparison with other animals 
+There are several key points of similarity between the bats' performance on the serial reversal task and that of other animals. Bumblebees showed improvement primarily through a reduction in the perseverative errors [@strang_serial_2014, **Chittka, 1998**] on a colour reversal task. Notably, this ability to improve at the task seems to be due to a large number of trials: when the task was done with very small trials numbers, both bumblebees [**Couvillon and Bitterman**] and honeybees [**Mota and Giurfa**] stopped discriminating and began responding to both the rewarding and non-rewarding stimuli at chance levels. Several different species of birds also showed performance on this task that was similar to the bats. Corvids [@bond_serial_2007-1, **blue jay paper**] showed both a decrease in perseverative errors as well as an increase in performance as they experienced successive reversals. The improvement in performance however was seen only in a colour reversal task and not a spatial reversal task. Two species of Great Tits did even better on a spatial reversal task than the corvids: both trials within a reversal block and reversal number had a positive effect on the proportion of visits to the rewarding option [**great tits paper**], and similar performance was seen in pigeons on a colour reversal task [**pigeon paper**]. Among mammals, a decrease in perseverative errors was seen both in marmosets on a visual reversal task [**marmoset paper**] and in rats on a spatial reversal task [**Castane paper**]. 
 
 ## A task relevant to their foraging ecology 
-* Quick detection and response to a changing environment
 
-## A comparison along relevant dimensions with the other animals that have done this task
-* Corvids and their spatial abilities 
-* The other nectar-feeders 
-* Other mammals? 
-  * Contrast with the spatial memory demands of passerines and chickadees - see discussion of the passerine paper
+Observations of foraging behaviour at Agave flowers show that the visitation rates of bats to flowers depends heavily on the volume of nectar in the flowers [**Lemke paper**]. Feeding rates are high in the first four hours of the night after sunset, and decline sharply when nectar volumes approach 50% of what they were at the start of the night. However when a nectar source is non-depleting, bats visit them at a significantly higher frequency, and for 3-5 hours longer than flowers that were depleted normally. The opposite pattern was seen when flowers were prematurely depleted: bats stopped feeding at these flowers earlier than at control flowers, and visited neighbouring flowers with a higher frequency. This is a sensible strategy, given that Agave flowers only replenish their nectar levels at a rate of 30% in 20 hours (equally over day and night). When rates of nectar replenishment are higher, bats are capable of detecting it and returning the same flowers sooner [**Ulf's thesis**], utilizing their excellent spatial memory to find the flower again, adjusting the time interval between successive visits based on the secretion rate of the experimental flowers. It would seem that a 'win-stay; lose-shift' strategy is ideal for the bats' natural foraging ecology. But flower nectar levels in nature are more likely to decline at a perceptible rate, rather than suddenly drop to zero; furthermore, the perception of flower nectar volume is subject to Weber's Law [**Ulf's paper**]. Thanks to these factors, a foraging bat would need to make more than one visit to a flower (as the optimal 'win-stay; lose-shift' strategy requires) to perceive that nectar levels have been depleted so much that future visits will not be profitable.
 
+## Modelling this behaviour - the strategies 
+Previous work has shown that the bats' behaviour can be described well by a choice-history dependent behavioural model [**Vladi's science paper**]. In such a model, an animal has a estimate of the profitability of the available option, based on its memory of past experience of reward at these options. The animal then makes a choice based on these estimates using a Softmax decision rule. An additional parameter, the exploration rate or 'temperature' parameter determines how frequently an animal makes an exploratory visit, i.e., a visit to an option that is estimated at the time of choice to be the less rewarding one. 
 
-## What have we actually discovered about the animals' abilities? 
-* Cognitive flexibility vs behavioural flexibility
-* Exploration and exploitation 
-* They learn that a reversal is something that can happen in this world 
-* They learned this pretty quickly: something that works with their foraging ecology
+**Figure 13** shows the result of a simulation of a more elaborate version of such a model (**details of the simulation are provided in the supplementary materials**). In this behavioural model, referred to from here on as the Reinforcement Learning (RL) model ... 
+
+```{r}
+#####
+#empirical data from the experiment, averaged over all the bats for each individual visit 
+rev_learning_avgallvis <- rev_learning_all %>% 
+  ungroup() %>% 
+  group_by(Day, count_vis) %>% 
+  group_modify(~ mean_cl_boot(.x$reward_status, conf.int = 0.95)) %>% 
+  filter(count_vis != 0) %>% 
+    mutate(Day = case_when(Day == "1" ~ "Night 1", 
+                         Day == "2" ~ "Night 2", 
+                         Day == "3" ~ "Night 3"))
+
+allvis_reversal <- rev_learning_avgallvis %>%
+  mutate(reversal = ifelse(count_vis %% 50 == 1, "switch", "non-switch")) %>% 
+  filter(
+    reversal == "switch")
+
+rev_learning_avgallvis %>% 
+  ggplot(aes(count_vis, y)) + 
+  geom_line(aes(group = Day, color = Day)) + 
+  geom_ribbon(aes(ymax = ymax, ymin = ymin), alpha = 0.4) + 
+  geom_vline(aes(xintercept = count_vis), allvis_reversal, linetype = "dashed") + 
+  #facet_grid(.~Day) + 
+  ylab("Proportion of visits to the rewarding option") + 
+  xlab("Visits") + 
+  theme_bw()
+```
+
+``` {r}
+#####
+# creating the reward schedule for the serial reversal learning experiment as it was done 
+#####
+#1. Helper functions
+#Function to decrease reward output gradually 
+decrease <- function(vis_dec) {
+  if (vis_dec == 0) {
+    prob_success <- tibble(rew = 0)
+  } else if (vis_dec > 0 & vis_dec < 4) {
+    prob_success <- tibble(rew = 1)
+  } else {
+  quarter <- round(vis_dec/4)
+  vis_dec <- 4*quarter
+  prob_success <- tibble(prob = rep(c(0.8, 0.6, 0.4, 0.2), 1, each = round(vis_dec/4))) %>% 
+    mutate(rew = rbinom(vis_dec, 1, prob)) %>% 
+    select(-prob)
+  }
+}
+#Function to increase reward output gradually 
+increase <- function(vis_inc) {
+  if (vis_inc == 0) {
+    prob_success <- tibble(rew = 0)
+  } else if (vis_inc > 0 & vis_inc < 4) {
+    prob_success <- tibble(rew = 1)
+  } else {
+    quarter <- round(vis_inc/4)
+    vis_inc <- 4*quarter
+    prob_success <- tibble(prob = rep(c(0.2, 0.4, 0.6, 0.8), 1, each = round(vis_inc/4))) %>% 
+      mutate(rew = rbinom(vis_inc, 1, prob)) %>% 
+      select(-prob)
+  }
+}
+
+# Creating the reward contingencies of the experiment
+rew_outputs <- function(n_block, block_size, vis_inc, vis_dec, opt1) {
+  # put it in here that when decrease and increase are 0 those phases don't exist
+  one_block1 <- c(rep("block_one", block_size), "decrease", rep("block_two", block_size), "increase")
+  one_block2 <- c(rep("block_one", block_size), "increase", rep("block_two", block_size), "decrease")
+  #the following can be tidied up so that rewards1 and rewards2 don't have to be two separate tables 
+  rewards1 <- tibble(phase1 = rep(one_block1, n_block/2)) %>% 
+    mutate(opt1 = opt1, 
+           option1 = case_when(
+             opt1 == 1 & phase1 == "block_one" ~ 1, 
+             opt1 == 0 & phase1 == "block_one" ~ 0,
+             opt1 == 1 & phase1 == "block_two" ~ 0, 
+             opt1 == 0 & phase1 == "block_two" ~ 1), 
+           option1 = ifelse(phase1 == "decrease", decrease(vis_dec), 
+                            ifelse(phase1 == "increase", increase(vis_inc), option1)))
+  
+  rewards2 <- tibble(phase2 = rep(one_block2, n_block/2)) %>% 
+    mutate(opt1 = opt1,
+           option2 = case_when(
+             opt1 == 1 & phase2 == "block_one" ~ 0, 
+             opt1 == 0 & phase2 == "block_one" ~ 1,
+             opt1 == 1 & phase2 == "block_two" ~ 1, 
+             opt1 == 0 & phase2 == "block_two" ~ 0), 
+           option2 = ifelse(phase2 == "decrease", decrease(vis_dec), 
+                            ifelse(phase2 == "increase", increase(vis_inc), option2)))
+  rewards <- bind_cols(rewards1, rewards2) %>% 
+    unnest(cols = c(option1, option2)) %>% 
+    select(option1, option2)
+  rewards 
+}
+
+# fill in your values of choice here 
+srl <- rew_outputs(6, 50, 0, 0, 1) # neither increase nor decrease
+srl <- srl %>% # remove the unnecessary rows - need to incorporate this into the function itself
+  filter(option1 != option2)
+
+# plot of experimental contingencies - this is the serial reversal learning experiment
+srl %>%
+  ungroup() %>% 
+  mutate(visits = 1:n()) %>%
+  ggplot(aes(visits)) +
+  geom_line(aes(y = option1, colour = "red")) +
+  geom_line(aes(y = option2, colour = "blue")) + 
+  ylab("Profitability of option") + 
+  theme_bw()
+```
+
+```{r}
+#The reinforcement learning model with the decay of eligibility traces. A more complex 
+#version of the simple reinforcement learning model 
+#1. Helper functions - softmax function 
+p_chooser <- function(probs) { 
+  # this function is to help the bat choose between the two probabilities
+  p <- runif(1, 0, 1)
+  upper_probs <- cumsum(probs)
+  lower_probs <- lag(upper_probs, default = 0)
+  which(map2_lgl(.x = lower_probs, .y = upper_probs, ~between(p, .x, .y)))
+}
+
+draw_reward_from_prob <- function(prob) {
+  rbinom(1, 1, prob)
+}
+
+softmax <- function(estimates, temperature) {
+  exps <- exp(estimates / temperature)
+  exps / sum(exps)
+}
+
+choose_softmax <- function(estimates, temperature) {
+  probs <- softmax(estimates, temperature = temperature)
+  p_chooser(probs)
+}
+
+# 2. A little test data table
+param <- tibble(estimates1 = 0, estimates2 = 0, temperature = 0.25, 
+                   option1 = 0, option2 = 1, n_visited = 0, 
+                   lambda1 = 0, lambda2 = 0, 
+                   l_rate = 0.25, zeta = 0.2)
+
+# 3. Function setting up the reinforcement learning model 
+rf_learn <- function(param, old) {
+  estimates <- c(param$estimates1, param$estimates2)
+  loc_visited <- choose_softmax(estimates, param$temperature) # where to go
+  # tally visits
+  param$n_visited <- param$n_visited + 1
+  # remember where last visit happened
+  #what is the reward?  
+  # reward1 <- ifelse(loc_visited == 1, param$option1, 0)
+  # reward2 <- ifelse(loc_visited == 2, param$option2, 0)
+  reward <- ifelse(loc_visited == 1, param$option1, param$option2)
+  # the eligibility traces decay for both options 
+  lambda1 <- param$lambda1*param$zeta
+  lambda2 <- param$lambda2*param$zeta
+  # the eligibility trace for the chosen option increases by 1
+  lambda1 <- case_when(loc_visited == 1 ~ lambda1 + 1, 
+                       loc_visited == 2 ~ lambda1)
+  lambda2 <- case_when(loc_visited == 1 ~ lambda2, 
+                             loc_visited == 2 ~ lambda2 + 1)
+  #what are the estimates 
+  # param$estimates1 <- 
+  #   case_when(loc_visited == 1 ~ 
+  #               param$estimates1 + (param$l_rate*(reward - param$estimates1)*(lambda1 + 1)), 
+  #             loc_visited == 2 ~ 
+  #               param$estimates1 + (param$l_rate*(reward - param$estimates1)*(lambda1)))
+  # param$estimates2 <- 
+  #   case_when(loc_visited == 1 ~ 
+  #               param$estimates2 + (param$l_rate*(reward - param$estimates2)*(lambda2)), 
+  #             loc_visited == 2 ~ 
+  #               param$estimates2 + (param$l_rate*(reward1 - param$estimates2)*(lambda2 + 1)))
+  
+  param$estimates1 <- param$estimates1 + param$l_rate*(reward - param$estimates1)*lambda1
+  param$estimates2 <- param$estimates2 + param$l_rate*(reward - param$estimates2)*lambda2
+  #putting them all together into one estimate list 
+  #output is the estimate list 
+  param$loc <- loc_visited
+  param$lambda1 <- lambda1
+  param$lambda2 <- lambda2
+  param$option1 <- old$option1
+  param$option2 <- old$option2
+  param
+}
+
+# 4. simulation - check this code before running 
+n_ind <- 14 # number of individuals to simulate over 
+
+rl_sim_srl <- cross_df(list(l_rate = c(0.125, 0.25, 0.5, 0.75),
+                            temperature = c(0.125, 0.25, 0.5, 0.75),
+                            zeta = c(0.1, 0.2, 0.5), 
+                            ind = c(seq(1:n_ind)))) %>% 
+  mutate(option1 = list(srl$option1), 
+         option2 = list(srl$option2), 
+         cond = paste(l_rate, temperature, zeta, sep = ";")) %>% 
+  unnest(cols = c(option1, option2)) %>% 
+  mutate(loc = 0, 
+         estimates1 = 0, 
+         estimates2 = 0, 
+         lambda1 = 0, 
+         lambda2 = 0,
+         n_visited = 0) %>% 
+  mutate(memories = pmap(list(l_rate = l_rate, temperature = temperature, zeta = zeta, 
+                              option1 = option1, option2 = option2, loc = loc, 
+                              estimates1 = estimates1, 
+                              estimates2 = estimates2,
+                              lambda1 = lambda1, lambda2 = lambda2, 
+                              n_visited = n_visited), list)) %>% 
+  select(ind, cond, memories) %>% 
+  group_by(cond, ind) %>% 
+  mutate(memories = accumulate(memories, .f = rf_learn)) 
+
+rl_srl <- rl_sim_srl %>% 
+  mutate(loc = map(memories, ~pluck(., "loc")), 
+         option1 = map(memories, ~pluck(., "option1")), 
+         option2 = map(memories, ~pluck(., "option2")), 
+         #n_visited = map(memories, ~pluck(., "n_visited")), 
+         estimates1 = (map(memories, ~pluck(.x, "estimates1"))), 
+         estimates2 = (map(memories, ~pluck(.x, "estimates2"))), 
+         estimates1 = round(as.numeric(estimates1), digits = 3), 
+         estimates2 = round(as.numeric(estimates2), digits = 3)) %>% 
+  select(-memories)
+
+# 5. how close is the model to the data? Stats for this and the plot
+rl_srl <- rl_srl %>% 
+  filter(loc != 0) %>% 
+  mutate(reward = ifelse(loc == 1, option1, option2), 
+         reward = as.numeric(reward), 
+         cond2 = cond) %>%
+  separate(cond2, into = c("l_rate", "temperature", "zeta"), sep = ";") %>%
+  group_by(ind, cond) %>% 
+  mutate(visits = 1:n())
+
+binsize <- 10
+breaks <- seq(0, 3000, binsize)
+
+rl_avgs_srl <- rl_srl %>% 
+  # cut the visits into bins
+  mutate(bins = as.numeric(cut(visits, breaks, include.lowest = TRUE))) %>% 
+  group_by(l_rate, temperature, zeta, visits) %>% 
+  group_modify(~ mean_cl_boot(.x$reward, conf.int = 0.95)) %>% 
+  ungroup() %>% 
+  group_by(l_rate, temperature, zeta) %>% 
+  mutate(
+    ind_bin = 1:n(),
+    ind_bin_vis = ind_bin * binsize
+  )
+
+#little lookup table for the reversals 
+switch <- rl_avgs_srl %>% 
+  mutate(switch = ifelse(visits %% 50 == 1, 1, 0)) %>%
+  filter(switch == 1) %>% 
+  select(visits)
+
+night1 <- rev_learning_avgallvis %>% 
+filter(Day == "Night 1")
+
+night2 <- rev_learning_avgallvis %>% 
+  filter(Day == "Night 2")
+
+night3 <- rev_learning_avgallvis %>% 
+  filter(Day == "Night 3")
+
+p13 <- rl_avgs_srl %>%
+  ggplot(aes(visits)) +
+  #geom_point() +
+  geom_line(aes(y = y, group = zeta, color = zeta), alpha = 0.5) +
+  geom_line(data = night1, aes(x = count_vis, y = y), color = "black", alpha = 0.25) + 
+  geom_ribbon(aes(ymin = ymin, ymax = ymax, group = zeta, fill = zeta), alpha = 0.25, ) +
+  geom_ribbon(data = night1, aes(x = count_vis, ymin = ymin, ymax = ymax), alpha = 0.25, fill = "black") + 
+  facet_grid(temperature ~ l_rate) +
+  #scale_x_continuous(breaks = seq(50, 300, by = 50)) +
+  #ylim(0, 1.02) +
+  geom_vline(aes(xintercept = visits), switch, linetype = "dotted") +
+  theme_bw() +
+  theme(legend.position = "none")  + 
+  labs(x = "Visits", y = "Avg choice for the more profitable option ± 95% CIs")
+
+p14 <- rl_avgs_srl %>%
+  ggplot(aes(visits)) +
+  #geom_point() +
+  geom_line(aes(y = y, group = zeta, color = zeta), alpha = 0.5) +
+  geom_line(data = night2, aes(x = count_vis, y = y), color = "black", alpha = 0.25) + 
+  geom_ribbon(aes(ymin = ymin, ymax = ymax, group = zeta, fill = zeta), alpha = 0.25) +
+  geom_ribbon(data = night2, aes(x = count_vis, ymin = ymin, ymax = ymax), alpha = 0.25, fill = "black") + 
+  facet_grid(temperature ~ l_rate) +
+  #scale_x_continuous(breaks = seq(50, 300, by = 50)) +
+  #ylim(0, 1.02) +
+  geom_vline(aes(xintercept = visits), switch, linetype = "dotted") +
+  theme_bw() +
+  theme(legend.position = "none") +
+  labs(x = "Visits", y = "Avg choice for the more profitable option ± 95% CIs")
+
+p15 <- rl_avgs_srl %>%
+  ggplot(aes(visits)) +
+  #geom_point() +
+  geom_line(aes(y = y, group = zeta, color = zeta), alpha = 0.5) +
+  geom_line(data = night3, aes(x = count_vis, y = y), color = "black", alpha = 0.25) + 
+  geom_ribbon(aes(ymin = ymin, ymax = ymax, group = zeta, fill = zeta), alpha = 0.25) +
+  geom_ribbon(data = night3, aes(x = count_vis, ymin = ymin, ymax = ymax), alpha = 0.25, fill = "black") + 
+  facet_grid(temperature ~ l_rate) +
+  #scale_x_continuous(breaks = seq(50, 300, by = 50)) +
+  #ylim(0, 1.02) +
+  geom_vline(aes(xintercept = visits), switch, linetype = "dotted") +
+  labs(x = "Visits", y = "Avg choice for the more profitable option ± 95% CIs") +
+  theme_bw()
+  
+ggarrange(p13, p14, p15,
+          labels = c("a) Night 1", "b)Night 2", "c) Night 3"), 
+          font.label = list(size = 6), 
+          legend = c("right"), 
+          ncol = 1, nrow = 3, 
+          common.legend = TRUE)
+
+```
+**Figure 14** is the result of the probabilistic models of win-stay; lose-shift/win-stay; lose-sample. This is what happened 
+
+```{r}
+# Probabilistic win-stay; lose-shift model
+#1. helper functions 
+#a. function for P (stay|win) - gives a probability
+prob_win <- function (win_t, win_theta, win_final) {
+  prob_win <- win_t + win_theta*(win_final - win_t)
+  prob_win
+}
+
+#b. function for P (shift|loss) - gives a probability
+prob_loss <- function (loss_t, loss_theta, loss_final) {
+  prob_loss <- loss_t + loss_theta*(loss_final - loss_t)
+  prob_loss
+}
+
+#c. function to calculate P(stay|win), P(shift|loss) and give a final output of whether the animal will stay or not
+prob_staynext <- function(win_t, win_theta, win_final, loss_t, loss_theta, loss_final, 
+                          reward_tprev, reward_t) { 
+  if (reward_t >= reward_tprev) {
+    prob_stay <- win_t + win_theta*(win_final - win_t)
+  } else {
+    prob_shift_loss <- loss_t + loss_theta*(loss_final - loss_t)
+    prob_stay <- 1 - prob_shift_loss
+  }
+  prob_stay
+  }
+
+#d. selecting the option based on the output of the probability functions - this needs redoing
+choose_loc <- function(prob_stay, last_loc, other_loc) {
+  choice <- rbinom(1, 1, prob_stay)
+  loc_visited <- ifelse(choice == 1, last_loc, other_loc)
+  loc_visited
+}
+
+# 2. function to simulate the probabilistic win-stay; lose-shift model 
+prob_wsls <- function(param, old) {
+  # reward on the trial before the previous
+  reward_tprev <- param$reward_tprev
+  # reward on the previous trial
+  reward_t <- param$reward_t
+  # location visited on the previous trial
+  loc <- param$loc
+  # the other location
+  other_loc <- case_when(loc == 1 ~ 2, 
+                         loc == 2 ~ 1, 
+                         loc == 0 ~ sample(c(1, 2), 1, replace = FALSE))
+  # P(stay|win)
+  win_t <- param$prob_stay_win
+  # P(shift|loss)
+  loss_t <- param$prob_shift_loss
+  # calculating the probability of staying on the previous location in the current trial
+  prob_stay <- prob_staynext (win_t, param$win_theta, param$win_final, loss_t, param$loss_theta, param$loss_final, 
+                              reward_tprev, reward_t)
+  # calculating the update to P(stay|win), if any
+  win_t <- ifelse(reward_t >= reward_tprev, prob_stay, param$prob_stay_win)
+  # calculating the update to P(shift|loss), if any
+  loss_t <- ifelse(reward_t < reward_tprev, (loss_t + param$loss_theta*(param$loss_final - loss_t)), 
+                            param$prob_shift_loss)
+  # choosing the location based on the probability calculated in the previous step
+  loc_visited <- choose_loc(prob_stay, loc, other_loc)
+  # increasing the visit count by 1 
+  param$n_visited <- param$n_visited + 1
+  # reward received on the current option
+  reward_tnext <- ifelse(loc_visited == 1, param$option1, param$option2)
+  # the current reward becomes the previous reward
+  param$reward_tprev <- reward_t
+  # the previous reward becomes the one before the previous reward
+  param$reward_t <- reward_tnext
+  # updating the options part of param
+  param$option1 <- old$option1
+  param$option2 <- old$option2
+  # updating the location visited in param
+  param$loc <- loc_visited
+  # update P(stay|win) and P(shift|loss)
+  param$prob_stay_win <- win_t
+  param$prob_shift_loss <- loss_t
+  param
+}
+
+#3. Simulation 
+n_ind <- 10 # number of individuals to simulate over 
+
+probwsls_sim_srl <- cross_df(list(win_theta = c(0.3, 0.6, 0.9), 
+                                   win_final = c(0.3, 0.6, 0.9), 
+                                   loss_theta = c(0.3, 0.6, 0.9), 
+                                   loss_final = c(0.3, 0.6, 0.9), 
+                                   ind = c(seq(1:n_ind)))) %>% 
+  mutate(option1 = list(srl$option1), 
+         option2 = list(srl$option2), 
+         cond = paste(win_theta, win_final, loss_theta, loss_final, sep = ";")) %>% 
+  unnest(cols = c(option1, option2)) %>% 
+  mutate(loc = 0, 
+         n_visited = 0, 
+         prob_stay_win = 0, 
+         prob_shift_loss = 0, 
+         reward_t = 0, 
+         reward_tprev = 0) %>% 
+  mutate(wsls = pmap(list(prob_stay_win = prob_stay_win, win_theta = win_theta, 
+                          win_final = win_final, prob_shift_loss = prob_shift_loss, 
+                          loss_theta = loss_theta, loss_final = loss_final, 
+                          option1 = option1, option2 = option2, 
+                          reward_t = reward_t, reward_tprev = reward_tprev,
+                          loc = loc, n_visited = n_visited), list)) %>% 
+  select(ind, cond, wsls) %>% 
+  group_by(cond, ind) %>% 
+  mutate(wsls = accumulate(wsls, .f = prob_wsls))
+
+probwsls_srl <- probwsls_sim_srl %>% 
+  mutate(loc = map(wsls, ~pluck(., "loc")), 
+         option1 = map(wsls, ~pluck(., "option1")), 
+         option2 = map(wsls, ~pluck(., "option2")),  
+         #n_visited = map(memories, ~pluck(., "n_visited")), 
+         reward_tprev = map(wsls, ~pluck(.x, "reward_tprev")), 
+         reward_t = map(wsls, ~pluck(.x, "reward_t"))) %>% 
+         #estimates1 = round(estimates1, digits = 3), 
+         #estimates2 = round(estimates2, digits = 3) 
+  select(-wsls)
+
+#5. Stats and plotting - how close is this to the empirical data 
+probwsls_srl <- probwsls_srl %>% 
+  filter(loc != 0) %>% 
+  rename(reward = reward_t) %>% 
+  mutate(cond2 = cond, 
+         reward = as.numeric(reward)) %>%
+  separate(cond2, into = c("win_theta", "win_final", "loss_theta", "loss_final"), sep = ";") %>%
+  group_by(ind, cond) %>% 
+  mutate(visits = 1:n())
+
+binsize <- 10
+breaks <- seq(0, 3000, binsize)
+
+probwsls_avgs_srl <- probwsls_srl %>% 
+  # cut the visits into bins
+  mutate(bins = as.numeric(cut(visits, breaks, include.lowest = TRUE))) %>% 
+  group_by(win_final, win_theta, loss_theta, loss_final, visits) %>% 
+  group_modify(~ mean_cl_boot(.x$reward, conf.int = 0.95)) %>% 
+  ungroup() %>% 
+  group_by(win_theta, win_final, loss_theta, loss_final) %>% 
+  mutate(
+    ind_bin = 1:n(),
+    ind_bin_vis = ind_bin * binsize
+  )
+  
+#little lookup table for the reversals 
+switch <- probwsls_avgs_srl %>% 
+  mutate(switch = ifelse(visits %% 50 == 1, 1, 0)) %>%
+  filter(switch == 1) %>% 
+  select(ind_bin_vis)
+
+probwsls_avgs_srl %>%
+  filter(win_final == 0.9) %>% 
+  ggplot(aes(ind_bin_vis)) +
+  geom_line(aes(y = y, color = loss_final)) +
+  geom_line(data = night3, aes(x = count_vis, y = y), color = "black", alpha = 0.25)
+  geom_ribbon(aes(ymin = ymin, ymax = ymax, fill = loss_final), alpha = 0.25) +
+  geom_ribbon(data = night3, aes(x = count_vis, ymin = ymin, ymax = ymax), alpha = 0.25, fill = "black") + 
+  facet_grid(win_theta ~ loss_theta) +
+  #scale_x_continuous(breaks = seq(50, 300, by = 50)) +
+  #ylim(0, 1.02) +
+  geom_vline(aes(xintercept = ind_bin_vis), switch, linetype = "dashed") +
+  theme_bw() +
+  labs(x = "Visits", y = "Avg choice for the more profitable option ± 95% CIs",
+       title = "Probabilistic win-stay; lose-shift model (P(stay|win)final = 0.3)")
+```
+RMSE to tell us which of the models is the better fit for the data 
+In contrast, a Win-Stay; Lose-Shift model .. fill this in after the results are in. 
+
+* A parameter that accounts for their ability to show second-order learning - do the models that only have first order learning do well enough that the second-order model is not necessary?
+
+## The underlying cognitive mechanism. Not even sure this is necessary. 
+* What do the models imply for cognitive vs behavioural flexibility? 
+
+* What kind of flexibility does a bat even need?
+
+## Wrap it up 
+A concluding paragraph 
 
 # References 
