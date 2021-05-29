@@ -198,7 +198,7 @@ rev_learning_all_beta <- raw_data %>%
 
 # placing the visits made on days 4, 5 and 6 in a separate data frame 
 
-rev_learning_all_lastdays <- raw_data %>% 
+rev_learning_all_lastdays <- raw_data %>%
   filter(!day %in% main_days)
 
 # preparing a data frame with all the visits, including the proper but unrewarded ones 
