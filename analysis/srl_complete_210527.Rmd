@@ -2,12 +2,12 @@
 title: "Serial reversal learning in nectar-feeding bats"
 always_allow_html: yes
 output:
-  bookdown::word_document2:
-    number_sections: no
-    toc: no
   bookdown::html_document2:
      number_sections: no
      toc: no
+  bookdown::word_document2:
+    number_sections: no
+    toc: no
 bibliography: srl.bib
  #csl: animal-cognition.csl
 ---
@@ -131,7 +131,7 @@ Four bats were placed in a flight-cage in a group, and all the bats were the sam
 ```{r Calculating the time taken for the pump to fill up, message = FALSE, warning = FALSE, message = FALSE, echo=FALSE, results='hide'}
 
 # reading in the pre-processed data to demonstrate the pump fill time 
-raw_data_preproc <- read.csv2("data/raw_data_preproc.csv", sep = ";", header = TRUE)
+raw_data_preproc <- read.csv2("data/processed_data/raw_data_all.csv", sep = ";", header = TRUE)
 
 # creating a vector of the bats to be excluded from the main analysis
 bats_incomp <- c("Bat7", "Bat19")
@@ -179,7 +179,7 @@ pump_fills <- raw_data_preproc %>%
 # Reading in and preparing the data
 #----------------------------------
 # loading the prepared CSV file of raw data
-raw_data <- read.csv2(file = "data/raw_data.csv", sep = ";", header = TRUE)
+raw_data <- read.csv2(file = "data/processed_data/Raw_data_bats.csv", sep = ";", header = TRUE)
 
 # The following terms are used in the analysis of the data:
 # 1. Day: a single experimental night during which the data were collected
@@ -573,7 +573,7 @@ analysis_pers <- rev_learning_all %>%
 #       seed = 12)
 # 
 # save(m_pers, file = "03_stats_rs_m4_negbinom.rda")
-load("data/03_stats_rs_m4_negbinom.rda")
+load("data/processed_data/03_stats_rs_m4_negbinom.rda")
 #m_pers <- read.csv2(file = "data/m_pers.csv", sep = ";", header = TRUE)
 
 # renaming the model appropriately
@@ -738,7 +738,7 @@ analysis_choices <- rev_learning_all %>%
 # # save the model 
 # save(m_choices, file = "03_stats_rs_m1.1.rda")
 #here is the model with the results, ready to be loaded. 
-load(file = "data/03_stats_rs_m1.1.rda")
+load(file = "data/processed_data/03_stats_rs_m1.1.rda")
 # renaming the model appropriately
 m_choices <- m1.2.1
 # removing the old model with the misleading name
@@ -897,7 +897,7 @@ analysis_choices2 <- analysis_choices %>%
 # save the model 
 #save(m_choices2, file = "03_stats_rs_m6.rda")
 #here is the model with the results, ready to be loaded. 
-load(file = "data/03_stats_rs_m6.rda")
+load(file = "data/processed_data/03_stats_rs_m6.rda")
 m_choices2 <- m6
 # removing the old model with the misleading name
 rm(m6)
@@ -1033,7 +1033,7 @@ We compared the predictive accuracy of the model that included night type and bl
 ```{r, message = FALSE, warning = FALSE, echo=FALSE}
 
 # reading in the table with the model comparison 
-loo_comparison <- read.csv2(file = "data/loo_comparison.csv", sep = ";", header = TRUE)
+loo_comparison <- read.csv2(file = "data/processed_data/loo_comparison.csv", sep = ";", header = TRUE)
 loo_comparison <- loo_comparison %>% 
   mutate(elpd_diff = round(as.numeric(elpd_diff), digits = 2), 
          se_diff = round(as.numeric(se_diff), digits = 2)) %>% 
@@ -1155,7 +1155,7 @@ analysis5 <- analysis5 %>%
 #                       seed = 12)
 
 #save(m_night_as_int_10trials, file = "m_night_as_int_10trials.rda")
-load("data/m_night_as_int_10trials.rda")
+load("data/processed_data/m_night_as_int_10trials.rda")
 
 color_scheme_set("darkgray")
 
