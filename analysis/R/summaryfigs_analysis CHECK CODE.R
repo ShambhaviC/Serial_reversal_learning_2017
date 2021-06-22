@@ -12,7 +12,7 @@ require(Hmisc)
 #-----------------------------------------
 # Loading the data
 #-----------------------------------------
-raw_data <- read.csv2(file = "/Users/shambhavi/Google Drive/Experiments & Data/SRL_2017/analysis/data/raw_data.csv", sep = ";", header = TRUE)
+raw_data <- read.csv2(file = "/Users/shambhavi/Google Drive/Experiments & Data/SRL_2017/analysis/data/processed_data/raw_data_bats.csv", sep = ";", header = TRUE)
 #--------------------------------------------------------------------------------------------------
 # Visualising the data from the three training phases: exploration, flower training and alternation
 #--------------------------------------------------------------------------------------------------

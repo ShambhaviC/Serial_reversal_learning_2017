@@ -3,7 +3,7 @@
 #Data prep 
 ######
 setwd("/Users/shambhavi/Google Drive/Experiments & Data/srl_2017_backup_additionalfiles/Analysis/Analysis/Updated clean code")
-raw_data <- read.csv2("Raw_data.csv", sep = ";", header = TRUE)
+raw_data <- read.csv2("Raw_data_bats.csv", sep = ";", header = TRUE)
 
 # creating a vector of the bats to be excluded from the main analysis
 bats_incomp <- c("Bat7", "Bat19")
