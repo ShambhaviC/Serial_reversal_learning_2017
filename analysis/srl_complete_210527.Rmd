@@ -9,101 +9,172 @@ output:
     number_sections: no
     toc: no
 bibliography: srl.bib
- #csl: animal-cognition.csl
+#csl: animal-cognition.csl
+---
+```{css style settings, echo = FALSE}
+blockquote {
+    margin: 0 0 20px;
+    font-size: 14px;
+}
+```
+---
 ---
 <style>
 body {
 text-align: justify}
 </style>
-
 ---
+
+Shambhavi Chidambaram^1, ^^2^, Sabine Wintergerst^1^, Alex Kacelnik^3^, Vladislav Nachev^1^, York Winter^1\*\S, ^2\*\S
+
+^1^ Institute of Biology, Humboldt University, Berlin, Germany
+
+^2^ Berlin School of Mind and Brain, Humbdoldt University, Berlin, Germany
+
+^3^ Department of Zoology, University of Oxford
+
+**^\*^For correspondence:** york.winter\@charite.de  
+
+**Present Address:** ^\S^Institute of Biology, Humboldt University, Philippstr. 13, 10099 Berlin, Germany
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, fig.align = "center")
 ```
 
-```{r Reading in the packages, echo = FALSE, include=FALSE, results= 'hide'}
+```{r Reading-in-the-packages, results= 'hide'}
 # clearing the environment
 rm(list = ls())
 
-# creating a vector of the required packages 
-# packages <- c("rmarkdown", "reshape2", "citr", "shiny", "flextable", "scales", "tidyverse", "lubridate", "ggpubr", "gridExtra",  "Hmisc", "brms", "bayesplot")
-#sapply(packages, library, character.only = TRUE)
-
-# installing the required packages if needed and loading them 
-if (!require(rmarkdown)) 
-install.packages(rmarkdown)
-if (!require(reshape2)) 
-install.packages(reshape2)
-if(!require(rticles))
-install.packages(rticles)
-if (!require(knitr)) 
-install.packages(knitr)
-if (!require(citr)) 
-install.packages(citr)
-if (!require(shiny)) 
-install.packages(shiny)
-if (!require(flextable)) 
-install.packages(flextable)
-if (!require(scales)) 
-install.packages(scales)
-if (!require(tidyverse)) 
-install.packages(tidyverse)
-if (!require(lubridate)) 
-install.packages(lubridate)
-if (!require(ggpubr)) 
-install.packages(ggpubr)
-if (!require(gridExtra)) 
-install.packages(gridExtra)
-if (!require(Hmisc)) 
-install.packages(Hmisc)
-if (!require(brms)) 
-install.packages(brms)
-if (!require(bayesplot)) 
-install.packages(bayesplot)
-
+# installing the required packages if needed and loading them
+if (!require(rmarkdown)) {
+  install.packages("rmarkdown")
+}
+if (!require(reshape2)) {
+  install.packages("reshape2")
+}
+if (!require(tufte)) {
+  install.packages("tufte")
+}
+if (!require(rticles)) {
+  install.packages("rticles")
+}
+if (!require(knitr)) {
+  install.packages("knitr")
+}
+if (!require(citr)) {
+  install.packages("citr")
+}
+if (!require(shiny)) {
+  install.packages("shiny")
+}
+if (!require(flextable)) {
+  install.packages("flextable")
+}
+if (!require(scales)) {
+  install.packages("scales")
+}
+if (!require(tidyverse)) {
+  install.packages("tidyverse")
+}
+if (!require(ggthemes)) {
+  install.packages("ggthemes")
+}
+if (!require(lubridate)) {
+  install.packages("lubridate")
+}
+if (!require(ggpubr)) {
+  install.packages("ggpubr")
+}
+if (!require(gridExtra)) {
+  install.packages("gridExtra")
+}
+if (!require(Hmisc)) {
+  install.packages("Hmisc")
+}
+if (!require(brms)) {
+  install.packages("brms")
+}
+if (!require(bayesplot)) {
+  install.packages("bayesplot")
+}
 ```
+
+```{r Themes, results= 'hide'}
+
+# creating two themes for all the plots
+
+theme_srl <- function() {
+  theme_pubr() +
+    theme(
+      axis.text = element_text(size = 8, family = "Times"),
+      axis.title = element_text(size = 10, family = "Times"),
+      strip.text.x = element_text(size = 10, family = "Times"),
+      strip.text.y = element_text(size = 10, family = "Times"),
+      legend.text = element_text(size = 10, family = "Times"),
+      legend.title = element_text(size = 12, face = "bold", family = "Times")
+    )
+}
+
+# c
+theme_srl2 <- function() {
+  theme_bw() +
+    theme(
+      axis.text = element_text(size = 8, family = "Times"),
+      axis.title = element_text(size = 10, family = "Times"),
+      strip.text.x = element_text(size = 10, family = "Times"),
+      strip.text.y = element_text(size = 10, family = "Times"),
+      legend.text = element_text(size = 10, family = "Times"),
+      legend.title = element_text(size = 12, face = "bold", family = "Times")
+    )
+}
+```
+
+# Abstract 
+  
+The tropical bat species *Glossophaga commissarisi* mainly feeds on nectar from flowers. Flowering plants stay fixed in one place, but the amount of nectar flowers contain varies as the flowers get emptied, replenish their nectar, or wither and die. Nectar-feeding bats must be capable of perceiving and responding flexibly to these changes in their environment. We aimed to demonstrate this through a spatial serial reversal learning task with wild *G. commissarisi* individuals. The bats were given two options in two places that did not change, one providing a reward, the other providing no reward. Once the bats had experienced the rewading properties of these options for some time, the properties reversed, and this reversal occurred repeatedly. We found that as bats experience serial reversals they show a more rapid switch to the rewarding option after a reversal, and an overall increase in the number of choices for the rewarding option. This overall increase was smaller with each successive reversal, indicating that the preference for the rewarding option was so high it could not increase much further: a ceiling effect. In the trade-off between exploiting options known to be rewarding and exploring new options, the bats' behaviour approached a 'best of both worlds' strategy. The bats showed near-exclusive preference for the rewarding option, which they changed rapidly following a reversal. This is strong evidence of 'learning to learn', or learning the rule of the reversals. Additional analyses showed that the highest number of choices for the rewarding option was made every night before the bats had experienced any reversals at all. Rule-learning could only happen after reversals had occurred; before that the bats strongly preferred to visit and exploit the only option known to be rewarding, rather than explore any other option.  
 
 # Introduction 
 
-*'Take some more tea,' the March Hare said to Alice, very earnestly.* 
+>'Take some more tea,' the March Hare said to Alice, very earnestly.
 
-*'I've had nothing yet,' Alice replied in an offended tone, 'so I can't take more.'*
+>'I've had nothing yet,' Alice replied in an offended tone, 'so I can't take more.'
 
-*'You mean you can't take LESS,' said the Hatter: 'it's very easy to take MORE than nothing.'*
+>'You mean you can't take LESS,' said the Hatter: 'it's very easy to take MORE than nothing.'
 
-***- Alice's Adventures in Wonderland*****, Lewis Carroll**
+>`r quote_footer('- ***Alices Adventures in Wonderland*****, Lewis Carroll**')`
 
-Nectar-feeding bats face the challenge of exploiting a resource that varies in temporal and spatial availability. Flower nectar levels vary within any given night, as well from night to night; flowers themselves, which often bloom seasonally, wither and die every few days. The bats need to detect the changing reward contingencies in their environment and adjust their behaviour accordingly. This ability of animals to recognize and respond to changes is crucial to survival, and includes cognitive or behavioural flexibility [@tello-ramos_spatial_2019]. It can be seen in a range of behaviours in many different species: locating food in ants [@czaczkes_ants_2015]; spatial navigation in male guppies [@lucon-xiccato_sex_2017] and parental care in poison frogs [@ringler_flexible_2015]. One experimental protocol that has been widely used to demonstrate cognitive/behavioural flexibility is reversal learning, a task that could be a simple experimental analogue to some of the kinds of decision-making bats do in their natural environment. 
+Nectar-feeding bats face the challenge of exploiting a resource that varies in temporal and spatial availability. Flower nectar levels vary within any given night, as well from night to night; flowering plants often bloom seasonally and flowers themselves wither and die every day or every few days. Bats need to detect the changing reward contingencies in their environment and adjust their behaviour accordingly. This ability of animals to recognize and respond to changes is crucial to survival, and includes cognitive or behavioural flexibility [@tello-ramos_spatial_2019]. It can be seen in a range of behaviours in many different species: locating food in ants [@czaczkes_ants_2015]; spatial navigation in male guppies [@lucon-xiccato_sex_2017] and parental care in poison frogs [@ringler_flexible_2015]. One experimental protocol that has been widely used to demonstrate cognitive/behavioural flexibility is reversal learning, a task that could be a simple experimental analogue to some of the kinds of decision-making bats do in their natural environment. 
 
-Reversal learning is essentially a specific type of discrimination learning, which is when animals must learn a specific response to each of multiple stimuli. In a reversal learning experiment an animal is first faced with a simultaneous choice between two stimuli. Responding to one stimulus but not the other results in a reward for the animal. After a certain number of trials has occurred and the animal has learned to perform the response that leads to a reward, the reward contingencies of the two stimuli are reversed. In a serial reversal learning procedure the reward contingencies reverse repeatedly. An animal that responds to the rewarding stimulus more frequently than to the non-rewarded stimulus receives food more often, and can be said to perform better on the task; a choice to the non-rewarded stimulus is, in the context of the task, an ‘error.’
+Reversal learning is essentially a type of discrimination learning, which is when animals must learn a specific response to each of multiple stimuli. In a reversal learning experiment an animal is first faced with a simultaneous choice between two stimuli. Responding to one stimulus but not the other results in a reward for the animal. After a certain number of trials has occurred and the animal has learned to perform the response that leads to a reward, the reward contingencies of the two stimuli are reversed. In a serial reversal learning procedure the reward contingencies reverse repeatedly. An animal that responds to the rewarding stimulus more frequently than to the non-rewarded stimulus receives food more often, and can be said to perform 'better' on the task; a choice to the non-rewarded stimulus is, in the context of the task, an ‘error.’
 
 The serial reversal learning protocol can be adapted to the behaviour and sensory physiology of many different species, thus allowing comparative research. It has been done using visual stimuli in bumblebees [@strang_serial_2014] and guppies [@boussard_brain_2020]; visual and spatial stimuli in both corvids [@bond_serial_2007-1] and cowbirds [@lois-milevicich_sex_2021];  spatial stimuli in rats [@boulougouris_effects_2007], great tits [@hermer_elevation-related_2018] and gray squirrels [@chow_serial_2015]; and olfactory stimuli in rats [@kinoshita_effects_2008]. Reversal learning, specifically serial reversal, has been used as an explicit comparative measure of animal ‘intelligence’ [@bitterman_evolution_1964]: animals considered then to be ‘higher’, like pigeons, rats and monkeys showed a progressive improvement on the task while species considered to be ‘lower’, like turtles and fish, did not. Though the idea of such a hierarchy is outdated, comparative research using reversal learning can reveal important differences in behaviour and learning that have evolved under the selection pressures faced by different species.
 
-Improvement in the reversal learning task is clearly demonstrable, and is therefore a meaningful criterion when comparing the performance of different animals. First-order learning happens when an animal learns after perceiving a stimulus which behavioural response leads to a reward the stimulus-reward association and changes its behaviour according to the strength of this reinforcement. Higher-order or second-order learning is the learning of rules or strategies. This is the ability to more efficiently choose the best response in any given situation, from among many different learned behavioural responses. In serial reversal learning the same stimuli are successively paired with a reward and then not paired with a reward. Under such conditions animals must learn the second-order rule to quickly abandon a suddenly unsuccessful response when it was previously. A rule that can maximize reward in a deterministic, fixed ratio reversal learning is ‘win-stay; lose-shift’ (WSLS): repeat the behaviour which produces a reward until it stops being rewarding, and then immediately change the behaviour. Such a rule means in practice that the animal makes exactly one ‘error’ per reversal. After learning the task, the perfectly optimal animal will first exclusively respond towards the stimulus that is paired with reward. At the first choice of this stimulus that does not result in reward (the error), the animal will change its preference and exclusively choose the other stimulus which is now paired with a reward. 
+Improvement in the reversal learning task is clearly demonstrable, and is therefore a meaningful criterion when comparing the performance of different animals. First-order learning happens when an animal perceives a stimulus and learns which behavioural response leads to a reward - the stimulus-reward association - and changes its behaviour according to the strength of this reinforcement. Higher-order or second-order learning is the learning of rules or strategies. This is the ability to more efficiently choose the best response in any given situation, from among many different learned behavioural responses. In serial reversal learning the same stimuli are successively paired with a reward and then not paired with a reward. Under such conditions animals must learn the second-order rule to quickly abandon a suddenly unsuccessful response when it previously resulted in reward. A rule that can maximize reward in a deterministic, fixed ratio reversal learning is ‘win-stay; lose-shift’ (WSLS): repeat the behaviour which produces a reward until it stops being rewarding, and then immediately change the behaviour. Such a rule means in practice that the animal makes exactly one ‘error’ per reversal. After learning the task, the perfectly optimal animal will first exclusively respond to the stimulus that is paired with reward. At the first choice of this stimulus that does not result in reward (the error), the animal will change its preference and exclusively respond to the other stimulus which is now paired with a reward. 
 
-Animals are rarely, if ever, so optimal in real life. Large and deterministic changes are uncommon in nature and more gradual shifts in behaviour maybe better suited to natural environmental changes. Errors in a task like fixed-ratio reversal learning are common, and can occur in different ways. An animal can make anticipatory errors, changing their behaviour and choosing the other cue before a reversal has occurred, or they can perseverate, and continue to choose a non-rewarding cue after the reversal has occurred. Progressive ‘improvement’ in this task, where an animal makes fewer and fewer errors per reversal is indication that the animal is learning the rule of reversal, or ‘learning to learn’ [@shettleworth_cognition_2010].
+Animals are rarely, if ever, so optimal in real life. Large and deterministic changes are uncommon in nature and more gradual shifts in behaviour maybe better suited to natural environmental changes. Errors in a task like fixed-ratio reversal learning are common, and can occur in different ways. An animal can make anticipatory errors: changing their behaviour and choosing the other cue before a reversal has occurred; or they can perseverate: continuing to choose a non-rewarding cue after the reversal has occurred. Progressive ‘improvement’ in this task, where an animal makes fewer and fewer errors per reversal is indication that the animal is learning the rule of reversal, or ‘learning to learn’ [@shettleworth_cognition_2010].
 
-Primates show  a very interesting difference in between first- and second-order learning. In one study, thirteen different species of primates were compared on a visual reversal learning task [@rumbaugh_toward_1996], where they were trained to discriminate a pair of stimuli up to either a 67% or 84% level of correct choices for the rewarded option. At these two different levels of training they  were then given a single reversal of reward contingencies. If the primates’ behaviour was driven mainly by first-order learning, they should switch to the newly-rewarding stimulus more quickly when their training had not yet reached a high level of performance, i.e., 67%. The opposite would be true if second-order learning or rule-learning was occurring: knowing the reversal rule, the primates would more quickly adapt to the reversed option when they had reached a high level of performance in their training, i.e., 84%. The results showed that Prosimian species tended to perform better when trained to 67% and  apes when trained to 84% level of correct choices before the reversal. 
+Primates show  a very interesting difference in between first- and second-order learning. In one study, thirteen different species of primates were compared on a visual reversal learning task [@rumbaugh_toward_1996], where they were trained to discriminate a pair of stimuli up to either a 67% or 84% level of correct choices for the rewarded option. At these two different levels of training they were then given a single reversal of reward contingencies. If the primates’ behaviour was driven mainly by first-order learning, they should switch to the newly-rewarding stimulus more quickly when their training had not yet reached a high level of performance, i.e., 67%. The opposite would be true if second-order learning or rule-learning was occurring: knowing the reversal rule, the primates would more quickly adapt to the reversed option when they had reached a high level of performance in their training, i.e., 84%. The results showed that Prosimian species tended to perform better when trained to 67% and apes when trained to 84% level of correct choices before the reversal. 
 
-Progressive improvement on the serial reversal task as more reversals are experienced, which is evidence of rule-learning, has been shown in many different species: bumblebees [@strang_serial_2014]; great tits from different environments [@hermer_elevation-related_2018]; three different species of corvids [@bond_serial_2007-1]; rats [@castane_selective_2010]; and marmosets [@clarke_lesions_2008]. A decrease in the number of errors to criterion with multiple reversals is seen in mice [@caglayan_learning_2021], even when each reversal is done with a different  pair of stimuli, indicating the formation of a learning set. 
+Progressive improvement on the serial reversal task as more reversals are experienced, which is evidence of rule-learning, has been shown in many different species: bumblebees [@strang_serial_2014]; great tits from different environments [@hermer_elevation-related_2018]; three different species of corvids [@bond_serial_2007-1]; rats [@castane_selective_2010]; and marmosets [@clarke_lesions_2008]. A decrease in the number of errors to reach a criterion (a pre-decided number of correct choices) with multiple reversals is seen in mice [@caglayan_learning_2021], even when each reversal is done with a different pair of stimuli, indicating the formation of a learning set. 
 
 What performance on the serial reversal task says about the deeper cognitive mechanisms at work, and whether the task is a measure of cognitive or behavioural flexibility, are not completely settled questions. Cognitive flexibility cannot be directly observed; it is inferred to have occurred through changes in behaviour, or behavioural flexibility [@tait_assessment_2018]. However, behavioural flexibility does not necessarily indicate cognitive flexibility [@dhawan_more_2019]. The term ‘behavioural flexibility’ itself has been used widely but inconsistently, applied to many traits that have different underlying neural mechanisms or do not co-vary [@audet_whats_2017]. Behavioural flexibility in animals has evolved in response to selection pressures from different foraging environments: the flexibility required to deal with seasonal changes in fruit availability is not the same kind of flexibility required to deal with capturing a prey animal intent on escaping. 
 
-There is a sense in which the foraging ecology of some nectar-feeding animals is a natural analogue to the serial reversal learning task. The Neotropical bat species *Glossophaga commissarisi* relies primarily on flower nectar for energy. These bats have remarkably high metabolic rates for their body mass [@voigt_energetic_1999; @voigt_field_2006], due to the energetic demands of hovering flight [@winter_energy_1998; @v_helversen_nectar_1984]. As flowers yield only small droplets of nectar each time they are visited [@voigt_field_2006], the bats make several hundred flower visits per night. Many plants visited by bats put out only a few flowers every night but  they can stay open up to a few days [@kunz_bat_2005]. A certain time after a flower is emptied the nectar-levels are replenished, so bats can visit the same flower multiple times, relocating it primarily through their excellent spatial memory [@winter_foraging_2005; @toelch_effect_2008]. The longer the bat waits, the more the flower refills but the higher the likelihood that a competitor could find and exploit the flower first. To make repeated, profitable visits to a flower, a bat must remember both the location of the flower and estimate the flower’s expected reward value. The serial reversal learning task requires an animal to respond to a change in the profitability of available options, and remember all potentially rewarding options. Though this is a simplified situation with no inter-individual competition and where the ‘flowers’ do not get progressively depleted, the behavioural flexibility required by the experimental protocol is the kind of flexibility required in the natural foraging circumstances of a nectar-feeding bat.
+There is a sense in which the foraging ecology of some nectar-feeding animals is a natural analogue to the serial reversal learning task. The Neotropical bat species *Glossophaga commissarisi* relies primarily on flower nectar for energy. These bats have remarkably high metabolic rates for their body mass [@voigt_energetic_1999; @voigt_field_2006], due to the energetic demands of hovering flight [@winter_energy_1998; @von_helversen_nectar_1984].
+Many plants visited by bats put out only a few flowers every night, but their flowering seasons that can last for several months. Bat-pollinated flowers can secrete up to 1-2 mL of nectar a night [@von_helversen_adaptations_1993] but as only small droplets are available each time they are visited [@voigt_field_2006], the bats make several hundred flower visits per night. Indeed, a certain time after a flower is emptied the nectar-levels are replenished, so bats can visit the same flower multiple times. The bats relocate the flowering plant primarily through their excellent spatial memory [@winter_foraging_2005], and use local echo-acoustic cues to find the individual flowers [@tolch_effect_2008]. The longer the bat waits, the more the flower refills but the higher the likelihood that a competitor could find and exploit the flower first. To make repeated, profitable visits to a flower, a bat must remember both the location of the flower and estimate the flower’s expected reward value. The serial reversal learning task requires an animal to respond to a change in the profitability of available options, and remember all potentially rewarding options. Though this is a simplified situation with no inter-individual competition and where the ‘flowers’ do not get progressively depleted, the behavioural flexibility required by the experimental protocol is the kind of flexibility required in the natural foraging circumstances of a nectar-feeding bat.
 
-We carried out a serial reversal learning task with wild *G. commissarisi* individuals. The bats were given two potentially rewarding options to choose between. At the start of the night, only one of the options was rewarding, the ‘S+’ option and the other was not rewarding, the ‘S-’ option. After a certain number of visits had been made by the bats, the reward contingencies suddenly reversed: the previously rewarding option was now unrewarding and the previously unrewarding option was rewarding, and this reversal happened five times in a night. 
-Our aims with this experiment were as follows. Firstly, we wanted to test whether the bats would alter their preference between the two reward sources accordingly to their transient rewarding properties. We believed this to be extremely likely as the behavioural requirements of the task reproduce aspects of the animals’ foraging ecology. Flowers that have remained undetected and are full of nectar will also require multiple visits for depletion. Secondly, if the bats demonstrated flexibility through an ability to respond to the reversals, we wanted to explore how this was reflected in their decision-making. How extreme was the relative number of visits made to the rewarding and the non-rewarding options, and how swiftly did allocation change after a reversal? Thirdly, we wanted to see if the bats were capable of second-order learning, or ‘learning to learn.’ Could the bats learn the rule behind the change in their environment and converge to the maximal payoff of one error per reversal achievable through WSLS?
+We carried out a serial reversal learning task with wild *G. commissarisi* individuals. The bats were given two potentially rewarding options to choose between. At the start of the night, only one of the options was rewarding, the ‘S+’ option and the other was not rewarding, the ‘S-’ option. After a certain number of visits had been made by the bats, the reward contingencies reversed without any signal or cue to the bats: the previously rewarding option was now unrewarding and the previously unrewarding option was rewarding, and this reversal happened five times in a night. 
 
-After the analyses described above were done and the data and results examined, we performed further analyses to explore the conclusions of our confirmatory analyses. The difference between these results must be clearly noted. Firstly, we reasoned that there is a difference between the first visits of a night, before any experience of a change in contingencies, and all the subsequent visits after at least one reversal had occurred. We statistically tested for this difference in the bats’ choice behaviour. Secondly, we examined the effect of the asymptotic level of performance (the highest stable proportion of visits to the rewarding option after a reversal) on the performance immediately after a reversal.
+Our aims with this experiment were as follows. Firstly, we wanted to test whether the bats would alter their preference between the two reward sources accordingly to their transient rewarding properties. We believed this to be extremely likely as the behavioural requirements of the task reproduce aspects of the animals’ foraging ecology. Flowers that have remained undetected and are full of nectar will also require multiple visits for depletion. Secondly, if the bats demonstrated flexibility through an ability to respond to the reversals, we wanted to explore how this was reflected in their decision-making. What would be the relative number of visits made to the rewarding and the non-rewarding options, and how swiftly would allocation change after a reversal? Thirdly, we wanted to see if the bats were capable of second-order learning, or ‘learning to learn.’ Could the bats learn the rule behind the change in their environment and converge to the maximal payoff of one error per reversal achievable through WSLS?
 
+After the analyses described above were done and the data and results examined, we performed further analyses to explore the conclusions of our confirmatory analyses. The difference between these results must be clearly noted. Firstly, we reasoned that there is a difference between the first visits of a night, before any experience of a change in contingencies, and all the subsequent visits after at least one reversal had occurred. We statistically tested for this difference in the bats’ choice behaviour. Secondly, we examined the effect of the asymptotic level of performance (the highest stable proportion of visits to the rewarding option) on the performance immediately after a reversal.
 
 # Methods 
 
 ## Study site and subjects
 
-The experiment took place from the 28th of June to the 25th of July, 2017, at La Selva Biological Field Station, Province Heredia, Costa Rica. Bats of the species Glossophaga commissarisi were captured from the wild and retained in a flight cage through the experiment. The bats were attracted to a particular location in the forest using sugar-water (see **Reward** below) as bait and then caught in mist-nets. The bats were sexed on capture and housed in two outdoor, meshed, single sex flight-cages (4 x 6 m) under ambient light conditions. Groups of four bats at a time shared each flight cage during experiments. All individuals were weighed and marked with radio frequency identification (RFID) tags placed as collars.
+The experiment took place from the 28th of June to the 25th of July, 2017, at La Selva Biological Field Station, Province Heredia, Costa Rica. Bats of the species *Glossophaga commissarisi* were captured from the wild and retained in a flight cage through the experiment. The bats were attracted to a particular location in the forest using sugar-water (see **Reward** below) as bait and then caught in mist-nets. The bats were sexed on capture and housed in two outdoor, meshed flight-cages (4 x 6 m) under ambient light conditions. All individuals were weighed and marked with radio frequency identification (RFID) tags placed as collars around their necks.
 
-16 bats participated in the main experiment. At the end of the experiment, the RFID collars were removed,  and the bats were released back into the wild . All the data collection was completely automatized. Two of the bats did not drink a sufficient amount of sugar-water to meet minimum energy requirements and were released before the end of the experiment and not replaced. The data from these two individuals were not analyzed. Thus, 14 bats (seven males and seven females) completed the experiment.
+16 bats participated in the main experiment. At the end of the experiment, the RFID collars were removed and the bats were released back into the wild . All the data collection was completely automatized. Two of the bats did not drink a sufficient amount of sugar-water to meet minimum energy requirements and were released before the end of the experiment and not replaced. The data from these two individuals were not analyzed. Thus, 14 bats (seven males and seven females) completed the experiment.
 
 Animal experimental procedures were reviewed and permission was granted by Sistema Nacional de Areas de Conservación (SINAC) at the Ministerio de Ambiente y Energía (MINAE), Costa Rica.
 
@@ -111,7 +182,7 @@ Animal experimental procedures were reviewed and permission was granted by Siste
 
 ### Reward
 
-The reward received by the bats during the experiment was also their main source of food. The reward was a 17% by weight solution of sugar dissolved in water, hereafter referred to as ‘nectar.’ The sugar consisted of a 1:1:1 mass-mixture of sucrose, fructose and glucose. The nectar was thus similar in composition and concentration to the nectar produced by wild chiropterophilous plants [@baker_sugar_1998].
+The reward received by the bats during the experiment was also their main source of food. The reward was a 17% by weight solution of sugar dissolved in water, hereafter referred to as ‘nectar’. The sugar consisted of a 1:1:1 mass-mixture of sucrose, fructose and glucose. The nectar was thus similar in composition and concentration to the nectar produced by wild chiropterophilous plants [@baker_sugar_1998].
 
 ### Flower and pump setup
 
@@ -120,31 +191,34 @@ Each flight cage had a square plastic frame in the center (2x2x1.5m). Eight rewa
 A stepper-motor pump was placed in the center of the plastic frame in each cage. The pumps contained a 25 mL Hamilton glass syringe (Sigma Aldrich). The step volume of the two pumps differed slightly: the pump in Cage 1 delivered `r round(40/19, digits = 2)` $\mu$L per step of the stepper-motor, and the pump in Cage 2, `r round(40/12, digits = 2)` $\mu$L per step. The glass syringe was connected to the tubing system of the flowers through five pinch valves. The pinch valves controlled the flow of liquid from the pump to the system and from a reservoir of liquid to the pump. The reservoir (500 mL thread bottle, Roth, Germany) was filled with fresh nectar everyday and connected to the syringe through the valves.
 
 When a tagged bat approached a flower, the individual RFID number was read by the reader. If the bat then poked its nose into the flower and broke the light barrier, it triggered the release of a reward. The pinch valve opened and the pump moved the correct number of pre-programmed steps to dispense nectar to the head of the flower. The bat could easily hover in front of the flower and lick up the nectar. Only when both events occurred, i.e., the RFID reader identified a bat and the light-barrier was broken, would a reward be triggered.
-The flowers and the pump were connected to a laptop computer with Windows operating system, which ran the experimental programs and the programs used to clean and fill the systems: PhenoSoft Control (PhenoSys GmbH, Berlin, Germany). The raw data were recorded as comma-separated value (CSV) files.
+The flowers and the pump were connected to a laptop computer with Windows operating system, which ran the experimental programs and the program used to clean and fill the systems: PhenoSoft Control (PhenoSys GmbH, Berlin, Germany). The raw data were recorded as comma-separated value (CSV) files.
 
 
-```{r, fig.cap= "a) Schematic of the cage and flower set-up b) Pump in cage 1 c) Pump in cage 2"}
+```{r, Pump-pictures, fig.cap= "a) Schematic of the cage and flower set-up b) Pump in cage 1 c) Pump in cage 2"}
 
 include_graphics("images/allthree.png")
-
 ```
 
 ## Experimental procedure
 
-Every day at around 1000 h the old nectar was emptied from the system. The system was rinsed and filled with plain water until 1500 h , when it was filled again with fresh nectar. Twice a week the system was filled with 70% ethanol for an hour to prevent microbial growth, then repeatedly rinsed with water.
+Every day at around 1000 h the old nectar was emptied from the system. The system was rinsed and filled with plain water until 1500 h, when it was filled again with fresh nectar. Twice a week the system was filled with 70% ethanol for an hour to prevent microbial growth, then repeatedly rinsed with water.
 
-Four bats of the same sex were placed in a flight-cage in a group. There were four such groups in total, and data were collected simultaneously from two groups, one in each flight-cage. Each bat was uniquely assigned two adjacent flowers on the same side of the square frame, out of the array of eight. These flowers were programmed to reward only one of the four bats in the cage. After the system was filled with fresh nectar at approximately 1700 h, the program was left running for data-collection till the next morning. Thus, the bats could begin visiting the flowers to collect a reward whenever they chose, which was at nightfall at approximately 1800 h every night.
+Four bats of the same sex were placed in a flight-cage in a group. There were four such groups in total, and data were collected simultaneously from two groups, one in each flight-cage. Each bat was uniquely assigned two adjacent flowers on the same side of the square frame, out of the array of eight. These flowers were programmed to reward to only one of the four bats in the cage. After the system was filled with fresh nectar at approximately 1700 h, the program was left running for data-collection till the next morning. Thus, the bats could begin visiting the flowers to collect a reward whenever they chose, which was at nightfall at approximately 1800 h every night.
 
-```{r Calculating the time taken for the pump to fill up, message = FALSE, warning = FALSE, message = FALSE, echo=FALSE, results='hide'}
-
-# reading in the pre-processed data to demonstrate the pump fill time 
+```{r Pump-filltime-events, results='hide'}
+#----------------------------------
+# Reading in and preparing the data
+#----------------------------------
+# reading in the pre-processed data to demonstrate the pump fill time
 raw_data_preproc <- read.csv2("data/processed_data/raw_data_all.csv", sep = ";", header = TRUE)
 
 # inserting a space between the word "Bat" and the number of the animal
-raw_data_preproc <- raw_data_preproc %>% 
-  mutate(Bat_word = ifelse((str_detect(IdLabel, "Bat") == TRUE), "Bat", ""), 
-         Bat_number = ifelse((str_detect(IdLabel, "Bat") == TRUE), as.integer(str_extract(IdLabel, "[0-9]+")), IdLabel), 
-         IdLabel = ifelse(is.na(IdLabel), IdLabel, paste0(Bat_word, " ", Bat_number))) %>% 
+raw_data_preproc <- raw_data_preproc %>%
+  mutate(
+    Bat_word = ifelse((str_detect(IdLabel, "Bat") == TRUE), "Bat", ""),
+    Bat_number = ifelse((str_detect(IdLabel, "Bat") == TRUE), as.integer(str_extract(IdLabel, "[0-9]+")), IdLabel),
+    IdLabel = ifelse(is.na(IdLabel), IdLabel, paste0(Bat_word, " ", Bat_number))
+  ) %>%
   select(-Bat_word, -Bat_number)
 
 # creating a vector of the bats to be excluded from the main analysis
@@ -156,49 +230,62 @@ bats_beta <- c("Bat 1", "Bat 2", "Bat 3", "Bat 4")
 # creating a vector of the main experimental days
 main_days <- c("Day 1", "Day 2", "Day 3")
 
+#--------------------------
+# Analysing the pump events
+#--------------------------
+
 # calculating the time for each refill event
-pump_time <- raw_data_preproc %>% 
-  filter(day < 4) %>% 
-  group_by(Cage) %>% 
-  arrange(DateTime) %>% 
-  filter(MsgValue1 == "start pump" | MsgValue1 == "end pump") %>% 
-  mutate(interval = ifelse(MsgValue1 == "start pump", as.numeric(difftime(lead(DateTime), DateTime, units = "secs")), "non-fill time")) %>% 
-  select(DateTime, IdLabel, Condition, Cage, MsgValue1, interval) %>% 
-  arrange(DateTime) %>% 
-  filter(Condition == "SerialReversalCounter", 
-         interval != "non-fill time", 
-         interval < 300) %>% 
-  mutate(interval = as.integer(interval)/60) %>% 
-  summarise(mean_filltime = round(mean(interval), digits = 2),  
-            sd_filltime = round(sd(interval), digits = 2))
+pump_time <- raw_data_preproc %>%
+  filter(day < 4) %>%
+  group_by(Cage) %>%
+  arrange(DateTime) %>%
+  filter(MsgValue1 == "start pump" | MsgValue1 == "end pump") %>%
+  mutate(interval = ifelse(MsgValue1 == "start pump", as.numeric(difftime(lead(DateTime), DateTime, units = "secs")), "non-fill time")) %>%
+  select(DateTime, IdLabel, Condition, Cage, MsgValue1, interval) %>%
+  arrange(DateTime) %>%
+  filter(
+    Condition == "SerialReversalCounter",
+    interval != "non-fill time",
+    interval < 300
+  ) %>%
+  mutate(interval = as.integer(interval) / 60) %>%
+  summarise(
+    mean_filltime = round(mean(interval), digits = 2),
+    sd_filltime = round(sd(interval), digits = 2)
+  )
 
 # counting the number of fill events per night: there is exactly one so the R code is not cited in the main text
-pump_fills <- raw_data_preproc %>% 
-  filter(Condition == "SerialReversalCounter") %>% 
-  arrange(DateTime) %>% 
-  group_by(Group, day) %>% 
-  mutate(hour = hour(DateTime)) %>% 
-  filter(!IdLabel %in% bats_incomp,
-         !IdLabel %in% bats_beta,  
-         day < 4, 
-         hour > 18 | hour < 6, 
-         MsgValue1 == "start pump") %>%
-  summarise(pump_events = n()) %>% 
-  ungroup() %>% 
+pump_fills <- raw_data_preproc %>%
+  filter(Condition == "SerialReversalCounter") %>%
+  arrange(DateTime) %>%
+  group_by(Group, day) %>%
+  mutate(hour = hour(DateTime)) %>%
+  filter(
+    !IdLabel %in% bats_incomp,
+    !IdLabel %in% bats_beta,
+    day < 4,
+    hour > 18 | hour < 6,
+    MsgValue1 == "start pump"
+  ) %>%
+  summarise(pump_events = n()) %>%
+  ungroup() %>%
   summarise(fill_events = mean(pump_events))
 ```
 
-```{r, Calculating the proportion of wrongly unrewarded visits, message = FALSE, warning = FALSE, message = FALSE, echo=FALSE, results='hide'}
+```{r, Wrongly-unrewarded-visits, results='hide'}
 #----------------------------------
 # Reading in and preparing the data
 #----------------------------------
 # loading the prepared CSV file of raw data
 raw_data <- read.csv2(file = "data/processed_data/Raw_data_bats.csv", sep = ";", header = TRUE)
 
-raw_data <- raw_data %>% 
-  mutate(Bat_word = ifelse((str_detect(IdLabel, "Bat") == TRUE), "Bat", ""), 
-         Bat_number = ifelse((str_detect(IdLabel, "Bat") == TRUE), as.integer(str_extract(IdLabel, "[0-9]+")), IdLabel), 
-         IdLabel = ifelse(is.na(IdLabel), IdLabel, paste0(Bat_word, " ", Bat_number))) %>% 
+# inserting a space between "Bat" and the bat number
+raw_data <- raw_data %>%
+  mutate(
+    Bat_word = ifelse((str_detect(IdLabel, "Bat") == TRUE), "Bat", ""),
+    Bat_number = ifelse((str_detect(IdLabel, "Bat") == TRUE), as.integer(str_extract(IdLabel, "[0-9]+")), IdLabel),
+    IdLabel = ifelse(is.na(IdLabel), IdLabel, paste0(Bat_word, " ", Bat_number))
+  ) %>%
   select(-Bat_word, -Bat_number)
 
 # The following terms are used in the analysis of the data:
@@ -209,34 +296,34 @@ raw_data <- raw_data %>%
 
 # setting binsize and breaks for cutting up the data into block and bin
 binsize <- 10
-breaks <- seq (0, 3000, binsize)
+breaks <- seq(0, 3000, binsize)
 
 # placing the visits made by the beta bats in a separate data frame
 
-rev_learning_all_beta <- raw_data %>% 
+rev_learning_all_beta <- raw_data %>%
   filter(IdLabel %in% bats_beta)
 
-# placing the visits made on days 4, 5 and 6 in a separate data frame 
+# placing the visits made on days 4, 5 and 6 in a separate data frame
 
 rev_learning_all_lastdays <- raw_data %>%
   filter(!day %in% main_days)
 
-# preparing a data frame with all the visits, including the proper but unrewarded ones 
+# preparing a data frame with all the visits, including the proper but unrewarded ones
 rev_learning_all_unrew <- raw_data %>%
   filter(
     # removing the bats that did not complete the experiment
     !IdLabel %in% bats_incomp,
-    !IdLabel %in% bats_beta, 
-    day %in% main_days, 
+    !IdLabel %in% bats_beta,
+    day %in% main_days,
     # filtering out the main experimental data
     Condition == "SerialReversalCounter"
   ) %>%
   mutate(
     # marking the difference between the normal visits in a block and the switch points
-    MsgValue1 = ifelse(MsgValue1 == "switch", MsgValue1, "block"),  
-    # making a column to mark the unrewarded proper visits 
+    MsgValue1 = ifelse(MsgValue1 == "switch", MsgValue1, "block"),
+    # making a column to mark the unrewarded proper visits
     reinforce1value = replace_na(reinforce1value, 0),
-    reinforce1Account = replace_na(reinforce1Account, 0), 
+    reinforce1Account = replace_na(reinforce1Account, 0),
     Unrew = ifelse(reinforce1value != reinforce1Account, 1, 0)
   ) %>%
   rename(Bat = IdLabel) %>%
@@ -245,86 +332,86 @@ rev_learning_all_unrew <- raw_data %>%
   group_by(Bat, day) %>%
   mutate(
     # creating a column with the total number of visits made by a bat per day
-    count_vis = ifelse(MsgValue1 == "switch", 0, 1), 
+    count_vis = ifelse(MsgValue1 == "switch", 0, 1),
     count_vis = cumsum(count_vis)
   ) %>%
-  # setting the maximum number of visits a night higher than the programmed max to allow for the 
-  # unrewarded visits
+  # setting the maximum number of visits a night higher than the programmed max to allow for the unrewarded visits
   filter(count_vis <= 350) %>%
   ungroup()
 
 # adding the reversal block numbers and marking the reversals for the dataset with the unrewarded visits
-rev_learning_all_unrew <- rev_learning_all_unrew %>% 
+rev_learning_all_unrew <- rev_learning_all_unrew %>%
   # creating a column with the reversal block number, marking the reversals
   mutate(block = ifelse(MsgValue1 == "switch", 1, 0)) %>%
   group_by(day, Bat) %>%
   mutate(block = cumsum(block)) %>%
-  ungroup() %>% 
+  ungroup() %>%
   group_by(day, Bat, block) %>%
   # creating a column with the number of visits within each block
-  mutate(block_vis = ifelse(MsgValue1 == "switch", 0, 1), 
-         block_vis = cumsum(block_vis), 
-         # creating a new column for visits in each block to be binned
-         bin = "") %>%
+  mutate(
+    block_vis = ifelse(MsgValue1 == "switch", 0, 1),
+    block_vis = cumsum(block_vis),
+    # creating a new column for visits in each block to be binned
+    bin = ""
+  ) %>%
   ungroup() %>%
   group_by(day, Bat, block) %>%
   # cutting the visits inside each block into bin of the size set earlier
   mutate(bin = as.numeric(cut(block_vis, breaks, include.lowest = TRUE)))
 
-# adding a reward status to the table 
-rev_learning_all_unrew <- rev_learning_all_unrew %>% 
-  mutate(reward_status = ifelse(reinforce1value == 0 | Unrew == 1, 0, 1)) %>% 
-  filter(!Bat %in% bats_beta, 
-         day %in% main_days)
+# adding a reward status to the table
+rev_learning_all_unrew <- rev_learning_all_unrew %>%
+  mutate(reward_status = ifelse(reinforce1value == 0 | Unrew == 1, 0, 1)) %>%
+  filter(
+    !Bat %in% bats_beta,
+    day %in% main_days
+  )
 
-# what percentage of the bats' visits are wrongly unrewarded? 
-mean_unrew <- rev_learning_all_unrew %>% 
-  group_by(Bat, Day) %>% 
-  filter(MsgValue1 != "switch") %>% 
-  summarise(mean_unrew = mean(Unrew)) %>% 
-  mutate(mean_unrew = mean_unrew *100)
+#----------------------------------
+# Calculating the unrewarded visits
+#----------------------------------
+
+# calculating the percentage of the bats' visits are wrongly unrewarded?
+mean_unrew <- rev_learning_all_unrew %>%
+  group_by(Bat, Day) %>%
+  filter(MsgValue1 != "switch") %>%
+  summarise(mean_unrew = mean(Unrew)) %>%
+  mutate(mean_unrew = mean_unrew * 100)
 
 overall_mean_unrew <- round(as.numeric(mean(mean_unrew$mean_unrew), digits = 2))
 overall_sd_unrew <- round(as.numeric(sd(mean_unrew$mean_unrew)), digits = 2)
-
 ```
 
 During the course of the night, when the syringe of the pump had been emptied, the pump re-filled automatically. This event happened only once every night. On the main experimental days this process took `r as.numeric(pump_time[1, 2])` minutes (SD = ±`r as.numeric(pump_time[1 ,3])`) for the horizontal pump, and `r as.numeric(pump_time[2, 2])` minutes (SD = ±`r as.numeric(pump_time[2, 3])`) for the vertical pump. About `r overall_mean_unrew` % (SD = ±`r overall_sd_unrew`) of all visits made by the bats over all three experimental nights happened during the pump refill events, and the bats did not receive any reward on these visits, even if they were made to the rewarding flower. 
 
-Every night the bats were also given ad-libitum access  to a supplemental food with less than 5% sugar as compared to the 17% sugar from the experimental feeders: 3.5g of hummingbird food (NektarPlus, Nekton) and 3.5g of milk powder (Nido 1+, Nestle) in 10 mL of water. They were also given a small bowl of locally-sourced bee pollen. 
+Every night the bats were also given ad-libitum access to supplemental food: 3.5g of hummingbird food (NektarPlus, Nekton) and 3.5g of milk powder (Nido 1+, Nestle) in 10 mL of water. They were also given a small bowl of locally-sourced bee pollen. 
 
 ## Experimental design
 The experiment proceeded through the following stages. 
 
 ### Training
 
-On the night the naive bats were captured and placed into the flight cages they could receive a reward from any of the flowers whenever they visited them throughout the night. To enable the bats to find the flowers a small cotton pad was placed on the flowers, soaked in di-methyl di-sulphide. This is a chemical attractant produced by many bat-pollinated flowers [@von_helversen_sulphur-containing_2000]. A small drop of honey was applied to the inside of the flowers to encourage the bats to place their heads inside, break the light-barrier and trigger a nectar reward. By the end of the night all the bats had found the flowers and learned to trigger rewards quickly. 
+On the night the naive bats were captured and placed into the flight cages they could receive a reward from any of the flowers whenever they visited them throughout the night. To enable the bats to find the flowers a small cotton pad was placed on the flowers, soaked in di-methyl di-sulphide. This is a chemical attractant produced by many bat-pollinated flowers [@von_helversen_sulphur-containing_2000]. A small drop of honey was applied to the inside of the flowers to encourage the bats to place their heads inside, break the light-barrier and trigger a nectar reward. By the end of the night all the bats had found the flowers and learned to trigger rewards. 
 
-After the bats had learned to trigger rewards, the next stage of training involved assigning the bats uniquely to two out of the eight flowers in the array. For an individual animal only the two flowers assigned it would be rewarding from this stage of training until the end of the experiment. Because the bats had already learned to trigger a reward at the flowers, the flowers were not provided with a cotton piece with the chemical attractant and honey was not applied to them. This stage was similar to the previous one, except the bats could only trigger a reward at their assigned flowers.
+After the bats had learned to trigger rewards, the next stage of training involved assigning the bats uniquely to two out of the eight flowers in the array. For an individual animal only the two flowers assigned to it would be rewarding from this stage of training until the end of the experiment. This stage was similar to the previous one, except the bats could only trigger a reward at their assigned flowers, and the chemical attractant and honey were not used.
 
 To ensure that the bats were familiar with both flowers assigned to them they went through one final stage of training: forced alternation after each reward between the two assigned flowers all night long.
 
 ### Serial Reversal Learning Task 
 
-In this serial reversal learning task the bats had continuous access to two flowers, one that gave a 40 $\mu$L nectar reward and one that was empty. The location of the rewarding flower was not cued, but through the Alternation phase of training each bat knew the locations of both flowers that were potentially rewarding to it. After a bat had made 50 visits in total to the two flowers (regardless of allocation) a reversal occurred: the previously rewarding flower became the non-rewarding flower and vice versa. Importantly, only visits to the two flowers assigned to a bat counted towards the visit tally, not visits to any of the other flowers in the flight cage which were always unrewarding to that particular bat. Each batch of 50 visits to the assigned two flowers, either to start each night or between reversals, was termed a ‘reversal block’. There were six blocks and five reversals per night, unless the bat ceased visiting earlier. This was repeated for three consecutive nights. The same flower started the sequence every night. As a consequence, the last flower to be rewarding one night was non-rewarding at the start of the next .
-
+In the serial reversal learning task the bats had continuous access to two flowers, one that gave a 40 $\mu$L nectar reward and one that was empty. The location of the rewarding flower was not cued, but through the Alternation phase of training each bat knew the locations of both flowers that were potentially rewarding to it. After a bat had made 50 visits in total to the two flowers (regardless of relative allocation) a reversal occurred: the previously rewarding flower became the non-rewarding flower and *vice versa*. Importantly, only visits to the two flowers assigned to a bat counted towards the visit tally, not visits to any of the other flowers in the flight cage which were always unrewarding to that particular bat. Each batch of 50 visits to the assigned two flowers, either at the start of each night or between reversals, was termed a ‘reversal block’. There were six blocks and five reversals per night, unless the bat ceased visiting earlier. This was repeated for three consecutive nights. The same flower started the sequence every night. Consequently the last flower to be rewarding one night was non-rewarding at the start of the next.
 
 ## Data analysis 
 
 All the models were fitted in a Bayesian framework using Hamiltonian Monte Carlo in the R package `brms` [@burkner_brms_2017], which is a front-end for `rstan` (Stan Development Team, 2020). Model comparison was done using leave-one-out cross-validation, implemented in `brms` using the package `loo` [@vehtari_practical_2017].
 
-Except when stated otherwise, all the visits made by the bats to their two assigned flowers - up to 300 – during a night were included in the analyses (some of the bats did not complete all 300 visits on every night). At the end of each of the first five blocks a reversal occurred and the end of the last block was the end of data-collection for the night. Each block was further divided into five bins of ten visits, in order to examine the bats’ behaviour within each block. Generalized linear mixed-models were used for the analyses (see **Supplementary Information** for details of the model fitting).  
+Except when stated otherwise, all the visits made by the bats to their two assigned flowers - up to 300 – during a night were included in the analyses (some of the bats did not complete all 300 visits on every night). The bats made some visits and approaches to the flowers that were not assigned to them but they were the minority, and not considered for the analysis (see **Supplementary Information** for details). At the end of each of the first five blocks a reversal occurred and the end of the last block was the end of data-collection for the night. Each block was further divided into five bins of ten visits, in order to examine the bats’ behaviour within each block. Generalized linear mixed-models were used for the analyses (see **Supplementary Information** for details of the model fitting).
 
 We investigated the effect of experimental night and reversal block on the number of perseverative visits, i.e., visits to the previously-rewarding option just after the occurrence of a reversal; and the effect of experimental night, block and bin on the proportion of visits to the rewarding flower. The proportion of visits to the rewarding flower was calculated as the number of visits to the S+ divided by total number of visits to both the S+ and S-, and we denote this as the preference index or I~pref~: 
 
-```{r}
+$$\mathrm{I_{pref}} = \displaystyle \frac{\rm Number \;of\; visits\; to\; the\; S+}{\rm (Number \;of\; visits\; to\; the\; S+) + (\rm Number \;of\; visits\; to\; the\; S-)}$$
 
-include_graphics("images/Ipref.png")
-
-```
-
-
-After examining the these results, we conducted further post hoc exploratory analyses. We investigated the effect of night, block, bin, and the first night and first block of the night as separate predictor variables on I~pref~, as on the first night the animals had had no prior experience of any reversals, and during the first block of every night they had not experienced any reversals on that night; and we compared the I~pref~ in the three bins just before a reversal (the asymptote) and the number of visits just after a reversal as we thought this might reveal something of the learning mechanisms at work.  
+After examining the these results, we conducted further post-hoc exploratory analyses. Firstly, we investigated the effect of night, block, bin, and the first night and first block of the night as separate predictor variables for I~pref~: on the first night the animals had had no prior experience of any reversals, and during the first block of every night they had not experienced any reversals on that night. Secondly, we compared the I~pref~ in the three bins just before a reversal (the asymptote) and the number of visits just after a reversal as we thought this might reveal something of the learning mechanisms at work.  
 
 All statistical analyses and creation of plots were done in R.
 
@@ -336,21 +423,14 @@ All data and analysis code are available online at .....
 ## Confirmatory Analyses
 
 ### Explanatory paragraph
-**This paragraph is just for our guidance and will be removed later: it is an overall summary of the conclusions we draw from all of the analyses, i.e., the story we are building.**
-  
-  **Confirmatory analyses**: As bats experience serial reversals they show a more rapid switch to the rewarding option after a reversal, and an overall increase in the proportion of visits made to the rewarding option. This overall increase was smaller with each successive reversal.
-
-**Exploratory analyses**: The largest proportion of visits to the rewarding option was made every night before the bats had experienced any reversals. The higher the asymptote the longer the bats took to reverse, but this negative relationship varied by night and almost disappeared on the second night. 
-
-**In conclusion**: Experiencing serial reversal of reward, nectar-feeding bats learn that reversal can occur in their environment: we know this because they switch more rapidly; reach a higher proportion of visits to the rewarding option with a 'ceiling effect'; and sample a little more once they have experienced a reversal on a day
 
 ### a) Bats made a very high proportion of their visits to the rewarding option
-```{r, Reading in and preparing the main data, include = FALSE}
+```{r, Preparing-main-data}
 #----------------------------------------
 # Preparing data from the main experiment
 #----------------------------------------
 # making a separate data frame without any unrewarded visits and preparing it further with block and bin numbers
-rev_learning_all <- rev_learning_all_unrew %>% 
+rev_learning_all <- rev_learning_all_unrew %>%
   filter(Unrew == 0) %>%
   select(-Unrew) %>%
   # grouping the data to count the visits, noting the reversals separately
@@ -359,8 +439,8 @@ rev_learning_all <- rev_learning_all_unrew %>%
     # noting whether the bat made a visit to the more or less rewarding flower
     reward_status = ifelse(reinforce1value > 0, 1, 0),
     # creating a column with the total number of visits made by a bat per day
-    count_vis = ifelse(MsgValue1 == "switch", 0, 1), 
-    # taking the cumulative sum of the visit counts 
+    count_vis = ifelse(MsgValue1 == "switch", 0, 1),
+    # taking the cumulative sum of the visit counts
     count_vis = cumsum(count_vis)
   ) %>%
   # setting the maximum number of visits a night
@@ -370,13 +450,15 @@ rev_learning_all <- rev_learning_all_unrew %>%
   mutate(block = ifelse(MsgValue1 == "switch", 1, 0)) %>%
   group_by(day, Bat) %>%
   mutate(block = cumsum(block)) %>%
-  ungroup() %>% 
+  ungroup() %>%
   group_by(day, Bat, block) %>%
   # creating a column with the number of visits within each block
-  mutate(block_vis = ifelse(MsgValue1 == "switch", 0, 1), 
-         block_vis = cumsum(block_vis), 
-         # creating a new column for visits in each block to be binned
-         bin = "") %>%
+  mutate(
+    block_vis = ifelse(MsgValue1 == "switch", 0, 1),
+    block_vis = cumsum(block_vis),
+    # creating a new column for visits in each block to be binned
+    bin = ""
+  ) %>%
   ungroup() %>%
   group_by(day, Bat, block) %>%
   # cutting the visits inside each block into bin of the size set earlier
@@ -387,9 +469,9 @@ rev_learning_all <- rev_learning_all_unrew %>%
 # averaging the bats' choice behaviour over day, block and bin
 rev_learning_avg <- rev_learning_all %>%
   group_by(day, block) %>%
-  mutate(n_bats = n_distinct(Bat)) %>% 
-  group_by(day, block, n_bats, bin) %>% 
-  # calculating the 95% confidence intervals 
+  mutate(n_bats = n_distinct(Bat)) %>%
+  group_by(day, block, n_bats, bin) %>%
+  # calculating the 95% confidence intervals
   group_modify(~ mean_cl_boot(.x$reward_status, conf.int = 0.95)) %>%
   ungroup() %>%
   group_by(day) %>%
@@ -399,210 +481,268 @@ rev_learning_avg <- rev_learning_all %>%
     reversal = ifelse(block != lead(block), "switch", "block")
   )
 
-# creating a look-up table so the reversals can be marked 
+# creating a look-up table so the reversals can be marked
 rev_main_avg <- rev_learning_avg %>%
   filter(
     reversal == "switch",
     day %in% main_days
   ) %>%
-  select(day, block, day_bin, day_bin_vis) %>% 
-  mutate(day = case_when(day == "Day 1" ~ "Night 1", 
-                         day == "Day 2" ~ "Night 2", 
-                         day == "Day 3" ~ "Night 3"))
+  select(day, block, day_bin, day_bin_vis) %>%
+  mutate(day = case_when(
+    day == "Day 1" ~ "Night 1",
+    day == "Day 2" ~ "Night 2",
+    day == "Day 3" ~ "Night 3"
+  ))
 
-# calculating the sample size in each block 
-bat_labels <- rev_learning_avg %>% 
+# calculating the sample size in each block
+bat_labels <- rev_learning_avg %>%
   select(day, block, n_bats) %>%
-  distinct() %>% 
-  group_by(day, block) %>% 
+  distinct() %>%
+  group_by(day, block) %>%
   mutate(day_bin_vis = ifelse(block == 1, 25, 50)) %>%
-  ungroup() %>% 
-  group_by(day) %>% 
-  mutate(day_bin_vis = cumsum(day_bin_vis)) %>% 
+  ungroup() %>%
+  group_by(day) %>%
+  mutate(day_bin_vis = cumsum(day_bin_vis)) %>%
   filter(day %in% main_days) %>%
-  mutate(day = case_when(day == "Day 1" ~ "Night 1", 
-                         day == "Day 2" ~ "Night 2", 
-                         day == "Day 3" ~ "Night 3"))
+  mutate(day = case_when(
+    day == "Day 1" ~ "Night 1",
+    day == "Day 2" ~ "Night 2",
+    day == "Day 3" ~ "Night 3"
+  ))
 
-# calculating and saving the values for the proportion of visits to the rewarding option in some of the bins 
-day1bin1 <- rev_learning_all %>% 
-  ungroup() %>% 
-  filter(day == "Day 1", 
-         block == 1, 
-         bin == 1) %>% 
-  mutate(reward_status = reward_status * 100) %>% 
-  group_modify(~ mean_cl_boot(.x$reward_status, conf.int = 0.95)) %>% 
-  mutate(y = round(y, digits = 1), 
-         ymin = round(ymin, digits = 1), 
-         ymax = round(ymax, digits = 1))
+#-------------------------------------------------------------
+# Calculating values for visits to the S+ for some of the bins
+#-------------------------------------------------------------
 
-day1bin2 <- rev_learning_all %>% 
-  ungroup() %>% 
-  filter(day == "Day 1", 
-         block == 1, 
-         bin == 2) %>% 
-  mutate(reward_status = reward_status * 100) %>% 
-  group_modify(~ mean_cl_boot(.x$reward_status, conf.int = 0.95)) %>% 
-  mutate(y = round(y, digits = 1), 
-         ymin = round(ymin, digits = 1), 
-         ymax = round(ymax, digits = 1))
+# calculating and saving the values for the proportion of visits to the rewarding option in some of the bins
+day1bin1 <- rev_learning_all %>%
+  ungroup() %>%
+  filter(
+    day == "Day 1",
+    block == 1,
+    bin == 1
+  ) %>%
+  mutate(reward_status = reward_status * 100) %>%
+  group_modify(~ mean_cl_boot(.x$reward_status, conf.int = 0.95)) %>%
+  mutate(
+    y = round(y, digits = 1),
+    ymin = round(ymin, digits = 1),
+    ymax = round(ymax, digits = 1)
+  )
 
-day1bin5 <- rev_learning_all %>% 
-  ungroup() %>% 
-  filter(day == "Day 1", 
-         block == 1, 
-         bin == 5) %>% 
-  mutate(reward_status = reward_status * 100) %>% 
-  group_modify(~ mean_cl_boot(.x$reward_status, conf.int = 0.95)) %>% 
-  mutate(y = round(y, digits = 1), 
-         ymin = round(ymin, digits = 1), 
-         ymax = round(ymax, digits = 1))
+day1bin2 <- rev_learning_all %>%
+  ungroup() %>%
+  filter(
+    day == "Day 1",
+    block == 1,
+    bin == 2
+  ) %>%
+  mutate(reward_status = reward_status * 100) %>%
+  group_modify(~ mean_cl_boot(.x$reward_status, conf.int = 0.95)) %>%
+  mutate(
+    y = round(y, digits = 1),
+    ymin = round(ymin, digits = 1),
+    ymax = round(ymax, digits = 1)
+  )
+
+day1bin5 <- rev_learning_all %>%
+  ungroup() %>%
+  filter(
+    day == "Day 1",
+    block == 1,
+    bin == 5
+  ) %>%
+  mutate(reward_status = reward_status * 100) %>%
+  group_modify(~ mean_cl_boot(.x$reward_status, conf.int = 0.95)) %>%
+  mutate(
+    y = round(y, digits = 1),
+    ymin = round(ymin, digits = 1),
+    ymax = round(ymax, digits = 1)
+  )
 
 day1bin6 <- rev_learning_all %>%
-  ungroup() %>% 
-  filter(day == "Day 1", 
-         block == 2, 
-         bin == 1) %>% 
-  mutate(reward_status = reward_status * 100) %>% 
-  group_modify(~ mean_cl_boot(.x$reward_status, conf.int = 0.95)) %>% 
-  mutate(y = round(y, digits = 1), 
-         ymin = round(ymin, digits = 1), 
-         ymax = round(ymax, digits = 1))
+  ungroup() %>%
+  filter(
+    day == "Day 1",
+    block == 2,
+    bin == 1
+  ) %>%
+  mutate(reward_status = reward_status * 100) %>%
+  group_modify(~ mean_cl_boot(.x$reward_status, conf.int = 0.95)) %>%
+  mutate(
+    y = round(y, digits = 1),
+    ymin = round(ymin, digits = 1),
+    ymax = round(ymax, digits = 1)
+  )
 
-day1bin10 <- rev_learning_all %>% 
-  ungroup() %>% 
-  filter(day == "Day 1", 
-         block == 2, 
-         bin == 5) %>% 
-  mutate(reward_status = reward_status * 100) %>% 
-  group_modify(~ mean_cl_boot(.x$reward_status, conf.int = 0.95)) %>% 
-  mutate(y = round(y, digits = 1), 
-         ymin = round(ymin, digits = 1), 
-         ymax = round(ymax, digits = 1))
+day1bin10 <- rev_learning_all %>%
+  ungroup() %>%
+  filter(
+    day == "Day 1",
+    block == 2,
+    bin == 5
+  ) %>%
+  mutate(reward_status = reward_status * 100) %>%
+  group_modify(~ mean_cl_boot(.x$reward_status, conf.int = 0.95)) %>%
+  mutate(
+    y = round(y, digits = 1),
+    ymin = round(ymin, digits = 1),
+    ymax = round(ymax, digits = 1)
+  )
 
-day1last3bins <- rev_learning_all %>% 
-  ungroup() %>% 
-  filter(day == "Day 1", 
-         block > 1, 
-         bin > 2) %>% 
-  mutate(reward_status = reward_status * 100) %>% 
-  group_modify(~ mean_cl_boot(.x$reward_status, conf.int = 0.95)) %>% 
-  mutate(y = round(y, digits = 1), 
-         ymin = round(ymin, digits = 1), 
-         ymax = round(ymax, digits = 1))
+day1last3bins <- rev_learning_all %>%
+  ungroup() %>%
+  filter(
+    day == "Day 1",
+    block > 1,
+    bin > 2
+  ) %>%
+  mutate(reward_status = reward_status * 100) %>%
+  group_modify(~ mean_cl_boot(.x$reward_status, conf.int = 0.95)) %>%
+  mutate(
+    y = round(y, digits = 1),
+    ymin = round(ymin, digits = 1),
+    ymax = round(ymax, digits = 1)
+  )
 
-day2and3bin1 <- rev_learning_all %>% 
-  ungroup() %>% 
-  filter(day != "Day 1", 
-         block == 1, 
-         bin == 1) %>% 
-  mutate(reward_status = reward_status * 100) %>% 
-  group_modify(~ mean_cl_boot(.x$reward_status, conf.int = 0.95)) %>% 
-  mutate(y = round(y, digits = 1), 
-         ymin = round(ymin, digits = 1), 
-         ymax = round(ymax, digits = 1))
+day2and3bin1 <- rev_learning_all %>%
+  ungroup() %>%
+  filter(
+    day != "Day 1",
+    block == 1,
+    bin == 1
+  ) %>%
+  mutate(reward_status = reward_status * 100) %>%
+  group_modify(~ mean_cl_boot(.x$reward_status, conf.int = 0.95)) %>%
+  mutate(
+    y = round(y, digits = 1),
+    ymin = round(ymin, digits = 1),
+    ymax = round(ymax, digits = 1)
+  )
 
-day2and3lastbins <- rev_learning_all %>% 
-  ungroup() %>% 
-  filter(day != "Day 1", 
-         block > 1, 
-         bin > 2) %>% 
-  mutate(reward_status = reward_status * 100) %>% 
-  group_modify(~ mean_cl_boot(.x$reward_status, conf.int = 0.95)) %>% 
-  mutate(y = round(y, digits = 1), 
-         ymin = round(ymin, digits = 1), 
-         ymax = round(ymax, digits = 1))
+day2and3lastbins <- rev_learning_all %>%
+  ungroup() %>%
+  filter(
+    day != "Day 1",
+    block > 1,
+    bin > 2
+  ) %>%
+  mutate(reward_status = reward_status * 100) %>%
+  group_modify(~ mean_cl_boot(.x$reward_status, conf.int = 0.95)) %>%
+  mutate(
+    y = round(y, digits = 1),
+    ymin = round(ymin, digits = 1),
+    ymax = round(ymax, digits = 1)
+  )
 ```
 
-```{r, message = FALSE, warning = FALSE, echo = FALSE, fig.cap = "Visits to the rewarding option across the three experimental nights. Data are average proportions for bins of ten visits averaged over all individuals. Data are indicated by white points in the first block on the first night before the bats experienced any reversals at all; the bin averages of all the other blocks are indicated by black points.. Numbers indicate the bats that participated in a particular reversal block. Shading shows 95% confidence intervals. Dashed lines show reversals", fig.width = 9, fig.height = 3}
+```{r, fig.cap = "Visits to the rewarding option across the three experimental nights. Data are average proportions for bins of ten visits averaged over all individuals. Data are indicated by white points in the first block on the first night before the bats experienced any reversals at all; the bin averages of all the other blocks are indicated by black points.. Numbers indicate the bats that participated in a particular reversal block. Shading shows 95% confidence intervals. Dashed lines show reversals", fig.width = 9, fig.height = 3}
 
 p1 <- rev_learning_avg %>%
   # filtering only the first three main days of the experiment:
   # one group had the experiment extended a further three days
   filter(day %in% main_days) %>%
-  mutate(day = case_when(day == "Day 1" ~ "Night 1", 
-                         day == "Day 2" ~ "Night 2", 
-                         day == "Day 3" ~ "Night 3"), 
-         firstpoint = as.factor(ifelse(block == 1 & day == "Night 1", 1, 0))) %>% 
+  mutate(
+    day = case_when(
+      day == "Day 1" ~ "Night 1",
+      day == "Day 2" ~ "Night 2",
+      day == "Day 3" ~ "Night 3"
+    ),
+    firstpoint = as.factor(ifelse(block == 1 & day == "Night 1", 1, 0))
+  ) %>%
   ggplot(aes(day_bin_vis, y)) +
   geom_point(aes(color = firstpoint, fill = firstpoint), shape = 21) +
-  scale_color_manual(values=c("0" = "black", "1" = "black")) + 
-  scale_fill_manual(values = c("0" = "black", "1" = "white")) + 
+  scale_color_manual(values = c("0" = "black", "1" = "black")) +
+  scale_fill_manual(values = c("0" = "black", "1" = "white")) +
   geom_line() +
   geom_ribbon(aes(ymin = ymin, ymax = ymax), alpha = 0.3) +
   facet_grid(. ~ day) +
   scale_x_continuous(breaks = seq(50, 300, by = 50)) +
-  ylim(0, 1.1) +
+  scale_y_continuous(breaks = seq(0, 1.1, by = 0.25)) +
   geom_hline(yintercept = c(0.25, 0.5, 0.75, 1), linetype = "dotted") +
   geom_vline(aes(xintercept = day_bin_vis), rev_main_avg, linetype = "dashed") +
-  theme_classic() +
-  geom_text( data = bat_labels, 
-             aes(x = day_bin_vis, y = 1.05, label = n_bats, group = n_bats)) + 
-  labs(x = "Visits", y = "Visits to the rewarding option") + 
+  theme_srl2() +
+  geom_text(
+    data = bat_labels,
+    aes(x = day_bin_vis, y = 1.05, label = n_bats, group = n_bats), family = "Times"
+  ) +
+  labs(x = "Visits", y = "Visits to the rewarding option") +
   theme(legend.position = "none")
 
 p1
 ```
 
-The allocation of visits between each bat’s two flowers is shown in **Figure 2**. Of particular interest is what the bats did in the first bins of each block, and the changes between the first night and the other two nights. At the start of the first night, in the very first bin of ten visits when the bats did not yet have any information about the available options and had never experienced a reversal, the I~pref~ averaged across individuals was close to chance: `r day1bin1$y` %, 95% CIs [`r day1bin1$ymin`, `r day1bin1$ymax`]. Within the next ten visits, however, I~pref~ increased to `r day1bin2$y` %, 95% CIs [`r day1bin2$ymin`, `r day1bin2$ymax`] and by the last bin of this first block was `r day1bin5$y` %, 95 % CIs [`r day1bin5$ymin`, `r day1bin5$ymax`]. Immediately after the first experience of a reversal, the I~pref~ dropped down to `r day1bin6$y`%, 95% CIs [`r day1bin6$ymin`, `r day1bin6$ymax`] in the first ten visits, but came back up to `r day1bin10$y`%, 95% CIs [`r day1bin10$ymin`, `r day1bin10$ymax`] by the last bin of this block. This pattern of a decrease in the average proportion of visits to the rewarding option of all the bats immediately following a reversal, and then a rapid increase, was consistently true for all the reversals on the first night. At the very start of the second and third nights, in the first bin of visits before any experience of a reversal on that night, the average I~pref~ of all the bats was `r day2and3bin1$y` %, 95% CIs [`r day2and3bin1$ymin`, `r day2and3bin1$ymax`]. However the I~pref~ still showed the pattern of a decrease immediately after a reversal and then increase to a high proportion - `r day2and3lastbins$y` %, 95% CIs [`r day2and3lastbins$ymin`, `r day2and3lastbins$ymax`], comparable to the `r day1last3bins$y` %, 95% CIs [`r day1last3bins$ymin`, `r day1last3bins$ymax`] on the first night.
+The allocation of visits between each bat’s two flowers is shown in **Figure 2**. Of particular interest is what the bats did in the first bins of each block, and the changes between the first night and the other two nights. At the start of the first night, in the very first bin of ten visits when the bats did not yet have any information about the available options and had never experienced a reversal, the I~pref~ averaged across individuals was close to chance: `r day1bin1$y` % [95% CIs `r day1bin1$ymin`, `r day1bin1$ymax`]. Within the next ten visits, however, I~pref~ increased to `r day1bin2$y` % [95% CIs `r day1bin2$ymin`, `r day1bin2$ymax`] and by the last bin of this first block was `r day1bin5$y` % [95 % CIs `r day1bin5$ymin`, `r day1bin5$ymax`]. Immediately after the first experience of a reversal, the I~pref~ dropped down to `r day1bin6$y`% [95% CIs `r day1bin6$ymin`, `r day1bin6$ymax`] in the first ten visits, but came back up to `r day1bin10$y`% [95% CIs `r day1bin10$ymin`, `r day1bin10$ymax`] by the last bin of this block. 
+
+This pattern of a decrease in the average proportion of visits to the rewarding option of all the bats immediately following a reversal, and then a rapid increase, was consistently true for all the reversals on the first night. At the very start of the second and third nights, in the first bin of visits before any experience of a reversal on that night, the average I~pref~ of all the bats was `r day2and3bin1$y` % [95% CIs `r day2and3bin1$ymin`, `r day2and3bin1$ymax`]. However the I~pref~ still showed the pattern of a decrease immediately after a reversal and then increase to a high proportion - `r day2and3lastbins$y` % [95% CIs `r day2and3lastbins$ymin`, `r day2and3lastbins$ymax`], comparable to the `r day1last3bins$y` % [95% CIs `r day1last3bins$ymin`, `r day1last3bins$ymax`] on the first night.
 
 ### b) Bats switch to the rewarding option faster as they experience more reversals
 
-We call the run of consecutive visits to a non-rewarding flower immediately after each reversal (before experiencing any reward in that block) perseverative visits. Errors in the first block were not, by definition, treated as perseverative errors. A generalized linear mixed-model was used to investigate the effect of experimental night and reversal block on the number of perseverative visits. A negative-binomial likelihood function was used for this model. Experimental night, reversal block and their interaction were fixed effects and random slopes and intercepts were used to fit regression lines for each individual animal.
+We called the run of consecutive visits to a non-rewarding flower immediately after each reversal (before experiencing any reward in that block) perseverative visits. Errors in the first block were not, by definition, treated as perseverative errors. A generalized linear mixed-model was used to investigate the effect of experimental night and reversal block on the number of perseverative visits. A negative-binomial likelihood function was used for this model. Experimental night, reversal block and their interaction were fixed effects and random slopes and intercepts were used to fit regression lines for each individual animal.
 
 We called the run of consecutive visits to a non-rewarding flower immediately after each reversal (before experiencing any reward in that block) perseverative visits. Both experimental night (1 to 3) and block (1 to 5) had a negative effect on the number of perseverative visits made by the bats. As the bats experienced more reversals on more nights the number of perseverative visits decreased. The interaction of night and block, however, was positive: perseverative visits decreased less as the bats experienced more experimental nights (**Figure 3** and **Figure 4**).
 
-```{r, message = FALSE, warning = FALSE, echo = FALSE, fig.cap = "Number of perseverative visits made by the bats after each reversal across all three nights. A perseverative visit was defined as visit to the previously-rewarding option directly after a reversal and before the first visit to the newly-rewarding option. By definition there were no perseverative visits in the first block of a night. The red lines are the perseverative visits made by the individual bats after each reversal of a night; the black lines are the number of perseverative visits averaged over the bats (N = 14).Reversals were between the two flowers assigned to an individual bat. ", fig.width = 6, fig.height = 3}
+```{r, fig.cap = "Number of perseverative visits made by the bats after each reversal across all three nights. A perseverative visit was defined as visit to the previously-rewarding option directly after a reversal and before the first visit to the newly-rewarding option. By definition there were no perseverative visits in the first block of a night. The red lines are the perseverative visits made by the individual bats after each reversal of a night; the black lines are the number of perseverative visits averaged over the bats (N = 14). Reversals were between the two flowers assigned to an individual bat", fig.width = 6, fig.height = 3}
 #---------------------------------------------------
 # Plotting the perseverative visits made by the bats
 #---------------------------------------------------
-pers_visits <- rev_learning_all %>% 
-  select(-c(Group, Cage, Condition, Day, IdRFID, SystemMsg)) %>% 
-  filter(block_vis != 0) %>% 
-  group_by(Bat, day, block) %>% 
-  mutate(first_rew = cumsum(reward_status)) %>% 
-  filter(block > 1, 
-         first_rew == 1, 
-         reward_status == 1) %>% 
+
+# preparing the perseverative visits
+pers_visits <- rev_learning_all %>%
+  select(-c(Group, Cage, Condition, Day, IdRFID, SystemMsg)) %>%
+  # removing the event which marked the reversal
+  filter(block_vis != 0) %>%
+  group_by(Bat, day, block) %>%
+  mutate(first_rew = cumsum(reward_status)) %>%
+  filter(
+    block > 1,
+    first_rew == 1,
+    reward_status == 1
+  ) %>%
   ungroup() %>%
-  group_by(day, block) %>% 
+  group_by(day, block) %>%
   mutate(mean_vis = mean(block_vis))
 
-p2 <- pers_visits %>% 
-  filter(day %in% main_days) %>% 
-  mutate(day = case_when(day == "Day 1" ~ "Night 1", 
-                         day == "Day 2" ~ "Night 2", 
-                         day == "Day 3" ~ "Night 3"), 
-         block = block - 1) %>% 
-  ggplot(aes(block)) + 
-  geom_line(aes(y = block_vis, group = Bat, color = "red"), alpha = 0.5) + 
-  geom_line(aes(y = mean_vis), color = "black") + 
-  facet_grid(.~day) + 
-  ylim(0, 18) + 
-  theme_bw() + 
-  theme(legend.position = "none") + 
-  ylab("Number of perseverative visits") + 
+p2 <- pers_visits %>%
+  filter(day %in% main_days) %>%
+  mutate(
+    day = case_when(
+      day == "Day 1" ~ "Night 1",
+      day == "Day 2" ~ "Night 2",
+      day == "Day 3" ~ "Night 3"
+    ),
+    block = block - 1
+  ) %>%
+  ggplot(aes(block)) +
+  geom_line(aes(y = block_vis, group = Bat), color = "red", alpha = 0.5) +
+  geom_line(aes(y = mean_vis), color = "black") +
+  facet_grid(. ~ day) +
+  ylim(0, 18) +
+  theme_srl() +
+  ylab("Number of perseverative visits") +
   xlab("Reversal number")
 
 p2
 ```
 
-```{r, message = FALSE, warning = FALSE, message = FALSE, echo=FALSE, fig.cap = "Forest plot of the estimates of the effect of night and block on perseverative visits; a negative value  indicates a decrease of perseverative visits with successive nights and blocks. Circles represent slope estimates, thick horizontal lines represent 50% credible intervals, and thin horizontal lines 95% credible intervals. Numbers are slope estimates and 95% credible intervals of each effect", fig.width = 6.5, fig.height = 1.5}
-#---------------
-# Model fitting 
-#---------------
-# preparing the data table for the analysis of the perseverative visits 
-analysis_pers <- rev_learning_all %>% 
-  ungroup() %>% 
+```{r, Pers-visits-model}
+#---------------------------------------------------
+# Model fitting and extracting information for plots
+#---------------------------------------------------
+# preparing the data table for the analysis of the perseverative visits
+analysis_pers <- rev_learning_all %>%
+  ungroup() %>%
   select(Day, block, Bat, reward_status, block_vis, count_vis) %>%
-  filter(block_vis != 0) %>% 
-  group_by(Bat, Day, block) %>% 
-  mutate(first_rew = cumsum(reward_status)) %>% 
-  filter(block > 1, 
-         first_rew == 1, 
-         reward_status == 1)
+  filter(block_vis != 0) %>%
+  group_by(Bat, Day, block) %>%
+  mutate(first_rew = cumsum(reward_status)) %>%
+  filter(
+    block > 1,
+    first_rew == 1,
+    reward_status == 1
+  )
 
-# fitting a random slopes and random intercept model to the data, examining the effects of day, block and bin on the number of perseverative visits following a reversal; the response variable is taken to follow a negative-binomial distribution, which assumes that each Poisson count variable has its own rate parameter 
+# fitting a random slopes and random intercept model to the data, examining the effects of day, block and bin on the number of perseverative visits following a reversal; the response variable is taken to follow a negative-binomial distribution, which assumes that each Poisson count variable has its own rate parameter
 
 # m_pers <-
 #   brm(data = analysis_pers, family = negbinomial,
@@ -610,159 +750,196 @@ analysis_pers <- rev_learning_all %>%
 #       prior = c(prior(normal(0, 10), class = Intercept),
 #                 prior(normal(0, 10), class = b),
 #                 prior(cauchy(0, 1), class = sd)),
-#       iter = 2000, warmup = 1000, chains = 4, cores = 4, thin = 3, 
-#       control = list(adapt_delta = 0.999, 
+#       iter = 2000, warmup = 1000, chains = 4, cores = 4, thin = 3,
+#       control = list(adapt_delta = 0.999,
 #                      max_treedepth = 12),
 #       seed = 12)
-# 
+#
 # save(m_pers, file = "03_stats_rs_m4_negbinom.rda")
+
 load("data/processed_data/03_stats_rs_m4_negbinom.rda")
-#m_pers <- read.csv2(file = "data/m_pers.csv", sep = ";", header = TRUE)
+# m_pers <- read.csv2(file = "data/m_pers.csv", sep = ";", header = TRUE)
 
 # renaming the model appropriately
 m_pers <- m3.1.1
 
-# removing the model with the misleading name 
+# removing the model with the misleading name
 rm(m3.1.1)
-# setting the colour scheme 
+# setting the colour scheme
 color_scheme_set("darkgray")
 
-#model summary
-t1 <- fixef(m_pers) %>% 
-  as_tibble() %>% 
-  mutate("Fixed effect" = c("Intercept", "Night", "Block", "Night-Block Interaction"), 
-         Estimate = round(Estimate, digits = 2), 
-         Q2.5 = round(Q2.5, digits = 2), 
-         Q97.5 = round(Q97.5, digits = 2)) %>% 
+# creating a table with the model summary
+t1 <- fixef(m_pers) %>%
+  as_tibble() %>%
+  mutate(
+    "Fixed effect" = c("Intercept", "Night", "Block", "Night-Block Interaction"),
+    Estimate = round(Estimate, digits = 2),
+    Q2.5 = round(Q2.5, digits = 2),
+    Q97.5 = round(Q97.5, digits = 2)
+  ) %>%
   # renaming the credibility intervals column
   mutate("95% Credibility intervals" = paste0("[", Q2.5, ", ", Q97.5, "]"))
 
-max_xvalue <- t1 %>% 
-  filter(`Fixed effect` != "Intercept") %>% 
-  select(Q97.5) %>% 
-  filter(Q97.5 == max(Q97.5)) %>% 
-  as.numeric() 
+# setting the maximum value on the x axis to locate the labels
+max_xvalue <- t1 %>%
+  filter(`Fixed effect` != "Intercept") %>%
+  select(Q97.5) %>%
+  filter(Q97.5 == max(Q97.5)) %>%
+  as.numeric()
 
-#max_xvalue <- max_xvalue + 0.3
-
-t1_estimates <- t1 %>% 
-  filter(`Fixed effect` != "Intercept") %>% 
-  rename(labels = `Fixed effect`) %>% 
-  select(labels, Estimate, `95% Credibility intervals`) %>% 
-  mutate(All = paste0(Estimate, " ", `95% Credibility intervals`)) %>% 
+# creating a table with the required values for the forest plot
+t1_estimates <- t1 %>%
+  filter(`Fixed effect` != "Intercept") %>%
+  rename(labels = `Fixed effect`) %>%
+  select(labels, Estimate, `95% Credibility intervals`) %>%
+  mutate(All = paste0(Estimate, " ", `95% Credibility intervals`)) %>%
   select(labels, All)
-
-# creating a plot of the slope coefficients 
-p3 <- mcmc_intervals(m_pers, 
-                     pars = vars(2:4), 
-                     prob_outer = 0.95, 
-                     point_size = 1.75) + 
-  xlim (-0.9, max_xvalue+0.35) +
-  geom_vline(xintercept = 0) + 
-  scale_y_discrete(
-    labels = c("b_Day" = "Experimental night",
-               "b_block" = "Reversal block", 
-               "b_Day:block" = "Night - block interaction"),
-    limits = c("b_Day:block", "b_block", "b_Day")) + 
-  geom_text(data = t1_estimates,
-            aes(x = max_xvalue + 0.07, y = c(3, 2, 1), label = All, fontface ="bold"), size = 3, hjust = 0)
-
-p3 
-
 ```
 
-```{r, message = FALSE, warning = FALSE, message = FALSE, echo=FALSE, fig.cap = "A comparison of the posterior predictions of the generalized linear mixed-effects model of the perseverative visits (blue line, shading indicates 95% confidence intervals) and the empirical data from the bats (red line)", fig.width = 9.5, fig.height = 3}
+```{r, fig.cap = "Forest plot of the estimates of the effect of night and block on perseverative visits; a negative value  indicates a decrease of perseverative visits with successive nights and blocks. Circles represent slope estimates, thick horizontal lines represent 50% credible intervals, and thin horizontal lines 95% credible intervals. Numbers are slope estimates and 95% credible intervals of each effect", fig.width = 6.5, fig.height = 1.5}
 
-# calculating the posterior predictions 
-# selecting the required columns from the analysis dataframe 
-nd_pers <- analysis_pers %>% 
-  select(Bat, Day, block) 
+# creating a plot of the slope coefficients
+p3 <- mcmc_intervals(m_pers,
+  point_size = 1.00,
+  pars = vars(2:4),
+  prob_outer = 0.95
+) +
+  xlim(-0.9, max_xvalue + 0.35) +
+  geom_vline(xintercept = 0) +
+  scale_y_discrete(
+    labels = c(
+      "b_Day" = "Experimental night",
+      "b_block" = "Reversal block",
+      "b_Day:block" = "Night - block interaction"
+    ),
+    limits = c("b_Day:block", "b_block", "b_Day")
+  ) +
+  geom_text(
+    data = t1_estimates,
+    aes(x = max_xvalue + 0.07, y = c(3, 2, 1), label = All, fontface = "bold", family = "Times"), size = 3, hjust = 0
+  ) +
+  theme_srl()
+
+p3
+```
+
+```{r, Posterior-predictions-pers-visits}
+#------------------------------------------------------------------------
+# Calculating the posterior predictions of the perseverative visits model
+#------------------------------------------------------------------------
+
+# calculating the posterior predictions
+# selecting the required columns from the analysis dataframe
+nd_pers <- analysis_pers %>%
+  select(Bat, Day, block)
 
 # re-doing the bat names temporarily
-nd_pers <- nd_pers %>% 
-  mutate(Bat_number = as.integer(str_extract(Bat, "[0-9]+")), 
-         Bat_word = "Bat", 
-         Bat = paste0(Bat_word, Bat_number)) %>% 
+nd_pers <- nd_pers %>%
+  mutate(
+    Bat_number = as.integer(str_extract(Bat, "[0-9]+")),
+    Bat_word = "Bat",
+    Bat = paste0(Bat_word, Bat_number)
+  ) %>%
   select(-Bat_number, -Bat_word)
 
-# calculating the posterior predictions 
+# calculating the posterior predictions
 post_fit <-
   fitted(m_pers,
-         newdata = nd_pers) %>% 
-  as_tibble() %>% 
-  mutate(Bat = analysis_pers$Bat, 
-         Day = analysis_pers$Day,
-         block = analysis_pers$block, 
-         count_vis = analysis_pers$block_vis)
+    newdata = nd_pers
+  ) %>%
+  as_tibble() %>%
+  mutate(
+    Bat = analysis_pers$Bat,
+    Day = analysis_pers$Day,
+    block = analysis_pers$block,
+    count_vis = analysis_pers$block_vis
+  )
 
-# calculating the empirical equivalents of the posterior predictions 
-comparison_pers <- analysis_pers %>% 
-  group_by(Bat, Day, block) %>% 
+# calculating the empirical equivalents of the posterior predictions
+comparison_pers <- analysis_pers %>%
+  group_by(Bat, Day, block) %>%
   group_modify(~ mean_cl_boot(.x$block_vis, conf.int = 0.95))
 
 # putting the calculated posterior values and the empirical values into the same table
 comparison_pers <- left_join(analysis_pers, post_fit, by = c("Bat", "Day", "block"))
 
-# plotting the posterior predicted values and empirical values together 
-p3 <- comparison_pers %>% 
-  mutate(Day = case_when(Day == 1 ~ "Night 1", 
-                         Day == 2 ~ "Night 2", 
-                         Day == 3 ~ "Night 3"), 
-         block = block - 1, 
-         Bat_word = ifelse((str_detect(Bat, "Bat") == TRUE), "Bat", ""), 
-         Bat_number = ifelse((str_detect(Bat, "Bat") == TRUE), as.integer(str_extract(Bat, "[0-9]+")), Bat), 
-         Bat = ifelse(is.na(Bat), Bat, paste0(Bat_word, " ", Bat_number))) %>% 
-  select(-Bat_word, -Bat_number) %>% 
-  ggplot(aes(block)) + 
-  #geom_point(aes(y = y), color = "red", size = 0.2) +
-  geom_line(aes(y = block_vis), color = "red") + 
-  #geom_ribbon(aes(ymin = ymin, ymax = ymax), fill = "red", alpha = 0.3) + 
-  geom_point(aes(y = Estimate), color = "blue", size = 0.2) + 
-  geom_line(aes(y = Estimate), color = "blue") + 
+# preparing this table a little further
+comparison_pers <- comparison_pers %>%
+  mutate(
+    Day = case_when(
+      Day == 1 ~ "Night 1",
+      Day == 2 ~ "Night 2",
+      Day == 3 ~ "Night 3"
+    ),
+    block = block - 1,
+    Bat_word = ifelse((str_detect(Bat, "Bat") == TRUE), "Bat", ""),
+    Bat_number = ifelse((str_detect(Bat, "Bat") == TRUE), as.integer(str_extract(Bat, "[0-9]+")), Bat),
+    Bat = ifelse(is.na(Bat), Bat, paste0(Bat_word, " ", Bat_number))
+  ) %>%
+  select(-Bat_word, -Bat_number)
+```
+
+```{r, fig.cap = "A comparison of the posterior predictions of the generalized linear mixed-effects model of the perseverative visits (blue line, shading indicates 95% confidence intervals) and the empirical data from the bats (red line)", fig.width = 9.5, fig.height = 3}
+
+# plotting the posterior predicted values and empirical values together
+p3 <- comparison_pers %>%
+  # mutate(Day = case_when(Day == 1 ~ "Night 1",
+  #                        Day == 2 ~ "Night 2",
+  #                        Day == 3 ~ "Night 3"),
+  #        block = block - 1,
+  #        Bat_word = ifelse((str_detect(Bat, "Bat") == TRUE), "Bat", ""),
+  #        Bat_number = ifelse((str_detect(Bat, "Bat") == TRUE), as.integer(str_extract(Bat, "[0-9]+")), Bat),
+  #        Bat = ifelse(is.na(Bat), Bat, paste0(Bat_word, " ", Bat_number))) %>%
+  # select(-Bat_word, -Bat_number) %>%
+  ggplot(aes(block)) +
+  # geom_point(aes(y = y), color = "red", size = 0.2) +
+  geom_line(aes(y = block_vis), color = "red") +
+  # geom_ribbon(aes(ymin = ymin, ymax = ymax), fill = "red", alpha = 0.3) +
+  geom_point(aes(y = Estimate), color = "blue", size = 0.2) +
+  geom_line(aes(y = Estimate), color = "blue") +
   geom_ribbon(aes(ymin = Q2.5, ymax = Q97.5), fill = "blue", alpha = 0.3) +
-  xlab("Reversal number") + 
-  ylab("Number of perseverative visits") + 
-  facet_grid(Day ~ Bat) + 
-  theme_bw()
+  xlab("Reversal number") +
+  ylab("Number of perseverative visits") +
+  facet_grid(Day ~ Bat) +
+  theme_srl()
 
 p3
-
 ```
 
 ### c) After the experience of reversals the bats make more visits to the rewarding option
 
-The proportion of visits to the rewarding option, the I~pref~, calculated only over the two flowers assigned to each bat, was modeled as an effect of experimental night, block and bin within block (details of the visits to the non-assigned flowers are in the Supplementary Information). The model was fit using a binomial likelihood function, with experimental night, block, bin and their interactions as fixed effects; random slopes and intercepts were used to fit regression lines for the individuals.
+The proportion of visits to the rewarding option, the I~pref~, calculated only over the two flowers assigned to each bat, was modeled as an effect of experimental night, block and bin within block. The model was fit using a binomial likelihood function, with experimental night, block, bin and their interactions as fixed effects; random slopes and intercepts were used to fit regression lines for the individuals.
 
-This analysis showed that all three, night, block and bin all had a positive effect on the proportion of visits to the rewarding option: as the bats experienced more reversals on more nights, and the more visits made since the occurrence of a reversal, the proportion of visits made to the rewarding option increased. Interestingly the slopes of the interactions of experimental night and block; block and bin within the block; and experimental night and bin within the block were all negative. That is, the increase in proportion of visits to the rewarding flower became smaller as the bats experienced more reversals on more nights. There was a smaller ‘improvement’ in performance, likely through a ‘ceiling effect,’ given how high the proportion of visits to the rewarding option was (**Figure 2** and **Figure 6**). 
+This analysis showed that all three, night, block and bin all had a positive effect on the proportion of visits to the rewarding option: as the bats experienced more reversals on more nights, and the more visits made since the occurrence of a reversal, the proportion of visits made to the rewarding option increased. Interestingly, the coefficients of the interactions of experimental night and block; block and bin within the block; and experimental night and bin within the block were all negative. In other words, the proportion of visits to the rewarding flower increased, but this increase became smaller as the bats experienced more reversals on more nights. There was a progressively smaller ‘improvement’ in performance, likely through a ceiling effect, given how high the proportion of visits to the rewarding option was (**Figure 2** and **Figure 6**). 
 
-```{r, message = FALSE, warning = FALSE, echo=FALSE, fig.cap = "Forest plot of the estimates of the effect of night, block and bin on the proportion of visits to the rewarding option; a positive effect indicates the visits to the rewarding option increased with successive nights, blocks and bins (within each block). Circles show slope estimates, thick and thin horizontal lines the 50% and 95% credible intervals. Numbers are slope estimates with 95% credible intervals. ", fig.width = 7, fig.height = 3}
+```{r Day-block-bin-model}
 #-----------------------------------------------------------------------
 # Fitting the model without accounting for the first day and first block
 #-----------------------------------------------------------------------
-# creating the dataset for the analysis 
-analysis_choices <- rev_learning_all %>% 
-  ungroup() %>% 
-  select(Day, block, bin, Bat, reward_status, block_vis, count_vis) %>% 
+# creating the dataset for the analysis
+analysis_choices <- rev_learning_all %>%
+  ungroup() %>%
+  select(Day, block, bin, Bat, reward_status, block_vis, count_vis) %>%
   filter(block_vis != 0)
 
-# fitting the model 
+# fitting the model
 # m_choices <-
 #   brm(data = analysis_choices, family = binomial,
 #       reward_status | trials(1) ~ Day + block + bin +
 #         Day:block +
 #         block:bin +
 #         Day:bin +
-#         (1 + Day + block + bin | Bat), # random slopes 
+#         (1 + Day + block + bin | Bat), # random slopes
 #       prior = c(prior(normal(0, 10), class = Intercept),
 #                 prior(normal(0, 10), class = b),
 #                 prior(cauchy(0, 1), class = sd)),
-#       iter = 2000, warmup = 1000, chains = 4, cores = 5, thin = 3, 
-#       control = list(adapt_delta = 0.9995, max_treedepth = 15),  
+#       iter = 2000, warmup = 1000, chains = 4, cores = 5, thin = 3,
+#       control = list(adapt_delta = 0.9995, max_treedepth = 15),
 #       seed = 12)
-# 
-# # save the model 
+#
+# # save the model
 # save(m_choices, file = "03_stats_rs_m1.1.rda")
-#here is the model with the results, ready to be loaded. 
+# here is the model with the results, ready to be loaded.
 load(file = "data/processed_data/03_stats_rs_m1.1.rda")
 # renaming the model appropriately
 m_choices <- m1.2.1
@@ -771,118 +948,139 @@ rm(m1.2.1)
 
 color_scheme_set("darkgray")
 
-#model summary
-t2 <- fixef(m_choices) %>% 
-  as_tibble() %>% 
-  mutate("Fixed effect" = c("Intercept", "Night", "Block","Bin", "Night-Block interaction", "Block-Bin interaction", "Night-Bin interaction"), 
-         Estimate = round(Estimate, digits = 2), 
-         Q2.5 = round(Q2.5, digits = 2), 
-         Q97.5 = round(Q97.5, digits = 2)) %>%
+# creating a table with the model summary
+t2 <- fixef(m_choices) %>%
+  as_tibble() %>%
+  mutate(
+    "Fixed effect" = c("Intercept", "Night", "Block", "Bin", "Night-Block interaction", "Block-Bin interaction", "Night-Bin interaction"),
+    Estimate = round(Estimate, digits = 2),
+    Q2.5 = round(Q2.5, digits = 2),
+    Q97.5 = round(Q97.5, digits = 2)
+  ) %>%
   mutate("95% Credibility intervals" = paste0("[", Q2.5, ", ", Q97.5, "]"))
 
-max_xvalue <- t2 %>% 
-  filter(`Fixed effect` != "Intercept") %>% 
-  select(Q97.5) %>% 
-  filter(Q97.5 == max(Q97.5)) %>% 
-  as.numeric() 
+# setting the maximum value on the x axis to locate the labels
+max_xvalue <- t2 %>%
+  filter(`Fixed effect` != "Intercept") %>%
+  select(Q97.5) %>%
+  filter(Q97.5 == max(Q97.5)) %>%
+  as.numeric()
 
-#max_xvalue <- max_xvalue + 0.5
-
-t2_estimates <- t2 %>% 
-  filter(`Fixed effect` != "Intercept") %>% 
-  rename(labels = `Fixed effect`) %>% 
+# creating a table with the required values for the forest plot
+t2_estimates <- t2 %>%
+  filter(`Fixed effect` != "Intercept") %>%
+  rename(labels = `Fixed effect`) %>%
   select(labels, Estimate, `95% Credibility intervals`) %>%
-  mutate(All = paste0(Estimate, " ", `95% Credibility intervals`)) %>% 
+  mutate(All = paste0(Estimate, " ", `95% Credibility intervals`)) %>%
   select(labels, All)
-
-# creating the plot of slope coefficients
-p4 <- mcmc_intervals(m_choices, 
-                     pars = vars(2:7), 
-                     prob_outer = 0.95, 
-                     point_size = 1.75) + 
-  xlim(-0.3, max_xvalue + 0.6)+ 
-  geom_vline(xintercept = 0) + 
-  scale_y_discrete(
-    labels = c("b_Day" = "Experimental night",
-               "b_block" = "Reversal block", 
-               "b_bin" = "Bin", 
-               "b_Day:block" = "Night - block interaction", 
-               "b_block:bin" = "Block - bin interaction", 
-               "b_Day:bin" = "Night - bin interaction"), 
-    limits = c("b_Day:bin", "b_block:bin", "b_Day:block", "b_bin", "b_block", "b_Day")) +
-  geom_text(data = t2_estimates,
-            aes(x = max_xvalue + 0.03, y = c(6, 5, 4, 3, 2, 1), label = All, fontface = "bold"), size = 3, hjust = 0) 
-
-p4
-
 ```
 
-```{r, message = FALSE, echo=FALSE, fig.cap = "A comparison of the posterior predictions of the generalized linear mixed-effects model of the visits to the rewarding option and the empirical data from the bats. The red line indicates the average proportion of visits to the rewarding option per bin made by the individual bats, with the red shading indicating 95% confidence intervals; the blue line indicates the corresponding posterior prediction of the model", fig.width = 9.5, fig.height = 6}
+```{r, fig.cap = "Forest plot of the estimates of the effect of night, block and bin on the proportion of visits to the rewarding option; a positive effect indicates the visits to the rewarding option increased with successive nights, blocks and bins (within each block). Circles show slope estimates, thick horizontal lines the 50% credible intervals and thin horizontal lines the 95% credible intervals. Numbers are slope estimates with 95% credible intervals. ", fig.width = 7, fig.height = 3}
+# creating the plot of slope coefficients
+p4 <- mcmc_intervals(m_choices,
+  pars = vars(2:7),
+  prob_outer = 0.95,
+  point_size = 1.00
+) +
+  xlim(-0.3, max_xvalue + 0.6) +
+  geom_vline(xintercept = 0) +
+  scale_y_discrete(
+    labels = c(
+      "b_Day" = "Experimental night",
+      "b_block" = "Reversal block",
+      "b_bin" = "Bin",
+      "b_Day:block" = "Night - block interaction",
+      "b_block:bin" = "Block - bin interaction",
+      "b_Day:bin" = "Night - bin interaction"
+    ),
+    limits = c("b_Day:bin", "b_block:bin", "b_Day:block", "b_bin", "b_block", "b_Day")
+  ) +
+  geom_text(
+    data = t2_estimates,
+    aes(x = max_xvalue + 0.03, y = c(6, 5, 4, 3, 2, 1), label = All, fontface = "bold", family = "Times"), size = 3, hjust = 0
+  ) +
+  theme_srl()
 
-# calculating the posterior predictions 
-# selecting the required columns from the analysis dataframe 
-nd_choices <- analysis_choices %>% 
+p4
+```
+
+```{r, Posterior-predictions-day-block-bin-model}
+#-----------------------------------------------------------------------
+# Posterior predictions for the model of the effect of day, block and bin
+#-----------------------------------------------------------------------
+
+# calculating the posterior predictions
+# selecting the required columns from the analysis dataframe
+nd_choices <- analysis_choices %>%
   select(Bat, Day, block, bin, count_vis)
 
-# calculating the posterior predictions 
+# calculating the posterior predictions
 post_fit <-
-  predict(m_choices) %>% 
-  as_tibble() %>% 
-  mutate(Bat = nd_choices$Bat, 
-         Day = nd_choices$Day,
-         block = nd_choices$block, 
-         bin = nd_choices$bin, 
-         count_vis = nd_choices$count_vis)
+  predict(m_choices) %>%
+  as_tibble() %>%
+  mutate(
+    Bat = nd_choices$Bat,
+    Day = nd_choices$Day,
+    block = nd_choices$block,
+    bin = nd_choices$bin,
+    count_vis = nd_choices$count_vis
+  )
 
-# calculating the empirical equivalents of the posterior predictions 
-comparison_choices <- analysis_choices %>% 
-  group_by(Bat, Day, block, bin) %>% 
+# calculating the empirical equivalents of the posterior predictions
+comparison_choices <- analysis_choices %>%
+  group_by(Bat, Day, block, bin) %>%
   group_modify(~ mean_cl_boot(.x$reward_status, conf.int = 0.95))
 
-# look up table for splitting the data set 
+# creating a look up table for splitting the data set
 split <- data.frame(
   Bat = c("Bat 5", "Bat 6", "Bat 8", "Ba t9", "Bat 10", "Bat 11", "Bat 12", "Bat 13", "Bat 14", "Bat 15", "Bat 16", "Bat 17", "Bat 18", "Bat 20"),
-  row = as.factor(c(rep(1, 7), rep(2, 7)))) 
+  row = as.factor(c(rep(1, 7), rep(2, 7)))
+)
 
 # putting the calculated posterior values and the empirical values into the same table
 comparison_choices <- left_join(comparison_choices, post_fit, by = c("Bat", "Day", "block", "bin"))
-comparison_choices <- left_join(comparison_choices, split, by = "Bat") %>% 
-  mutate(Day = case_when(Day == 1 ~ "Night 1", 
-                         Day == 2 ~ "Night 2", 
-                         Day == 3 ~ "Night 3"))
+comparison_choices <- left_join(comparison_choices, split, by = "Bat") %>%
+  mutate(Day = case_when(
+    Day == 1 ~ "Night 1",
+    Day == 2 ~ "Night 2",
+    Day == 3 ~ "Night 3"
+  ))
+```
 
-# plotting the posterior predicted values and empirical values together 
-p5 <- comparison_choices %>% 
-  filter(row == 1) %>% 
-  ggplot(aes(count_vis)) + 
-  #geom_point(aes(y = y), color = "red", size = 0.2) +
-  geom_line(aes(y = y), color = "red") + 
-  geom_ribbon(aes(ymin = ymin, ymax = ymax), fill = "red", alpha = 0.3) + 
-  #geom_point(aes(y = Estimate), color = "blue", size = 0.2) + 
-  geom_line(aes(y = Estimate), color = "blue", alpha = 0.5) + 
-  #geom_ribbon(aes(ymin = Q2.5, ymax = Q97.5), fill = "blue", alpha = 0.3) + 
-  geom_vline(xintercept = c(50, 100, 150, 200, 250), linetype = "dashed", size = 0.2) + 
-  xlab("Visit count") + 
-  ylab("Proportion of visits to the rewarding flower") + 
-  scale_y_continuous(breaks = c(0, 0.5, 1)) + 
-  facet_grid(Day ~ Bat) + 
-  theme_classic()
+```{r, fig.cap = "A comparison of the posterior predictions of the generalized linear mixed-effects model of the visits to the rewarding option and the empirical data from the bats. The red line indicates the average proportion of visits to the rewarding option per bin made by the individual bats, with the red shading indicating 95% confidence intervals; the blue line indicates the corresponding posterior prediction of the model", fig.width = 9.5, fig.height = 6}
 
-p6 <- comparison_choices %>% 
-  filter(row == 2) %>% 
-  ggplot(aes(count_vis)) + 
-  #geom_point(aes(y = y), color = "red", size = 0.2) +
-  geom_line(aes(y = y), color = "red") + 
-  geom_ribbon(aes(ymin = ymin, ymax = ymax), fill = "red", alpha = 0.3) + 
-  #geom_point(aes(y = Estimate), color = "blue", size = 0.2) + 
-  geom_line(aes(y = Estimate), color = "blue", alpha = 0.5) + 
-  #geom_ribbon(aes(ymin = Q2.5, ymax = Q97.5), fill = "blue", alpha = 0.3) + 
-  geom_vline(xintercept = c(50, 100, 150, 200, 250), linetype = "dashed", size = 0.2) + 
-  xlab("Visit count") + 
-  ylab("Proportion of visits to the rewarding flower") + 
-  scale_y_continuous(breaks = c(0, 0.5, 1)) + 
-  facet_grid(Day ~ Bat) + 
-  theme_classic()
+# plotting the posterior predicted values and empirical values together
+p5 <- comparison_choices %>%
+  filter(row == 1) %>%
+  ggplot(aes(count_vis)) +
+  # geom_point(aes(y = y), color = "red", size = 0.2) +
+  geom_line(aes(y = y), color = "red") +
+  geom_ribbon(aes(ymin = ymin, ymax = ymax), fill = "red", alpha = 0.3) +
+  # geom_point(aes(y = Estimate), color = "blue", size = 0.2) +
+  geom_line(aes(y = Estimate), color = "blue", alpha = 0.5) +
+  # geom_ribbon(aes(ymin = Q2.5, ymax = Q97.5), fill = "blue", alpha = 0.3) +
+  geom_vline(xintercept = c(50, 100, 150, 200, 250), linetype = "dashed", size = 0.2) +
+  xlab("Visit count") +
+  ylab("Proportion of visits to the rewarding flower") +
+  scale_y_continuous(breaks = c(0, 0.5, 1)) +
+  facet_grid(Day ~ Bat) +
+  theme_srl()
+
+p6 <- comparison_choices %>%
+  filter(row == 2) %>%
+  ggplot(aes(count_vis)) +
+  # geom_point(aes(y = y), color = "red", size = 0.2) +
+  geom_line(aes(y = y), color = "red") +
+  geom_ribbon(aes(ymin = ymin, ymax = ymax), fill = "red", alpha = 0.3) +
+  # geom_point(aes(y = Estimate), color = "blue", size = 0.2) +
+  geom_line(aes(y = Estimate), color = "blue", alpha = 0.5) +
+  # geom_ribbon(aes(ymin = Q2.5, ymax = Q97.5), fill = "blue", alpha = 0.3) +
+  geom_vline(xintercept = c(50, 100, 150, 200, 250), linetype = "dashed", size = 0.2) +
+  xlab("Visit count") +
+  ylab("Proportion of visits to the rewarding flower") +
+  scale_y_continuous(breaks = c(0, 0.5, 1)) +
+  facet_grid(Day ~ Bat) +
+  theme_srl()
 
 ggarrange(p5, p6, nrow = 2, ncol = 1)
 ```
@@ -891,192 +1089,224 @@ ggarrange(p5, p6, nrow = 2, ncol = 1)
 
 ### a) The effect of the first experimental night and the first block of each night
 
-The first block of an experimental night was qualitatively different from the other blocks, as this was the only part of the night when the bats had not yet experienced a reversal. A similar argument can be made about the first experimental night: on this night the bats experience reversals for the first time. Our prior analysis seemed to not completely capture the effects of experimental night, block and bin. Therefore, we performed an exploratory analysis to specifically explore the effects of the first block and the first night.
-The GLMM used in this analysis was identical to the that used to investigate the effect of block, bin and night on the Ipref, except for the addition of experimental night and block as factor variables. The first night and the first block of every night was treated as one level of the factor variables and the other nights and other blocks of each night as the other level. 
+The first block of an experimental night was qualitatively different from the other blocks, as this was the only part of the night when the bats had not yet experienced a reversal. A similar argument can be made about the first experimental night: on this night the bats experience reversals for the first time. Our confirmatory analyses did not seem to completely capture the effects of experimental night, block and bin. Therefore, we performed an exploratory analysis to specifically explore the effects of the first block and the first night.
+The GLMM used in this analysis was identical to the that used to investigate the effect of block, bin and night on the I~pref~, except for the addition of experimental night and block as factor variables. The first night and the first block of every night was treated as one level of the factor variables and the other nights and other blocks of each night as the other level. 
 
-The main effects of night, block and bin, and their interactions were similar to the previous model (**Figure 8**). Additionally, we found that the bats made more visits to the rewarding flower in the first block of every night, before they had experienced any reversal at all: thus the variable ‘block type,’ (i.e., whether a block was the first reversal block of the night or not), had a positive slope.  The I~pref~ was not any higher on the first night than the other nights, meaning that ‘night type’ did not have an effect. However, the highest Ipref  was in the first block of 50 visits of the first night, before any reversals had ever been experienced even once, compared to any other block on any other night. This was despite the random performance of the very first ten visits (see also **Figure 2**). Thus block type and night type had an interaction effect with a positive coefficient. 
+The main effects of night, block and bin, and their interactions were similar to the previous model (**Figure 8**). Additionally, we found that the bats made more visits to the rewarding flower in the first block of every night, before they had experienced any reversal at all: the variable ‘block type,’ (i.e., whether a block was the first reversal block of the night or not), had a positive coefficient.  The I~pref~ was not any higher on the first night than the other nights, meaning that ‘night type’ did not have an effect. However, the highest I~pref~  was in the first block of 50 visits of the first night, before any reversals had ever been experienced even once, compared to any other block on any other night. This was despite the random performance of the very first ten visits (see also **Figure 2**). Thus block type and night type had an interaction effect with a positive coefficient. 
 
-```{r, message = FALSE, warning = FALSE, echo=FALSE, fig.cap = "Forest plot of the estimates of the effect of night, block, and bin; and the differential effect of the first night and the first block ('night-type' and 'block-type') on the proportion of visits to the rewarding option; a positive effect indicates the visits to the rewarding option increased with successive nights, blocks and bins (within each block), or there were more visits to the rewarding option on the 'block-type' or 'night-type' indicated. The circles represent the slope estimates, the thick horizontal lines represent the 50% credible intervals and the thin horizontal lines 95% credible intervals", fig.width = 7, fig.height = 5.5}
+```{r Day-block-bin-first-day-first-block-model}
 #---------------------------------------------------------------
 # Fitting the model accounting for the first day and first block
 #---------------------------------------------------------------
-analysis_choices2 <- analysis_choices %>% 
-  mutate(day_type = as.factor(ifelse(Day == 1, 1, 0)), 
-         block_type = as.factor(ifelse(block == 1, 1, 0)))
+analysis_choices2 <- analysis_choices %>%
+  mutate(
+    day_type = as.factor(ifelse(Day == 1, 1, 0)),
+    block_type = as.factor(ifelse(block == 1, 1, 0))
+  )
 
 # m_choices2 <-
 #   brm(data = analysis_choices2, family = binomial,
-#       reward_status | trials(1) ~ 
-#         Day + block + 
-#         day_type + block_type + bin + 
-#         Day:block + block:bin + Day:bin + 
+#       reward_status | trials(1) ~
+#         Day + block +
+#         day_type + block_type + bin +
+#         Day:block + block:bin + Day:bin +
 #         day_type:block_type + block_type:bin + day_type:bin +
-#         (1 + Day + block + day_type + block_type + bin | Bat), # random slopes 
+#         (1 + Day + block + day_type + block_type + bin | Bat), # random slopes
 #       prior = c(prior(normal(0, 10), class = Intercept),
 #                 prior(normal(0, 10), class = b),
 #                 prior(cauchy(0, 1), class = sd)),
-#       # longer chains were needed for this more complex model to converge 
+#       # longer chains were needed for this more complex model to converge
 #       iter = 2500, warmup = 1200, chains = 4, cores = 5, thin = 3,
-#       control = list(adapt_delta = 0.9995, max_treedepth = 15),  
+#       control = list(adapt_delta = 0.9995, max_treedepth = 15),
 #       seed = 12)
 
-# save the model 
-#save(m_choices2, file = "03_stats_rs_m6.rda")
-#here is the model with the results, ready to be loaded. 
+# save the model
+# save(m_choices2, file = "03_stats_rs_m6.rda")
+# loading the completed model 
 load(file = "data/processed_data/03_stats_rs_m6.rda")
+# renaming the model properly 
 m_choices2 <- m6
 # removing the old model with the misleading name
 rm(m6)
 
-# setting the colour scheme 
+# setting the colour scheme
 color_scheme_set("darkgray")
 
-#model summary
-t3 <- fixef(m_choices2) %>% 
-  as_tibble() %>% 
-  mutate("Fixed effect" = c("Intercept", "Night", "Block", "Night Type 1", "Block Type 1", "Bin", "Night-Block interaction", "Block-Bin interaction", "Night-Bin interaction", "Night Type 1-Block Type 1 interaction", "Block Type 1-Bin interaction", "Night Type 1-Bin interaction"), 
-         Estimate = round(Estimate, digits = 2), 
-         Q2.5 = round(Q2.5, digits = 2), 
-         Q97.5 = round(Q97.5, digits = 2)) %>% 
+# creating a table with the model summary
+t3 <- fixef(m_choices2) %>%
+  as_tibble() %>%
+  mutate(
+    "Fixed effect" = c("Intercept", "Night", "Block", "Night Type 1", "Block Type 1", "Bin", "Night-Block interaction", "Block-Bin interaction", "Night-Bin interaction", "Night Type 1-Block Type 1 interaction", "Block Type 1-Bin interaction", "Night Type 1-Bin interaction"),
+    Estimate = round(Estimate, digits = 2),
+    Q2.5 = round(Q2.5, digits = 2),
+    Q97.5 = round(Q97.5, digits = 2)
+  ) %>%
   mutate("95% Credibility intervals" = paste0("[", Q2.5, ", ", Q97.5, "]"))
 
-max_xvalue <- t3 %>% 
-  filter(`Fixed effect` != "Intercept") %>% 
-  select(Q97.5) %>% 
-  filter(Q97.5 == max(Q97.5)) %>% 
-  as.numeric() 
+# setting the maximum value for the X-axis
+max_xvalue <- t3 %>%
+  filter(`Fixed effect` != "Intercept") %>%
+  select(Q97.5) %>%
+  filter(Q97.5 == max(Q97.5)) %>%
+  as.numeric()
 
 max_xvalue <- max_xvalue + 0.1
 
-t3_estimates <- t3 %>% 
-  filter(`Fixed effect` != "Intercept") %>% 
-  rename(labels = `Fixed effect`) %>% 
-  select(labels, Estimate, `95% Credibility intervals`) %>% 
-  mutate(All = paste0(Estimate, " ", `95% Credibility intervals`)) %>% 
+# creating a table with the estimates for the forest plot
+t3_estimates <- t3 %>%
+  filter(`Fixed effect` != "Intercept") %>%
+  rename(labels = `Fixed effect`) %>%
+  select(labels, Estimate, `95% Credibility intervals`) %>%
+  mutate(All = paste0(Estimate, " ", `95% Credibility intervals`)) %>%
   select(labels, All)
+```
+
+```{r, fig.cap = "Forest plot of the estimates of the effect of night, block, and bin; and the differential effect of the first night and the first block ('night-type' and 'block-type') on the proportion of visits to the rewarding option; a positive effect indicates the visits to the rewarding option increased with successive nights, blocks and bins (within each block), or there were more visits to the rewarding option on the 'block-type' or 'night-type' indicated. The circles represent the slope estimates, the thick horizontal lines represent the 50% credible intervals and the thin horizontal lines 95% credible intervals", fig.width = 7, fig.height = 5.5}
 
 # creating the plot of slope coefficients
-p7 <- mcmc_intervals(m_choices2, 
-                     pars = vars(2:12), 
-                     prob_outer = 0.95, 
-                     point_size = 1.75) + 
-  xlim(-1, max_xvalue + 0.85) + 
-  geom_vline(xintercept = 0) + 
+p7 <- mcmc_intervals(m_choices2,
+  pars = vars(2:12),
+  prob_outer = 0.95,
+  point_size = 1.00
+) +
+  xlim(-1, max_xvalue + 0.85) +
+  geom_vline(xintercept = 0) +
   scale_y_discrete(
-    labels = c("b_Day" = "Experimental night",
-               "b_block" = "Reversal block", 
-               "b_day_type1" = "First experimental night",
-               "b_block_type1" = "First block of a night",
-               "b_bin" = "Bin", 
-               "b_Day:block" = "Night - block interaction", 
-               "b_block:bin" = "Block - bin interaction", 
-               "b_Day:bin" = "Day - bin interaction", 
-               "b_day_type1:block_type1" = "First night - first block interaction", 
-               "b_block_type1:bin" = "First block - bin interaction", 
-               "b_day_type1:bin" = "First night - bin interaction"), 
-    limits = c("b_day_type1:bin", "b_block_type1:bin", "b_day_type1:block_type1", "b_Day:bin",
-               "b_block:bin", "b_Day:block", "b_bin", "b_block_type1", "b_day_type1",
-               "b_block", "b_Day")) + 
-  geom_text(data = t3_estimates,
-            aes(x = max_xvalue, y = c(11:1), label = All, fontface = "bold"), size = 3, hjust = 0)
+    labels = c(
+      "b_Day" = "Experimental night",
+      "b_block" = "Reversal block",
+      "b_day_type1" = "First experimental night",
+      "b_block_type1" = "First block of a night",
+      "b_bin" = "Bin",
+      "b_Day:block" = "Night - block interaction",
+      "b_block:bin" = "Block - bin interaction",
+      "b_Day:bin" = "Day - bin interaction",
+      "b_day_type1:block_type1" = "First night - first block interaction",
+      "b_block_type1:bin" = "First block - bin interaction",
+      "b_day_type1:bin" = "First night - bin interaction"
+    ),
+    limits = c(
+      "b_day_type1:bin", "b_block_type1:bin", "b_day_type1:block_type1", "b_Day:bin",
+      "b_block:bin", "b_Day:block", "b_bin", "b_block_type1", "b_day_type1",
+      "b_block", "b_Day"
+    )
+  ) +
+  geom_text(
+    data = t3_estimates,
+    aes(x = max_xvalue, y = c(11:1), label = All, fontface = "bold", family = "Times"), size = 3, hjust = 0
+  ) +
+  theme_srl()
 
 p7
 ```
 
-```{r, message = FALSE, warning = FALSE, message = FALSE, echo=FALSE, fig.cap = "A comparison of the posterior predictions of the exploratory generalized linear mixed-effects model of the visits to the rewarding option and the empirical data from the bats, including the effect of ‘night-type’ and ‘block-type.’ The red line indicates the average proportion of visits to the rewarding option per bin made by the individual bats to show the change, with the red shading indicating 95% confidence intervals; the blue line indicates the corresponding posterior prediction of the model. Note the differences to Figure 7: there is a better fit to the data from the first block, especially on Nights 1 and 2 for many of the bats", fig.width = 9.5, fig.height = 6}
+```{r Posterior-predictions-day-bin-block-first-day-first-block-model}
+#---------------------------------------------------------------------------------
+# Calculating the posterior predictions for the model with the first day and block particularly
+#---------------------------------------------------------------------------------
 
-# calculating the posterior predictions 
-# selecting the required columns from the analysis dataframe 
-nd_choices2 <- analysis_choices2 %>% 
+# calculating the posterior predictions
+# selecting the required columns from the analysis dataframe
+nd_choices2 <- analysis_choices2 %>%
   select(Bat, Day, block, bin, count_vis)
 
-# calculating the posterior predictions 
+# calculating the posterior predictions
 post_fit <-
-  predict(m_choices2) %>% 
-  as_tibble() %>% 
-  mutate(Bat = nd_choices2$Bat, 
-         Day = nd_choices2$Day,
-         block = nd_choices2$block, 
-         bin = nd_choices2$bin, 
-         count_vis = nd_choices2$count_vis)
+  predict(m_choices2) %>%
+  as_tibble() %>%
+  mutate(
+    Bat = nd_choices2$Bat,
+    Day = nd_choices2$Day,
+    block = nd_choices2$block,
+    bin = nd_choices2$bin,
+    count_vis = nd_choices2$count_vis
+  )
 
-# calculating the empirical equivalents of the posterior predictions 
-comparison_choices2 <- analysis_choices2 %>% 
-  group_by(Bat, Day, block, bin) %>% 
+# calculating the empirical equivalents of the posterior predictions
+comparison_choices2 <- analysis_choices2 %>%
+  group_by(Bat, Day, block, bin) %>%
   group_modify(~ mean_cl_boot(.x$reward_status, conf.int = 0.95))
 
-# look up table for splitting the data set 
+# creating a look up table for splitting the data set
 split <- data.frame(
   Bat = c("Bat 5", "Bat 6", "Bat 8", "Bat 9", "Bat 10", "Bat 11", "Bat 12", "Bat 13", "Bat 14", "Bat 15", "Bat 16", "Bat 17", "Bat 18", "Bat 20"),
-  row = as.factor(c(rep(1, 7), rep(2, 7)))) 
+  row = as.factor(c(rep(1, 7), rep(2, 7)))
+)
 
 # putting the calculated posterior values and the empirical values into the same table
 comparison_choices2 <- left_join(comparison_choices2, post_fit, by = c("Bat", "Day", "block", "bin"))
-comparison_choices2 <- left_join(comparison_choices2, split, by = "Bat") %>% 
-  mutate(Day = case_when(Day == 1 ~ "Night 1", 
-                         Day == 2 ~ "Night 2", 
-                         Day == 3 ~ "Night 3"))
+comparison_choices2 <- left_join(comparison_choices2, split, by = "Bat") %>%
+  mutate(Day = case_when(
+    Day == 1 ~ "Night 1",
+    Day == 2 ~ "Night 2",
+    Day == 3 ~ "Night 3"
+  ))
+```
 
-# plotting the posterior predicted values and empirical values together 
-p8 <- comparison_choices2 %>% 
-  filter(row == 1) %>% 
-  ggplot(aes(count_vis)) + 
-  #geom_point(aes(y = y), color = "red", size = 0.2) +
-  geom_line(aes(y = y), color = "red") + 
-  geom_ribbon(aes(ymin = ymin, ymax = ymax), fill = "red", alpha = 0.3) + 
-  #geom_point(aes(y = Estimate), color = "blue", size = 0.2) + 
-  geom_line(aes(y = Estimate), color = "blue", alpha = 0.5) + 
-  #geom_ribbon(aes(ymin = Q2.5, ymax = Q97.5), fill = "blue", alpha = 0.3) + 
-  geom_vline(xintercept = c(50, 100, 150, 200, 250), linetype = "dashed", size = 0.2) + 
-  xlab("Visit count") + 
-  ylab("Proportion of visits to the rewarding flower") + 
-  scale_y_continuous(breaks = c(0, 0.5, 1)) + 
-  facet_grid(Day ~ Bat) + 
-  theme_classic()
+```{r, fig.cap = "A comparison of the posterior predictions of the exploratory generalized linear mixed-effects model of the visits to the rewarding option and the empirical data from the bats, including the effect of ‘night-type’ and ‘block-type.’ The red line indicates the average proportion of visits to the rewarding option per bin made by the individual bats to show the change, with the red shading indicating 95% confidence intervals; the blue line indicates the corresponding posterior prediction of the model. Note the differences to Figure 7: there is a better fit to the data from the first block, especially on Nights 1 and 2 for many of the bats", fig.width = 9.5, fig.height = 6}
 
-p9 <- comparison_choices2 %>% 
-  filter(row == 2) %>% 
-  ggplot(aes(count_vis)) + 
-  #geom_point(aes(y = y), color = "red", size = 0.2) +
-  geom_line(aes(y = y), color = "red") + 
-  geom_ribbon(aes(ymin = ymin, ymax = ymax), fill = "red", alpha = 0.3) + 
-  #geom_point(aes(y = Estimate), color = "blue", size = 0.2) + 
-  geom_line(aes(y = Estimate), color = "blue", alpha = 0.5) + 
-  #geom_ribbon(aes(ymin = Q2.5, ymax = Q97.5), fill = "blue", alpha = 0.3) + 
-  geom_vline(xintercept = c(50, 100, 150, 200, 250), linetype = "dashed", size = 0.2) + 
-  xlab("Visit count") + 
-  ylab("Proportion of visits to the rewarding flower") + 
-  scale_y_continuous(breaks = c(0, 0.5, 1)) + 
-  facet_grid(Day ~ Bat) + 
-  theme_classic()
+# plotting the posterior predicted values and empirical values together
+p8 <- comparison_choices2 %>%
+  filter(row == 1) %>%
+  ggplot(aes(count_vis)) +
+  # geom_point(aes(y = y), color = "red", size = 0.2) +
+  geom_line(aes(y = y), color = "red") +
+  geom_ribbon(aes(ymin = ymin, ymax = ymax), fill = "red", alpha = 0.3) +
+  # geom_point(aes(y = Estimate), color = "blue", size = 0.2) +
+  geom_line(aes(y = Estimate), color = "blue", alpha = 0.5) +
+  # geom_ribbon(aes(ymin = Q2.5, ymax = Q97.5), fill = "blue", alpha = 0.3) +
+  geom_vline(xintercept = c(50, 100, 150, 200, 250), linetype = "dashed", size = 0.2) +
+  xlab("Visit count") +
+  ylab("Proportion of visits to the rewarding flower") +
+  scale_y_continuous(breaks = c(0, 0.5, 1)) +
+  facet_grid(Day ~ Bat) +
+  theme_srl()
+
+p9 <- comparison_choices2 %>%
+  filter(row == 2) %>%
+  ggplot(aes(count_vis)) +
+  # geom_point(aes(y = y), color = "red", size = 0.2) +
+  geom_line(aes(y = y), color = "red") +
+  geom_ribbon(aes(ymin = ymin, ymax = ymax), fill = "red", alpha = 0.3) +
+  # geom_point(aes(y = Estimate), color = "blue", size = 0.2) +
+  geom_line(aes(y = Estimate), color = "blue", alpha = 0.5) +
+  # geom_ribbon(aes(ymin = Q2.5, ymax = Q97.5), fill = "blue", alpha = 0.3) +
+  geom_vline(xintercept = c(50, 100, 150, 200, 250), linetype = "dashed", size = 0.2) +
+  xlab("Visit count") +
+  ylab("Proportion of visits to the rewarding flower") +
+  scale_y_continuous(breaks = c(0, 0.5, 1)) +
+  facet_grid(Day ~ Bat) +
+  theme_srl()
 
 ggarrange(p8, p9, nrow = 2, ncol = 1)
-
 ```
 
 We compared the predictive accuracy of the model that included night type and block type to the model that did not include these, using leave-one-out cross-validation (LOO). The LOO criterion was lower for the former than the latter, indicating better predictive accuracy of the model including night-type and block-type (**Table 1**). Indeed, its posterior predictions were a better fit for the first block of a night for many of the bats than those of the model that did not include them (**Figure 9**). 
 
-```{r, message = FALSE, warning = FALSE, echo=FALSE}
+```{r Model-comparison}
 
-# reading in the table with the model comparison 
+# reading in the table with the model comparison
 loo_comparison <- read.csv2(file = "data/processed_data/loo_comparison.csv", sep = ";", header = TRUE)
-loo_comparison <- loo_comparison %>% 
-  mutate(elpd_diff = round(as.numeric(elpd_diff), digits = 2), 
-         se_diff = round(as.numeric(se_diff), digits = 2)) %>% 
-  rename("Difference in LOO estimates" = elpd_diff, 
-         "Standard error" = se_diff) 
+loo_comparison <- loo_comparison %>%
+  mutate(
+    elpd_diff = round(as.numeric(elpd_diff), digits = 2),
+    se_diff = round(as.numeric(se_diff), digits = 2)
+  ) %>%
+  rename(
+    "Difference in LOO estimates" = elpd_diff,
+    "Standard error" = se_diff
+  )
 
-loo_comparison <- flextable(loo_comparison, cwidth = 1.5) %>% 
-  hline() %>% 
-  theme_booktabs() %>% 
-  set_caption("Comparison of the two models of the proportion of visits to the rewarding option using leave-one-out cross-validation") %>% 
-  align(align = "center", part = "all") %>% 
+loo_comparison <- flextable(loo_comparison, cwidth = 1.5) %>%
+  hline() %>%
+  theme_booktabs() %>%
+  set_caption("Comparison of the two models of the proportion of visits to the rewarding option using leave-one-out cross-validation") %>%
+  align(align = "center", part = "all") %>%
   # making the column names bold
-  bold(part = "header") %>% 
+  bold(part = "header") %>%
   bold(j = 1, bold = TRUE)
 
 loo_comparison
-
 ```
 
 ### b) The effect of asymptotic performance on the visits to the rewarding option just after a reversal
@@ -1085,62 +1315,70 @@ We reasoned that a comparison of the bats’ behaviour just before and after a r
 
 **Figure 10** shows the distribution of the slopes of the regression lines for each bat, with asymptotic I~pref~ as the predictor variable and the I~pref~ in the bin just after the reversal as the response variable. The more positive this slope, the faster the bats reversed from one option to another.
 
-```{r, message = FALSE, warning = FALSE, message = FALSE, echo=FALSE, fig.cap = "Distribution of the slopes of the regression lines fit for each individual bat for the effect of asymptotic Ipref on the Ipref just after the reversal. More positive slopes indicated that a higher preference for the S+ before the reversal was also indicative of a higher preference after the reversal, or a faster reversal. A negative slope indicated the opposite, i.e., a slower reversal. The three experimental nights are indicated by the different colours", fig.width = 6, fig.height = 3}
+```{r Asymptote-post-reversal-bin-slopes}
 #-------------------------------------------------------------------------------------
-# making a data-table with the visits at the asymptote and the visits in the first bin post-reversal
+# Making a data-table with the visits at the asymptote and the visits in the first bin post-reversal
 #-------------------------------------------------------------------------------------
-rev_learning_asymptote <- rev_learning_all %>% 
-  select(Bat, day, block, bin, reward_status) %>% 
-  # removing only the second bin which we do not need for this analysis 
-  filter(bin != 2) %>% 
+rev_learning_asymptote <- rev_learning_all %>%
+  select(Bat, day, block, bin, reward_status) %>%
+  # removing only the second bin which we do not need for this analysis
+  filter(bin != 2) %>%
   # removing the bins that do not happen around the reversals
-  mutate(remove = case_when(bin == 1 & block == 1 ~ 1, 
-                            bin == 5 & block == 6 ~ 1), 
-         remove = replace_na(remove, 0)) %>% 
-  filter(remove == 0) %>% 
-  select(-remove) %>% 
-  ungroup() %>% 
-  group_by(Bat, day, block, bin) %>% 
-  # mark the asymptotic phase 
-  mutate(asymptote = ifelse(bin == 1, 0, 1), 
-         # mark the reversal number, which is 1 less than the block number 
-         rev_num = ifelse(asymptote == 0, block-1, block), 
-         # make a column to differentiate the asymptote and the first post reversal bin 
-         stage = ifelse(asymptote == 0, "post_rev", "asymptote"), 
-         rev_num = rev_num) %>% 
+  mutate(
+    remove = case_when(
+      bin == 1 & block == 1 ~ 1,
+      bin == 5 & block == 6 ~ 1
+    ),
+    remove = replace_na(remove, 0)
+  ) %>%
+  filter(remove == 0) %>%
+  select(-remove) %>%
+  ungroup() %>%
+  group_by(Bat, day, block, bin) %>%
+  # mark the asymptotic phase
+  mutate(
+    asymptote = ifelse(bin == 1, 0, 1),
+    # mark the reversal number, which is 1 less than the block number
+    rev_num = ifelse(asymptote == 0, block - 1, block),
+    # make a column to differentiate the asymptote and the first post reversal bin
+    stage = ifelse(asymptote == 0, "post_rev", "asymptote"),
+    rev_num = rev_num
+  ) %>%
   group_by(Bat, day, block, asymptote) %>%
-  ungroup() %>% 
+  ungroup() %>%
   select(-block, -asymptote)
-# pulling out the asymptote data 
-asymptote <- rev_learning_asymptote %>% 
-  filter(stage == "asymptote") %>% 
-  ungroup() %>% 
-  group_by(Bat, day, rev_num) %>% 
-  # taking the average of the threee asymptotic bins 
+# pulling out the asymptote data
+asymptote <- rev_learning_asymptote %>%
+  filter(stage == "asymptote") %>%
+  ungroup() %>%
+  group_by(Bat, day, rev_num) %>%
+  # taking the average of the threee asymptotic bins
   summarise(asymptote = mean(reward_status))
 
 # pulling out the post-reversal bin data, keeping this as 1s and 0s
-post_rev <- rev_learning_asymptote %>% 
-  filter(stage == "post_rev") %>% 
+post_rev <- rev_learning_asymptote %>%
+  filter(stage == "post_rev") %>%
   select(-stage, -bin)
 
-# joining the two data frames together 
-rev_learning_asymptote <- left_join(post_rev, asymptote, by = c("Bat", "day", "rev_num")) 
-# creating a separate copy of this data frame for model-fitting 
+# joining the two data frames together
+rev_learning_asymptote <- left_join(post_rev, asymptote, by = c("Bat", "day", "rev_num"))
 
-analysis5 <- rev_learning_asymptote 
+# creating a separate copy of this data frame for model-fitting
+analysis5 <- rev_learning_asymptote
 
-# calculating the number of visits out of 10 to the rewarding option in the first 
+# calculating the number of visits out of 10 to the rewarding option in the first
 # post reversal bin
-rev_learning_asymptote <- rev_learning_asymptote %>% 
-  ungroup() %>% 
+rev_learning_asymptote <- rev_learning_asymptote %>%
+  ungroup() %>%
   group_by(Bat, day, rev_num, asymptote) %>%
-  summarise(count_post_rev = sum(reward_status)) %>% 
-  mutate(day = case_when(day == "Day 1" ~ "Night 1", 
-                         day == "Day 2" ~ "Night 2", 
-                         day == "Day 3" ~ "Night 3"))
+  summarise(count_post_rev = sum(reward_status)) %>%
+  mutate(day = case_when(
+    day == "Day 1" ~ "Night 1",
+    day == "Day 2" ~ "Night 2",
+    day == "Day 3" ~ "Night 3"
+  ))
 
-#plotting it out - points and individual slopes
+# plotting it out - points and individual slopes
 # rev_learning_asymptote %>%
 #   ggplot(aes(asymptote, count_post_rev)) +
 #   geom_point(aes(color = Bat)) +
@@ -1149,54 +1387,63 @@ rev_learning_asymptote <- rev_learning_asymptote %>%
 #   xlab("Proportion of visits to the rewarding option in the asymptote") +
 #   ylab("Visits to rewarding option \n just after a reversal") +
 #   xlim(0.6, 1) +
-#   theme_bw() +
+#   theme_srl() +
 #   theme(legend.position = "none") +
 #   scale_color_viridis_d(option = "inferno")
 
-# plot of frequency distribution of the slopes 
+# calculating the slopes
 
-rev_learning_slopes <- rev_learning_asymptote %>% 
-  mutate(count_post_rev = count_post_rev/10) %>% 
-  ungroup() %>% 
-  group_by(day, Bat) %>% 
+rev_learning_slopes <- rev_learning_asymptote %>%
+  mutate(count_post_rev = count_post_rev / 10) %>%
+  ungroup() %>%
+  group_by(day, Bat) %>%
   do(models = lm(count_post_rev ~ asymptote, data = .)) %>%
-  mutate(Slopes = summary(models)$coeff[2], 
-         Slopes = round(Slopes, digits = 2)) %>% 
-  select(-models) 
-
-#summary(rev_learning_slopes$models)
-
-rev_learning_slopes %>% 
-  rename(Day = day) %>%
-  ggplot(aes(Slopes, fill = Day, group = Day)) + 
-  geom_histogram(bins = 100) + 
-  theme_bw() + 
-  scale_x_continuous(breaks = seq(-17, 10, by = 1)) + 
-  xlab("Slopes: Number of rewarded visits just after the reversal ~ \n 
-       Asymptotic preference") + 
-  ylab("Frequency")
+  mutate(
+    Slopes = summary(models)$coeff[2],
+    Slopes = round(Slopes, digits = 2)
+  ) %>%
+  select(-models)
 
 ```
 
-This showed that indeed the effect of the asymptote on immediate post-reversal behaviour depended on the night. With each successive night, switching to the newly rewarding flower after a reversal was less affected by the previous level of the asymptote.  This can be seen from the large interaction effect between night and asymptote value. On the first night the slope of the effect of the asymptote was negative, indicating that the higher the asymptote value the lower the number of visits to the rewarding option just after a reversal. On the second night the slope was close to 0, though still negative, indicating a weaker relationship than on the first night. On the third night the slope was negative again, but lower to that on the first night (**Figure 11**). Across the three nights, an overall trend towards a higher level of the asymptote was seen, as well as a smaller and higher range in the proportion of rewarded visits just after the reversal. This is consistent with the results of the confirmatory analysis.
+```{r, fig.cap = "Distribution of the slopes of the regression lines fit for each individual bat for the effect of asymptotic I~pref~ on the I~pref~ just after the reversal. More positive slopes indicated that a higher preference for the S+ before the reversal was also indicative of a higher preference after the reversal, or a faster reversal. A negative slope indicated the opposite, i.e., a slower reversal. The three experimental nights are indicated by the different colours", fig.width = 7, fig.height = 3}
 
-```{r, message = FALSE, warning = FALSE, message = FALSE, echo=FALSE, fig.cap = "a) Forest plot of the coefficients of the effect of night and the value of the asymptote before a reversal on the number of visits to the rewarding option just after a reversal. The circles represent the intercept and slope estimates, the thick horizontal lines represent the 50% credible intervals and the thin horizontal lines 95% credible intervals. b) A comparison of the number of visits to the rewarding flower in the first bin of ten visits just after a reversal to the asymptotic proportion of visits to the rewarding flower in the 30 visits just before that reversal. Individual points are data from each individual bat for each one of the five reversals that occurred on a day. Colours indicate the individual bat. Regression lines are fit for each night", fig.width = 17, fig.height = 4.5}
+p10 <- rev_learning_slopes %>%
+  rename(Night = day) %>%
+  ggplot(aes(Slopes, fill = Night, group = Night)) +
+  geom_histogram(bins = 100) +
+  theme_srl() +
+  scale_x_continuous(breaks = seq(-17, 10, by = 1)) +
+  xlab("Slopes: Number of rewarded visits just after the reversal ~ \n 
+       Asymptotic preference") +
+  ylab("Frequency") +
+  scale_fill_viridis_d(option = "inferno")
 
-# preparing the data-set for analysis 
-analysis5 <- analysis5 %>% 
-  rename(post_rev = reward_status) %>% 
-  select(Bat, day, rev_num, post_rev, asymptote) %>% 
-  mutate(day = ifelse(day == "Day 1", 1, ifelse(day == "Day 2", 2, 3)), 
-         day = as.factor(day)) %>% 
+p10
+```
+
+```{r Asymptote-post-reversal-bin-model}
+#---------------------------------------------------------------------------
+# Fitting the model for the effect of the asymptote on the post-reversal bin
+#---------------------------------------------------------------------------
+
+# preparing the data-set for analysis
+analysis5 <- analysis5 %>%
+  rename(post_rev = reward_status) %>%
+  select(Bat, day, rev_num, post_rev, asymptote) %>%
+  mutate(
+    day = ifelse(day == "Day 1", 1, ifelse(day == "Day 2", 2, 3)),
+    day = as.factor(day)
+  ) %>%
   drop_na() %>%
-  group_by(Bat, day, rev_num, asymptote) %>% 
+  group_by(Bat, day, rev_num, asymptote) %>%
   # counting the number of visits in the first post-reversal bin out of a total of 10
-  summarise(count_post_rev = sum(post_rev)) 
+  summarise(count_post_rev = sum(post_rev))
 
 # fitting the model
 
 # m_night_as_int_10trials <- brm(data = analysis, family = binomial,
-#                       count_post_rev | trials(10) ~ day + asymptote + day:asymptote + 
+#                       count_post_rev | trials(10) ~ day + asymptote + day:asymptote +
 #                         (1 + day + asymptote + day:asymptote|Bat),
 #                       prior = c(#prior(normal(0, 10), class = Intercept),
 #                                 prior(normal(0, 10), class = b)),
@@ -1205,97 +1452,124 @@ analysis5 <- analysis5 %>%
 #                                      max_treedepth = 12),
 #                       seed = 12)
 
-#save(m_night_as_int_10trials, file = "m_night_as_int_10trials.rda")
+# save(m_night_as_int_10trials, file = "m_night_as_int_10trials.rda")
 load("data/processed_data/m_night_as_int_10trials.rda")
 
 color_scheme_set("darkgray")
 
-#model summary
-t4 <- fixef(m_night_as_int_10trials) %>% 
-  as_tibble() %>% 
-  mutate("Fixed effect" = c("Intercept" , "Night 2", "Night 3", "Asymptote", "Night 2-Asymptote", "Night 3-Asymptote"), 
-         Estimate = round(Estimate, digits = 2), 
-         Q2.5 = round(Q2.5, digits = 2), 
-         Q97.5 = round(Q97.5, digits = 2)) %>% 
+# creating a table with the model summary
+t4 <- fixef(m_night_as_int_10trials) %>%
+  as_tibble() %>%
+  mutate(
+    "Fixed effect" = c("Intercept", "Night 2", "Night 3", "Asymptote", "Night 2-Asymptote", "Night 3-Asymptote"),
+    Estimate = round(Estimate, digits = 2),
+    Q2.5 = round(Q2.5, digits = 2),
+    Q97.5 = round(Q97.5, digits = 2)
+  ) %>%
   mutate("95% Credibility intervals" = paste0("[", Q2.5, ", ", Q97.5, "]"))
 
-max_xvalue <- t4 %>% 
-  select(Q97.5) %>% 
-  filter(Q97.5 == max(Q97.5)) %>% 
-  as.numeric() 
+# calculating the maximum value for the X-axis
+max_xvalue <- t4 %>%
+  select(Q97.5) %>%
+  filter(Q97.5 == max(Q97.5)) %>%
+  as.numeric()
 
 max_xvalue <- max_xvalue + 0.75
 
-t4_estimates <- t4 %>% 
-  rename(labels = `Fixed effect`) %>% 
-  select(labels, Estimate, `95% Credibility intervals`) %>% 
-  mutate(All = paste0(Estimate, " ", `95% Credibility intervals`)) %>% 
+# creating a table with the values for the forest plot
+t4_estimates <- t4 %>%
+  rename(labels = `Fixed effect`) %>%
+  select(labels, Estimate, `95% Credibility intervals`) %>%
+  mutate(All = paste0(Estimate, " ", `95% Credibility intervals`)) %>%
   select(labels, All)
+```
+
+```{r, fig.cap = "a) Forest plot of the coefficients of the effect of night and the value of the asymptote before a reversal on the number of visits to the rewarding option just after a reversal. The circles represent the intercept and slope estimates, the thick horizontal lines represent the 50% credible intervals and the thin horizontal lines 95% credible intervals. b) A comparison of the number of visits to the rewarding flower in the first bin of ten visits just after a reversal to the asymptotic proportion of visits to the rewarding flower in the 30 visits just before that reversal. Individual points are data from each individual bat for each one of the five reversals that occurred on a day. Colours indicate the individual bat. Regression lines are fit for each night", fig.width = 17, fig.height = 4.5 }
 
 # creating the plot of slope coefficients
-p10 <- mcmc_intervals(m_night_as_int_10trials, 
-                      pars = vars(1:6), 
-                      prob_outer = 0.95, 
-                      point_size = 1.75) + 
-  geom_vline(xintercept = 0) + 
-  xlim(-9, max_xvalue + 2.25) + 
+p10 <- mcmc_intervals(m_night_as_int_10trials,
+  pars = vars(1:6),
+  prob_outer = 0.95,
+  point_size = 1.5
+) +
+  geom_vline(xintercept = 0) +
+  xlim(-9, max_xvalue + 2.25) +
   scale_y_discrete(
-    labels = c("b_Intercept" = "Intercept",
-               "b_day2" = "Night 2", 
-               "b_day3" = "Night 3", 
-               "b_asymptote" = "Asymptote", 
-               "b_day2:asymptote" = "Night 2-Asymptote", 
-               "b_day3:asymptote" = "Night 3-Asymptote"), 
-    limits = c("b_day3:asymptote", "b_day2:asymptote", "b_asymptote", "b_day3", "b_day2", "b_Intercept")) +
-  geom_text(data = t4_estimates,
-            aes(x = max_xvalue, y = c(6:1), label = All, fontface = "bold"), size = 3, hjust = 0)
+    labels = c(
+      "b_Intercept" = "Intercept",
+      "b_day2" = "Night 2",
+      "b_day3" = "Night 3",
+      "b_asymptote" = "Asymptote",
+      "b_day2:asymptote" = "Night 2-Asymptote",
+      "b_day3:asymptote" = "Night 3-Asymptote"
+    ),
+    limits = c("b_day3:asymptote", "b_day2:asymptote", "b_asymptote", "b_day3", "b_day2", "b_Intercept")
+  ) +
+  geom_text(
+    data = t4_estimates,
+    aes(x = max_xvalue, y = c(6:1), label = All, fontface = "bold", family = "Times"), size = 3, hjust = 0
+  ) +
+  theme_srl()
 
-p11 <- rev_learning_asymptote %>% 
-  #filter(day != "Night 2") %>% 
-  ggplot(aes(asymptote, count_post_rev)) + 
-  geom_point(aes(color = Bat)) + 
-  geom_smooth(method = "lm", se = FALSE, size = 0.75, color = "black") + 
-  facet_grid(.~day) + 
-  xlab("Proportion of visits to the rewarding option in the asymptote") + 
-  ylab("Visits to rewarding option just after a reversal") + 
-  theme_bw() + 
-  theme(legend.position = "none") + 
+p11 <- rev_learning_asymptote %>%
+  # filter(day != "Night 2") %>%
+  ggplot(aes(asymptote, count_post_rev)) +
+  geom_point(aes(color = Bat)) +
+  geom_smooth(method = "lm", se = FALSE, size = 0.75, color = "black") +
+  facet_grid(. ~ day) +
+  xlab("Proportion of visits to the rewarding option in the asymptote") +
+  ylab("Visits to rewarding option just after a reversal") +
+  theme_srl() +
+  theme(legend.position = "none") +
   scale_color_viridis_d(option = "inferno")
 
 ggarrange(p10, p11, labels = c("a)", "b)"), ncol = 2, nrow = 1)
 ```
 
-```{r, message = FALSE, echo=FALSE, fig.cap = "A comparison of the posterior predictions of the generalized linear mixed-effects model of the visits to the rewarding option after a reversal as an effect of night and asymptotic performance. Red points are the empirical values from the individual bats and the blue points indicate the corresponding posterior predictions of the model", fig.width = 12, fig.height = 3.5}
+The analysis showed that the effect of the asymptote on immediate post-reversal behaviour depended on the night. With each successive night, switching to the newly rewarding flower after a reversal was less affected by the previous level of the asymptote.  This can be seen from the large interaction effect between night and asymptote value. On the first night the slope of the effect of the asymptote was negative, indicating that the higher the asymptote value the lower the number of visits to the rewarding option just after a reversal. On the second night the slope was close to 0, though still negative, indicating a weaker relationship than on the first night. On the third night the slope was negative again, but lower to that on the first night (**Figure 11**). Across the three nights, an overall trend towards a higher level of the asymptote was seen, as well as a smaller and higher range in the proportion of rewarded visits just after the reversal. This is consistent with the results of the confirmatory analysis.
 
-# calculating the posterior predictions 
-# selecting the required columns from the analysis dataframe 
+```{r Posterior-predictions-asymptote-post-reversal-model}
+
+#---------------------------------------------------------------------------------------------
+# Calculating the posterior predictions for the model with the asymptote and post-reversal bin
+#---------------------------------------------------------------------------------------------
+
+# calculating the posterior predictions
+# selecting the required columns from the analysis dataframe
 nd <- analysis5
 
-# calculating the posterior predictions 
+# calculating the posterior predictions
 post_fit <-
-  predict(m_night_as_int_10trials) %>% 
-  as_tibble() %>% 
-  mutate(Bat = nd$Bat, 
-         day = nd$day,
-         rev_num = nd$rev_num, 
-         asymptote = nd$asymptote)
+  predict(m_night_as_int_10trials) %>%
+  as_tibble() %>%
+  mutate(
+    Bat = nd$Bat,
+    day = nd$day,
+    rev_num = nd$rev_num,
+    asymptote = nd$asymptote
+  )
 
 # putting the calculated posterior values and the empirical values into the same table
 comparison5 <- left_join(nd, post_fit, by = c("Bat", "day", "rev_num", "asymptote"))
+```
 
-# plotting the posterior predicted values and empirical values together 
-p12 <- comparison5 %>% 
-  mutate(day = case_when(day == 1 ~ "Night 1", 
-                         day == 2 ~ "Night 2", 
-                         day == 3 ~ "Night 3")) %>% 
-  ggplot(aes(asymptote)) + 
-  geom_jitter(aes(y = Estimate), colour = "blue", size = 0.75, alpha = 0.5) + 
-  #geom_ribbon(aes(ymin = Q2.5, ymax = Q97.5), fill = "blue", alpha = 0.5) + 
-  geom_jitter(aes(y = count_post_rev), colour = "red", size = 0.75, alpha = 0.5) + 
-  facet_grid(day~Bat) + 
-  xlab("Proportion of visits to the rewarding option in the asymptote") + 
-  ylab("Visits to rewarding option \n just after a reversal") + 
-  theme_bw() + 
+```{r, fig.cap = "A comparison of the posterior predictions of the generalized linear mixed-effects model of the visits to the rewarding option after a reversal as an effect of night and asymptotic performance. Red points are the empirical values from the individual bats and the blue points indicate the corresponding posterior predictions of the model", fig.width = 12, fig.height = 3.5 }
+
+# plotting the posterior predicted values and empirical values together
+p12 <- comparison5 %>%
+  mutate(day = case_when(
+    day == 1 ~ "Night 1",
+    day == 2 ~ "Night 2",
+    day == 3 ~ "Night 3"
+  )) %>%
+  ggplot(aes(asymptote)) +
+  geom_jitter(aes(y = Estimate), colour = "blue", size = 0.75, alpha = 0.5) +
+  # geom_ribbon(aes(ymin = Q2.5, ymax = Q97.5), fill = "blue", alpha = 0.5) +
+  geom_jitter(aes(y = count_post_rev), colour = "red", size = 0.75, alpha = 0.5) +
+  facet_grid(day ~ Bat) +
+  xlab("Proportion of visits to the rewarding option in the asymptote") +
+  ylab("Visits to rewarding option \n just after a reversal") +
+  theme_srl2() +
   theme(axis.text.x = element_text(angle = 35)) +
   theme(legend.position = "none")
 
@@ -1308,23 +1582,23 @@ In our experiment wild nectar-feeding bats participated in a 2-AFC serial revers
 
 ## A faster switch
 
-After each reversal they were quicker to switch from the previously-rewarding option to the newly-rewarding option. This was demonstrated in two ways. Firstly the number of perseverative visits decreased, meaning that the first visit to the newly-rewarding option happened earlier with more reversals (as shown by the confirmatory analysis - **Figures 3** and **Figure 4**). Secondly the overall proportion of visits to the newly-rewarding option in the first bin of ten visits after a reversal increased (as shown in the exploratory analysis - **Figure 11**). 
+After each reversal they were quicker to switch from the previously-rewarding option to the newly-rewarding option. This was demonstrated in two ways. Firstly the number of perseverative visits decreased, meaning that the first visit to the newly-rewarding option happened earlier with more reversals (as shown by the confirmatory analysis - **Figure 3** and **Figure 4**). Secondly the overall proportion of visits to the newly-rewarding option in the first bin of ten visits after a reversal increased (as shown in the exploratory analysis - **Figure 11**). 
 
-The task the bats had to do was relatively simple. At any given time there was only one rewarding flower out of an array of eight, and only two flowers out of those eight could be rewarding at all. The difference between a large reward and no reward, (‘something’ vs ‘nothing’) is the easiest possible discrimination. The change from one option to another by the animals is less remarkable than the fact that this change happened more and more rapidly: more experience of the reversal led to better exploitation of the particular type of change the environment was undergoing. 
+The task the bats had to do was relatively simple. At any given time there was only one rewarding flower out of an array of eight, and only two flowers out of those eight could be rewarding at all. The difference between a large reward and no reward, (‘something’ vs ‘nothing’) is the easiest possible discrimination. The change from one option to another by the animals is less remarkable than the fact that this change happened more and more rapidly: more experience of the reversal led to better exploitation of this particular type of environmental change. 
 
 ## Improved ‘performance’: the effect of experience at different time-scales on the exploration-exploitation tradeoff
 
 When foraging efficiently in a natural context, such as the one we simulate in our experiment, animals face the classic trade-off between exploration and exploitation. The greater the behavioural allocation to the currently better alternative, the lower the ability to immediately detect an increase in reward elsewhere. The balance between these alternatives may be affected by experience. To explore this possibility, we examined whether experiencing repeated alternations has an impact on this trade-off at two different time scales: within a single night and repeatedly across nights. 
 
-A visual examination of our results summarized in **Figure 2** shows that, to some extent, both effects are present. In the first night, exploitation as measured by behavioural absorption, that is, asymptotic commitment to the currently rewarding option declined at the end of each block of 50 visits. As a conquence the correction after each reversal became faster. By the second and third nights the bats appeared to show further behavioural changes to have the ‘best of both worlds’. They could reach near-total absorption rapidly within a block, eventually reaching a ceiling, and rapidly corrected the misdirected behaviour immediately after a reversal. This approach to a ‘best of both worlds’ strategy is strong evidence of second-order learning, or learning the rule behind the environmental change.
+A visual examination of our results summarized in **Figure 2** shows that, to some extent, both effects are present. In the first night, exploitation as measured by behavioural absorption - that is, asymptotic commitment to the currently rewarding option - declined at the end of each block of 50 visits. As a consequence the correction after each reversal became faster. By the second and third nights the bats appeared to show further behavioural changes to have the ‘best of both worlds’. They could reach near-total absorption rapidly within a block, eventually reaching a ceiling, and rapidly corrected the misdirected behaviour immediately after a reversal. This approach to a ‘best of both worlds’ strategy is strong evidence of second-order learning, or learning the rule behind the environmental change.
 
 The results of the statistical analysis support this interpretation. **Figure 6** shows the strength of improvement in foraging performance as a function of each of these two time scales. Unsurprisingly, we see that the allocation to the rewarded option increased within each block (as a function of bin). Much more interesting is the fact that this increase occurred also over a night (as a function of reversal block) and across the three nights, indicating adaptive foraging on both time scales. 
 
-The fact that experience has an effect on the trade-off between exploration and exploitation is underlined by the results of the exploratory analysis. It is evident from **Figure 2** that the highest behavioural allocation to the S+ was in the first block of the first night before any reversal had been experienced. At this point the trade-off is strongly in favour of exploitation and not exploration, as only one flower out of an array of eight has repeatedly been experienced as rewarding: the behavioral allocation to it went rapidly from around 50% to nearly 100%. The bats had no information yet about how the environment changes; the possibility that exploration could be profitable arose when the first reversal happened and the hitherto rewarding flower was suddenly empty. 
+The fact that experience has an effect on the trade-off between exploration and exploitation is underlined by the results of the exploratory analysis. It is evident from **Figure 2** that the highest behavioural allocation to the S+ was in the first block of the first night before any reversal had been experienced. At this point the trade-off is strongly in favour of exploitation and not exploration, as only one flower has repeatedly been experienced as rewarding: the behavioral allocation to it went rapidly from around 50% to nearly 100%. The bats had no information yet about how the environment changes; the possibility that exploration could be profitable arose when the first reversal happened and the hitherto rewarding flower was suddenly empty. 
 
-This was true, but to a lesser extent on the second and third nights. Although reversals had happened on the previous night, none had happened during the current night. The results of the exploratory analysis represented in **Figure 7** demonstrate this. There was an effect of both the first block of the night and the interaction between the first block and the first night, but not of the first night itself: behavioural allocation to the S+ was higher during the first block of the night, particularly the first block of the first night when reversals had not been experienced; reversals were experienced throughout the first night and there was no specific effect of the whole first night . Second-order learning could only happen after reversals had occurred, and before that first-order learning led to the highest possible amount of exploitation. 
+This was true, but to a lesser extent at the start of the second and third nights. Although reversals had happened on the previous night, none had happened during the current night. The results of the exploratory analysis represented in **Figure 7** demonstrate this. Behavioural allocation to the S+ was higher during the first block of the night, particularly on the first night when reversals had not been experienced; reversals were experienced throughout the first night and there was no specific effect of the whole first night. Second-order learning could only happen after reversals had occurred, and before that first-order learning led to the highest possible amount of exploitation. 
 
-## The asymptote and immediate post-reversal performance 
+## Before and after a reversal
 
 The confirmatory analyses showed that the proportion of visits to the rewarding option at the end of a reversal block progressively increased, and the number of perseverative errors decreased. The exploratory analyses shed additional light on the effect of the reversals on performance just before and after the reversal: the correlation between the performance just after a reversal and just before a reversal was negative on the first and third nights, and the correlation was close to zero on the second night (**Figure 11**). The correlation was most negative on the first night compared to the other two nights, suggesting that by the second night at least some learning had occurred. It must be noted however that on the third night the negative slope could be a statistical artefact, resulting from the fact that the range of the proportion of rewarded visits in asymptote was much smaller than on the first night (0.6 - 1 versus 0.8 - 1).
 
@@ -1332,129 +1606,351 @@ Our overall interpretation of our results are as follows: the bats learn to take
 
 ## How do other animal species compare with the bats? 
 
-There are several key points of similarity between the bats’ performance on the serial reversal task and that of other animals. Bumblebees show improvement primarily through a reduction in the perseverative errors [@strang_serial_2014, @chittka_sensorimotor_1998] on a colour reversal task. Notably, this ability to improve at the task seems to be achieved through the large number of trials, just as we had in our experiment. When the task was done with a small number of trials between the reversals, both bumblebees [@couvillon_performance_1986] and honeybees [@mota_multiple_2010] stopped discriminating and began responding to both the rewarding and non-rewarding stimuli at chance levels.
+There are several key points of similarity between the bats’ performance on the serial reversal task and that of other animals. Bumblebees show improvement primarily through a reduction in the perseverative errors [@strang_serial_2014; @chittka_sensorimotor_1998] on a colour reversal task. Notably, this ability to improve at the task seems to be achieved through the large number of trials, just as we had in our experiment. When the task was done with a small number of trials between the reversals, both bumblebees [@couvillon_performance_1986] and honeybees [@mota_multiple_2010] stopped discriminating and began responding to both the rewarding and non-rewarding stimuli at chance levels.
 
-Several different species of birds also showed performance on this task that was similar to the bats. Corvids [@bond_serial_2007-1] show both a decrease in perseverative errors as well as an increase in preference for the rewarding stimulus as they experienced successive reversals. The improvement in performance however is seen only in a colour reversal task and not a spatial reversal task. Great tits sampled from two different locations do even better on a spatial reversal task than the Corvids: both trials within a reversal block and reversal number have a positive effect on the proportion of visits to the rewarding option [@hermer_elevation-related_2018-1], and similar performance is seen in pigeons on a colour reversal task [@diekamp_functional_1999]. Among mammals, a decrease in perseverative errors is seen both in marmosets on a visual reversal task [@clarke_lesions_2008] and in rats on a spatial reversal task [@castane_selective_2010]. The bats’ improvement on the serial reversal learning task thus seems to follow a similar pattern to the improvement of several other animal species, potentially indicating similar learning mechanisms. The role of the sensory modality of the experimental stimuli must not be overlooked: we suggest that animals are likely to perform best on a version of the task that uses a sensory modality relevant to their natural foraging ecology and this is consistent with the results of serial reversal experiments with multiple species. Indeed, the transfer of improved performance across stimuli (as seen in the Corvids), is extremely strong evidence of rule-learning, and a potential follow-up experiment to the one we have carried out.
+Several different species of birds also showed performance on this task that was similar to the bats. Corvids [@bond_serial_2007-1] show both a decrease in perseverative errors as well as an increase in preference for the rewarding stimulus as they experienced successive reversals. The improvement in performance however is seen only in a colour reversal task and not a spatial reversal task. Great tits, sampled from two different locations, do even better on a spatial reversal task than the Corvids: both trials within a reversal block and reversal number have a positive effect on the proportion of visits to the rewarding option [@hermer_elevation-related_2018-1]. A similar performance is seen in pigeons on a colour reversal task [@diekamp_functional_1999]. Among mammals, a decrease in perseverative errors is seen both in marmosets on a visual reversal task [@clarke_lesions_2008] and in rats on a spatial reversal task [@castane_selective_2010]. The bats’ improvement on the serial reversal learning task thus seems to follow a similar pattern to the improvement of several other animal species, potentially indicating similar learning mechanisms. 
+
+The role of the sensory modality of the experimental stimuli must not be overlooked: we suggest that animals are likely to perform best on a version of the task that uses a sensory modality relevant to their natural foraging ecology and this is consistent with the results of serial reversal experiments with multiple species. Indeed, the transfer of improved performance across stimuli (as seen in the Corvids), is extremely strong evidence of rule-learning, and a potential follow-up experiment to the one we have carried out.
 
 ## Reversal learning in the wild
 
-To our knowledge our experiment is the first to carry out a 2-AFC serial reversal task with bats under controlled conditions, and the results are consistent with previous work in much more natural conditions in the same environment (La Selva Biological Field Station, Costa Rica) and with the same species of bat. In this previous research, free-flying wild bats interacted with flowers in the open forest that varied in their rate of nectar production, and the spatial locations of the flower types changed every night (**Thiele, 2006 - where do you find a copy of the thesis?**). Like in our experiment, the bats primarily chose the more rewarding option over several nights, often nearly exclusively. 
+**Put a pin in the following paragraph - need Yorkian input**
+To our knowledge our experiment is the first to carry out a 2-AFC serial reversal task with bats under controlled conditions, and the results are consistent with previous work in much more natural conditions in the same environment (La Selva Biological Field Station, Costa Rica) and with the same species of bat. In this previous research, free-flying wild bats interacted with flowers in the open forest that varied in their rate of nectar production, and the spatial locations of the flower types changed every night [@thiele_nahrungssuchstrategien_2006]. Like in our experiment, the bats primarily chose the more rewarding option over several nights, often nearly exclusively. 
 
-Under natural conditions bats exploit the flowers of many different species of plants that vary in the flowering season, flowering duration, the number of flowers that bloom per night, and the quantity of nectar they provide. Observations of foraging behaviour at *Agave desmettiana* flowers show that the visitation rates of bats to flowers depends heavily on nectar volume [@lemke_foraging_1984]. Feeding rates are high in the first four hours of the night after sunset, and decline sharply when nectar volumes approach 50% of what they were at the start of the night. However when the flowers were artificially replenished so they never got depleted, bats visit them at a significantly higher frequency, and for 3-5 hours longer than flowers that were depleted normally. The opposite pattern was seen when flowers were prematurely depleted: bats stopped feeding at these flowers earlier than at control flowers, and visited neighbouring flowers with a higher frequency. This is a sensible strategy, given that Agave flowers only replenish their nectar levels at a rate of 30% in 20 hours (equally over day and night). When rates of nectar replenishment are higher, bats are capable of detecting it and returning the same flowers sooner [@tolch_bat_2006], utilizing their excellent spatial memory to find the flower again and adjusting the time interval between successive visits based on the secretion rate of the experimental flowers. In the wild, therefore, flowers alternate between being rewarding and non-rewarding. It would seem that a ‘win-stay; lose-shift’ strategy is ideal for the bats’ natural foraging ecology, just as it is optimal in a serial reversal task. But the natural environment is not a perfect analogue of the experimental task. Flower nectar levels in nature are more likely to decline at a perceptible rate, rather than suddenly drop to zero [@lemke_foraging_1984], and the perception of flower nectar volume is subject to Weber’s Law [@toelch_psychometric_2007]. Thanks to these factors, a foraging bat would need to make more than one visit to a flower (as the optimal ‘win-stay; lose-shift’ strategy requires) to perceive that nectar levels have been depleted so much that future visits will not be profitable. A more complex behavioural strategy might be more profitable in this more complex environment.
+Under natural conditions bats exploit the flowers of many different species of plants that vary in their flowering season, flowering duration, the number of flowers that bloom per night, and the quantity of nectar they provide. Observations of foraging behaviour at *Agave desmettiana* flowers show that the visitation rates of bats to flowers depends heavily on nectar volume [@lemke_foraging_1984]. Feeding rates are high in the first four hours of the night after sunset, and decline sharply when nectar volumes approach 50% of what they were at the start of the night. However when the flowers were artificially replenished so they never got depleted, bats visit them at a significantly higher frequency, and for 3-5 hours longer than flowers that were depleted normally. The opposite pattern was seen when flowers were prematurely depleted: bats stopped feeding at these flowers earlier than at control flowers, and visited neighbouring flowers with a higher frequency. When rates of nectar replenishment are higher, bats are capable of detecting it and returning the same flowers sooner [@tolch_bat_2006], utilizing their excellent spatial memory to find the flower again and adjusting the time interval between successive visits based on the secretion rate of the experimental flowers. In the wild, therefore, flowers alternate between being rewarding and non-rewarding. It would seem that a ‘win-stay; lose-shift’ strategy is ideal for the bats’ natural foraging ecology, just as it is optimal in a serial reversal task. But the natural environment is not a perfect analogue of the experimental task. Flower nectar levels in nature are more likely to decline at a perceptible rate, rather than suddenly drop to zero [@lemke_foraging_1984], and the perception of flower nectar volume is subject to Weber’s Law [@tolch_psychometric_2007]. Thanks to these factors, a foraging bat would need to make more than one visit to a flower (as the optimal ‘win-stay, lose-shift’ strategy requires) to perceive that nectar levels have been depleted so much that future visits will not be profitable. A more complex behavioural strategy might be more profitable in this more complex environment.
 
 ## Learning mechanisms in a reveral learning task 
-Previous work has shown that the bats' behaviour can be described well by a choice-history dependent behavioural model [@nachev_cognition-mediated_2017]. In such a model, an animal has a estimate of the profitability of the available option, based on its memory of past reward at these options. The past experiences are weighted by recency: the most recent experience affects the estimate of the option more than those in the past, and the estimates are updated according to the animal's learning rate. Our results, both from the confirmatory and the exploratory analyses seem to indicate that that reinforcement learning, which is choice-history dependent [@worthy_comparison_2014] is playing a role in the animals' behaviour, especially at the beginning of the experiment before second-order learning has happened. As they learn the task the bats appear to approach the strategy of win-stay; lose-shift, wherein decision-making is dependent only on the last one experience and not on previous choice-history.
+Previous work has shown that the bats' behaviour can be described well by a choice-history dependent behavioural model [@nachev_cognition-mediated_2017]. In such a model, an animal has a estimate of the profitability of the available option, based on its memory of past reward at these options. The past experiences are weighted by recency: the most recent experience affects the estimate of the option more than those in the past, and the estimates are updated according to the animal's learning rate. Our results, both from the confirmatory and the exploratory analyses seem to indicate that that reinforcement learning, which is choice-history dependent [@worthy_comparison_2014] is playing a role in the animals' behaviour, especially at the beginning of the experiment before second-order learning has happened. As they learn the task the bats appear to approach the strategy of WSLS wherein decision-making is dependent only on the last one experience and not on previous choice-history.
 
-The key word here is *approach*. We suggest that through second-order learning, the bats shift from a reinforcement-learning strategy to a strategy that approximates win-stay; lose-shift. A pure reinforcement-learning strategy might result in high performance, but not in decreased perseveration or improvement in performance immediately after a reversal. The options themselves reverse between the same two consistent rewarding states, so simply updating the estimates should also result in consistent and non-improving performance. A pure win-stay;lose-shift strategy would result in optimum performance. The bats never show such optimal behaviour, but their behaviour becomes a closer approximation of win-stay;lose-shift as the experiment progresses, and their performance between reversals consequently improves.
+The key word here is *approach*. We suggest that through second-order learning, the bats shift from a reinforcement-learning strategy to a strategy that approximates win-stay, lose-shift. A pure reinforcement-learning strategy might result in high performance, but not in decreased perseveration or improvement in performance immediately after a reversal. The options reverse between the same two consistent rewarding states, so simply updating the estimates should result in consistent and non-improving performance. On the other hand a pure win-stay, lose-shift strategy would result in optimum performance. The bats never show such optimal behaviour, but their behaviour becomes a closer approximation of win-stay, lose-shift as the experiment progresses, and their performance between reversals consequently improves.
 
 Our results thus show that nectar-feeding bats are not only capable of higher-order learning, but of flexibly applying different behavioural strategies in response to a predictably changing environment. 
 
-# Supplementary Information 
+## Supplementary Information 
 
-## Details of the statistical analyses 
+### Details of the statistical analyses 
 
 Weakly informative priors were used. The random intercepts and slopes were given a Normal distribution with a mean of 0, and a standard deviation drawn from a Cauchy distribution with a mean of 0 and a standard deviation of 1. All the models were estimated using 4 chains with a thinning interval of 3, with 1200 warm-up samples and 1300 post-warm-up samples for the model with the first experimental night and block additionally treated differently; 2000 warm-up samples and 2000 post-warm-up samples for the model of the first bin of 10 visits after a reversal; and 1000 warm-up samples and 1000 post-warm-up samples for the others. 
 
 Visual inspection of the trace plots, the number of effective samples, the Gelman-Rubin convergence diagnostic ($\hat R$) and the calculation of posterior predictions for the same clusters were all used to assess the fit of the models. In all of the models the $\hat R$ was equal to 1 for all the chains. 
 
-## Visits and approaches to the unassigned flowers 
+### Visits and approaches to the unassigned flowers 
 
-```{r, message = FALSE, echo=FALSE, fig.cap = "Visits made by the bats to the flowers not assigned to them. Red bars are nose-pokes, where the bats attempted to get a reward by breaking the light-barrier. Blue bars are 'fly by' events where the bat flew near the flower but did not attempt to get a reward.", fig.width = 13, fig.height = 4}
+```{r Preparing-data-and-checking-distribution-to-nonassigned-flowers}
 
-# making a data frame with the data from the bats and days we need  
-sampling_nonrw <- raw_data_preproc %>% 
-  filter(Condition == "SerialReversalCounter", 
-         Day < 4, 
-         str_detect(IdLabel, "Bat"), 
-         !IdLabel %in% bats_beta, 
-         !IdLabel %in% bats_incomp, 
-         str_detect(unitLabel, "CondMod") | str_detect(unitLabel, "Reader")) 
- 
-# making a look-up table to mark the assigned flowers       
-rewarding <- sampling_nonrw %>% 
-  # marking the assigned flowers 
-  filter(outLabel == "positive") %>% 
-  # pulling out the CondMod events 
-  mutate(assigned = ifelse(str_detect(unitLabel, "CondMod"), 1, 0)) %>% 
-  arrange(IdLabel) %>% 
-  select(Day, IdLabel, unitLabel, assigned) %>% 
-  distinct() %>% 
-  # making a column with the flower numbers 
-  mutate(Loc = as.integer(str_extract(unitLabel, "[0-9]+"))) %>% 
+#------------------------------------------------
+# Preparing the table with the information needed
+#------------------------------------------------
+
+# setting binsize and breaks for cutting up the data into block and bin
+binsize <- 10
+breaks <- seq(0, 3000, binsize)
+
+# creating a data-table with the visits to the unassigned flowers 
+samp_all_nonrw <- raw_data_preproc %>%
+  arrange(DateTime) %>%
+  filter(
+    Condition == "SerialReversalCounter",
+    Day < 4,
+    !IdLabel %in% bats_beta,
+    !IdLabel %in% bats_incomp,
+    # selecting the required information in the proper columns
+    str_detect(MsgValue1, "start pump") | str_detect(MsgValue1, "end pump") | str_detect(MsgValue1, "switch") | str_detect(unitLabel, "CondMod | Reader") | str_detect(IdLabel, "Bat")
+  ) %>%
+  mutate(
+    Day = case_when(
+      Day == 1 ~ "Night 1",
+      Day == 2 ~ "Night 2",
+      Day == 3 ~ "Night 3"
+    ),
+    Loc = as.integer(str_extract(unitLabel, "[0-9]+"))
+  ) %>%
+  rename(Bat = IdLabel) %>%
+  ungroup() %>%
+  group_by(Day, Bat) %>%
+  # creating a column with the reversal block number, marking the reversals
+  mutate(block = ifelse(MsgValue1 == "switch", 1, 0)) %>%
+  group_by(Day, Bat) %>%
+  mutate(block = cumsum(block)) %>%
+  ungroup() %>%
+  group_by(Day, Bat, block) %>%
+  # creating a column with the number of visits within each block
+  mutate(
+    block_vis = ifelse(MsgValue1 == "switch", 0, 1),
+    block_vis = cumsum(block_vis),
+    # creating a new column for visits in each block to be binned
+    bin = ""
+  ) %>%
+  ungroup() %>%
+  group_by(day, Bat, block) %>%
+  # cutting the visits inside each block into bin of the size set earlier
+  mutate(bin = as.numeric(cut(block_vis, breaks, include.lowest = TRUE))) %>%
+  filter(Bat != " Test")
+
+# making a look-up table to mark the assigned flowers
+rewarding <- samp_all_nonrw %>%
+  # marking the assigned flowers
+  filter(outLabel == "positive") %>%
+  # pulling out the CondMod events
+  mutate(assigned = ifelse(str_detect(unitLabel, "CondMod"), 1, 0)) %>%
+  arrange(Bat) %>%
+  ungroup() %>%
+  select(Day, Bat, unitLabel, assigned) %>%
+  distinct() %>%
+  # making a column with the flower numbers
+  mutate(Loc = as.integer(str_extract(unitLabel, "[0-9]+"))) %>%
   select(-unitLabel)
 
-# now making the table with the flower numbers marked  
-assignment <- sampling_nonrw %>%
-  select(Day, IdLabel, unitLabel) %>%
+# making the table with the flower numbers marked
+assignment <- samp_all_nonrw %>%
+  ungroup() %>%
+  select(Day, Bat, unitLabel) %>%
   distinct() %>%
   mutate(Loc = as.integer(str_extract(unitLabel, "[0-9]+")))
 
 # joining the tables to create the assignment look-up table
-assignment <- left_join(assignment, rewarding, by = c("Day", "IdLabel", "Loc")) %>% 
-  mutate(assigned = replace_na(assigned, 0))
-  
-# marking the visits in the data set from the bats as assigned or not assigned 
-sampling_nonrw <- left_join(sampling_nonrw, assignment, by = c("Day", "IdLabel", "unitLabel"))
+assignment <- left_join(assignment, rewarding, by = c("Day", "Bat", "Loc")) %>%
+  mutate(assigned = replace_na(assigned, 0)) %>%
+  select(-unitLabel)
 
 # removing the now unnecessary look-up table
 rm(rewarding)
 
+# marking the visits in the data set from the bats as assigned or not assigned
+samp_all_nonrw <- left_join(samp_all_nonrw, assignment, by = c("Day", "Bat", "Loc"))
+
 # labels to extract
-labels <- paste(c("CondMod", "Reader"), collapse="|")
+labels <- paste(c("CondMod", "Reader"), collapse = "|")
 
-# now counting it all up 
-sampling_nonrw_count <- sampling_nonrw %>% 
-  select(Day, IdLabel, unitLabel, Loc, assigned) %>%
-  group_by(Day, IdLabel, unitLabel, assigned, Loc) %>% 
-  summarise(visits = n()) %>% 
-  arrange(Loc) %>% 
-  mutate(Type = str_extract(unitLabel, labels), 
-         Type = as.factor(ifelse(Type == "CondMod", "Nose-poke", "Fly-by")), 
-         Loc = as.character(Loc))
+# making a look-up table to find the last visit of the experiment
+last_visit <- samp_all_nonrw %>%
+  # selecting the visits to the assigned flowers and the CondMods
+  filter(
+    assigned == 1,
+    outLabel == "positive"
+  ) %>%
+  group_by(Day, Bat) %>%
+  # counting these visits
+  mutate(count_vis = 1:n()) %>%
+  # filter the last one of these visits
+  filter(count_vis == max(count_vis)) %>%
+  # selecting the required columns
+  select(DateTime, Day, Bat) %>%
+  distinct() %>%
+  # noting the last experimental visit
+  mutate(final_vis = 1)
 
-# plotting
-sampling_nonrw_count %>% 
-  filter(assigned == 0) %>% 
-  ggplot() + 
-  geom_col(aes(x = Loc, y = visits, fill = Type)) + 
-  facet_grid(Day ~ IdLabel) + 
-  xlab("Flower number") + 
-  ylab("Number of approaches/visits \n to non-assigned flowers") + 
-  theme_bw() + 
-  theme(legend.position = "bottom")
+# adding the information about the last visit to the main table
+samp_all_nonrw <- left_join(samp_all_nonrw, last_visit, by = c("DateTime", "Day", "Bat"))
 
-# proportion of visits to the non-assigned flowers 
-sampling_nonrw_sums <- sampling_nonrw_count %>% 
-  group_by(Day, IdLabel, assigned) %>% 
-  summarise(sum = sum(visits)) %>%
-  pivot_wider(names_from = assigned, values_from = sum) %>% 
-  rename(non_assigned = `0`, 
-         assigned = `1`) %>% 
-  mutate(non_assigned = replace_na(non_assigned, 0)) %>% 
-  mutate(prop_assigned = non_assigned/assigned)
-```
+samp_all_nonrw <- samp_all_nonrw %>%
+  mutate(
+    final_vis = replace_na(final_vis, 0),
+    # flipping the 1s and 0s for the assigned so that the visits to the unassigned flowers can be calculated for the Y axis
+    assigned = ifelse(assigned == 0, 1, 0)
+  )
 
-```{r message = FALSE, echo=FALSE, fig.cap = "Proportion of visits or approaches to the un-assigned flowers out of the total number of visits or approaches to flowers. Coloured points are data from individual bats. Black points are the mean proportion per night and the error bars are 95% CIs.", fig.width = 5, fig.height = 4}
+# taking only the experimental times
+samp_exp_nonrw <- samp_all_nonrw %>%
+  ungroup() %>%
+  group_by(Day, Bat) %>%
+  mutate(
+    final_vis = cumsum(final_vis),
+    final_vis = cumsum(final_vis)
+  ) %>%
+  filter(final_vis <= 1) %>%
+  group_by(Day, Bat)
 
-sampling_nonrw_mean <- sampling_nonrw_sums %>% 
-  ungroup() %>% 
-  group_by(Day) %>% 
+# making a look-up table with the reversals
+reversals <- samp_exp_nonrw %>%
+  ungroup() %>%
+  group_by(Bat, Day) %>%
+  mutate(day_bin = ifelse(bin == lag(bin), 0, 1)) %>%
+  filter(!is.na(day_bin)) %>%
+  mutate(
+    day_bin = cumsum(day_bin),
+    day_bin = day_bin + 1,
+    day_bin_vis = day_bin * 10
+  ) %>%
+  ungroup() %>%
+  mutate(day_bin_vis = ifelse(MsgValue1 == "start pump" | MsgValue1 == "end pump", lag(day_bin_vis), day_bin_vis)) %>%
+  filter(MsgValue1 == "switch")
+
+#----------------------------------------------
+# Counting the events at the unassigned flowers
+#----------------------------------------------
+
+# calculating the visits to the unassigned flowers over the night
+samp_avg_nonrw <- samp_exp_nonrw %>%
+  # grouping the data to see what happened before and after the experiment
+  group_by(Day, Bat, block, bin) %>%
+  group_modify(~ mean_cl_boot(.x$assigned, conf.int = 0.95)) %>%
+  ungroup() %>%
+  group_by(Bat, Day) %>%
+  mutate(
+    day_bin = 1:n(),
+    day_bin_vis = day_bin * 10,
+    ymin = replace_na(ymin, 0),
+    ymax = replace_na(ymax, 0)
+  ) %>%
+  filter(str_detect(Bat, "Bat"))
+
+# plotting the proportion of visits to the unassigned flowers
+# samp_avg_nonrw %>%
+#   # filtering only the first three main days of the experiment:
+#   # one group had the experiment extended a further three days
+#   ggplot(aes(day_bin_vis, y)) +
+#   geom_point(size = 0.3) +
+#   geom_line() +
+#   geom_ribbon(aes(ymin = ymin, ymax = ymax), alpha = 0.3) +
+#   facet_grid(Bat ~ Day) +
+#   #scale_x_continuous(breaks = seq(50, 300, by = 50)) +
+#   ylim(0, 1.1) +
+#   geom_hline(yintercept = c(0.25, 0.5, 0.75, 1), linetype = "dotted") +
+#   geom_vline(data = reversals, aes(xintercept = day_bin_vis), color = "blue") +
+#   theme_classic() +
+#   labs(x = "Visits", y = "Proportion of visits to the non-assigned flowers") +
+#   theme(legend.position = "none")
+
+
+# creating a table with the individual counts of visits to the different flowers
+
+samp_bar_nonrw <- samp_exp_nonrw %>%
+  # removing the NAs
+  filter(
+    !is.na(Bat),
+    !is.na(Loc)
+  ) %>%
+  ungroup() %>%
+  group_by(Day, Cage, Bat, unitLabel, assigned, Loc) %>%
+  summarise(visits = n()) %>%
+  arrange(Loc) %>%
+  mutate(
+    Type = str_extract(unitLabel, labels),
+    # marking the CondMod and Reader events
+    Type = as.factor(ifelse(Type == "CondMod", "Nose-poke", "Fly-by")),
+    Loc = as.character(Loc),
+    assigned = ifelse(assigned == 1, " ", "(assigned)")
+  ) %>%
+  ungroup() %>%
+  group_by(Day, Bat, Loc, Type) %>%
+  mutate(
+    max = sum(visits),
+    Event = paste(Type, assigned, sep = " ")
+  ) %>%
+  # taking only the bat visits 
+  filter(unitLabel != "exp")
+
+# calculating the proportion of events at the unassigned flowers
+samp_prop_nonrw <- samp_exp_nonrw %>%
+  group_by(Day, Bat, assigned) %>%
+  summarise(sum = n()) %>%
+  pivot_wider(names_from = assigned, values_from = sum) %>%
+  rename(
+    non_assigned = `1`,
+    assigned = `0`
+  ) %>%
+  filter(!is.na(assigned)) %>%
+  mutate(
+    non_assigned = replace_na(non_assigned, 0),
+    prop_assigned = non_assigned / (assigned + non_assigned)
+  )
+
+# calculating the mean and 95% CIs
+samp_prop_mean <- samp_prop_nonrw %>%
+  ungroup() %>%
+  group_by(Day) %>%
   group_modify(~ mean_cl_boot(.x$prop_assigned, conf.int = 0.95))
-
-dodge <- position_dodge(width=0.1)
-
-sampling_nonrw_sums %>% 
-  mutate(Day = as.factor(Day)) %>% 
-  ggplot() + 
-  geom_point(aes(Day, prop_assigned, color = IdLabel)) +
-  geom_point(data = sampling_nonrw_mean, aes(Day, y), alpha = 0.7) + 
- geom_errorbar(data = sampling_nonrw_mean, aes(x= Day, ymax = ymax, ymin = ymin), alpha = 0.7, position = dodge, width = 0.1) +  
-  ylim(0,1) + 
-  xlab("Night") + 
-  ylab("Proportion of approaches or visits \n to the unassigned flowers") + 
-  geom_hline(yintercept = 0.5, linetype = 2) + 
-  theme_bw() + 
-  theme(legend.position="bottom", legend.box="vertical", legend.margin=margin())
 ```
+
+Only two out of the array of eight flowers were assigned uniquely to each bat but all the flowers were accessible to all the animals. The number of approaches to and attempts to get a reward from all the flowers, both assigned and not assigned, is shown in **Figure 13**.
+
+```{r, fig.cap="Visits made by the bats to all the flowers, including the ones that were not assigned to them. Purple bars are nose-pokes at the assigned flowers, where the bats attempted to get a reward by breaking the light-barrier. Green bars are ‘fly by’ events near the assigned flowers where the bat flew near the flower but did not attempt to get a reward. Red bats are nose-pokes at the non-assigned flowers and blue bars are fly-bys at the non-assigned flowers."}
+
+p13 <- samp_bar_nonrw %>%
+  filter(Cage == 1) %>%
+  ggplot(aes(x = Loc, y = visits, fill = Event)) +
+  geom_col(position = "dodge", color = "black") +
+  # geom_text(aes(x = Loc, y = max + 15, label = assigned), size = 2) +
+  facet_grid(Day ~ Bat) +
+  xlab("Flower number") +
+  ylab("Number of approaches/visits \n to non-assigned flowers") +
+  scale_fill_viridis_d(option = "inferno") +
+  theme_srl() +
+  theme(legend.position = "none")
+
+p14 <- samp_bar_nonrw %>%
+  filter(Cage == 2) %>%
+  ggplot(aes(x = Loc, y = visits, fill = Event)) +
+  geom_col(position = "dodge", color = "black") +
+  # geom_text(aes(x = Loc, y = max + 15, label = assigned), size = 2) +
+  facet_grid(Day ~ Bat) +
+  xlab("Flower number") +
+  ylab("Number of approaches/visits \n to non-assigned flowers") +
+  scale_fill_viridis_d(option = "inferno") +
+  theme_srl() +
+  theme(legend.position = "right")
+
+ggarrange(p13, p14, labels = c("a)", "b)", nrow = 2))
+``` 
+
+The number of approaches or attempts to get a reward at the non-assigned flowers was a small proportion of the overall number of approaches and reward-attempts at the flowers, less than 10% every night on average as **Figure 14** shows. 
+
+```{r, fig.cap = "Proportion of visits or approaches to the un-assigned flowers out of the total number of visits or approaches to flowers. Coloured points are data from individual bats. Black points are the mean proportion per night and the error bars are 95% CIs", fig.width=6, fig.height=3} 
+
+dodge <- position_dodge(width = 0.1)
+
+p15 <- samp_prop_nonrw %>%
+  mutate(Day = as.factor(Day)) %>%
+  ggplot() +
+  geom_point(aes(Day, prop_assigned, color = Bat)) +
+  geom_point(data = samp_prop_mean, aes(Day, y), alpha = 0.7) +
+  geom_errorbar(data = samp_prop_mean, aes(x = Day, ymax = ymax, ymin = ymin), alpha = 0.7, position = dodge, width = 0.1) +
+  ylim(0, 1) +
+  xlab("Night") +
+  ylab("Proportion of approaches or visits \n to the unassigned flowers") +
+  geom_hline(yintercept = 0.5, linetype = 2) +
+  theme_srl() +
+  scale_color_viridis_d(option = "inferno") +
+  theme(legend.position = "bottom", legend.box = "vertical", legend.margin = margin())
+
+p15
+```
+
+## Acknowledgements 
+
+We thank Alexej Schatz for the programming of the PhenoSoft Control software. We thank the members of the Winter lab, Dr. Adam Wilkins, __ and __ for many useful discussions and our colleagues at La Selva Biological Field Station for all their support. We also thank ___ for their comments and suggestions for the improvement of the manuscript.  
+
+## Author Contributions 
+
+SC: data-collection, methodology, formal analysis, data curation, writing - original draft, writing - review and editing. SW: conceptualization, methodology, data-collection. VN: conceptualization, methodology, formal analysis, visualization, data curation, writing - review and editing, supervision. AK: formal analysis, writing - review and editing, supervision. YW: resources, formal analysis, writing - review and editing, supervision. 
+
+## Funding
+
+Open Access funding ... 
+
+## Availability of data and code
+
+All data and code are available in the Zenodo repository ... 
+
+# Declarations
+
+## Funding 
+
+This work was funded partly by a scholarship from the Deutscher Akademischer Austauschdienst (DAAD) to SC. **what was Sabine's funding? who else do I acknowledge here?** 
+
+## Conflict of interest 
+
+YW owns PhenoSys equity
+
+## Ethics approval
+
+Experimental procedures were reviewed and permission was granted by Sistema Nacional de Areas de Conservación (SINAC) at the Ministerio de Ambiente y Energía (MINAE), Costa Rica. **Do I need to check this? This info was there in Sabine's thesis, and I thought when I was writing the first draft that this would apply to this project as well, as it was done at the end of her thesis**
+
+## Code availability 
+
+All data and code are available in the Zenodo repository ... 
+
+## Open Access
 
 # References 
