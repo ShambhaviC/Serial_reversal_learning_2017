@@ -1823,7 +1823,11 @@ samp_prop_mean <- samp_prop_nonrw %>%
 
 Only two out of the array of eight flowers were assigned uniquely to each bat but all the flowers were accessible to all the animals. The number of approaches to and attempts to get a reward from all the flowers, both assigned and not assigned, is shown in Figure \@ref(fig:unassigned-flowers).
 
+<<<<<<< HEAD
 (ref:unassigned-flowers) Visits made by the bats to all the flowers, including the ones that were not assigned to them. Orange bars are nose-pokes at the assigned flowers, where the bats attempted to get a reward by breaking the light-barrier. Black bars are 'fly by' events near the assigned flowers where the bat flew near the flower but did not attempt to get a reward. Yellow bars are nose-pokes at the non-assigned flowers and purple bars are fly-bys at the non-assigned flowers.
+=======
+(ref:unassigned-flowers) Visits made by the bats to all the flowers, including the ones that were not assigned to them. Yellow bars are nose-pokes at the assigned flowers, where the bats attempted to get a reward by breaking the light-barrier. Purple bars are 'fly by' events near the assigned flowers where the bat flew near the flower but did not attempt to get a reward. Orange bars are nose-pokes at the non-assigned flowers and black bars are fly-bys at the non-assigned flowers.
+>>>>>>> b03fabf593561f4c9c55e902b79837071e30d0cf
 
 ```{r, unassigned-flowers, fig.cap="(ref:unassigned-flowers)", fig.width = 12, fig.height = 6}
 
