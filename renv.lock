@@ -114,13 +114,6 @@
       "Repository": "CRAN",
       "Hash": "0325b5be38a02d192828027983c7b470"
     },
-    "RefManageR": {
-      "Package": "RefManageR",
-      "Version": "1.3.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "a31abee042741b1fc1bbb546da687f3f"
-    },
     "Rttf2pt1": {
       "Package": "Rttf2pt1",
       "Version": "1.3.8",
@@ -198,13 +191,6 @@
       "Repository": "CRAN",
       "Hash": "91e7a98d41aa25ea3909198c2b482ddd"
     },
-    "bibtex": {
-      "Package": "bibtex",
-      "Version": "0.4.2.3",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "76c015d8a12da5047be8aa6bead07077"
-    },
     "blob": {
       "Package": "blob",
       "Version": "1.2.1",
@@ -212,12 +198,19 @@
       "Repository": "CRAN",
       "Hash": "9addc7e2c5954eca5719928131fed98c"
     },
-    "boot": {
-      "Package": "boot",
-      "Version": "1.3-25",
+    "bookdown": {
+      "Package": "bookdown",
+      "Version": "0.22",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "bd51734a754b6c2baf28b2d1ebc11e91"
+      "Hash": "8fb0b67dfdf9d751fc93cb0036def3cc"
+    },
+    "boot": {
+      "Package": "boot",
+      "Version": "1.3-28",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "0baa960e3b49c6176a4f42addcbacc59"
     },
     "bridgesampling": {
       "Package": "bridgesampling",
@@ -289,18 +282,6 @@
       "Repository": "CRAN",
       "Hash": "a667800d5f0350371bedeb8b8b950289"
     },
-    "citr": {
-      "Package": "citr",
-      "Version": "0.3.2",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "citr",
-      "RemoteUsername": "crsh",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "0e8243d55676888546a383b98adbfd454603f547",
-      "Hash": "32b4d8e8de9cd1d53676fbde969d0439"
-    },
     "cli": {
       "Package": "cli",
       "Version": "3.0.1",
@@ -317,10 +298,10 @@
     },
     "cluster": {
       "Package": "cluster",
-      "Version": "2.1.0",
+      "Version": "2.1.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "db63a44aab5aadcb6bf2f129751d129a"
+      "Hash": "ce49bfe5bc0b3ecd43a01fe1b01c2243"
     },
     "coda": {
       "Package": "coda",
@@ -527,10 +508,10 @@
     },
     "foreign": {
       "Package": "foreign",
-      "Version": "0.8-80",
+      "Version": "0.8-81",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "ae1b1e15cc6ccb2bc61c0ac33e86d35f"
+      "Hash": "74628ea7a3be5ee8a7b5bb0a8e84882e"
     },
     "fs": {
       "Package": "fs",
@@ -636,6 +617,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "6efd734b14c6471cfe443345f3e35e29"
+    },
+    "gluedown": {
+      "Package": "gluedown",
+      "Version": "1.0.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "922c7ba09eb533d682ca6aeae0843b0c"
     },
     "googledrive": {
       "Package": "googledrive",
@@ -968,10 +956,10 @@
     },
     "nnet": {
       "Package": "nnet",
-      "Version": "7.3-14",
+      "Version": "7.3-16",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "0d87e50e11394a7151a28873637d799a"
+      "Hash": "3a3dc184000bc9e6c145c4dbde4dd702"
     },
     "numDeriv": {
       "Package": "numDeriv",
@@ -1367,10 +1355,10 @@
     },
     "survival": {
       "Package": "survival",
-      "Version": "3.2-7",
+      "Version": "3.2-11",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "39c4ac6d22dad33db0ee37b40810ea12"
+      "Hash": "f4d706b25d640dbaeb56d9c9b6ce9a22"
     },
     "sys": {
       "Package": "sys",
