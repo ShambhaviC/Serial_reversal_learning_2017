@@ -2,8 +2,13 @@
 ######
 #Data prep 
 ######
-setwd("/Users/shambhavi/Google Drive/Experiments & Data/srl_2017_backup_additionalfiles/Analysis/Analysis/Updated clean code")
-raw_data <- read.csv2("Raw_data_bats.csv", sep = ";", header = TRUE)
+setwd("/Users/shambhavi/Google Drive/Experiments & Data/SRL_2017/analysis/R")
+
+require(tidyverse)
+require(brms)
+
+setwd("/Users/shambhavi/Google Drive/Experiments & Data/Serial Reversal Learning - La Selva_2017 (backup)/Analysis/Analysis/Raw Data")
+raw_data <- read.csv2("Raw_data.csv", sep = ";", header = TRUE)
 
 # creating a vector of the bats to be excluded from the main analysis
 bats_incomp <- c("Bat7", "Bat19")
@@ -250,6 +255,35 @@ comparison1.2 %>%
   ylab("Proportion of visits to the S+ option") + 
   facet_grid(Day ~ Bat) + 
   theme_classic()
+#####
+# marginal effects 
+#####
+int_conditions2 <- list(Day = c(1, 2, 3), block = c(1,2,3,4,5), bin = c(1,2,3,4,5))
+
+me <- conditional_effects(m1.1,spaghetti = T, nsamples = 150)
+# the index value for plot can be changed to anything between 1 and 6
+plot(me, plot = FALSE, line_args = c(alpha = 1/5)) [[2]] + theme_bw() + ylim(0,1)
+
+# should do a nice triptych plot for comparison with the conditional effects 
+
+#####
+# now let's do some hypothesis testing!
+#####
+# is the prop(rew) higher for day 2 than day 3
+
+q1 <- c(q1 = "Day + Day:bin + Day:block * 3 > Day + Day:bin + Day:block * 2")
+q2 <- c(q2 = "bin + block:bin + Day:bin * 1 > bin + block:bin + Day:bin * 5")
+
+q2 <- c(q2 = "Day + Day:bin + Day:block * 1 > Day + Day:bin + Day:block * 3")
+
+hypothesis(m1.1, q2)
+plot(hypothesis(m1.1, "Day + Day:bin + Day:block * 3 = 0"))  
+
+d_sum <- d %>% 
+  ungroup() %>% 
+  group_by(Day, block) %>% 
+  summarise(mean = round(mean(reward_status), digits = 2), 
+            sd = round(sd(reward_status), digits = 2))
 ######
 #Is there a difference between the model with the complete bats and the one with them all? 
 ######
@@ -526,7 +560,17 @@ comparison4 %>%
   facet_grid(Day ~ Bat) + 
   theme_bw()
 
+####
+# conditional effects 
+####
 
+int_conditions2 <- list(Day = c(1, 2, 3), block = c(1,2,3,4,5), bin = c(1,2,3,4,5))
+
+me <- conditional_effects(m4,nsamples = 150)
+# the index value for plot can be changed to anything between 1 and 6
+plot(me, plot = FALSE, line_args = c(alpha = 1/5)) [[2]] + theme_bw() + ylim(0,1)
+
+plot(hypothesis(m4, "Day*2 > Day*3"))
 ######
 #Model 5: The effect of day and bin on the proportion of visits to the S+ in block 1 of every day 
 #####
