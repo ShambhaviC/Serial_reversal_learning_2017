@@ -13,9 +13,7 @@ output:
    bookdown::word_document2:
       fig_caption: yes
       number_sections: no
-   #    fig_caption: yes
-   #    number_sections: no
-  # bookdown::pdf_document2:
+   bookdown::pdf_document2:
   #   number_sections: no
   #   toc: no
   #   number_sections: no
@@ -108,24 +106,24 @@ if (!require(bayestestR)) {
 theme_srl <- function() {
   theme_pubr() +
     theme(
-      axis.text = element_text(size = 8, family = "Times"),
-      axis.title = element_text(size = 10, family = "Times"),
-      strip.text.x = element_text(size = 10, family = "Times"),
-      strip.text.y = element_text(size = 10, family = "Times"),
-      legend.text = element_text(size = 10, family = "Times"),
-      legend.title = element_text(size = 12, face = "bold", family = "Times")
+      axis.text = element_text(size = 12, family = "Times"),
+      axis.title = element_text(size = 14, family = "Times"),
+      strip.text.x = element_text(size = 14, family = "Times"),
+      strip.text.y = element_text(size = 14, family = "Times"),
+      legend.text = element_text(size = 12, family = "Times"),
+      legend.title = element_text(size = 14, face = "bold", family = "Times")
     )
 }
 
 theme_srl2 <- function() {
   theme_bw() +
     theme(
-      axis.text = element_text(size = 8, family = "Times"),
-      axis.title = element_text(size = 10, family = "Times"),
-      strip.text.x = element_text(size = 10, family = "Times"),
-      strip.text.y = element_text(size = 10, family = "Times"),
-      legend.text = element_text(size = 10, family = "Times"),
-      legend.title = element_text(size = 12, face = "bold", family = "Times")
+      axis.text = element_text(size = 12, family = "Times"),
+      axis.title = element_text(size = 14, family = "Times"),
+      strip.text.x = element_text(size = 14, family = "Times"),
+      strip.text.y = element_text(size = 14, family = "Times"),
+      legend.text = element_text(size = 12, family = "Times"),
+      legend.title = element_text(size = 14, face = "bold", family = "Times")
     )
 }
  # writing a function to automate the reporting of an estimate and error bars
@@ -259,6 +257,7 @@ pump_fills <- alldata_pumps %>%
 # Reading in and preparing the data
 #----------------------------------
 # loading the prepared CSV file of raw data
+
 rev_learning_all <- read.csv2(file = "/Users/shambhavi/Google Drive/Experiments & Data/SRL_2017/analysis/data/processed_data/raw_data_bats.csv", sep = ";", header = TRUE)
 
 # creating a vector of the bats to be excluded from the main analysis
@@ -410,7 +409,7 @@ All data and analysis code are available online at .....
 
 # Results 
 
-## A consistently high proportion of the bats' visits go to the rewarding option
+## A consistently high proportion of the bats' visits went to the rewarding option
 
 ```{r, Preparing-main-data}
 #----------------------------------------
@@ -619,15 +618,29 @@ day1last3bins <- rev_learning %>%
     ymin = round(ymin, digits = 1),
     ymax = round(ymax, digits = 1)
   )
+
+day2and3block1 <- rev_learning %>%
+  ungroup() %>%
+  filter(
+    Day != "Day 1",
+    block == 1
+  ) %>%
+  mutate(reward_status = reward_status * 100) %>%
+  group_modify(~ mean_cl_boot(.x$reward_status, conf.int = 0.95)) %>%
+  mutate(
+    y = round(y, digits = 1),
+    ymin = round(ymin, digits = 1),
+    ymax = round(ymax, digits = 1)
+  )
 ```
 
-The bats made a very high number of visits to the rewarding option. When a reversal occurred the bats abandoned the option that had been rewarding until then and switched to making most of their visits to the newly-rewarding option (figure \@ref(fig:overall-summary)a)). A consistent pattern emerged over all three nights: a sharp decrease in the proportion of visits to the previously-rewarding option immediately following a reversal, then a rapid increase in visits to the newly-rewarding option. 
+The bats made a very high number of visits to the rewarding option, `r report_m_ci_perc(overall, par = "y", brackets = "square")`. When a reversal occurred the bats abandoned the option that had been rewarding until then and switched to making most of their visits to the newly-rewarding option (figure \@ref(fig:overall-summary)). A consistent pattern emerged over all three nights: a sharp decrease in the proportion of visits to the previously-rewarding option immediately following a reversal, then a rapid increase in visits to the newly-rewarding option. 
 
 At the start of the first night, in the very first bin of ten visits when the bats did not yet have any information about the available options and had never experienced a reversal, the Prop~rew~ (the proportion of visits to the rewarding option) averaged across individuals was at chance level: `r report_m_ci_perc(day1bin1, par = "y", brackets = "square")`, about 5 out of the 10 visits. Within the next ten visits however, Prop~rew~ increased to `r report_m_ci_perc(day1bin2, par = "y", brackets = "square")` and by the last bin of this first block was `r report_m_ci_perc(day1bin5, par = "y", brackets = "square")`. Immediately after the first experience of a reversal, the Prop~rew~ dropped down to `r report_m_ci_perc(day1bin6, par = "y", brackets = "square")` in the first ten visits, but came back up to `r report_m_ci_perc(day1bin10, par = "y", brackets = "square")` by the last bin of this block of fifty visits.
 
-(ref:overall-summary) a) Visits to the rewarding of two options across the three experimental nights. Data are average proportions for bins of ten visits averaged over all 14 individuals. Data are indicated by white points in the first block on the first night before the bats had experienced any reversals; the bin averages of the other blocks are indicated by black points. b) Average propotion of visits to the rewarding of two options per block. The data-point indicated by a white point in the first block of the first night was before the bats had experienced any reversals; the averages of the other blocks are indicated by black points. Numbers indicate the bats that participated in a block. Shading shows 95% confidence intervals. Dashed lines show reversals  
+(ref:overall-summary) Visits to the rewarding one of two options over the first experimental night. Data are average proportions for bins of ten visits averaged over all the individuals that made visits in each bin. Data are indicated by white points in the first block before the bats had experienced any reversals; the bin averages of the other blocks are indicated by black points. Numbers indicate the bats that participated in a block. Shading shows 95% confidence intervals. Dashed lines show reversals
 
-```{r, overall-summary, fig.cap = "(ref:overall-summary)", fig.width = 9, fig.height = 6}
+```{r, overall-summary, fig.cap = "(ref:overall-summary)", fig.width = 3, fig.height = 3}
 
 p1 <- rev_learning_avg %>%
   # filtering only the first three main Days of the experiment:
@@ -641,22 +654,25 @@ p1 <- rev_learning_avg %>%
     day_bin_vis = day_bin_vis - 5
   ) %>%
   ggplot(aes(day_bin_vis, y)) +
-  geom_point(aes(color = firstpoint, fill = firstpoint), shape = 21) +
+  geom_line() +
+  geom_hline(yintercept = c(0.25, 0.5, 0.75, 1), linetype = "dotted") +
+  geom_ribbon(aes(ymin = ymin, ymax = ymax), alpha = 0.3) +
+  geom_point(aes(color = firstpoint, fill = firstpoint), shape = 21, size = 2) +
   scale_color_manual(values = c("0" = "black", "1" = "black")) +
   scale_fill_manual(values = c("0" = "black", "1" = "white")) +
-  geom_line() +
-  geom_ribbon(aes(ymin = ymin, ymax = ymax), alpha = 0.3) +
-  facet_grid(. ~ Day) +
+  #facet_grid(. ~ Day) +
   scale_x_continuous(breaks = seq(50, 300, by = 50)) +
   scale_y_continuous(breaks = seq(0, 1.1, by = 0.25)) +
   geom_vline(aes(xintercept = day_bin_vis), data = rev_main_avg %>% filter(Day == "Night 1"), linetype = "dashed") +
-  geom_hline(yintercept = c(0.25, 0.5, 0.75, 1), linetype = "dotted") +
+  ylim(0,1.05) + 
   theme_srl2() +
   geom_text(
     data = bat_labels  %>% filter(Day == "Night 1"),
-    aes(x = day_bin_vis, y = 1.05, label = n_bats, group = n_bats), family = "Times"
+    aes(x = day_bin_vis, y = 1.05, label = n_bats, group = n_bats), size = 5, family = "Times"
   ) +
   labs(x = "Visits", y = "Visits to the rewarding option") +
+  # theme(axis.title = element_text(size = 14)) + 
+  # theme(axis.text = element_text(size = 12)) +  
   theme(legend.position = "none")
 
 # p1.5 <- rev_learning_block_avg %>%
@@ -692,22 +708,101 @@ p1 <- rev_learning_avg %>%
 #   theme(legend.position = "none")
 
 p1
+
+first_10_last_10 <- rev_learning %>% 
+  filter(bin == 1 | bin == 5, 
+         block > 1, 
+         Day == "Day 1") %>% 
+  mutate(`Visit bin` = ifelse(bin < 3, "First 10 visits", "Last 10 visits")) %>% 
+  ungroup() %>% 
+  group_by(block, `Visit bin`) %>% 
+  group_modify(~ mean_cl_boot(.x$reward_status, conf.int = 0.95)) %>% 
+  mutate(day_bin_vis = (block*50) - 25) %>% 
+  left_join(bat_labels %>% filter(Day == "Night 1") %>% select(day_bin_vis, n_bats), by = c("day_bin_vis")) %>% 
+  select(-Day)
+
+p1.5 <- first_10_last_10 %>% 
+  ggplot() +
+  geom_line(aes(day_bin_vis, y, group = `Visit bin`)) +
+  geom_point(data = first_10_last_10 %>% filter(`Visit bin` == "First 10 visits"),  aes(day_bin_vis, y), shape = "triangle", size = 2) + 
+  geom_point(data = first_10_last_10 %>% filter(`Visit bin` == "Last 10 visits"), aes(day_bin_vis, y), shape = "square", size = 2) + 
+  geom_ribbon(aes(day_bin_vis, y, ymin = ymin, ymax = ymax, group = `Visit bin`), alpha = 0.3) +
+  xlim(50, 300) + 
+  scale_x_continuous(breaks = seq(50, 300, by = 50)) +
+  scale_y_continuous(breaks = seq(0, 1.1, by = 0.25)) +
+  geom_hline(yintercept = c(0.25, 0.5, 0.75, 1), linetype = "dotted") +
+  ylim(0, 1.05) + 
+  geom_vline(xintercept = c(50, 100, 150, 200, 250), linetype = "dashed") + 
+  # scale_colour_viridis_d(option = "plasma") + 
+  # scale_fill_viridis_d(option = "plasma") + 
+  theme_srl2() +
+  geom_text(
+    aes(x = day_bin_vis, y = 1.05, label = n_bats, group = n_bats), size = 5, family = "Times"
+  ) +
+  labs(x = "Visits", y = "Visits to the rewarding option") + 
+  # theme(axis.title = element_text(size = 14)) + 
+  # theme(axis.text = element_text(size = 12)) +  
+  theme(legend.position = "none")
+
+p1.5  
+
+p1.75 <- rev_learning %>% 
+  ungroup() %>% 
+  group_by(Day, count_vis) %>% 
+  filter(Day == "Day 1", 
+         count_vis > 0) %>% 
+  group_modify(~ mean_cl_boot(.x$reward_status, conf.int = 0.95))
+
+p1.75 %>% 
+  ggplot(aes(count_vis, y)) + 
+  geom_line() + 
+  geom_ribbon(aes(ymin = ymin, ymax = ymax), alpha = 0.3) + 
+  geom_hline(aes(yintercept = 0.5), linetype = "dotted") + 
+  geom_vline(xintercept = c(50, 100, 150, 200, 250), linetype = "dashed") + 
+  ylab("Prop. of rewarded visits") + 
+  xlab("Visits") + 
+  theme_srl2()
+
+ggarrange(p1, p1.5, labels = c("a)", "b)"))
 ```
 
 ## Bats switch to the rewarding option faster as they experience more reversals
 
-On the first experimental night the area under the curve formed by the proportion of the bats' visits to the rewarding option in the first 25 visits of a block increased with the each reversal the bats experienced (figure \@ref(fig:areas-under-the-curves) and \@ref(fig:area-under-the-curve-all-reversals)). This is the part of each block where perseverative visits occur, i.e., visits to the previously rewarding option after a reversal has occurred. 
+The proportion of visits to the rewarding flower in the first half of each reversal block increased as the bats experience more reversals. This conclusion was visually evident in the raw data (Figure \@ref(fig:raw-data-first-half)), and was held up by the statistical analysis. 
 
-(ref:areas-under-the-curves) Areas under the curves formed by the proportion of visits to the rewarding option out of the first 25 visits after each reversal on the first night. Thin coloured lines are data from the individual bats; the thick red line is the average area under the curve of all the bats. 
+(ref:raw-data-first-half) Proportion of visits to the rewarding option out of the first 25 visits after each reversal on the first night. Thin coloured lines are data from the individual bats; the thick red line is the average area under the curve of all the bats.
 
-```{r areas-under-the-curves, fig.cap = "(ref:areas-under-the-curves)", fig.width = 6, fig.height = 4}
+```{r raw-data-first-half, fig.cap = "(ref:raw-data-first-half)", fig.width = 6, fig.height = 4}
 
+# calculating and saving the values for the proportion of visits to the rewarding option overall
+
+bin_means <- rev_learning %>% 
+  ungroup() %>% 
+  filter(Day == "Day 1",
+         block > 1) %>% 
+  group_by(bin) %>% 
+  group_modify(~ mean_cl_boot(.x$reward_status, conf.int = 0.95)) %>%
+  mutate(
+    y = round(y, digits = 3),
+    ymin = round(ymin, digits = 3),
+    ymax = round(ymax, digits = 3)
+  )
+  
+# extracting the mean for the final block
+
+final_mean <- bin_means %>% 
+  ungroup() %>% 
+  filter(bin == 5) %>% 
+  select(y)
+
+final_mean_90 <- (as.numeric(final_mean))*0.9
+  
 # setting a different binsize to group the data
 binsize_five <- 5
 breaks_five <- seq(0, 3000, binsize_five)
 
 # creating a separate dataframe with the data from the first night
-rev_learning_first_night <- rev_learning %>% 
+pers_visits <- rev_learning %>% 
   # filtering out the first night
   filter(Day == "Day 1") %>%
   # binning the data
@@ -719,264 +814,1153 @@ rev_learning_first_night <- rev_learning %>%
   # calculating the average proportion of visits to rewarding flower for each bat and each block
   mutate(block_average = mean(reward_status)) %>% 
   ungroup() %>% 
-  group_by(Bat, block, block_average, bin_five) %>%
-  # calculating the average proportion of visits to the rewading flower for each bat, block and bin
+  group_by(Bat, block, block_average, bin_five) 
+
+pers_bin_number <- pers_visits %>%
+  # calculating the average proportion of visits to the rewarding flower for each bat, block and bin
   summarise(bin_five_average = mean(reward_status)) %>%
   ungroup() %>% 
   group_by(Bat) %>% 
   # calculating the total number of visits per animal over the whole night
-  mutate(total_vis = 1:n())
+  mutate(total_vis = 1:n()) %>% 
+  ungroup() %>% 
+  filter(block > 1) %>% 
+  group_by(block, bin_five) %>% 
+  summarise(overall_avg = mean(bin_five_average)) %>%
+  mutate(cutoff = final_mean_90, 
+         include = ifelse(overall_avg < cutoff, 1, 0)) %>% 
+  filter(include == 1) %>% 
+  ungroup() %>% 
+  summarise(mean = mean(bin_five))
 
-areas_under_curves <- rev_learning_first_night %>% 
+pers_bin_number <- round((as.numeric(pers_bin_number))*5)
+
+pers_visits <- pers_visits %>% 
+  ungroup() %>% 
+  filter(block > 1, 
+         block_vis <= pers_bin_number) %>% 
+  ungroup() %>%
+  group_by(Bat, block, bin_five) %>% 
+  mutate(bin_five_average = mean(reward_status)) %>% 
+  # selecting the required columns
+  select(Bat, block, bin_five, bin_five_average) %>% 
   ungroup() %>% 
   group_by(Bat, block) %>% 
-  mutate(
-    # creating a column to note which blocks have 25 visits or more as this will be the parts of the blocks that are analyzed
-         keep_2 = max(bin_five)/2
-         ) %>% 
-  # filtering the blocks after the first reversal had been 
-  # experienced, and the blocks that had the first half complete
-  filter(
-         block > 1, 
-         bin_five <= 5, 
-         keep_2 == 5
-         ) %>% 
-  ungroup() %>%
-  # selecting the required columns
-  select(Bat, block, total_vis, bin_five, bin_five_average) %>% 
-  group_by(Bat, block) %>%
-  # calculating the area under the curve
-  summarise(auc = area_under_curve(total_vis, bin_five_average), 
-            auc = round(auc, digits = 2))
-
-# plotting out the areas under the curves 
-p4 <- areas_under_curves %>% 
-  mutate(block = block - 1) %>% 
+  # calculating the proportion of rewarded visits per bat per block
+  mutate(block_bat_mean = mean(bin_five_average)) %>% 
   ungroup() %>% 
   group_by(block) %>% 
-  mutate(block_mean = mean(auc)) %>% 
-  ggplot() + 
-  #geom_point() + 
-  geom_line(aes(block, auc, group = Bat, colour = Bat)) +
-  geom_line(aes(block, block_mean), colour = "red", size = 2) + 
-  xlab("Reversal number on the first night") + 
-  ylab("Area under the curve") + 
-  #scale_y_continuous(breaks = seq(0, 4, by = 0.5)) + 
-  theme_srl2()
-  
-p4
-```
+  # calculating the proportion of rewarded visits per block averaged all bats 
+  mutate(block_mean = mean(bin_five_average))
 
-(ref:area-under-the-curve-all-reversals) a) Forest plot of the regression coeffients from the model of the effect of reversal on the area under the curve of the bats' choice data. Circles represent the means of the posterior distributions of the slope coefficients, thick horizontal lines represent 50% credible intervals, and thin horizontal lines 89% credible intervals. The numbers in bold are the means of the posterior distributions and 89% credible intervals b) Conditional effects plot from the model of the effect of reversal on the area under the curve of the bats' choice data, sampling from the posterior distribution.
+pers_visits_first_night <- rev_learning %>% 
+  filter(Day == "Day 1", 
+         bin == 1, 
+         block > 1) %>% 
+  ungroup() %>% 
+  group_by (Bat, block) %>% 
+  mutate(mean_per_bat = mean(reward_status)) %>% 
+  ungroup() %>% 
+  group_by(block) %>% 
+  mutate(mean_overall = mean(reward_status))
 
-```{r area-under-the-curve-all-reversals, fig.cap = "(ref:area-under-the-curve-all-reversals)", fig.width = 12, fig.height = 3}
-
-# displaying the priors for the model 
-# get_prior(data = areas_under_curves, family = gaussian,
-#       auc ~ block + (1 + block|Bat))
-
-# fitting the model
-# m.areas.under.curves <-
-#   brm(data = areas_under_curves, family = gaussian,
-#       # allowing the slopes and intercepts to vary by bat
-#       auc ~ block + (1 + block|Bat),
-#       iter = 3000, warmup = 1500, chains = 4, cores = 4, thin = 3,
-#       control = list(adapt_delta = 0.999, max_treedepth = 15),
-#       seed = 12)
-
-# saving the model
-# save(m.areas.under.curves, file = "data/processed_data/m.areas.under.curves.rda")
-
-# loading the model
-load("data/processed_data/m.areas.under.curves.rda")
-
-# setting the colour scheme
-color_scheme_set("darkgray")
-
-# setting the names of the fixed effects
-fixed_effects = c("Intercept", "Reversal")
-
-# putting the model's estimates into a table
-t1_estimates <- model_outputs(m.areas.under.curves, fixed_effects)
-
-# finding the maximum x value in the fixed effects of the model
-max_xvalue <- max_xvalue_output(m.areas.under.curves, fixed_effects)
-
-# creating a plot of the slope coefficients
-p5 <- mcmc_intervals(m.areas.under.curves,
-  point_size = 1.1,
-  pars = vars(1:4),
-  prob_outer = 0.89
-) +
-  xlim(-0.5, max_xvalue + 0.6) +
-  geom_vline(xintercept = 0) +
-  scale_y_discrete(
-    labels = c(
-      "b_Intercept" = "Intercept",
-      "b_block" = "Reversal number"
-    ),
-    limits = c("b_block", "b_Intercept")
-  ) +
-  geom_text(
-    data = t1_estimates,
-    aes(x = max_xvalue + 0.1, y = c(2, 1), label = All, fontface = "bold", family = "Times"), size = 3, hjust = 0
-  ) +
-  theme_srl2()
-
-# setting the conditions for the conditional effects plots 
-int_conditions <- list(block = c(2,3,4,5,6))
-
-# calculating the conditional effects
-m_areas_under_curves <- conditional_effects(m.areas.under.curves, int_conditions = int_conditions, prob = 0.89, nsamples = 150)
-
-#plotting out the conditional effects 
-p6 <- plot(m_areas_under_curves, plot = FALSE, line_args = c(alpha = 1/5)) [[1]] +
-  xlab("Experimental night") +
-  ylab("Perseverative \n visits") +
-  scale_x_continuous(breaks = seq(1,5,by = 1)) +
-  #scale_y_continuous(breaks = seq(1.5, 2.5, by = 0.5)) +
-  #ylim(1.5, 4) + 
-  xlab("Reversal number on the first night") + 
-  ylab("Posterior estimate of \n the area under the curve") + 
-  theme_srl2()
-
-# plotting it out
-ggarrange(p5, p6, ncol = 2, labels = c("a)","b)"), font.label = list(face = "plain", family = "Times New Roman", size = 8))
-```
-
-The average proportions of visits to the rewarding option in each block of 50 visits plotted in figure (\@ref(fig:overall-summary)b)) show that on all three nights, the highest number of visits to the rewarding option occurred in the first block. On the first night, there was a decrease in the second block followed by an increase in the succeeding blocks. The second block, just after the first reversal of the first night is unique, as it is the very first time the bats experience a reversal in the main experiment. The effect of reversal on the area under the curve persists even when the data in the second block are removed from the analysis (figure \@ref(fig:area-under-the-curve-all-but-first-reversal)b)). 
-
-(ref:area-under-the-curve-all-but-first-reversal) a) Forest plot of the regression coeffients from the model of the effect of reversal on the area under the curve of the bats' choice data, excluding the very first reversal (the second block). Circles represent the means of the posterior distributions of the slope coefficients, thick horizontal lines represent 50% credible intervals, and thin horizontal lines 89% credible intervals. The numbers in bold are the means of the posterior distributions and 89% credible intervals b) Conditional effects plot from the model of the effect of reversal - excluding the first reversal - on the area under the curve of the bats' choice data, sampling from the posterior distribution.
-
-```{r area-under-the-curve-all-but-first-reversal, fig.cap = "(ref:area-under-the-curve-all-but-first-reversal)", fig.width = 12, fig.height = 3}
-
-# creating a dataset with all the reversals but leaving out the first one
-areas_under_curves_lastblocks <- areas_under_curves %>%
-  filter(block > 2)
-
-# fitting a similar model of the areas under the curves but leaving out the first reversal
-# m.areas.under.curves.lastblocks <-
-#   brm(data = areas_under_curves_lastblocks, family = gaussian,
-#       auc ~ block + (1 + block|Bat),
-#       iter = 3000, warmup = 1500, chains = 4, cores = 4, thin = 3,
-#       control = list(adapt_delta = 0.999, max_treedepth = 15),
-#       seed = 12)
-
-# saving the model
-# save(m.areas.under.curves.lastblocks, file = "data/processed_data/m.areas.under.curves.lastblocks.rda")
-
-# loading the model
-load("data/processed_data/m.areas.under.curves.lastblocks.rda")
-
-# setting the colour scheme
-color_scheme_set("darkgray")
-
-# setting the names off the fixed effects
-fixed_effects = c("Intercept", "Reversal")
-
-# putting the model's estimates into a table
-t1_estimates <- model_outputs(m.areas.under.curves.lastblocks, fixed_effects)
-
-# finding the maximum x value in the fixed effects of the model
-max_xvalue <- max_xvalue_output(m.areas.under.curves.lastblocks, fixed_effects)
-
-# creating a plot of the slope coefficients
-p7 <- mcmc_intervals(m.areas.under.curves.lastblocks,
-  point_size = 1.1,
-  pars = vars(1:4),
-  prob_outer = 0.89
-) +
-  xlim(-0.5, max_xvalue + 0.6) +
-  geom_vline(xintercept = 0) +
-  scale_y_discrete(
-    labels = c(
-      "b_Intercept" = "Intercept",
-      "b_block" = "Reversal number"
-    ),
-    limits = c("b_block", "b_Intercept")
-  ) +
-  geom_text(
-    data = t1_estimates,
-    aes(x = max_xvalue + 0.1, y = c(2, 1), label = All, fontface = "bold", family = "Times"), size = 3, hjust = 0
-  ) +
-  theme_srl2()
-
-# setting the conditions for the conditional effects plots 
-int_conditions <- list(block = c(3,4,5,6))
-
-# calculating the conditional effects
-m_areas_under_curves_lastblocks <- conditional_effects(m.areas.under.curves.lastblocks, int_conditions = int_conditions, prob = 0.89, nsamples = 150)
-
-#plotting out the conditional effects 
-p8 <- plot(m_areas_under_curves_lastblocks, plot = FALSE, line_args = c(alpha = 1/5)) [[1]] +
-  xlab("Experimental night") +
-  ylab("Perseverative \n visits") +
-  scale_x_continuous(breaks = seq(1,5,by = 1)) +
-  #scale_y_continuous(breaks = seq(1.5, 2.5, by = 0.5)) +
-  ylim(1.5, 4) + 
-  xlab("Reversal number on the first night") + 
-  ylab("Posterior estimate of \n the area under the curve") +
-  theme_srl2()
-
-# plotting it out
-ggarrange(p7, p8, ncol = 2, labels = c("a)","b)"), font.label = list(face = "plain", family = "Times New Roman", size = 8))
-```
-
-## Bats make more visits to the rewarding flower as they experience more reversals 
-
-On the first night, apart from the increasingly faster switch to the rewarding option after a reversal, the Prop~rew~ increased as the bats experienced more reversals in two ways: over the entire night as an effect of reversal; and within each reversal block as an effect of 10-visit bins. The interaction effect of the reversal and bin showed that the increase in the visits to the rewarding option was driven by the effect of the first bin of 10 visits in each block. (figure \@ref(fig:first-night-first-block-removed)); in the last two bins of every block there was a consistently high number of rewarded visits. These effects of bin and reversal persisted even when the second block, following the first reversal, was removed from the analysis (figure \@ref(fig:first-night-first-two-blocks-removed)). 
-
-```{r area-under-curve-all-visits}
-
-areas_under_curves_allvisits <- rev_learning_first_night %>% 
+pers_visits <- pers_visits %>% 
+  ungroup() %>% 
+  filter(block > 1, 
+         block_vis <= pers_bin_number) %>% 
+  ungroup() %>%
+  group_by(Bat, block, bin_five) %>% 
+  mutate(bin_five_average = mean(reward_status)) %>% 
+  # selecting the required columns
+  select(Bat, block, bin_five, bin_five_average) %>% 
   ungroup() %>% 
   group_by(Bat, block) %>% 
-  mutate(
-    # creating a column to note which blocks have 25 visits or more as this will be the parts of the blocks that are analyzed
-         keep_2 = max(bin_five)
-         ) %>% 
-  # filtering the blocks after the first reversal had been 
-  # experienced, and the blocks that had the first half complete
-  filter(
-         block > 1, 
-         #bin_five <= 5, 
-         keep_2 == 10
-         ) %>% 
-  ungroup() %>%
-  # selecting the required columns
-  select(Bat, block, total_vis, bin_five, bin_five_average) %>% 
-  group_by(Bat, block) %>%
-  # calculating the area under the curve
-  summarise(auc = area_under_curve(total_vis, bin_five_average), 
-            auc = round(auc, digits = 2))
+  # calculating the proportion of rewarded visits per bat per block
+  mutate(block_bat_mean = mean(bin_five_average)) %>% 
+  ungroup() %>% 
+  group_by(block) %>% 
+  # calculating the proportion of rewarded visits per block averaged all bats 
+  mutate(block_mean = mean(bin_five_average))
 
-#fitting the model
-# m.areas.under.curves.all.visits <-
-#   brm(data = areas_under_curves_allvisits, family = gaussian,
-#       # allowing the slopes and intercepts to vary by bat
-#       auc ~ block + (1 + block|Bat),
-#       iter = 3000, warmup = 1500, chains = 4, cores = 4, thin = 3,
-#       control = list(adapt_delta = 0.999, max_treedepth = 15),
-#       seed = 12)
-# 
-# # saving the model
-# save(m.areas.under.curves.all.visits, file = "data/processed_data/m.areas.under.curves.all.visits.rda")
+# plotting it out
+p2.5 <- pers_visits %>%
+  ggplot() + 
+  geom_line(aes(block, block_bat_mean, group = Bat, colour = Bat)) + 
+  geom_line(aes(block, block_mean), colour = "red", size = 2) + 
+  ylim(0, 1) + 
+  ylab("Proportion of rewarded visits in \n the first 12 visits after a reversal") + 
+  xlab("Reversal number") +
+  scale_colour_viridis_d() + 
+  theme_srl() + 
+  theme(legend.position = "right")
 
-# loading the model
-load("data/processed_data/m.areas.under.curves.all.visits.rda")
+p2 <- pers_visits_first_night %>%
+  select(Bat, block, mean_per_bat, mean_overall) %>% 
+  ungroup() %>% 
+  distinct() %>% 
+  ggplot() + 
+  geom_point(aes(block, mean_per_bat, group = Bat, colour = Bat), alpha = 0.75) + 
+  geom_line(aes(block, mean_overall), colour = "red", size = 2) + 
+  ylim(0, 1) + 
+  ylab("Prop. of rewards in \n the first 10 visits") + 
+  xlab("Block") +
+  scale_colour_viridis_d() + 
+  theme_srl() + 
+  # theme(axis.title = element_text(size = 14)) + 
+  # theme(axis.text = element_text(size = 12)) +  
+  theme(legend.position = "top", 
+        legend.title = element_blank(),
+        legend.text = element_text(size  = 8),
+        legend.margin=margin(0,0,0,0)) +
+    guides(colour = guide_legend(nrow = 2))
 
-# setting the names off the fixed effects
-fixed_effects = c("Intercept", "Reversal")
-
-# putting the model's estimates into a table
-t1_estimates <- model_outputs(m.areas.under.curves.all.visits, fixed_effects)
+p2
 ```
 
-This was consistent with the result that reversal number also had an effect on the area under the curve of the entire reversal block, and not just the first 25 visits in a block (Mean and 89% credible intervals: intercept - `r t1_estimates[1,2]`; slope coefficient -`r t1_estimates[2,2]`). The bats made more visits to the rewarding option with each experience of a reversal, primarily because they switched to the rewarding option faster with each reversal. 
+```{r perseverative visits}
+
+pers_visits <- rev_learning %>% 
+  ungroup() %>% 
+  filter(block_vis > 0, 
+         Day == "Day 2" | Day == "Day 3") %>% 
+  group_by(Day, block, block_vis, count_vis) %>% 
+  group_modify(~ mean_cl_boot(.x$reward_status, conf.int = 0.95)) %>% 
+  mutate(pers_visits = ifelse(ymin < 0.5, 0, 1)) %>% 
+  ungroup() %>% 
+  group_by(Day, block) %>% 
+  filter(pers_visits == 0) %>%
+  ungroup() %>% 
+  group_by(Day, block) %>% 
+  mutate(check = count_vis - lag(count_vis), 
+         check = ifelse(is.na(check), 0, check)) %>% 
+  filter(check < 3) %>% 
+  mutate(check = count_vis - lag(count_vis), 
+         check = ifelse(is.na(check), 0, check)) %>% 
+  filter(check < 3) %>% 
+  mutate(check = count_vis - lag(count_vis), 
+         check = ifelse(is.na(check), 0, check)) %>% 
+  filter(check < 3) %>% 
+  ungroup() %>% 
+  group_by(Day, block) %>% 
+  summarise(pers_visits = max(block_vis)) %>% 
+  ungroup() %>% 
+  group_modify(~ mean_cl_boot(.x$pers_visits, conf.int = 0.95)) %>% 
+  mutate(y = round(y, digits = 2), 
+         ymin = round(ymin, digits = 2), 
+         ymax = round(ymax, digits = 2))
+
+pers_visits_first_night <- rev_learning %>% 
+  ungroup() %>% 
+  filter(block_vis > 0, 
+         Day == "Day 1", 
+         block == 6) %>% 
+  group_by(Day, block, block_vis, count_vis) %>% 
+  group_modify(~ mean_cl_boot(.x$reward_status, conf.int = 0.95)) %>% 
+  mutate(pers_visits = ifelse(ymin < 0.5, 0, 1)) %>% 
+  ungroup() %>% 
+  group_by(Day, block) %>% 
+  filter(pers_visits == 0) %>%
+  ungroup() %>% 
+  group_by(Day, block) %>% 
+  mutate(check = count_vis - lag(count_vis), 
+         check = ifelse(is.na(check), 0, check)) %>% 
+  filter(check < 3) %>% 
+  ungroup() %>% 
+  group_by(Day, block) %>% 
+  summarise(pers_visits = max(block_vis)) %>% 
+  ungroup() %>% 
+  group_modify(~ mean_cl_boot(.x$pers_visits, conf.int = 0.95)) %>% 
+  mutate(y = round(y, digits = 2), 
+         ymin = round(ymin, digits = 2), 
+         ymax = round(ymax, digits = 2))
+
+pers_visits <- rev_learning %>% 
+  ungroup() %>% 
+  filter(block_vis > 0, 
+         Day == "Day 1" & block == 6 | Day == "Day 2" | Day == "Day 3") %>% 
+  group_by(Day, block, block_vis, count_vis) %>% 
+  group_modify(~ mean_cl_boot(.x$reward_status, conf.int = 0.95)) %>% 
+  mutate(pers_visits = ifelse(ymin < 0.5, 0, 1)) %>% 
+  ungroup() %>% 
+  group_by(Day, block) %>% 
+  filter(pers_visits == 0) %>%
+  ungroup() %>% 
+  group_by(Day, block) %>% 
+  mutate(check = count_vis - lag(count_vis), 
+         check = ifelse(is.na(check), 0, check)) %>% 
+  filter(check < 3) %>% 
+  mutate(check = count_vis - lag(count_vis),
+         check = ifelse(is.na(check), 0, check)) %>%
+  filter(check < 3) %>%
+  mutate(check = count_vis - lag(count_vis),
+         check = ifelse(is.na(check), 0, check)) %>%
+  filter(check < 3) %>%
+  ungroup() %>% 
+  group_by(Day, block) %>% 
+  summarise(pers_visits = max(block_vis)) %>% 
+  ungroup() %>% 
+  group_modify(~ mean_cl_boot(.x$pers_visits, conf.int = 0.95)) %>% 
+  mutate(y = round(y, digits = 2), 
+         ymin = round(ymin, digits = 2), 
+         ymax = round(ymax, digits = 2))
+
+pers_visits_t_test <- rev_learning %>% 
+  ungroup() %>% 
+  filter(block_vis > 0, 
+         Day == "Day 1" & block == 6 | Day == "Day 2" | Day == "Day 3") %>% 
+  group_by(Day, block, block_vis, count_vis) %>% 
+  filter(block_vis <= 8)
+  ungroup() %>% 
+  group_by(Day, block, block_vis) %>% 
+  summarise(mean = mean(reward_status)) %>% 
+  arrange(Bat)
+
+# pers_visits %>% 
+#   ggplot(aes(count_vis, y)) + 
+#   geom_line() + 
+#   geom_ribbon(aes(ymin = ymin, ymax = ymax), alpha = 0.3) +
+#   facet_grid(Day~.) + 
+#   geom_vline(xintercept = c(50, 100, 150, 200, 250), linetype = "dashed", colour = "red") + 
+#   geom_hline(yintercept = c(0.5), linetype = "dotted") + 
+#   theme_srl2()
+```
+
+```{r change point}
+
+######
+# Helper functions 
+######
+
+
+#' Make a lagged copy of a vector
+#' @param x Input vector
+#' @return y A lagged copy of the input vector x, with the first entry repeated
+#' @details Not normally called directly, but via the cp_wrapper function instead.
+
+lag_v <- function(x) c(x[1], x[1:(length(x) - 1)])
+
+#' Make a lead copy of a vector
+#' @param x Input vector of cumulative response counts
+#' @return y A lead copy of the input vector x, with the last entry repeated
+#' @details Not normally called directly, but via the cp_wrapper function instead.
+#'
+lead_v <- function(x) c(x[2:(length(x))], x[length(x)])
+
+######
+# CP wrapper 
+######
+#' Find change points in a sequence of choices based on given test and decision criterion
+#' @param input A vector of correct or incorrect decisions, coded as 1s and 0s
+#' @param isDiscrete A boolean parameter, true if the data to be analyzed are discrete,
+#' false if continuous, e.g. succesive intervals
+#' @param test Name of the test to be performed. The following tests are implemented:
+#' "binomial" (random rate), "chisquare", "ttest", "KS" (Komolgorov-Smirnov). The binomial
+#' test is used for finding changes in the rate parameter of a random rate process, either
+#' intermittently (isDiscrete = TRUE) or continuously (isDiscrete = FALSE) sampled.
+#' The chi square test is used with data where there has been a frequency change, as in,
+#' e.g. correct choices. The t test should be used for normally distributed data.
+#' The Komolgorov-Smirnof test is used for data with nonnormal or unknown distribution.
+#' @param Crit A real-valued decision criterion on logit. Values recommended by
+#' Gallistel et al. (2004) are between 1.3 and 6, which correspond to p values of 0.05 and
+#' 0.000001, respectively. The values are the logarithms of the odds against the null
+#' (no-change) hypothesis. logit = log[(1-p)/p], where p is the desired significance level
+#' @return A data frame with the number of Trials (Trial) for each change point detected,
+#' the cumulative number of correct responses, or successes, (CumSs),
+#' and the ratio of correct/total choices (Slopes) for the trials since the last change
+#' point and the current change point
+#' @references Gallistel CR, Fairhurst S, Balsam P (2004) The learning curve:
+#' Implications of a quantitative analysis. PNAS 101:13124-13131.
+#' doi: 10.1073/pnas.0404965101
+#' @examples
+#' # generate dummy data with a change point at trial 120
+#' input <- c(rbinom(120, 1, 0.5), rbinom(200, 1, 0.8))
+#' cp_wrapper(input, TRUE, "chisquare", 3)
+#' cp_wrapper(input, TRUE, "binomial", 3)
+#'
+#' # use included eyeblink data set:
+#' eyeblink[,] # inspect data set
+#' cp_wrapper(eyeblink, TRUE, "chisquare", 3)
+#' # using small criterion, e.g. 2, fails due to computational problems
+#' # better use "binomial" instead
+#' cp_wrapper(eyeblink, TRUE, "binomial", 2)
+#'
+#' # use included plusmaze data set:
+#' plusmaze[,] # inspect data set
+#' (cp.1 <- cp_wrapper(plusmaze, TRUE, "binomial", 1.3))
+#' # decrease sensitivity and detect different change points
+#' (cp.2 <- cp_wrapper(plusmaze, TRUE, "binomial", 2))
+#' # the chisquare test detects more change points even with higher criterion
+#' (cp.3 <- cp_wrapper(plusmaze, TRUE, "chisquare", 2))
+#'
+#' # plotting data with ggplot2
+#' library(ggplot2)
+#' # first generate data.frame with cumulative responses:
+#' my.data <- data.frame(Trial = 1:length(plusmaze[,]),
+#' CumRespMeasure = cumsum(plusmaze)[,])
+#' # plot cumulative learning curve with change points
+#' ggplot(my.data) + geom_line(aes(Trial,CumRespMeasure)) +
+#'  geom_point(data = cp.1, aes(Trial, CumSs), shape = 1, size = 6, color = "blue") +
+#'  geom_point(data = cp.2, aes(Trial, CumSs), shape = 2, size = 3, color = "green") +
+#'  geom_point(data = cp.3, aes(Trial, CumSs), shape = 3, size = 3, color = "red")
+#'
+#' # plot average response rate per trial
+#' ggplot() + geom_step(data = cp.1, aes(Trial, Slopes)) +
+#'  ylab("Average Response Rate per Trial")
+#'
+#' @export
+
+cp_wrapper <- function(input, isDiscrete, test, Crit)
+{
+  if (!is.logical(isDiscrete)) stop("Second input (isDiscrete) must be boolean")
+
+  input <- unlist(input, use.names = FALSE)
+  Cum <- unlist(cumsum(input), use.names = FALSE)
+
+
+  if ((test == "binomial") & (!identical(input %% 1, mat.or.vec(length(input), nc = 1))) &
+      (isDiscrete))
+    stop("When the binomial test is used with discrete-trial data,
+         the data must be integer valued")
+
+  if (!isDiscrete & test == "chisquare")
+    stop("Cannot use chi square test when data are successive intervals")
+
+  if ((test == "chisquare") & (sum(input + !input) != length(input)))
+    stop("When chi square test is used, data must be binary, i.e. 0 or 1")
+
+  switch(test,
+         binomial = {
+           CritLength <- 1 # When binomial test is used, there must be at least two data
+         },
+         chisquare = {
+           CritLength <- 7 # A test of differences of frequency cannot be significant when
+           # the total number of observations is less than 8
+         },
+         KS = {
+           CritLength <- 7 # K-S test is not valid when there are fewer than 4 data in
+           # either of the two samples
+         },
+         ttest = {
+           CritLength <- 2 # when t test is used there must be at least 3 data
+         },
+         stop("Test can only be 'binomial', 'chisquare', 'ttest', or 'KS' ")
+  )
+
+  outputlist <- c() # resetting the output
+
+  if (test == "chisquare" | test == "binomial")
+  {
+    CP <- matrix(c(0, 0), ncol = 2)
+    outputlist <- list(Cumt = Cum) # Initializiing for while loop. The Cumt vector will
+    # be truncated as change points are found
+    outputlist$r <- 1 # Initializing for while loop
+
+    while (!is.null(outputlist$r) & (length(outputlist$Cumt) > CritLength))
+    {
+      if (!isDiscrete) { # data are continuous
+        R <- cpc(outputlist$Cumt) # putative inflection points
+        L <- rrc(outputlist$Cumt, R) # logit vector for continuous case
+      } else {# data are discrete
+        R <- cpd(outputlist$Cumt) # putative inflection points
+
+        switch(test,
+               binomial = {# if binomial test is to be used
+                 L <- rrd(outputlist$Cumt, R) # logit vector
+               },
+               chisquare = {# if chisquare test is to be used
+                 L <- chi2logit(outputlist$Cumt, R) # logit vector
+               },
+               stop("For discrete data test can only be 'binomial' or 'chisquare' ")
+        )
+      }
+      outputlist <- trun(outputlist$Cumt, R, L, Crit) #Cumt is the truncated cumulative
+      # record; Lt is the logit vector up to the point of
+      # truncation (not used); r is the change point; r is empty if there is
+      # no significant change point
+
+      if (!is.null(outputlist$r)) { # if change point, update change-point array
+        if (!isDiscrete) # In the continuous case, the row count goes in the
+          # y-column of the output array (the event count); in all other cases, it goes
+          # in the x column. In the continuous case, the x column
+          # contains the successive event times
+        {
+          cumrCP <- CP[length(CP[, 1]), 2] + outputlist$r # Add Cumt row for latest change
+          # point to last change point to get Cum row of latest change point
+          CP <- rbind(CP,c(Cum[cumrCP], cumrCP)) # Value of cumulative record at the
+          # change point
+        }else{# In the discrete case, the row data go in the first column of CP
+          cumrCP <- CP[length(CP[, 1]), 1] + outputlist$r # Add Cumt row for latest
+          # change point to last change point to get Cum row of latest change point
+          CP <- rbind(CP, c(cumrCP, Cum[cumrCP])) # Value of cumulative record at the
+          # change point
+        }
+
+      } # end of updating change-point array
+
+    } # end of while loop for finding successive change points with binomial test
+  } # end of section that computes change-point array with binomial or chi square test
+
+  if (test == "ttest" | test == "KS")
+  {
+    outputlist <- list(newinput = input) # Initializing for while loop. These vectors will
+    # be truncated as CPs are found out
+    CP <- matrix(c(0, 0), ncol = 2) # Initializing for while loop
+    outputlist$r <- 1 # Initializing for while loop
+
+    while (!is.null(outputlist$r) & (length(outputlist$newinput) > CritLength))
+    {
+      outputlist$newCum <- cumsum(outputlist$newinput)
+      if (!isDiscrete) {# data are continuous
+        R <- cpc(outputlist$newCum) # putative inflection points
+      } else {# data are discrete
+        R <- cpd(outputlist$newCum) # putative inflection points
+      } #computing R vector
+
+      switch(test,
+             KS = {# if K-S test is to be used
+               outputlist$r <- KS(outputlist$newinput, R, Crit) # logit vector
+             },
+             ttest = {# if t test is to be used
+               outputlist$r <- cpt(outputlist$newinput, R, Crit) # logit vector
+             }
+      ) # end of computing new changepoint
+      if (!is.null(outputlist$r)) {# if there is a change point, update change-point array
+        # and truncate newinput
+        cumrCP <- CP[length(CP[, 1]), 1] + outputlist$r # Add Cumt row for latest change
+        # point to last change point to get Cum row of latest change point
+        CP <- rbind(CP, c(cumrCP, Cum[cumrCP])) # Value of cumulative record at the change
+        # point
+        outputlist$newinput <-
+          outputlist$newinput[(outputlist$r + 1):length(outputlist$newinput)]
+        # Truncated data vector
+
+      } # end of updating change-point array & truncating
+    } # end of while loop for computing CP array when K-S or t test are used
+  } # end of section that computes CP array when K-S or t test are used
+
+  # Adding final point to output array
+  if (isDiscrete) #
+  {
+    CP <- as.data.frame(rbind(CP, c(length(Cum), Cum[length(Cum)])))
+    names(CP) <- c("Trial", "CumSs")
+  } else {# in continuous case, row count goes in y column
+    CP <- as.data.frame(rbind(CP, c(Cum[length(Cum)], length(Cum))))
+    names(CP) <- c("Time", "Events")
+
+  }
+  # last row of CP array gives coordinates of final point in cumulative record
+  CP$Slopes <- (lead_v(CP[, 2]) - CP[, 2]) / (lead_v(CP[, 1]) - CP[, 1])
+  CP$Slopes <- ifelse(is.na(CP$Slopes), lag_v(CP$Slopes), CP$Slopes)
+  CP
+}
+
+######
+# CP detector 
+######
+
+#' Find putative change point in discrete-time cumulative records
+#' @param Cum Input vector of cumulative response counts
+#' @return R A vector with the same length as Cum, with putative change points for each
+#' trial. These correspond to the preceding trial at which the deviation of the
+#' observed count from the expected count is maximal
+#' @details Not normally called directly, but via the cp_wrapper function instead.
+
+cpd <- function(Cum)
+{
+  N <- 1:length(Cum) #Trial count vector
+  Slopes <- Cum / N #Average count or measure per trial for trials 1 to N
+
+  M <- diag(length(Cum))
+  M[upper.tri(M)] <- 1 # Mask with ones on and above diagonal & zeros below
+
+  Diag <- M * matrix(rep(Slopes, length(Slopes)), nrow = length(Slopes), byrow = TRUE)
+  # Creates an array in which successive cols have successive slopes of the cumulative
+  # record. The slope for a given col fills all the cells on and above the main diagonal
+
+  Preds <- 1:length(Slopes) * Diag
+  # Predicted (expected) cumulative values in a diagonal array
+
+  Obs <- Cum * M
+  # Diagonal array of observed cumulations
+
+  Devs <- abs(Obs - Preds) # Diagonal array of deviations from expectations
+
+  mx <- M * matrix(rep((apply(Devs, 2, max)), length(Slopes)), nrow = length(Slopes),
+                   byrow = TRUE)
+
+  # mx is a matrix listing the maxima of the deviations
+
+  R <- merge(data.frame(col = 1:length(Cum)),
+                 as.data.frame(which(Devs == mx & mx > 0, arr.ind = TRUE)), by = "col",
+             all.x = TRUE)
+
+  names(R)[names(R) == "row"] <- "R"
+  names(R)[names(R) == "col"] <- "N"
+  # R at this stage is a data.frame with columns N, and R. R has the trial numbers of the
+  # putative change points and N - the trial numbers.
+
+  stats::aggregate(R$R, by = R["N"], min)$x
+
+  # return the minimum of the trial numbers of the putative change points for each trial
+  # number
+}
+
+#' Find putative change point in continuous-time cumulative records
+#' @param Cum Input vector of the cumulative interevent intervals
+#' @return R A vector with the same length as Cum, with putative change points for each
+#' event. The putative change point corresponding to the Nth
+#' event is the preceding event at which the deviation of the observed event count
+#' from the expected event count is maximal. The expected event count
+#' at any earlier event, n, is Cum[n], the interval up to the nth event,
+#' divided by the average interevent interval over the range from n = 0 to n = N
+#' The deviation from expectation is n - this expectation. R is the value of n at
+#' which this deviation is maximal
+#' @details Not normally called directly, but via the cp_wrapper function instead
+
+cpc <- function(Cum)
+{
+  N <- 1:length(Cum) # Event count vector
+  Slopes <- N / Cum # Average slope up to given point in cumulative function
+
+  M <- diag(length(Cum))
+  M[upper.tri(M)] <- 1 # Mask with ones on and above diagonal & zeros below
+
+  Diagonal <- M * matrix(rep(Slopes, length(Slopes)), nrow = length(Slopes), byrow = TRUE)
+  # Creates an array in which successive cols have successive slopes of the cumulative
+  # record. The slope for a given col fills all the cells on and above the main diagonal
+
+  Preds <-  Cum * Diagonal
+  # Creates diagonal array of the predicted numbers of events at each time in Cum
+
+  Obs <- 1:length(Slopes) * M
+  # Diagonal array with actual numbers of events
+
+  Devs <- abs(Obs - Preds) # Diagonal array of deviations from expectations
+
+  mx <- M * matrix(rep((apply(Devs, 2, max)), length(Slopes)), nrow = length(Slopes),
+                   byrow = TRUE)
+
+  # mx is a matrix listing the maxima of the deviations
+
+  R <- merge(data.frame(col = 1:length(Cum)),
+             as.data.frame(which(Devs == mx & mx > 0, arr.ind = TRUE)), by = "col",
+             all.x = TRUE)
+
+  names(R)[names(R) == "row"] <- "R"
+  names(R)[names(R) == "col"] <- "N"
+  # R at this stage is a data.frame with columns N, and R. R has the cumulative
+  # inter-event intervals of the putative change points and N - the event numbers.
+
+  stats::aggregate(R$R, by = R["N"], min)$x
+
+  # return the minimum of the trial numbers of the putative change points for each trial
+  # number
+}
+
+#' Truncate the cumulative record at significant change point
+#' @param Cum Input vector of cumulative response counts
+#' @param R A vector with trial numbers of putative change points
+#' @param L A vector giving for each trial the pseudologit, approximately
+#' the log of the odds that there has been a change point
+#' @param Crit A real-valued decision criterion on logit
+#' @return A list of Cumt, the truncated cumulative record,
+#' Lt, the truncated L vector up to the row at which a change point was detected,
+#' and r, the row at which L was truncated.
+#' @details Not normally called directly, but via the cp_wrapper function instead.
+#' Works for both discrete and continuous cumulative records. All input arguments are
+#' obligatory.
+
+trun <- function(Cum, R, L, Crit)
+{
+  # Cumt is truncated cumulative record,
+  # the record as it would be if observation began at time CP+ or after trial CP
+  # Lt is the L vector truncated at Alert, which is the row at which an CP was detected
+  # r is row at which it was truncated.
+
+  La <- abs(L)
+  if (length(which(La > Crit)) > 0) {
+    Alert <- min(which(La > Crit))# Finds first row where decision criterion is exceeded
+  } else {# If there is no such row, then Alert will be NULL
+    Alert <- NULL
+  }
+
+  if (is.null(Alert)) {
+    list(Cumt = Cum, Lt = L, r = Alert)
+  }
+  else
+  {
+    r <- R[Alert] # The putative change point at the value of Cum that first yields
+    # significant logit.This putative change point is always the number of an earlier
+    # event or trial
+
+    I <- c(Cum[1], diff(Cum)) # Interevent interval vector OR vector
+    # of responses on successive trials
+
+    Cumt <- cumsum(I[(r + 1):(length(I))]) # Truncated cumulative record
+
+    Lt <- L[1:Alert] # Truncated logit vector
+
+    list(Cumt = Cumt, Lt = Lt, r = r)
+  }
+
+}
+
+
+######
+# Logits 
+######
+#' Compute the pseudologit vector for random rate discrete data, using binomial test
+#' @param Cum Input vector of cumulative response counts
+#' @param R A vector with trial numbers of putative change points
+#' @return L A vector giving for each trial the pseudologit, approximately
+#' the log of the odds that there has been a change point
+#' @details Not normally called directly, but via the cp_wrapper function instead
+
+rrd <- function(Cum, R)
+{
+  # L is the vector giving for each trial the pseudologit--log[P / (1 - P + p)]--
+  # for the probability of observing n_a or fewer post-CP responses if
+  # lambda_a / lambda_b = 1
+  # where lambda_a and lambda_b are the rates of responding before and after
+  # the putative change point; P is the probability of observing Cum - Cum(R) or fewer
+  # responses after the putative change point; and p is the probability of
+  # observing exactly Cum - Cum[R] responses after the putative change point.
+  # Note that the numerator and denominator of the pseudologit are not complementary
+  # probabilities, as they are in a true logit; they both include the probability of
+  # observing exactly Cum - Cum[R] post-CP responses, where Cum is the cumulative number
+  # of responsess at the moment of calculation.
+  # The putative change point is the row (R = trial number) at which the difference
+  # between the observed and expected number of responses is maximal.
+  # Cum / N is the slope of the cumulative record up to N (i.e., the average response rate
+  # up to the trial of calculation
+  # (Cum / N) * R is the expected number of responses up to trial R; Cum[R] is the
+  # observed number. A negative pseudologit means that n_a is less than expected.
+  Trial <- 1:length(Cum) # The trial count vector
+  Ta <- Trial - R # the trials since the putative change point
+  p <- Ta / Trial # probability of any one response occuring during the trials since the
+  # putative CP
+  Na <- Cum - Cum[R] # number of responses since putative CP
+
+  Peqorl <- stats::pbinom(Na, Cum, p)[-1]
+  # Probability of observing Na or fewer total responses on the trials since putative CP
+
+  Peqorm <- 1 - Peqorl + stats::dbinom(Na, Cum, p)[-1] #Probability of observing Na or
+  # more total responses on the trials since putative CP. Note that this probability
+  # overlaps the "complementary" probability; both include the probability of observing
+  # exactly Na events.
+
+  c(0, log10(Peqorl / Peqorm)) # Vector of the pseudologits
+
+}
+
+#' Compute the pseudologit vector for continuous random rate case
+#' @param Cum A cumulative interevent interval vector
+#' @param R A vector with trial numbers of putative change points
+#' @return L A vector giving for each trial the pseudologit, approximately
+#' the log of the odds that there has been a change point
+#' @details  For use when finding changes in the rate parameter of a random rate process.
+#' Not normally called directly, but via the cp_wrapper function instead
+
+rrc <- function(Cum, R)
+{
+  # The output is the vector giving for each event the pseudologit log[P / (1 - P + p)]
+  # for the probability of observing n_a or fewer post-CP responses if
+  # lambda_a / lambda_b = 1
+  # where lambda_a and lambda_b are the rates of responding before and after
+  # the putative change point; P is the probability of observing N - R or fewer
+  # events after the putative change point; and p is the probability of
+  # observing exactly N - R events after the putative change point.
+  # Note that the numerator and denominator of the pseudologit are not complementary
+  # probabilities, as they are in a true logit; they both include the probability of
+  # observing exactly N - R events, where N is the total number of events at the moment of
+  # calculation. The putative change point is the row (R = event number) at which
+  # the difference between (N / Cum[N]) * (Cum[R]) and Cum[R] is maximal.
+  # N / Cum[N] is the slope of the cumulative record up to the Nth event.
+  # Cum[R] is the time up to the Rth event.
+  # A negative pseudologit means that n_a is less than expected.
+
+  Ta <- Cum - Cum[R] # the interval elapsed since the putative CP
+  p <- Ta / Cum # probability of any one event falling after the putative CP
+  N <- 1:length(Cum) # event count vector
+  Na <- N - R # vector giving number of events since putative CP
+
+
+
+  Peqorl <- stats::pbinom(Na, N, p)[-1]
+  # Probability of observing Na or fewer events in the interval Ta
+
+  Peqorm <- 1 - Peqorl + stats::dbinom(Na, N, p)[-1] # Probability of observing Na or more
+  # events in the interval Ta. Note that this probability overlaps the "complementary"
+  # probability; both include the probability of observing exactly Na events.
+
+  c(0, log10(Peqorl / Peqorm)) # Vector of the pseudologits
+}
+
+
+#' Compute the pseudologit vector for random discrete data using Chi squared and Fisher
+#' exact tests
+#' @param Cum Input vector of cumulative response counts
+#' @param R A vector with trial numbers of putative change points
+#' @return Lgt A vector giving for each trial the pseudologit, approximately
+#' the log of the odds that there has been a change point
+#' @details Not normally called directly, but via the cp_wrapper function instead.
+#' For cases, in which the chi square test is not valid (expected obersavations all
+#' smaller than 5), the Fisher exact test is used instead. Occasionally, for noisy data
+#' even this test will fail. In that case use the rrd function instead. Notice that the p
+#' values delivered by this test are estimated from a 1000 Monte Carlo simulations.
+
+chi2logit <- function(Cum, R)
+{
+  # Level is the point beyond which the
+  # Chi square test is not valid (because no expectation < 5)
+  # and NV gives the rows for which the chi square test cannot
+  # validly be performed (because at least one cell has an expectation
+  # less than 5).
+  N <- 1:length(Cum) # The trial count vector
+
+  Level1 <- min(which(N > 7)) # Finds the row
+  # below which even the Fisher exact test should not be applied, because it
+  # cannot yield a p value lower than .1 with fewer than 7 observations, and,
+  # moreover, for fewer than 4 observations, fishexct returns p values
+  # greater than 1.
+
+  Ta <- N - R # the trials since the putative change point
+  Onespre <- Cum[R] # number of (corect) responses up to the putative CP
+  Onespre[which(is.na(Onespre))] <- 0
+  Onespost <- Cum - Cum[R] # number of (correct) responses since the putative CP
+  Onespost[which(is.na(Onespost))] <- 0
+  Zeroespre <- R - Onespre # number of incorrect responses (or no responses) up to the
+  # putative CP
+  Zeroespre[which(is.na(Zeroespre))] <- 0
+  Zeroespost <- Ta - Onespost # number of incorrect responses (or no responses) since the
+  # putative CP
+  Zeroespost[which(is.na(Zeroespost))] <- 0
+
+  Smallest <- pmin(Cum, N - Cum) * pmin(R, Ta) / N # The smallest expectation is the
+  # smallest row total times the smallest column total, divided by N
+
+  NV <- which(Smallest < 5) # Critical value for cell expectations is 5. NV is the
+  # vector of rows whose contingency tables have a cell with less than the
+  # critical value
+
+  Level <- max(NV) # The highest level at which the  smallest expectation is less than 5.
+  # Chi square is not valid when smallest expectation is less than 5.
+
+  p_chisq <- rep(1, length(N)) # initiate pvalue vector
+  # mat <- matrix(rep(0, 4), nrow = 2, ncol = 2)
+
+  for (i in 1:length(N)) # loop over the trial count vector
+  {
+    mat <- cbind(c(Onespre[i], Onespost[i]),
+                 c(Zeroespre[i], Zeroespost[i]))
+
+    p_chisq[i] <-
+      ifelse(N[i] > Level,
+             stats::chisq.test(mat, simulate.p.value = TRUE, B = 1000)$p.value,
+             ifelse(N[i] <= Level & N[i] > Level1,
+                    # For the cases in which chi square is invalid, calculate p values
+                    # from Fisher's exact test.
+                    stats::fisher.test(mat, simulate.p.value = TRUE, B = 1000)$p.value,
+                    1
+                    )
+             )
+  }
+
+  Lgt <- ifelse(p_chisq == 1, 0, log10(p_chisq / (1 - p_chisq)))
+  Lgt
+}
+
+
+#' Uses t test to find first significant change point
+#' @param Data A vector of trial by trial measures or successive intervals
+#' @param R A vector of putative change points
+#' @param Crit Decision criterion, the value the logit must exceed
+#' for the function to return a significant change point
+#' @return CP The first significant change point
+#' @details This test is appropriate if one is looking for a change in the expectation of
+#' a renewal event-generating process, where the interevent intervals are normally (rather
+#' than exponentially) distributed. Not normally called directly, but via the cp_wrapper
+#' function instead.
+
+cpt <- function(Data, R, Crit)
+{
+  Data <- unlist(Data, use.names = FALSE)
+  L <- c(0, 0) # initialization of the logit vector up to and including
+  # the row where the significance criterion (Crit) was exceeded
+  r <- 3 # Initializing for while loop, with index r
+
+  while (abs(L[length(L)]) < Crit)
+  { # loop that ends when critical L found or end of data reached
+    if (!is.na(R[r])) # if R[r] is NA skip to next r
+    {
+      if ((sum(stats::sd(Data[1:R[r]]), stats::sd(Data[(R[r] + 1):r]),
+               na.rm = TRUE) > 0) &
+          (length(Data[1:R[r]]) > 1) & (length(Data[(R[r] + 1):r]) > 1))# test cannot be
+        # run when there is no variance on either side of putative CP, for example, in the
+        # sequence 0 0 0 3 3 3 or from a single observation e.g. 0 vs 3 2 5
+      {
+        pb <- stats::t.test(Data[1:R[r]], Data[(R[r] + 1):r], "greater")$p.value
+        # Probability that the mean after the putative change point is greater than the
+        # mean up to and including the putative change point
+        pl <- stats::t.test(Data[1:R[r]], Data[(R[r] + 1):r], "less")$p.value
+        # Probability that the mean after the putative change point is less than the
+        # mean up to and including the putative change point
+        L[r] <- log10(pb / pl) # Latest logit
+      } else {
+        L[r] <- 0
+      } # end of if that computes individual logit (L) values
+    } # end of if that checks if R[r] is NA
+
+
+    r <- r + 1 # Incrementing latest row for next iteration
+    if (r > length(Data)) break # end of data reached
+
+  } # end of while loop
+
+  if (abs(L[length(L)]) > Crit) CP <- R[r - 1] else CP <- NULL # if no significant change
+  # point, CP empty
+  CP
+}
+
+
+#' Uses Komolgorov-Smirnov test to find first significant change point
+#' @param Data A vector of trial by trial measures or successive intervals
+#' @param R A vector of putative change points
+#' @param Crit Decision criterion, the value the logit must exceed
+#' for the function to return a significant change point
+#' @return r1 the change point row when the decision criterion is exceeded
+#' @details Not normally called directly, but via the cp_wrapper function instead.
+
+KS <- function(Data, R, Crit)
+{
+  # L is the pseudologit vector for rows where the
+  # approximation formula for the Kolmogorov-Smirnov p is valid.
+  # Its final value is the first value to exceed the decision criterion
+  # t is the col vector of rows for which L is defined
+  # r1 is the change point row when the decision criterion is exceeded
+  # r2 is the row at which the decision criterion is exceeded
+  # If there are no testable rows or if the decision criterion is never
+  # exceeded, the variables are returned empty
+
+  N <- 1:length(Data) # Number of rows in Data vector
+  L <- rep(0, length(N)) # initialization of the logit vector
+
+  Na <- N - R # Col vector giving for each row in Data the number of rows
+  # after the putative change point. So R gives the number of
+  # rows before the change point and Na the number after
+
+  Test <- which(Na * R / (Na + R) >= 4) # For the approximation to the KS
+  # probability to be valid, the product of the two n's divided by
+  # the sum must be greater than or equal to 4. Test is the col
+  # vector of rows that satisfy this constraint--the row numbers(!),
+  # not the entries themselves
+  r1 <- c()
+  r2 <- c()
+  t <- rep(0, length(Test))
+
+  if (length(Test) > 0) {# check if any rows satisfy the constraint and proceed
+    for (T in 1:length(Test)) {
+      pval <- suppressWarnings(stats::ks.test(Data[1:R[Test[T]]],
+                                       Data[(R[Test[T]] + 1):Test[T]],
+                                       exact = FALSE)$p.value)
+      L[T] <- log10((1 - pval) / pval)
+      t[T] <- Test[T] # The row to which the latest value of L[T] "belongs"
+
+      if (L[T] > Crit) # Value of logit exceeds decision criterion
+      {
+        r2 <- Test[T] # the row (in Data) at which the criterion is exceeded
+        r1 <- R[Test[T]] # the change point when the criterion is exceeded
+        L <- L[1:T] # Drop rows of L after row in which decision criterion reached
+        break # Break out of loop when decision criterion exceeded
+      }
+    }
+  }
+  r1
+}
+
+######
+# CP finder
+######
+#' Find putative change point in discrete-time cumulative records
+#' @param Cum Input vector of cumulative response counts
+#' @return R A vector with the same length as Cum, with putative change points for each
+#' trial. These correspond to the preceding trial at which the deviation of the
+#' observed count from the expected count is maximal
+#' @details Not normally called directly, but via the cp_wrapper function instead.
+
+cpd <- function(Cum)
+{
+  N <- 1:length(Cum) #Trial count vector
+  Slopes <- Cum / N #Average count or measure per trial for trials 1 to N
+
+  M <- diag(length(Cum))
+  M[upper.tri(M)] <- 1 # Mask with ones on and above diagonal & zeros below
+
+  Diag <- M * matrix(rep(Slopes, length(Slopes)), nrow = length(Slopes), byrow = TRUE)
+  # Creates an array in which successive cols have successive slopes of the cumulative
+  # record. The slope for a given col fills all the cells on and above the main diagonal
+
+  Preds <- 1:length(Slopes) * Diag
+  # Predicted (expected) cumulative values in a diagonal array
+
+  Obs <- Cum * M
+  # Diagonal array of observed cumulations
+
+  Devs <- abs(Obs - Preds) # Diagonal array of deviations from expectations
+
+  mx <- M * matrix(rep((apply(Devs, 2, max)), length(Slopes)), nrow = length(Slopes),
+                   byrow = TRUE)
+
+  # mx is a matrix listing the maxima of the deviations
+
+  R <- merge(data.frame(col = 1:length(Cum)),
+                 as.data.frame(which(Devs == mx & mx > 0, arr.ind = TRUE)), by = "col",
+             all.x = TRUE)
+
+  names(R)[names(R) == "row"] <- "R"
+  names(R)[names(R) == "col"] <- "N"
+  # R at this stage is a data.frame with columns N, and R. R has the trial numbers of the
+  # putative change points and N - the trial numbers.
+
+  stats::aggregate(R$R, by = R["N"], min)$x
+
+  # return the minimum of the trial numbers of the putative change points for each trial
+  # number
+}
+
+#' Find putative change point in continuous-time cumulative records
+#' @param Cum Input vector of the cumulative interevent intervals
+#' @return R A vector with the same length as Cum, with putative change points for each
+#' event. The putative change point corresponding to the Nth
+#' event is the preceding event at which the deviation of the observed event count
+#' from the expected event count is maximal. The expected event count
+#' at any earlier event, n, is Cum[n], the interval up to the nth event,
+#' divided by the average interevent interval over the range from n = 0 to n = N
+#' The deviation from expectation is n - this expectation. R is the value of n at
+#' which this deviation is maximal
+#' @details Not normally called directly, but via the cp_wrapper function instead
+
+cpc <- function(Cum)
+{
+  N <- 1:length(Cum) # Event count vector
+  Slopes <- N / Cum # Average slope up to given point in cumulative function
+
+  M <- diag(length(Cum))
+  M[upper.tri(M)] <- 1 # Mask with ones on and above diagonal & zeros below
+
+  Diagonal <- M * matrix(rep(Slopes, length(Slopes)), nrow = length(Slopes), byrow = TRUE)
+  # Creates an array in which successive cols have successive slopes of the cumulative
+  # record. The slope for a given col fills all the cells on and above the main diagonal
+
+  Preds <-  Cum * Diagonal
+  # Creates diagonal array of the predicted numbers of events at each time in Cum
+
+  Obs <- 1:length(Slopes) * M
+  # Diagonal array with actual numbers of events
+
+  Devs <- abs(Obs - Preds) # Diagonal array of deviations from expectations
+
+  mx <- M * matrix(rep((apply(Devs, 2, max)), length(Slopes)), nrow = length(Slopes),
+                   byrow = TRUE)
+
+  # mx is a matrix listing the maxima of the deviations
+
+  R <- merge(data.frame(col = 1:length(Cum)),
+             as.data.frame(which(Devs == mx & mx > 0, arr.ind = TRUE)), by = "col",
+             all.x = TRUE)
+
+  names(R)[names(R) == "row"] <- "R"
+  names(R)[names(R) == "col"] <- "N"
+  # R at this stage is a data.frame with columns N, and R. R has the cumulative
+  # inter-event intervals of the putative change points and N - the event numbers.
+
+  stats::aggregate(R$R, by = R["N"], min)$x
+
+  # return the minimum of the trial numbers of the putative change points for each trial
+  # number
+}
+
+#' Truncate the cumulative record at significant change point
+#' @param Cum Input vector of cumulative response counts
+#' @param R A vector with trial numbers of putative change points
+#' @param L A vector giving for each trial the pseudologit, approximately
+#' the log of the odds that there has been a change point
+#' @param Crit A real-valued decision criterion on logit
+#' @return A list of Cumt, the truncated cumulative record,
+#' Lt, the truncated L vector up to the row at which a change point was detected,
+#' and r, the row at which L was truncated.
+#' @details Not normally called directly, but via the cp_wrapper function instead.
+#' Works for both discrete and continuous cumulative records. All input arguments are
+#' obligatory.
+
+trun <- function(Cum, R, L, Crit)
+{
+  # Cumt is truncated cumulative record,
+  # the record as it would be if observation began at time CP+ or after trial CP
+  # Lt is the L vector truncated at Alert, which is the row at which an CP was detected
+  # r is row at which it was truncated.
+
+  La <- abs(L)
+  if (length(which(La > Crit)) > 0) {
+    Alert <- min(which(La > Crit))# Finds first row where decision criterion is exceeded
+  } else {# If there is no such row, then Alert will be NULL
+    Alert <- NULL
+  }
+
+  if (is.null(Alert)) {
+    list(Cumt = Cum, Lt = L, r = Alert)
+  }
+  else
+  {
+    r <- R[Alert] # The putative change point at the value of Cum that first yields
+    # significant logit.This putative change point is always the number of an earlier
+    # event or trial
+
+    I <- c(Cum[1], diff(Cum)) # Interevent interval vector OR vector
+    # of responses on successive trials
+
+    Cumt <- cumsum(I[(r + 1):(length(I))]) # Truncated cumulative record
+
+    Lt <- L[1:Alert] # Truncated logit vector
+
+    list(Cumt = Cumt, Lt = Lt, r = r)
+  }
+
+}
+
+```
+
+```{r}
+cutoff <- 12
+lookup <- tibble(block = c(6, rep(c(2, 3, 4, 5, 6), 2)), 
+                 Day = c("Day 1", rep("Day 2", 5), rep("Day 3", 5)), 
+                 overall_block = 1:11)
+
+change_point <- rev_learning %>% 
+  select(Day, Bat, block, bin, block_vis, reward_status) %>% 
+  filter(Day == "Day 2" | Day == "Day 3" | Day == "Day 1" & block == 6, 
+         block > 1, 
+         block_vis <= cutoff & block_vis > 0) %>% 
+  mutate(Block = paste0(Day, " ", "- Block ", block)) %>% 
+  ungroup() %>% 
+  group_by(Bat, Block) %>%
+  do(cp_wrapper(.$reward_status, isDiscrete = TRUE, "ttest", 1.5))  
+
+#generate a cumulative response vs trial plot:
+change_point %>% 
+  filter(str_detect(Block, "Day 1") | str_detect(Block, "Day 2")) %>%
+  ggplot(aes(Trial, CumSs, colour = Block, group = Block
+             )) +
+  geom_jitter(size = 0.75) +
+  geom_line(alpha = 0.2, size = 1.25) + 
+  geom_vline(xintercept = c(5, 10), linetype = "dotted") +
+  # scale_x_continuous(limits = c(0, 15), breaks = seq(0, 15, by = 1)) +
+  # scale_y_continuous(limits = c(0, 15), breaks = seq(0, 15, by = 1)) +
+  facet_wrap(.~Bat) +
+  xlab("Number of trials for each change point") + 
+  ylab("Cumulative number of correct responses") + 
+  theme_bw()
+  
+change_point %>% 
+  filter(str_detect(Block, "Day 3")) %>%
+  # mutate(Block = as.factor(Block)) %>%
+  ggplot(aes(Trial, CumSs, colour = Block, group = Block
+             )) +
+  geom_jitter(size = 0.75) +
+  geom_line(alpha = 0.2, size = 1.25) + 
+  geom_vline(xintercept = c(5, 10), linetype = "dotted") +
+  # scale_x_continuous(limits = c(0, 15), breaks = seq(0, 15, by = 1)) +
+  # scale_y_continuous(limits = c(0, 15), breaks = seq(0, 15, by = 1)) +
+  facet_wrap(.~Bat) +
+  xlab("Number of trials for each change point") + 
+  ylab("Cumulative number of correct responses") + 
+  theme_bw()
+```
+
+```{r plateau}
+
+plateau <- rev_learning %>% 
+  select(Bat, Day, block, bin, block_vis, count_vis, reward_status) %>% 
+  filter(
+         #Day == "Day 1" & block == 6 |
+         Day == "Day 2" | Day == "Day 3",
+         block > 1, 
+         block_vis > 0 & block_vis < 11) %>% 
+  mutate(Day = case_when(Day == "Day 1" ~ "Night 1", 
+                         Day == "Day 2" ~ "Night 2", 
+                         Day == "Day 3" ~ "Night 3"))
+
+write.csv2(plateau, file = "/Users/shambhavi/Google Drive/Experiments & Data/Serial Reversal Learning - La Selva_2017 (backup)/Analysis/plateau_raw_data.csv", row.names = FALSE)
+
+plateau_avg <- plateau %>% 
+  ungroup() %>% 
+  group_by(block_vis) %>% 
+  group_modify(~ mean_cl_boot(.x$reward_status, conf.int = 0.95))
+
+p11 <- plateau_avg %>% 
+  ggplot(aes(block_vis, y)) + 
+  geom_ribbon(aes(ymin = ymin, ymax = ymax), alpha = 0.3) +
+  geom_hline(aes(yintercept = 0.5), linetype = "dotted") + 
+  geom_line() + 
+  geom_point() + 
+  scale_x_continuous(breaks = seq(1,10, by = 1)) + 
+  scale_y_continuous(breaks = seq(0, 1, by = 0.1), limits = c(0,1)) +  
+  xlab("Number of visits after a reversal") + 
+  ylab("Visits to the rewarding option") + 
+  theme_srl2()
+
+p12 <- plateau %>% 
+  filter(Bat == "Bat 10") %>% 
+  ggplot(aes(block_vis, reward_status)) + 
+  #geom_ribbon(aes(ymin = ymin, ymax = ymax), alpha = 0.3) +
+  geom_hline(aes(yintercept = 0.5), linetype = "dotted") + 
+  geom_line(aes(colour = Bat, group = Bat)) + 
+  #geom_point() + 
+  scale_x_continuous(breaks = seq(1,10, by = 1)) + 
+  scale_y_continuous(breaks = seq(0, 1.1, by = 0.1)) +  
+  facet_grid(Day~block) + 
+  #ylim(0,1) + 
+  xlab("Visits after reversal") + 
+  ylab("Prop. rewarded visits ± 95% CIs") + 
+  theme_bw()
+  
+
+plateau <- rev_learning %>% 
+  select(Bat, Day, block, bin, block_vis, count_vis, reward_status) %>% 
+  filter(Day == "Day 1" & block == 6 |
+         Day == "Day 2" | Day == "Day 3",
+         block > 1, 
+         block_vis > 0 & block_vis < 11) %>% 
+  ungroup() %>% 
+  group_by(Day, block, block_vis) %>% 
+  group_modify(~ mean_cl_boot(.x$reward_status, conf.int = 0.95)) %>% 
+  ungroup() %>% 
+  mutate(trial_num = 1:n())
+
+blocks <- plateau %>% 
+  mutate(reversal = ifelse(block != lag(block), 1, 0)) %>% 
+  filter(reversal == 1) %>% 
+  mutate(trial_num = trial_num - 0.5)
+
+plateau %>% 
+  ggplot(aes(trial_num, y)) + 
+  geom_line() + 
+  geom_point() +
+  geom_ribbon(aes(ymin = ymin, ymax = ymax, alpha = 0.3)) + 
+  geom_vline(data = blocks, aes(xintercept = trial_num), linetype = "dashed") +
+  geom_hline(aes(yintercept = 0.5), linetype = "dotted") + 
+  scale_x_continuous(breaks = seq(0, 120, by = 10)) + 
+  ylab("Prop. rewarded visits ± 95% CIs") + 
+  xlab("Running trial number") + 
+  theme_bw() + 
+  theme(legend.position = "none") 
+```
+
+The Prop~rew~ in the first bin of 10 visits after a reversal increased significantly as the bats experienced more reversals. This effect was present in the second bin of 10 visits (visits 11 - 20) as well, but by the third bin there was no further change (Figure \@ref(fig:first-night-block-removed) b)). At the end of each block, i.e., just before the next reversal, the bats visited the rewarding flower almost exclusively, and there was no evidence of anticipatory visits. 
 
 (ref:first-night-first-block-removed) a) Forest plot of the regression coeffients from the model of the effect of reversal and 10-visit bin on the visits to the rewarding flower. Circles represent the means of the posterior distributions of the slope coefficients, thick horizontal lines represent 50% credible intervals, and thin horizontal lines 89% credible intervals. The numbers in bold are the means of the posterior distributions and 89% credible intervals b) Conditional effects plot from the model of the effect of reversal and 10-visit bin on the visits to the rewarding flower showing the two-way interaction between reversal and bin, sampling from the posterior distribution.
 
-```{r first-night-first-block-removed, fig.cap = "(ref:first-night-first-block-removed)", fig.width = 18, fig.height = 5}
+```{r first-night-first-block-removed, fig.cap = "(ref:first-night-first-block-removed)", fig.width = 20, fig.height = 5}
 
 # creating a table of the data from the first night with the first block removed
 analysis_choices_firstnight_nofirstblock <- rev_learning %>% 
@@ -1029,12 +2013,15 @@ t1_estimates <- model_outputs(m.firstnight.blockbin.nofirstblock, fixed_effects)
 max_xvalue <- max_xvalue_output(m.firstnight.blockbin.nofirstblock, fixed_effects)
 
 # creating a plot of the slope coefficients
-p9 <- mcmc_intervals(m.firstnight.blockbin.nofirstblock,
-  point_size = 1.1,
+p3 <- mcmc_intervals(m.firstnight.blockbin.nofirstblock,
+  point_size = 2.5,
   pars = vars(1:4),
-  prob_outer = 0.89
+  prob_outer = 0.89, 
+  inner_size = 4, 
+  outer_size = 2.5
 ) +
-  xlim(-5, max_xvalue + 0.8) +
+  xlim(-4.5, max_xvalue + 0.9) +
+  ylim(c(2.5, 1)) + 
   geom_vline(xintercept = 0) +
   scale_y_discrete(
     labels = c(
@@ -1047,9 +2034,13 @@ p9 <- mcmc_intervals(m.firstnight.blockbin.nofirstblock,
   ) +
   geom_text(
     data = t1_estimates,
-    aes(x = max_xvalue + 0.1, y = c(4, 3, 2, 1), label = All, fontface = "bold", family = "Times"), size = 3, hjust = 0
+    aes(x = max_xvalue + 0.1, y = c(4, 3, 2, 1), label = All, fontface = "bold", family = "Times"), size = 5, hjust = 0
   ) +
-  theme_srl2()
+  scale_colour_viridis_d() + 
+  theme_srl2() + 
+  theme(axis.text = element_text(size = 12, family = "Times", colour = "black"), 
+        axis.title = element_text(size = 14, family = "Times"))
+  
 
 # setting the conditions for the conditional effects plots 
 int_conditions <- list(block = c(2,3,4,5,6), bin = c(1,2,3,4,5))
@@ -1058,190 +2049,27 @@ int_conditions <- list(block = c(2,3,4,5,6), bin = c(1,2,3,4,5))
 m_firstnight_blockbin_nofirstblock <- conditional_effects(m.firstnight.blockbin.nofirstblock, int_conditions = int_conditions, prob = 0.89, nsamples = 150)
 
 # plotting out the conditional effects
-p10 <- plot(m_firstnight_blockbin_nofirstblock, plot = FALSE, line_args = c(alpha = 1/5)) [[3]] +
-  scale_x_continuous(breaks = seq(1,5,by = 1)) +
-  ylim(0,1) + 
-  xlab("Reversal") + 
-  ylab("Visits to the rewarding option") +
-  theme_srl2()
-
-# plotting it out
-ggarrange(p9, p10, ncol = 2, labels = c("a)","b)"), font.label = list(face = "plain", family = "Times New Roman", size = 8))
-```
-
-(ref:first-night-first-two-blocks-removed) a) Forest plot of the regression coeffients from the model of the effect of reversal and 10-visit bin on the visits to the rewarding flower, excluding the first reversal. Circles represent the means of the posterior distributions of the slope coefficients, thick horizontal lines represent 50% credible intervals, and thin horizontal lines 89% credible intervals. The numbers in bold are the means of the posterior distributions and 89% credible intervals b) Conditional effects plot from the model of the effect of reversal and 10-visit bin on the visits to the rewarding flower - excluding the first reversal - showing the two-way interaction between reversal and bin, sampling from the posterior distribution.
-
-```{r first-night-first-two-blocks-removed, fig.cap = "(ref:first-night-first-two-blocks-removed)", fig.width = 18, fig.height = 5}
-# creating a table of the data from the first night with the first two blocks removed
-analysis_choices_firstnight_lastthreeblocks <- analysis_choices_firstnight_nofirstblock %>% 
-  filter(block > 2)
-
-# fitting the model
-# m.firstnight.blockbin.lastthreeblocks <-
-#   brm(data = analysis_choices_firstnight_lastthreeblocks, family = bernoulli,
-#       reward_status ~ block + bin + block:bin + 
-#         (1 + block:bin|Bat), # random slopes and intercepts
-#       prior = c(prior(normal(0, 2.5), class = Intercept),
-#                 prior(normal(0, 2.5), class = b), 
-#                 prior(cauchy(0, 1), class = sd)
-#                 ),
-#       iter = 2000, warmup = 1000, chains = 4, cores = 5, thin = 3,
-#       control = list(adapt_delta = 0.99, max_treedepth = 15),
-#       seed = 12)
-
-# saving the model
-# save(m.firstnight.blockbin.lastthreeblocks, file = "data/processed_data/m.firstnight.blockbin.lastthreeblocks.rda")
-
-# loading the model
-load("data/processed_data/m.firstnight.blockbin.lastthreeblocks.rda")
-
-# setting the names of the fixed effects
-fixed_effects = c("Intercept", "block", "bin", "block:bin")
-
-# putting the model's estimates into a table
-t1_estimates <- model_outputs(m.firstnight.blockbin.lastthreeblocks, fixed_effects)
-
-# finding the maximum x value in the fixed effects of the model
-max_xvalue <- max_xvalue_output(m.firstnight.blockbin.lastthreeblocks, fixed_effects)
-
-# creating a plot of the slope coefficients
-p11 <- mcmc_intervals(m.firstnight.blockbin.lastthreeblocks,
-  point_size = 1.1,
-  pars = vars(1:4),
-  prob_outer = 0.89
-) +
-  xlim(-5, max_xvalue + 0.8) +
-  geom_vline(xintercept = 0) +
-  scale_y_discrete(
-    labels = c(
-      "b_Intercept" = "Intercept",
-      "b_block" = "Reversal",
-      "b_bin" = "Bin",
-      "b_block:bin" = "Reversal-bin \n interaction"
-    ),
-    limits = c("b_block:bin", "b_bin", "b_block", "b_Intercept")
-  ) +
-  geom_text(
-    data = t1_estimates,
-    aes(x = max_xvalue + 0.1, y = c(4, 3, 2, 1), label = All, fontface = "bold", family = "Times"), size = 3, hjust = 0
-  ) +
-  theme_srl2()
-
-# setting the conditions for the conditional effects plots 
-int_conditions <- list(block = c(3,4,5,6), bin = c(1,2,3,4,5))
-
-# calculating the conditional effects
-m_firstnight_blockbin_nofirstblock <- conditional_effects(m.firstnight.blockbin.nofirstblock, int_conditions = int_conditions, prob = 0.89, nsamples = 150)
-
-# creating the plots of the conditional effects
-p12 <- plot(m_firstnight_blockbin_nofirstblock, plot = FALSE, line_args = c(alpha = 1/5)) [[3]] +
-  scale_x_continuous(breaks = seq(3,6,by = 1)) +
-  ylim(0,1) + 
-  xlab("Reversal") + 
-  ylab("Visits to the rewarding option") +
-  theme_srl2()
-
-# plotting it out
-ggarrange(p11, p12, ncol = 2, labels = c("a)","b)"), font.label = list(face = "plain", family = "Times New Roman", size = 8))
-```
-
-## The proportion of rewarded visits does not increase due to reversal experience in the later stages of the experiment
-
-On the second and third experimental nights the highest Prop~rew~ was in the first block of the night, before any reversals had been experienced: `r report_m_ci_perc(day2and3bin1, par = "y", brackets = "square")`. Excluding this first block, there was no effect of reversal on the Prop~rew~, although there was a strong effect of 10-visit bin within each block. That is, the proportion of visits to the rewarded flower only increased within each block as the block progressed (figure \@ref(fig:second-and-third-nights-analysis)).  
-
-(ref:second-and-third-nights-analysis) a) Forest plot of the regression coeffients from the model of the effect of experimental night, reversal and 10-visit bin on the visits to the rewarding flower, excluding the first night. Circles represent the means of the posterior distributions of the slope coefficients, thick horizontal lines represent 50% credible intervals, and thin horizontal lines 89% credible intervals. The numbers in bold are the means of the posterior distributions and 89% credible intervals b) Conditional effects plot from the model of the effect of experimental night, reversal and 10-visit bin on the visits to the rewarding flower - excluding the first night - showing the two-way interaction between reversal and bin, sampling from the posterior distribution.
-
-```{r second-and-third-nights-analysis, fig.cap = "(ref:second-and-third-nights-analysis)", fig.width = 18, fig.height = 5}
-
-# creating a data table with the data from the second and third nights
-analysis_choices_laternights <- rev_learning %>% 
-  ungroup() %>% 
-  select(Day, block, bin, Bat, reward_status, block_vis, count_vis) %>% 
-  filter(block_vis != 0) %>% 
-  # removing the space temporarily and changing the Day back to numbers as this is how it was done in the model 
-  mutate(Bat = str_remove_all(Bat, " "),
-         Day = case_when(Day == "Day 1" ~ 1, 
-                         Day == "Day 2" ~ 2, 
-                         Day == "Day 3" ~ 3), 
-         Day = as.integer(Day),
-         block = as.integer(block),
-         bin = as.integer(bin),
-         reward_status = as.integer(reward_status),
-         block_vis = as.integer(block_vis),
-         count_vis = as.integer(count_vis)) %>% 
-  filter(Day > 1, 
-         block > 1)
-
-# fitting the model
-# m.dayblockbin.laternights <-
-  # brm(data = analysis_choices_laternights, family = bernoulli,
-  #     reward_status ~ Day + block + bin + block:bin + Day:block + 
-  #       (1 + block:bin + Day:block|Bat), # random slopes and intercepts
-  #     prior = c(prior(normal(0, 2.5), class = Intercept),
-  #               prior(normal(0, 2.5), class = b), 
-  #               prior(cauchy(0, 1), class = sd)
-  #               ),
-  #     iter = 2000, warmup = 1000, chains = 4, cores = 5, thin = 3,
-  #     control = list(adapt_delta = 0.99, max_treedepth = 15),
-  #     seed = 12)
-
-# saving the model
-# save(m.dayblockbin.laternights, file = "data/processed_data/m.dayblockbin.laternights.rda")
-
-# loading the model
-load("data/processed_data/m.dayblockbin.laternights.rda")
-
-# setting the names of the fixed effects
-fixed_effects = c("Intercept", "Day", "block", "bin", "block:bin", "Day:block")
-
-# putting the model's estimates into a table
-t1_estimates <- model_outputs(m.dayblockbin.laternights, fixed_effects)
-
-# finding the maximum x value in the fixed effects of the model
-max_xvalue <- max_xvalue_output(m.dayblockbin.laternights, fixed_effects)
-
-# creating a plot of the slope coefficients
-p13 <- mcmc_intervals(m.dayblockbin.laternights,
-  point_size = 1.1,
-  pars = vars(1:6),
-  prob_outer = 0.89
-) +
-  xlim(-3, max_xvalue + 0.8) +
-  geom_vline(xintercept = 0) +
-  scale_y_discrete(
-    labels = c(
-      "b_Intercept" = "Intercept",
-      "b_Day" = "Experimental \n night", 
-      "b_block" = "Block",
-      "b_bin" = "Bin",
-      "b_block:bin" = "Block-bin \n interaction", 
-      "b_Day:block" = "Night-block \n interaction"
-    ),
-    limits = c("b_Day:block", "b_block:bin", "b_bin", "b_block", "b_Day", "b_Intercept")
-  ) +
-  geom_text(
-    data = t1_estimates,
-    aes(x = max_xvalue + 0.1, y = c(6, 5, 4, 3, 2, 1), label = All, fontface = "bold", family = "Times"), size = 3, hjust = 0
-  ) +
-  theme_srl2()
-
-# setting the conditions for the conditional effects plots 
-int_conditions <- list(Day = c(1, 2, 3), block = c(2,3,4,5,6), bin = c(1,2,3,4,5))
-
-# calculating the conditional effects
-m_dayblockbin_laternights <- conditional_effects(m.dayblockbin.laternights, int_conditions = int_conditions, prob = 0.89, nsamples = 150)
-
-# creating the plots of the conditional effects
-p14 <- plot(m_dayblockbin_laternights, plot = FALSE, line_args = c(alpha = 1/5)) [[4]] +
+p4 <- plot(m_firstnight_blockbin_nofirstblock, plot = FALSE, line_args = c(alpha = 1/5)) [[3]] +
+  scale_x_continuous(breaks = seq(2,6,by = 1)) +
   ylim(0,1) + 
   xlab("Block") + 
-  ylab("Visits to the rewarding option") + 
-  theme_srl2() + 
-  theme(legend.position = "right")
+  ylab("Posterior estimates of the model") +
+  guides(color = guide_legend(reverse=TRUE), 
+         fill = guide_legend(reverse = TRUE)) + 
+  scale_colour_viridis_d() + 
+  scale_fill_viridis_d() + 
+  theme_srl2() +
+  theme(axis.text = element_text(size = 12, family = "Times", colour = "black"), 
+        axis.title = element_text(size = 14, family = "Times"), 
+        legend.position = "top") 
+  
 
 # plotting it out
-ggarrange(p13, p14, ncol = 2, labels = c("a)","b)"), font.label = list(face = "plain", family = "Times New Roman", size = 8))
+ggarrange(p3, p4, nrow = 2, labels = c("a)","b)"), font.label = list(face = "plain", family = "Times New Roman", size = 12))
 ```
+
+The block after the very first reversal of the night, which was also the first reversal of the whole experiment had the lowest proportion of rewarded visits in the first twenty visits of the block. The effect of reversal on the Prop~rew~ persisted even when the data from this block were removed from the analysis (see **Supplementary Information**).
+Thus, the bats switched to the rewarding flower with increasing speed, i.e., within a smaller number of visits, as they experienced successive reversals. 
 
 # Discussion 
 
@@ -1466,7 +2294,7 @@ samp_bar_nonrw <- samp_exp_nonrw %>%
     # marking the CondMod and Reader events
     Type = as.factor(ifelse(Type == "CondMod", "Nose-poke", "Fly-by")),
     Loc = as.character(Loc),
-    assigned = ifelse(assigned == 0, " ", "(non-assigned)")
+    assigned = ifelse(assigned == 0, "", "(non-assigned)")
   ) %>%
   ungroup() %>%
   group_by(Day, Bat, Loc, Type) %>%
@@ -1505,10 +2333,12 @@ Only two out of the array of eight flowers were assigned uniquely to each bat bu
 
 ```{r, unassigned-flowers, fig.cap="(ref:unassigned-flowers)", fig.width = 10, fig.height = 7}
 
-p15 <- samp_bar_nonrw %>%
-  # adding a row for the fly-by visits to an assigned flower for Bat 20 so the bars in the following plot are of even width
+samp_bar_nonrw <- samp_bar_nonrw %>% 
   ungroup() %>% 
-  add_row(Day = "Night 1", Cage = 1, Bat = "Bat 20", unitLabel = "Reader7", assigned = " ", Loc = as.character(7), visits = 0, Type = "Fly-by", max = 0, Event = "Fly-by") %>% 
+    add_row(Day = "Night 1", Cage = 1, Bat = "Bat 20", unitLabel = "Reader7", assigned = "", Loc = as.character(7), visits = 0, Type = "Fly-by", max = 0, Event = "Fly-by ")
+
+p5 <- samp_bar_nonrw %>%
+  # adding a row for the fly-by visits to an assigned flower for Bat 20 so the bars in the following plot are of even width
   filter(Cage == 1) %>%
   ggplot(aes(x = Loc, y = visits, fill = Event)) +
   geom_col(position = "dodge", color = "black") +
@@ -1519,7 +2349,7 @@ p15 <- samp_bar_nonrw %>%
   theme_srl() +
   scale_fill_viridis_d(option = "inferno") 
 
-p16 <- samp_bar_nonrw %>%
+p6 <- samp_bar_nonrw %>%
   filter(Cage == 2) %>%
   ggplot(aes(x = Loc, y = visits, fill = Event)) +
   geom_col(position = "dodge", color = "black") +
@@ -1529,9 +2359,9 @@ p16 <- samp_bar_nonrw %>%
   ylab("Number of approaches/visits \n to non-assigned flowers") +
   scale_fill_viridis_d(option = "inferno") +
   theme_srl() +
-  theme(legend.positio = "bottom")
+  theme(legend.position = "bottom")
 
-ggarrange(p15, p16, nrow = 2, ncol = 1, common.legend = TRUE)
+ggarrange(p5, p6, nrow = 2, ncol = 1, common.legend = TRUE)
 ```
 
 The number of approaches or attempts to get a reward at the non-assigned flowers was a small proportion of the overall number of approaches and reward-attempts at the flowers, less than 10% every night on average as Figure \@ref(fig:proportion-unassigned) shows.
@@ -1542,7 +2372,7 @@ The number of approaches or attempts to get a reward at the non-assigned flowers
 
 dodge <- position_dodge(width = 0.1)
 
-p17 <- samp_prop_nonrw %>%
+p7 <- samp_prop_nonrw %>%
   mutate(Day = as.factor(Day)) %>%
   ggplot() +
   geom_jitter(aes(Day, prop_assigned, color = Bat)) +
@@ -1554,33 +2384,14 @@ p17 <- samp_prop_nonrw %>%
   geom_hline(yintercept = 0.5, linetype = 2) +
   theme_srl() +
   scale_color_viridis_d(option = "inferno") +
-  theme(legend.position = "bottom", legend.box = "vertical", legend.margin = margin())
+  theme(legend.position = "top", 
+        legend.title = element_blank(),
+        legend.text = element_text(size  = 8),
+        legend.margin=margin(0,0,0,0)) +
+    guides(colour = guide_legend(nrow = 2))
 
-p17
+p7
 ```
-
-
-## Curves of individual bats' visits to the rewarding flower on the first night
-
-(ref:first-night-rew-visits-individual-bats) Visits to the rewarding flower for each individual bat: average proportion per five-visit bin. Vertical dashed lines indicate the occurrence of a reversal. The area under the curve marked by data from the reversal up to 25th visit of the block, marked by the vertical dotted line, were analysed. 
-
-```{r, first-night-rew-visits-individual-bats, fig.cap = "(ref:first-night-rew-visits-individual-bats)"}
-
-# plotting it out   
-p18 <- rev_learning_first_night %>% 
-  ggplot() + 
-  geom_line(aes(total_vis, bin_five_average, group = Bat, colour = Bat)) +
-  facet_wrap(~Bat) + 
-  ylim(0,1) + 
-  geom_vline(xintercept = c(10.5, 20.5, 30.5, 40.5, 50.5), linetype = "dashed") +
-  geom_vline(xintercept = c(5.5, 15.5, 25.5, 35.5, 45.5), linetype = "dotted") + 
-  xlab("Bins of 5 visits") + 
-  ylab("Proportion of visits to the rew flower") + 
-  theme_srl2()
-
-p18
-```
-
 
 ## Details of the statistical analyses
 
@@ -1591,5 +2402,245 @@ For the models of the area under the curve a normal likelihood function was used
 
 Visual inspection of the trace plots, the effective sample size, the Gelman-Rubin convergence diagnostic ($\hat R$) and the calculation of posterior predictions for the same clusters were all used to assess the fit of the models. In all the models the $\hat R$ was equal to 1 for all the chains.
 
+
+## The effect of reversal is not driven solely by the effect of the first reversal on the first night 
+
+The effect of reversal on the visits to the rewarding flower persisted even when the data from this block were removed from the analysis. 
+
+(ref:first-night-first-two-blocks-removed) a) Forest plot of the regression coeffients from the model of the effect of reversal and 10-visit bin on the visits to the rewarding flower, excluding the first reversal. Circles represent the means of the posterior distributions of the slope coefficients, thick horizontal lines represent 50% credible intervals, and thin horizontal lines 89% credible intervals. The numbers in bold are the means of the posterior distributions and 89% credible intervals b) Conditional effects plot from the model of the effect of reversal and 10-visit bin on the visits to the rewarding flower - excluding the first reversal - showing the two-way interaction between reversal and bin, sampling from the posterior distribution.
+
+```{r first-night-first-two-blocks-removed, fig.cap = "(ref:first-night-first-two-blocks-removed)", fig.width = 18, fig.height = 5}
+# creating a table of the data from the first night with the first two blocks removed
+analysis_choices_firstnight_lastthreeblocks <- analysis_choices_firstnight_nofirstblock %>% 
+  filter(block > 2)
+
+# fitting the model
+# m.firstnight.blockbin.lastthreeblocks <-
+#   brm(data = analysis_choices_firstnight_lastthreeblocks, family = bernoulli,
+#       reward_status ~ block + bin + block:bin + 
+#         (1 + block:bin|Bat), # random slopes and intercepts
+#       prior = c(prior(normal(0, 2.5), class = Intercept),
+#                 prior(normal(0, 2.5), class = b), 
+#                 prior(cauchy(0, 1), class = sd)
+#                 ),
+#       iter = 2000, warmup = 1000, chains = 4, cores = 5, thin = 3,
+#       control = list(adapt_delta = 0.99, max_treedepth = 15),
+#       seed = 12)
+
+# saving the model
+# save(m.firstnight.blockbin.lastthreeblocks, file = "data/processed_data/m.firstnight.blockbin.lastthreeblocks.rda")
+
+# loading the model
+load("data/processed_data/m.firstnight.blockbin.lastthreeblocks.rda")
+
+# setting the names of the fixed effects
+fixed_effects = c("Intercept", "block", "bin", "block:bin")
+
+# putting the model's estimates into a table
+t1_estimates <- model_outputs(m.firstnight.blockbin.lastthreeblocks, fixed_effects)
+
+# finding the maximum x value in the fixed effects of the model
+max_xvalue <- max_xvalue_output(m.firstnight.blockbin.lastthreeblocks, fixed_effects)
+
+# creating a plot of the slope coefficients
+p8 <- mcmc_intervals(m.firstnight.blockbin.lastthreeblocks,
+  point_size = 2.5,
+  pars = vars(1:4),
+  prob_outer = 0.89, 
+  inner_size = 4, 
+  outer_size = 2.5
+) +
+  xlim(-4.6, max_xvalue + 0.9) +
+  geom_vline(xintercept = 0) +
+  scale_y_discrete(
+    labels = c(
+      "b_Intercept" = "Intercept",
+      "b_block" = "Reversal",
+      "b_bin" = "Bin",
+      "b_block:bin" = "Reversal-bin \n interaction"
+    ),
+    limits = c("b_block:bin", "b_bin", "b_block", "b_Intercept")
+  ) +
+  geom_text(
+    data = t1_estimates,
+    aes(x = max_xvalue + 0.1, y = c(4, 3, 2, 1), label = All, fontface = "bold", family = "Times"), size = 5, hjust = 0
+  ) +
+  scale_colour_viridis_d() + 
+  theme_srl2() + 
+  theme(axis.text = element_text(size = 12, family = "Times", colour = "black"), 
+        axis.title = element_text(size = 14, family = "Times"))
+
+# setting the conditions for the conditional effects plots 
+int_conditions <- list(block = c(3,4,5,6), bin = c(1,2,3,4,5))
+
+# calculating the conditional effects
+m_firstnight_blockbin_lastthreeblocks <- conditional_effects(m.firstnight.blockbin.lastthreeblocks, int_conditions = int_conditions, prob = 0.89, nsamples = 150)
+
+# creating the plots of the conditional effects
+p9 <- plot(m_firstnight_blockbin_lastthreeblocks, plot = FALSE, line_args = c(alpha = 1/5)) [[3]] +
+  scale_x_continuous(breaks = seq(3,6,by = 1)) +
+  ylim(0,1) + 
+  xlab("Block") + 
+  ylab("Posterior estimates of the model") +
+  scale_colour_viridis_d() + 
+  scale_fill_viridis_d() + 
+  guides(color = guide_legend(reverse=TRUE), 
+         fill = guide_legend(reverse = TRUE)) + 
+  theme_srl2() + 
+  theme(legend.position = "top") +
+  theme(axis.text = element_text(size = 12, family = "Times", colour = "black"), 
+        axis.title = element_text(size = 14, family = "Times"))
+
+# plotting it out
+ggarrange(p8, p9, ncol = 2, labels = c("a)","b)"), font.label = list(face = "plain", family = "Times New Roman", size = 8))
+```
+
+## The proportion of rewarded visits does not increase due to reversal experience in the later stages of the experiment
+
+On the second and third experimental nights the highest Prop~rew~ was in the first block of the night, before any reversals had been experienced: `r report_m_ci_perc(day2and3block1, par = "y", brackets = "square")`. Excluding this first block, there was no effect of reversal on the Prop~rew~, although there was a strong effect of 10-visit bin within each block. That is, the proportion of visits to the rewarded flower only increased within each block as the block progressed (Figures 
+\@ref(fig:overall-summary-last-two-nights) and \@ref(fig:second-and-third-nights-analysis)).  
+
+(ref:overall-summary-last-two-nights) Visits to the rewarding one of two options over second and third experimental nights. Data are average proportions for bins of ten visits averaged over all the individuals that made visits in each bin. Data are indicated by white points in the first block before the bats had experienced any reversals; the bin averages of the other blocks are indicated by black points. Numbers indicate the bats that participated in a block. Shading shows 95% confidence intervals. Dashed lines show reversals
+
+```{r, overall-summary-last-two-nights, fig.cap = "(ref:overall-summary-last-two-nights)", fig.width = 6, fig.height = 3}
+
+p10 <- rev_learning_avg %>%
+  # filtering only the first three main Days of the experiment:
+  # one group had the experiment extended a further three Days
+  filter(Day != "Day 1") %>%
+  mutate(
+    Day = case_when(
+      Day == "Day 2" ~ "Night 2", 
+      Day == "Day 3" ~ "Night 3"
+    ),
+    firstpoint = as.factor(ifelse(block == 1 & Day == "Night 1", 1, 0)), 
+    day_bin_vis = day_bin_vis - 5
+  ) %>%
+  ggplot(aes(day_bin_vis, y)) +
+  geom_point(aes(color = firstpoint, fill = firstpoint), shape = 21) +
+  scale_color_manual(values = c("0" = "black", "1" = "black")) +
+  scale_fill_manual(values = c("0" = "black", "1" = "white")) +
+  geom_line() +
+  geom_ribbon(aes(ymin = ymin, ymax = ymax), alpha = 0.3) +
+  facet_grid(. ~ Day) +
+  scale_x_continuous(breaks = seq(50, 300, by = 50)) +
+  geom_vline(aes(xintercept = day_bin_vis), data = rev_main_avg %>% filter(Day != "Night 1"), linetype = "dashed") +
+  geom_hline(yintercept = c(0.25, 0.5, 0.75, 1), linetype = "dotted") +
+  ylim(0,1.05) + 
+  #scale_y_continuous(breaks = seq(-0.1, 1.1, by = 0.25)) +
+  theme_srl2() +
+  geom_text(
+    data = bat_labels  %>% filter(Day != "Night 1"),
+    aes(x = day_bin_vis, y = 1.05, label = n_bats, group = n_bats), family = "Times"
+  ) +
+  labs(x = "Visits", y = "Visits to the rewarding option") +
+  theme(legend.position = "none")
+
+p10
+```
+
+(ref:second-and-third-nights-analysis) a) Forest plot of the regression coeffients from a model of the effect of experimental night, reversal and 10-visit bin on the visits to the rewarding flower, excluding the first night. Circles represent the means of the posterior distributions of the slope coefficients, thick horizontal lines represent 50% credible intervals, and thin horizontal lines 89% credible intervals. The numbers in bold are the means of the posterior distributions and 89% credible intervals b) Conditional effects plot from the model of the effect of experimental night, reversal and 10-visit bin on the visits to the rewarding flower - excluding the first night - showing the two-way interaction between reversal and bin, sampling from the posterior distribution.
+
+```{r second-and-third-nights-analysis, fig.cap = "(ref:second-and-third-nights-analysis)", fig.width = 18, fig.height = 5}
+
+# creating a data table with the data from the second and third nights
+analysis_choices_laternights <- rev_learning %>% 
+  ungroup() %>% 
+  select(Day, block, bin, Bat, reward_status, block_vis, count_vis) %>% 
+  filter(block_vis != 0) %>% 
+  # removing the space temporarily and changing the Day back to numbers as this is how it was done in the model 
+  mutate(Bat = str_remove_all(Bat, " "),
+         Day = case_when(Day == "Day 1" ~ 1, 
+                         Day == "Day 2" ~ 2, 
+                         Day == "Day 3" ~ 3), 
+         Day = as.integer(Day),
+         block = as.integer(block),
+         bin = as.integer(bin),
+         reward_status = as.integer(reward_status),
+         block_vis = as.integer(block_vis),
+         count_vis = as.integer(count_vis)) %>% 
+  filter(Day > 1, 
+         block > 1)
+
+# fitting the model
+# m.dayblockbin.laternights <-
+  # brm(data = analysis_choices_laternights, family = bernoulli,
+  #     reward_status ~ Day + block + bin + block:bin + Day:block + 
+  #       (1 + block:bin + Day:block|Bat), # random slopes and intercepts
+  #     prior = c(prior(normal(0, 2.5), class = Intercept),
+  #               prior(normal(0, 2.5), class = b), 
+  #               prior(cauchy(0, 1), class = sd)
+  #               ),
+  #     iter = 2000, warmup = 1000, chains = 4, cores = 5, thin = 3,
+  #     control = list(adapt_delta = 0.99, max_treedepth = 15),
+  #     seed = 12)
+
+# saving the model
+# save(m.dayblockbin.laternights, file = "data/processed_data/m.dayblockbin.laternights.rda")
+
+# loading the model
+load("data/processed_data/m.dayblockbin.laternights.rda")
+
+# setting the names of the fixed effects
+fixed_effects = c("Intercept", "Day", "block", "bin", "block:bin", "Day:block")
+
+# putting the model's estimates into a table
+t1_estimates <- model_outputs(m.dayblockbin.laternights, fixed_effects)
+
+# finding the maximum x value in the fixed effects of the model
+max_xvalue <- max_xvalue_output(m.dayblockbin.laternights, fixed_effects)
+
+# creating a plot of the slope coefficients
+p11 <- mcmc_intervals(m.dayblockbin.laternights,
+  point_size = 2.5,
+  pars = vars(1:6),
+  prob_outer = 0.89, 
+  inner_size = 4, 
+  outer_size = 2.5
+) +
+  xlim(-2.5, max_xvalue + 0.8) +
+  geom_vline(xintercept = 0) +
+  scale_y_discrete(
+    labels = c(
+      "b_Intercept" = "Intercept",
+      "b_Day" = "Experimental \n night", 
+      "b_block" = "Block",
+      "b_bin" = "Bin",
+      "b_block:bin" = "Block-bin \n interaction", 
+      "b_Day:block" = "Night-block \n interaction"
+    ),
+    limits = c("b_Day:block", "b_block:bin", "b_bin", "b_block", "b_Day", "b_Intercept")
+  ) +
+  geom_text(
+    data = t1_estimates,
+    aes(x = max_xvalue + 0.1, y = c(6, 5, 4, 3, 2, 1), label = All, fontface = "bold", family = "Times"), size = 5, hjust = 0
+  ) +
+  theme_srl2() + 
+    theme(axis.text = element_text(size = 12, family = "Times", colour = "black"), 
+        axis.title = element_text(size = 14, family = "Times"))
+
+# setting the conditions for the conditional effects plots 
+int_conditions <- list(Day = c(1, 2, 3), block = c(2,3,4,5,6), bin = c(1,2,3,4,5))
+
+# calculating the conditional effects
+m_dayblockbin_laternights <- conditional_effects(m.dayblockbin.laternights, int_conditions = int_conditions, prob = 0.89, nsamples = 150)
+
+# creating the plots of the conditional effects
+p12 <- plot(m_dayblockbin_laternights, plot = FALSE, line_args = c(alpha = 1/5)) [[4]] +
+  ylim(0,1) + 
+  xlab("Block") + 
+  ylab("Posterior estimates of the model") +
+  scale_colour_viridis_d(option = "plasma") +
+  scale_fill_viridis_d(option = "plasma") + 
+  guides(color = guide_legend(reverse=TRUE), 
+         fill = guide_legend(reverse = TRUE)) + 
+  theme_srl2() + 
+  theme(legend.position = "top") + 
+  theme(axis.text = element_text(size = 12, family = "Times", colour = "black"), 
+        axis.title = element_text(size = 14, family = "Times"))
+
+# plotting it out
+ggarrange(p11, p12, ncol = 2, labels = c("a)","b)"), font.label = list(face = "plain", family = "Times New Roman", size = 8))
+```
 
 # References
