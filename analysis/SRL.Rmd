@@ -967,7 +967,11 @@ AK is grateful to the Deutsche Forschungsgemeinschaft (DFG, German Research Foun
 
 # Availability of data and code 
 
+<<<<<<< HEAD
 All data and code are available in the Zenodo repository: https://zenodo.org/badge/latestdoi/314248513
+=======
+All data and code are available in the Zenodo repository …
+>>>>>>> c02a57935142a0f1ec078bea142c2b6677066444
 
 # Declarations
 
