@@ -43,7 +43,7 @@ Shambhavi Chidambaram^1,2^, Sabine Wintergerst^3^, Alex Kacelnik^4^, Vladislav N
 
 **Present Address:** Institute of Biology, Humboldt University, Philippstr. 13, 10115 Berlin, Germany
 
-**Key words:** Serial reversal learning; bats; Glossophaga commissarisi; behavioural flexibility; foraging; ‘Win-Stay-Lose-Shift’
+**Key words:** Serial reversal learning; bats; Glossophaga commissarisi; behavioral flexibility; foraging; ‘Win-Stay-Lose-Shift’
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
@@ -273,7 +273,7 @@ pump_fills <- alldata_pumps %>%
 #----------------------------------
 # loading the prepared CSV file of raw data
 
-rev_learning_all <- read.csv2(file = "/Users/shambhavi/Google Drive/Experiments & Data/SRL_2017/analysis/data/processed_data/raw_data_bats.csv", sep = ";", header = TRUE)
+rev_learning_all <- read.csv2(file = "/Users/shambhavi/Google Drive/Experiments & Data/SRL_2017/analysis/data/processed_data/Raw_data_bats copy.csv", sep = ",")
 
 # creating a vector of the bats to be excluded from the main analysis
 bats_incomp <- c("Bat 7", "Bat 19")
@@ -334,33 +334,33 @@ overall_sd_unrew <- round(as.numeric(sd(mean_unrew$mean_unrew)), digits = 2)
 
 # Abstract
 
-We explored the behavioural flexibility of Commissaris's long-tongued bats through a spatial serial reversal foraging task. Bats kept in captivity for short periods were trained to obtain nectar rewards from two artificial flowers . At any given time only one of the flowers provided rewards and these reward contingencies reversed in successive blocks of 50 flower visits. All bats detected and responded to reversals by making most of their visits to the currently active flower. As the bats experienced repeated reversals, their preference re-adjusted faster. Although the flower state reversals were theoretically predictable, we did not detect anticipatory behaviour, that is, frequency of visits to the alternative flower did not increase within each block as the programmed reversal approached . The net balance of these changes was a progressive improvement in performance in terms of the total proportion of visits allocated to the active flower. The results are compatible with, but do not depend on, the bats displaying an ability to 'learn to learn' and show that the dynamics of allocation of effort between food sources can change flexibly according to circumstances.
+We explored the behavioral flexibility of Commissaris's long-tongued bats through a spatial serial reversal foraging task. Bats kept in captivity for short periods were trained to obtain nectar rewards from two artificial flowers. At any given time only one of the flowers provided rewards and these reward contingencies reversed in successive blocks of 50 flower visits. All bats detected and responded to reversals by making most of their visits to the currently active flower. As the bats experienced repeated reversals, their preference re-adjusted faster. Although the flower state reversals were theoretically predictable, we did not detect anticipatory behavior, that is, frequency of visits to the alternative flower did not increase within each block as the programmed reversal approached. The net balance of these changes was a progressive improvement in performance in terms of the total proportion of visits allocated to the active flower. The results are compatible with, but do not depend on, the bats displaying an ability to 'learn to learn' and show that the dynamics of allocation of effort between food sources can change flexibly according to circumstances.
 
 # Introduction
 
 Many animals face frequent and unpredictable changes in the relative profitability of food sources. This is the case for animals that forage for nectar and/or pollen in flowering plants. Though flowers are stationary, changes in their profitability occur at many time scales. Many plants bloom seasonally, and single flowers on plants themselves wither and die every day or every few days. Furthermore, they are depleted and replenished at various timescales by the interplay of foragers and nectar production, altering their profitability as food resources with the passage of time. 
 
-Behavioural flexibility helps to cope with such changes. The word ‘flexibility’ has been used to mean many different things in the animal behaviour literature (often inconsistently – for a discussion see [@audet_whats_2017]), and one of its manifestations relates to the concept of elasticity: behavioural patterns that can be repeatedly and readily reversed [@bond_serial_2007]. An experimental protocol that has been widely used to test for and demonstrate this sort of flexibility is reversal learning [@izquierdo_neural_2017].
+Behavioral flexibility helps to cope with such changes. The word ‘flexibility’ has been used to mean many different things in the animal behavior literature (often inconsistently – for a discussion see [@audet_whats_2017]), and one of its manifestations relates to the concept of elasticity: behavioral patterns that can be repeatedly and readily reversed [@bond_serial_2007]. An experimental protocol that has been widely used to test for and demonstrate this sort of flexibility is reversal learning [@izquierdo_neural_2017].
 
-In a reversal learning task, an animal first learns about multiple stimulus-reward pairings, such as two or more spatial locations that can be visited to potentially obtain rewards. In the initial phase, subjects typically bias their behaviour towards the richer location. When contingencies are stable and/or only one of the locations offers rewards, the reward-maximizing strategy is to allocate all behaviour to that one. However, if and when the contingencies in the available sources vary with time, behavioural allocation is expected to, and typically is, less extreme, facilitating the detection of other opportunities. The temporal course of such adjustments is an informative index of the difference in flexibility such as between species [@bond_serial_2007], between sexes [@lois-milevicich_sex_2021], and between temporal or experienced contingencies [@smith_midsession_2018], [@santos_constantly_2021]. Here we use a reversal protocol to explore flexibility in learning dynamics and how it affects the foraging efficiency of nectar-feeding bats.
+In a reversal learning task, an animal first learns about multiple stimulus-reward pairings, such as two or more spatial locations that can be visited to potentially obtain rewards. In the initial phase, subjects typically bias their behavior towards the richer location. When contingencies are stable and/or only one of the locations offers rewards, the reward-maximizing strategy is to allocate all behavior to that one. However, if and when the contingencies in the available sources vary with time, behavioral allocation is expected to, and typically is, less extreme, facilitating the detection of other opportunities. The temporal course of such adjustments is an informative index of the difference in flexibility such as between species [@bond_serial_2007], between sexes [@lois-milevicich_sex_2021], and between temporal or experienced contingencies [@smith_midsession_2018], [@santos_constantly_2021]. Here we use a reversal protocol to explore flexibility in learning dynamics and how it affects the foraging efficiency of nectar-feeding bats.
 
-In situations where there are two sources, of which at any given time only one is active, but which one it is switches frequently, foraging yield is positively related to behavioural allocation to the currently active source and to the speed of detection of reversals. In these scenarios there is a trade-off between these two factors, because greater commitment to one source reduces the information available about the state of the other. When reversals are between two continuous reinforcement reward schedules (i.e., when any active source yields food on every visit), the theoretical strategy “Win-Stay, Lose-Shift” (WSLS) is almost perfectly maximizing, since it takes only one unrewarded visit to detect each reversal (minor deviations are not of interest here). However, WSLS has not been found to accurately describe the behaviour of experimental animals [@smith_midsession_2018], [@santos_constantly_2021]. Instead, typically, behaviour is better described by combined sensitivity to schedule properties that, although programmed deterministically, are evidently not perceived as such by the subjects. In some cases, the mechanism by which the subject allocates choices is expressed in continuous (rather than discrete) changes in behaviour. For instance, in the mid-session reversal protocol, reversals are programmed to occur after a fixed number of trials, which usually corresponds with a somewhat predictable point in time. Using pigeons as subjects, @smith_midsession_2018 found that as a reversal approached, in trials where subjects faced only one option rather than a binary choice, pigeons showed a smoothly increasing latency to respond to the currently rewarding option, and a decreasing latency to respond to the soon-to-be-rewarding option. In intermingled choice trials, there were both anticipatory and perseverative choices of the currently non-rewarding option. Thus, the independent smooth variation in latencies in single option trials correlated, probably causally, to the gradual and probabilistic distribution of choices in two-option trials, a regularity that describes well behaviour in other protocols [@kacelnik_darwins_2011]. Notice that we avoid labelling all choices of the currently non-rewarding options as ‘errors’ as these unrewarded attempts may be the outcome of an efficient strategy given the information available to the subjects. 
+In situations where there are two sources of rewards, of which at any given time only one is active, but which one it is switches frequently, foraging yield is positively related to behavioral allocation to the currently active source and to the speed of detection of reversals. In these scenarios there is a trade-off between these two factors, because greater commitment to one source reduces the information available about the state of the other. When reversals are between two continuous reinforcement reward schedules (i.e., when any active source yields food on every visit), the theoretical strategy “Win-Stay, Lose-Shift” (WSLS) is almost perfectly maximizing, since it takes only one unrewarded visit to detect each reversal (minor deviations are not being of interest here). However, WSLS has not been found to accurately describe the behavior of experimental animals [@smith_midsession_2018], [@santos_constantly_2021]. Instead, typically, behavior is better described by combined sensitivity to schedule properties that, although programmed deterministically, are evidently not perceived as such by the subjects. In some cases, the mechanism by which the subject allocates choices is expressed in continuous (rather than discrete) changes in behavior. For instance, in the mid-session reversal protocol, reversals are programmed to occur after a fixed number of trials, which usually corresponds with a somewhat predictable point in time. Using pigeons as subjects, @smith_midsession_2018 found that as a reversal approached, in trials where subjects faced only one option rather than a binary choice, pigeons showed a smoothly increasing latency to respond to the currently rewarding option, and a decreasing latency to respond to the soon-to-be-rewarding option. In intermingled choice trials, there were both anticipatory and perseverative choices of the currently non-rewarding option. Thus, the independent smooth variation in latencies in single option trials correlated, probably causally, to the gradual and probabilistic distribution of choices in two-option trials, a regularity that describes well behavior in other protocols [@kacelnik_darwins_2011]. Notice that we avoid labelling all choices of the currently non-rewarding options as ‘errors’ as these unrewarded attempts may be the outcome of an efficient strategy given the information available to the subjects. 
 
-In serial reversal learning procedures, where reward contingencies reverse repeatedly, subjects can use their experience to adjust the dynamics of behaviour allocation so as to improve reward yield. In other words, subjects could show second order learning, or learning to learn, similar to observations in ‘learning set’ protocols [@harlow_formation_1949]. This could involve learning that the sudden absence of reward signals reliably that reward contingencies have reversed.
+In serial reversal learning procedures, where reward contingencies reverse repeatedly, subjects can use their experience to adjust the dynamics of behavior allocation so as to improve reward yield. In other words, subjects could show second order learning, or learning to learn, similar to observations in ‘learning set’ protocols [@harlow_formation_1949]. This could involve learning that the sudden absence of reward signals reliably that reward contingencies have reversed.
 
 We carried out a serial reversal learning task with Commissaris’s long-tongued bats, (*Glossophaga commissarisi*), which primarily feed on flower nectar [@tschapka_energy_2004]. They may often experience unstable opportunities in their natural environment, because a flower may remain rewarding for multiple visits before it is depleted by self or a competitor or withers and dies. When a given flower becomes inactive, the memory of previously rewarding flowers that may have replenished is likely to drive visits to nearby alternatives.  In our experiment, bats were offered two potentially rewarding options, identified by their spatial location. Glossophagine bats have well-developed spatial memory ([@stich_ortsgedachtnis_2004 - chapter 2]; [@stich_ortsgedachtnis_2004 - chapter 3];  [@thiele_hierarchical_2005]; [@winter_foraging_2005]) so no other cue was necessary. At the start of each night, one of the options was active, yielding nectar every time it was visited (the ‘S+’ option), while the alternative was inactive (the ‘S-’ option). After a fixed number of visits, the reward contingencies reversed without any additional cue: the rewarding option became inactive (S+ -> S-) and the previously unrewarding option became active (S- -> S+). This reversal happened five times in a night. 
 
-In the wild, when new flowers become available, bats can quickly learn the locations associated with high reward, a form of first-order learning ([@stich_ortsgedachtnis_2004 - chapter 2], [@stich_ortsgedachtnis_2004 - chapter 3]; [@winter_visual_2005]; [@tolch_psychometric_2007]; [@nachev_psychophysics_2012]; [@nachev_cognition-mediated_2017] – this research also showed that bats learn a change  in spatial location much faster than when flowers differ in echo-acoustic properties). Frequent changes in flower properties may involve second order learning, in which bats’ behavioural trajectory of biasing towards present relative profitability reflects not just present reward but also the dynamics of previously experienced opportunity fluctuations. The aim of our present experiment was to test if bats show flexibility in their adjustment to repeated reversal of contingencies, so that experience with changes translated into improvements in foraging efficiency.  
+In the wild, when new flowers become available, bats can quickly learn the locations associated with high reward, a form of first-order learning ([@stich_ortsgedachtnis_2004 - chapter 2], [@stich_ortsgedachtnis_2004 - chapter 3]; [@winter_visual_2005]; [@tolch_psychometric_2007]; [@nachev_psychophysics_2012]; [@nachev_cognition-mediated_2017]).It has also been shown that bats learn a change in spatial location much faster than when flowers change in echo-acoustic properties [@thiele_hierarchical_2005]. Frequent changes in flower properties may involve second order learning, in which bats’ behavioral trajectory of biasing towards present relative profitability reflects not just present reward but also the dynamics of previously experienced opportunity fluctuations. The aim of our present experiment was to test if bats show flexibility in their adjustment to repeated reversal of contingencies, so that experience with changes translated into improvements in foraging efficiency.  
 
-Since in our protocol there is a simple, near-optimal theoretical strategy, in the form of win-stay lose-shift, we were also interested in finding out whether the bats progressively approached this strategy by learning to reallocate behaviour more abruptly after just one unrewarded visit.
+Since in our protocol there is a simple, near-optimal theoretical strategy, in the form of win-stay lose-shift, we were also interested in finding out whether the bats progressively approached this strategy by learning to reallocate behavior more abruptly after just one unrewarded visit.
 
 # Methods
 
 ## Study site and subjects
 
-The experiment took place at the Organisation for Tropical Studies (O.T.S/O.E.T) La Selva Biological Field Station, Province Heredia, Costa Rica in June-July 2017. *Glossophaga commissarisi* bats were captured and retained in a flight cage through the experiment. The bats were attracted to a particular location in the forest using chicken-feeders filled with sugar-water (see *Reward*) as bait. The feeders had cotton swabs soaked in dimethyl disulphide on them, a chemical odour attractant produced by many bat-pollinated flowers [@von_helversen_sulphur-containing_2000] and then caught in mist-nets. The bats were sexed on capture, pregnant or lactating females excluded,  and housed in two outdoor, meshed flight-cages (4 x 6 m) under ambient light conditions. All individuals were weighed and marked with radio frequency identification (RFID) tags placed as collars around their necks.
+The experiment took place at the Organization for Tropical Studies (O.T.S/O.E.T) La Selva Biological Field Station, Province Heredia, Costa Rica in June-July 2017. *Glossophaga commissarisi* bats were captured and retained in a flight cage throughout the experiment. The bats were attracted to a particular location in the forest using chicken-feeders filled with sugar-water (see *Reward*) as bait. The feeders had cotton swabs soaked in dimethyl disulphide on them, a chemical odor attractant produced by many bat-pollinated flowers [@von_helversen_sulphur-containing_2000] and then caught in mist-nets. The bats were sexed on capture, pregnant or lactating females excluded,  and housed in two outdoor, meshed flight-cages (4 x 6 m) under ambient light conditions. All individuals were weighed and marked with radio frequency identification (RFID) tags placed as collars around their necks.
 
-A total of 16 bats participated in the main experiment and the first stage of the experiment began on the night the bats entered the cages. A group of four experimental bats of the same sex were placed in a flight cage together. Two such groups were run in parallel, one in each flight-cage so the data were collected simultaneously. At the end of the experiment, the RFID collars were removed, and the bats were released back into the wild. All the data collection was completely automatized. Two of the bats did not drink a sufficient amount of sugar-water to meet minimum energy requirements. These two bats were released before the end of the experiment and not replaced, and data from these two individuals were not analyzed. Thus, 14 bats (7 males and 7 females) completed the experiment. Permission for this research was granted by Sistema Nacional de Areas de Conservación (SINAC) at the Ministerio de Ambiente y Energía (MINAE), Costa Rica.
+A total of 16 bats participated in the main experiment and the first stage of the experiment began on the night the bats entered the cages. A group of four experimental bats of the same sex were placed in a flight cage together. Two such groups were run in parallel, one in each flight-cage so the data were collected simultaneously. At the end of the experiment, the RFID collars were removed, and the bats were released back into the wild. All the data collection was completely automated. Two of the bats did not drink a sufficient amount of sugar water to meet minimum energy requirements. These two bats were released before the end of the experiment and not replaced, and data from these two individuals were not analyzed. Thus, 14 bats (7 males and 7 females) completed the experiment. Permission for this research was granted by Sistema Nacional de Areas de Conservación (SINAC) at the Ministerio de Ambiente y Energía (MINAE), Costa Rica.
 
 ## Experimental Setup
 
@@ -370,19 +370,19 @@ The rewards consumed by the bats during the experiment were also their main sour
 
 ### Flower and pump setup
 
-Each flight cage had a square frame in the center (2 × 2 m), fixed 1.5 m above the ground. Eight reward-dispensing devices – hereafter referred to as ‘flowers’ – were fixed two on each side of the square (Figure \@ref(fig:Schematic)) with a distance of 40 cm between adjacent flowers. At this separation, bats can fully discriminate neighbouring spatial locations [@thiele_hierarchical_2005]; [@winter_visual_2005]. Each flower had the following parts: a circular RFID antenna mounted at the end of a plastic cylinder that constituted the artificial flower; an infrared photo gate; and an electronic pinch valve through which a silicon tube was placed and fixed to the base of the flower.
+Each flight cage had a square frame in the center (2 × 2 m), fixed 1.5 m above the ground. Eight reward-dispensing devices – hereafter referred to as ‘flowers’ – were fixed two on each side of the square (Figure \@ref(fig:Schematic)) with a distance of 40 cm between adjacent flowers. At this separation, bats can fully discriminate neighboring spatial locations [@thiele_hierarchical_2005]; [@winter_visual_2005]. Each flower had the following parts: a circular RFID antenna mounted at the end of a plastic cylinder that constituted the artificial flower; an infrared photo gate; and an electronic pinch valve through which a silicon tube was placed and fixed to the base of the flower (see [@winter_foraging_2005] and [@thiele_nahrungssuchstrategien_2006] - Anhang B for details of the equipment).
 
 A stepper-motor syringe pump was placed in the center of the square in each cage with a 25 mL Hamilton glass syringe (Sigma Aldrich, Germany). All bats received the same volume of reward on each visit: 40 $\mu$L of nectar. The syringe was connected to the tubing system of the flowers through five pinch valves [@nachev_psychophysics_2012]. The pinch valves controlled the flow of liquid from the pump to the flower system and from a reservoir of liquid to the pump. The reservoir (500 mL bottle, Roth, Germany) was filled with fresh nectar every day.
 
 Every day, an automated routine was started at around 10:00. The system was emptied of remaining nectar and rinsed with plain water. The system was then filled with water and kept this way until 15:00, when it was filled with fresh nectar. Twice a week, the system was filled with 70% ethanol for an hour to prevent microbial growth, then rinsed with water.
 
-When a tagged bat approached a flower, its individual number was read. If the bat then poked its nose into the flower and interrupted the light beam, this was recorded, and if if it was an assigned flower and currently active, a reward was released. The flowers were programmed such that each bat could trigger rewards at only two unique flowers out of the array of eight. Upon a nose poke, the pinch valve opened the tubing connection to the nectar pump, and the pump dispensed nectar to the base of the flower. The bat could hover in front of the flower and lick up the nectar. The flowers and the pump were connected to a Windows PC, which ran the experimental programs, collected the data and also ran the routine program used to automatically flush, clean and fill the pump and tubing system (PhenoSoft Control, PhenoSys, Germany). 
+When a tagged bat approached a flower, its individual number was read. If the bat then poked its nose into the flower and interrupted the light beam, this was recorded, and if it was an assigned flower and currently active, a reward was released. The flowers were programmed such that each bat could trigger rewards at only two unique flowers out of the array of eight. Upon a nose poke, the pinch valve opened the tubing connection to the nectar pump, and the pump dispensed nectar to the base of the flower. The bat could hover in front of the flower and lick up the nectar. The flowers and the pump were connected to a Windows PC, which ran the experimental programs, collected the data and also ran the routine program used to automatically flush, clean and fill the pump and tubing system (PhenoSoft Control, PhenoSys, Germany). 
 
-(ref:Schematic) Schematic of the cage and flower set-up (not drawn to scale). Dimensions of the  flight cage were 4x6 m. The square holding the artificial flowers measured 2x2 m and was 1.5 m above ground. Neighbouring flowers were 40 cm apart. 
+(ref:Schematic) Schematic of the cage and flower set-up (not drawn to scale). Dimensions of the  flight cage were 4x6 m. The square holding the artificial flowers measured 2x2 m and was 1.5 m above ground. Neighbouring flowers were 40 cm apart 
 
 ```{r, Schematic, fig.cap= "(ref:Schematic)", fig.width = 7, fig.height = 6}
 
-include_graphics("/Users/shambhavi/Google Drive/Experiments & Data/SRL_2017/analysis/images/cage_schematic.png")
+include_graphics("/Users/shambhavi/Google Drive/Experiments & Data/SRL_2017/analysis/images/cage_schematic.jpg")
 ```
 
 ## Experimental procedure
@@ -403,28 +403,23 @@ On the night the naïve bats were captured and placed into the flight cages, the
 
 The next stage of training involved assigning each bat to two of the eight flowers in the array. For an individual animal, only the two flowers assigned to it would elicit rewards from this stage of training until the end of the experiment. This stage was similar to the previous one, except that the bats could only collect nectar from their two assigned flowers. The chemical attractant was not used.
 
-To ensure that each bat was familiar with both its assigned flowers, we added a final stage of training: forced alternation. The bats received a reward at one of the two flowers for one trial, and then could only receive reward at the other flower for the next trial. If the bat repeatedly visited the same flower, the other flower would remain rewarding until it was visited.
-
+aThe final stage of training was: forced alternation. The bats received a reward at one of the two flowers for one trial, and then could only receive reward at the other flower for the next trial. If the bat repeatedly visited the same flower, the other flower would remain rewarding until it was visited. The purpose of this training stage was: to pre-expose the bats to the location of the two potentially rewarding flowers; to counteract their natural bias to be faithful to a previously rewarding site; and to neutralize pre-existing side preferences. This pre-training may have increased their tendency to switch with respect to a naïve individual, thus decreasing persistence after reward extinction. Since our effect is in the opposite direction (i.e., we expect and measure an increasing readiness to switch after a flower ceases to offer nectar), alternating pre-training could not have enhanced our results.
 
 ### Serial Reversal Learning Task
 
-In the serial reversal learning stage, for any given bat at any given time one of its two flowers gave a 40 $\mu$L nectar reward, and the other was unrewarding. After a bat had made 50 visits in total to its assigned two flowers, a reversal occurred: the previously rewarding flower became non-rewarding and *vice versa*. Only visits to the two flowers assigned to each bat counted towards its visit tally, and the distribution of visits between these two flowers did not have any effect. Each set of 50 visits was termed a ‘block.’ Each bat had six blocks and five reversals per night, unless it ceased visiting earlier. This was repeated for three consecutive nights, and the same flower started the sequence every night. However, since bats already during the first night seemed to have reached their asymptote of quickly adjusting their choices after a reversal had occurred, for this study we focus on the analysis of the five reversals experienced the first night. 
+In the serial reversal learning stage, for any given bat at any given time one of its two flowers gave a 40 $\mu$L nectar reward, and the other was unrewarding. After a bat had made 50 visits in total to its assigned two flowers, a reversal occurred: the previously rewarding flower became non-rewarding and vice versa. Only visits to the two flowers assigned to each bat counted towards its visit tally, and the distribution of visits between these two flowers did not have any effect. Each set of 50 visits was termed a ‘block.’ Each bat had six blocks and five reversals per night, unless it entirely ceased visiting the flowers earlier. This was repeated for three consecutive nights, and the same flower started the sequence every night. However, since bats already during the first night seemed to have reached their asymptote of quickly adjusting their choices after a reversal had occurred, for this study we focus on the statistical analysis of the five reversals experienced the first night. 
 
 ## Data analysis
 
-The raw data collected during this study were the computer-logged events of feeder visits. Each event included the time stamp, animal ID, photo gate interruption duration and the volume of nectar dispensed: either 40 $\mu$L or 0 $\mu$L. The bats made occasional visits and approaches to the flowers that were not assigned to them. However, these visits were infrequent: they made up less than 10% of the overall number of visits and were not considered for the analysis (see *Supplementary Material* for details). For the analysis, blocks were further divided into five bins of ten visits, in order to examine the bats’ behaviour within each block. R (version 3.6.3, R Development Core Team 2020) was used for all statistical analyses and creation of plots.
+The raw data collected during this study were the computer-logged events of feeder visits. Each event included the time stamp, animal ID, photo gate interruption duration and the volume of nectar dispensed: either 40 $\mu$L or 0 $\mu$L. The bats made occasional visits and approaches to the flowers that were not assigned to them. However, these visits were infrequent: they made up less than 10% of the overall number of visits and were not considered for the analysis (see *Supplementary Material* for details). For the analysis, blocks were further divided into five bins of ten visits, in order to examine the bats’ behavior within each block. R (version 3.6.3, R Development Core Team 2020) was used for all statistical analyses and creation of plots.
 
 All the statistical models were fitted in a Bayesian framework using Hamiltonian Monte Carlo in the R package `brms` [@burkner_brms_2017] which is a front-end for `rstan` [@carpenter_stan_2017]. Generalized linear mixed models were used for the analyses (see *Supplementary Information* for the technical details of the model fitting). Unless mentioned otherwise, we report here the mean as a measure of central tendency and the 89% quantile-based credible intervals for the intercept and slope coefficients (89% boundaries are the default for reporting credible intervals – @mcelreath_statistical_2020). To aid in the interpretation of the model parameters we also present plots of the conditional effects of some of the predictor variables.
 
-Visual inspection of the whole data set showed a qualitative difference between the first and later nights, implying that any second-order learning effect already reached asymptotic stability by the 5th reversal at the end of the first night. To avoid masking first-night acquisition effects by swamping them with post asymptotic (overtraining) data we focus on the first night but present the full data set in the supplementary material.
+Visual inspection of the whole data set showed a qualitative difference between the first and later nights, implying that any second-order learning effect already reached asymptotic stability by the 5th reversal at the end of the first night (see Figure \@ref(fig:overall-summary)). To avoid masking first-night acquisition effects by swamping them with post-asymptotic (overtraining) data, we focus on the first night in our statistical analysis. The data from and analysis of the second and third nights is presented in full in the supplementary material.
 
 The first reversal was experienced at the end of the first block of the first night, namely by the 51st flower visit for each bat. Hence this is where we started the analysis to seek for evidence of 2nd order learning. We used the proportion of visits to each of the two flowers in each 10-visit bin as response variable and fitted a generalized linear mixed-model (GLMM) using bin and reversal number and their interaction, as explanatory variables. The proportion of visits to the rewarding flower was given by the number of visits to the S+ divided by 10, which was the total of visits made to both flowers in each bin. This was denoted as the Prop~rew~.  
 
-Confidence intervals were calculated by non-parametric bootstrapping without assuming a normal distribution of the data, using the `Hmisc` package [@jr_hmisc_2023]. 
-
-## Data availability
-
-All data and analysis code are available online at .....
+Confidence intervals were calculated by non-parametric bootstrapping using the `Hmisc` package [@jr_hmisc_2023]. 
 
 # Results 
 
@@ -478,7 +473,7 @@ rev_learning <- rev_learning_all %>%
 #----------------------------------------------------------------------------
 # Calculating the proportion of visits to the rewarding option averaged over all the bats
 #----------------------------------------------------------------------------
-# averaging the bats' choice behaviour over day, block and bin
+# averaging the bats' choice behavior over day, block and bin
 rev_learning_avg <- rev_learning %>%
   ungroup() %>% 
   group_by(Day, block) %>%
@@ -636,7 +631,7 @@ day1bin10 <- rev_learning %>%
 
 During the first experimental night and after the first 20 visits bats made more than 95% of their visits to the rewarding flower. 
 
-Figure \@ref(fig:overall-summary)a shows the temporal adjustment of visit allocations between the assigned flowers, highlighting both the effect of experience within a block and between blocks (i.e., reversals). Within each block allocation to the rewarding flower increased with successive bins, progressing towards an asymptotic proportion. After each reversal, persistence to the previously rewarding source was brief – though longer than the single unrewarded attempt expected from win-stay lose-shift. Thus, within-block behavioural allocation changed as the bats’ responses quickly evolved towards a new asymptotic distribution with a bias towards the currently active source of nectar.  
+Figure \@ref(fig:overall-summary)a shows the temporal adjustment of visit allocations between the assigned flowers, highlighting both the effect of experience within a block and between blocks (i.e., reversals). Within each block allocation to the rewarding flower increased with successive bins, progressing towards an asymptotic proportion. After each reversal, persistence to the previously rewarding source was brief – though longer than the single unrewarded attempt expected from win-stay lose-shift. Thus, within-block behavioral allocation changed as the bats’ responses quickly evolved towards a new asymptotic distribution with a bias towards the currently active source of nectar.  
 
 At the start of the experiment, in the first bin of ten visits when the bats had not experienced the reward contingencies, Prop~rew~ (the proportion of visits to the rewarding option) averaged across individuals was at chance level: `r report_m_ci_perc(day1bin1, par = "y", brackets = "square")`, about half of the 10 visits. Within the next ten visits however, mean Prop~rew~ increased to `r report_m_ci_perc(day1bin2, par = "y", brackets = "square")` and by the last bin of this first block was almost completely directed at the rewarding flower, at `r report_m_ci_perc(day1bin5, par = "y", brackets = "square")`. Reallocation after the first reversal was fast, as Proprew already reached `r report_m_ci_perc(day1bin6, par = "y", brackets = "square")` within the first ten visits, reaching a Prop~rew~ of `r report_m_ci_perc(day1bin10, par = "y", brackets = "square")` by the last bin of this block Figure \@ref(fig:overall-summary)b. There was a trend towards faster reallocation as experience of reversals increased (Figure \@ref(fig:overall-summary)b). 
 
@@ -717,102 +712,11 @@ p2 <- first_10_last_10 %>%
 ggarrange(p1, p2, labels = c("a)", "b)"))
 ```
 
-The most salient signal for 2nd order behavioural change was the decline in perseverative visitation to the previously-rewarding option after consecutive reversals, as is apparent in Figure \@ref(fig:overall-summary). The proportion of visits to the presently rewarding flower in the first bin of 10 visits after a reversal increased more than in any other bin as the bats accumulated experience. This is observable in the raw data (Figure \@ref(fig:overall-summary)b, \@ref(fig:pers-visits)), and held up by the statistical analysis (Figure \@ref(fig:first-night-first-block-removed)).
-
-(ref:pers-visits) Proportion of visits to the rewarding option out of the first 10 visits after each reversal. Thin lines are individual data, and the thick line is the average proportion of rewarded visits over all bats.  
-
-```{r pers-visits, fig.cap = "(ref:pers-visits)", fig.width = 5, fig.height = 4.5}
-
-# setting a different binsize to group the data
-binsize_five <- 5
-breaks_five <- seq(0, 3000, binsize_five)
-
-# creating a separate dataframe with the data from the first night
-pers_visits <- rev_learning %>% 
-  # filtering out the first night
-  filter(Day == "Day 1") %>%
-  # binning the data
-  mutate(bin_five = as.numeric(cut(block_vis, breaks_five, include.lowest = TRUE))) %>% 
-  ungroup() %>% 
-  select(Bat, block, bin, reward_status, block_vis, bin_five) %>% 
-  # grouping by block
-  group_by(Bat, block) %>% 
-  # calculating the average proportion of visits to rewarding flower for each bat and each block
-  mutate(block_average = mean(reward_status)) %>% 
-  ungroup() %>% 
-  group_by(Bat, block, block_average, bin_five) 
-
-pers_bin_number <- 10
-
-pers_visits <- pers_visits %>% 
-  ungroup() %>% 
-  filter(block > 1, 
-         block_vis <= pers_bin_number) %>% 
-  ungroup() %>%
-  group_by(Bat, block, bin_five) %>% 
-  mutate(bin_five_average = mean(reward_status)) %>% 
-  # selecting the required columns
-  select(Bat, block, bin_five, bin_five_average) %>% 
-  ungroup() %>% 
-  group_by(Bat, block) %>% 
-  # calculating the proportion of rewarded visits per bat per block
-  mutate(block_bat_mean = mean(bin_five_average)) %>% 
-  ungroup() %>% 
-  group_by(block) %>% 
-  # calculating the proportion of rewarded visits per block averaged all bats 
-  mutate(block_mean = mean(bin_five_average))
-
-# pers_visits_first_night <- rev_learning %>% 
-#   filter(Day == "Day 1", 
-#          bin == 1, 
-#          block > 1) %>% 
-#   ungroup() %>% 
-#   group_by (Bat, block) %>% 
-#   mutate(mean_per_bat = mean(reward_status)) %>% 
-#   ungroup() %>% 
-#   group_by(block) %>% 
-#   mutate(mean_overall = mean(reward_status))
-
-# pers_visits <- pers_visits %>% 
-#   ungroup() %>% 
-#   filter(block > 1, 
-#          block_vis <= pers_bin_number) %>% 
-#   ungroup() %>%
-#   group_by(Bat, block, bin_five) %>% 
-#   mutate(bin_five_average = mean(reward_status)) %>% 
-#   # selecting the required columns
-#   select(Bat, block, bin_five, bin_five_average) %>% 
-#   ungroup() %>% 
-#   group_by(Bat, block) %>% 
-#   # calculating the proportion of rewarded visits per bat per block
-#   mutate(block_bat_mean = mean(bin_five_average)) %>% 
-#   ungroup() %>% 
-#   group_by(block) %>% 
-#   # calculating the proportion of rewarded visits per block averaged all bats 
-#   mutate(block_mean = mean(bin_five_average))
-
-# plotting it out
-p3 <- pers_visits %>%
-  ggplot() + 
-  geom_line(aes(block, block_bat_mean, group = Bat, colour = Bat), linetype = "dashed") + 
-  geom_line(aes(block, block_mean), colour = "black", size = 2) + 
-  ylim(0, 1) + 
-  ylab("Rewards in the first 10 visits") + 
-  xlab("Block") +
-  scale_colour_viridis_d() + 
-  theme_srl() + 
-  theme(legend.position = "top", 
-        legend.title = element_blank(),
-        legend.text = element_text(size = 10),
-        legend.margin=margin(0,0,0,0)
-        )
-
-p3
-```
+The most salient signal for 2nd order behavioral change was the decline in perseverative visitation to the previously-rewarding option after consecutive reversals. The proportion of visits to the presently rewarding flower in the first bin of 10 visits after a reversal increased more than in any other bin as the bats accumulated experience. This is observable in the raw data (Figure \@ref(fig:overall-summary)b; see also Figure \@ref(fig:pers-visits) in the *Supplementary Material*), and held up by the statistical analysis (Figure \@ref(fig:first-night-first-block-removed)).
 
 Statistically, Prop~rew~ in the first bin of each block increased significantly as the bats experienced successive reversals. This reversal-dependent or second order effect was present in the second bin of 10 visits (visits 11 - 20) as well, but by the third bin the reversal effect was not statistically detectable (Figure \@ref(fig:first-night-first-block-removed)). The mechanism for the acceleration of switching could depend on the bats forming an expectation that things change after about 50 visits, leading to an increase in the proportion of win-shift (“proactive sampling”) responses towards the end of each block. An alternative, not mutually exclusive, mechanism could be an increase in lose-shift probability, which would be evidenced by the dynamics at the beginning of each block, after reversals. There is no strong evidence of the former (but see the trend to lower asymptotes in Figure \@ref(fig:overall-summary)) but there is reliable statistical evidence for the latter (see Figure \@ref(fig:first-night-first-block-removed)). On balance, one may expect both factors to play some role.
 
-(ref:first-night-first-block-removed) a) Forest plot of the regression coefficients from the model of the effect of reversal and 10-visit bin on the visits to the rewarding flower. Data are means and their 50% and 89% credible intervals of the posterior distributions of the slope coefficients, with their values given on the right b) Effect of number of reversal (Block) on the proportion of correct choices for the five consecutive 10-visit bins (colours yellow to purple) within a block. Lines are the conditional effects plot from the model of the effect of reversal and 10-visit bin on the visits to the rewarding flower showing the effect of reversal and bin, sampling from the posterior distribution.
+(ref:first-night-first-block-removed) a) Forest plot of the regression coefficients from the model of the effect of reversal and 10-visit bin on the visits to the rewarding flower. Data are means and their 50% and 89% credible intervals of the posterior distributions of the slope coefficients, with their values given on the right b) Effect of number of blocks on the proportion of correct choices for the five consecutive 10-visit bins (colors yellow to purple) within a block. Lines are the conditional effects plot from the model of the effect of reversal and 10-visit bin on the visits to the rewarding flower showing the effect of reversal and bin, sampling from the posterior distribution.
 
 ```{r first-night-first-block-removed, fig.cap = "(ref:first-night-first-block-removed)", fig.width = 6, fig.height = 7}
 
@@ -867,6 +771,7 @@ t1_estimates <- model_outputs(m.firstnight.blockbin.nofirstblock, fixed_effects)
 max_xvalue <- max_xvalue_output(m.firstnight.blockbin.nofirstblock, fixed_effects)
 
 # creating a plot of the slope coefficients
+
 p4 <- mcmc_intervals(m.firstnight.blockbin.nofirstblock,
   point_size = 2.5,
   pars = vars(1:4),
@@ -894,7 +799,6 @@ p4 <- mcmc_intervals(m.firstnight.blockbin.nofirstblock,
   theme_srl2() + 
   theme(axis.text = element_text(size = 12, family = "Times", colour = "black"), 
         axis.title = element_text(size = 14, family = "Times"))
-  
 
 # setting the conditions for the conditional effects plots 
 int_conditions <- list(block = c(2,3,4,5,6), bin = c(1,2,3,4,5))
@@ -921,29 +825,31 @@ p5 <- plot(m_firstnight_blockbin_nofirstblock, plot = FALSE, line_args = c(alpha
 ggarrange(p4, p5, heights = c(2.5, 4.5), nrow = 2, labels = c("a)","b)"), font.label = list(face = "plain", family = "Times New Roman", size = 15))
 ```
 
-When the bats had their very first experience of a reversal, the proportion of rewarded visits dropped to the lowest level of the whole experiment. So, we asked whether the first reversal just by itself was responsible for the significance of the factor *number of reversal* on Prop~rew~ in our statistical model of the data set. We found that this was not the case. To investigate this, we removed these data and repeated the analysis. We found that the effect of the reversals on the Prop~rew~ persisted, even without the effect of the first reversal (see *Supplementary Information*). 
+When the bats had their very first experience of a reversal, the proportion of rewarded visits dropped to the lowest level of the whole experiment. So, we asked whether the first reversal just by itself was responsible for the significance of the factor *number of reversal* on Prop~rew~ in our statistical model of the data set. To investigate this, we removed these data and repeated the analysis. We found that the effect of the reversals on the Prop~rew~ persisted, even without the effect of the first reversal (see *Supplementary Material*, Figure \@ref(fig:first-night-first-two-blocks-removed)). 
 
 # Discussion 
 
-We studied temporarily captive wild nectar-feeding bats in a spatial serial reversal learning task with two food sources that repeatedly alternated their rewarding properties, seeking evidence for behavioural flexibility in the mechanisms by which bats adjust to dynamically changing foraging environments. From a functional perspective, we sought to characterize the consequences of such adjustments in terms of payoffs. We found that as bats experienced more reversals, they reduced the number of perseverative failures after each reversal. In addition, there was a trend to decrease their asymptotic commitment to the presently better source. On balance, these two effects resulted in an increase in the total proportion of visits made to active flowers, leading to better yields.
+We studied temporarily captive wild nectar-feeding bats in a spatial serial reversal learning task with two food sources that repeatedly alternated their rewarding properties, seeking evidence for behavioral flexibility in the mechanisms by which bats adjust to dynamically changing foraging environments. From a functional perspective, we sought to characterize the consequences of such adjustments in terms of payoffs. We found that as bats experienced more reversals, they reduced the number of perseverative failures after each reversal. In addition, there was a trend to decrease their asymptotic commitment to the presently better source. On balance, these two effects resulted in an increase in the total proportion of visits made to active flowers, leading to better yields.
 
-In this protocol, the theoretical Win-Stay, Lose-Shift strategy would yield virtually maximal payoffs (losing only one reward per reversal). The bats did not follow WSLS, but they did increase the proportion of shifts (i.e., visits to the alternative flower) after a loss (an unrewarded visit), thus reducing the deviation from WSLS. This "speed of switching” increased within five experiences of reward reversal, in their first experimental night. Further experience, in two follow-up nights with 5 reversals each, did not yield further detectable changes (see *Supplementary Information*), indicating a protocol-dependent ceiling in performance.
+In this protocol, the theoretical Win-Stay, Lose-Shift strategy would yield virtually maximal payoffs (losing only one reward per reversal). The bats did not follow WSLS, but they did increase the proportion of shifts (i.e., visits to the alternative flower) after a loss (an unrewarded visit), thus reducing the deviation from WSLS. This 'speed of switching' increased within five experiences of reward reversal, in their first experimental night. Further experience, in two follow-up nights with 5 reversals each, did not yield further detectable changes (see *Supplementary Material*), indicating a protocol-dependent ceiling in performance.
 
-The probability of returning after a reward (win-stay) was high from the start, and an increase as a function of reversals would have been harder to detect precisely because it was already very high from the first block onwards. It would be misleading to label deviations from WSLS as anticipatory or perseverative ‘errors’: Although in the experimental protocol contingencies changed precisely  every 50 visits, the bats had no reason to be perfectly tuned to this. Changes in natural flowers are likely to be temporally noisy, and a probabilistic approximation to the WSLS policy may provide a good balance between sampling and exploitation. 
+The probability of returning after a reward (win-stay) was high from the start, and an increase as a function of reversals would have been harder to detect precisely because it was already very high from the first block onward. It would be misleading to label deviations from WSLS as anticipatory or perseverative ‘errors’: Although in the experimental protocol contingencies changed precisely  every 50 visits, the bats had no reason to be perfectly tuned to this. Changes in natural flowers are likely to be temporally noisy, and a probabilistic approximation to the WSLS policy may provide a good balance between sampling and exploitation. 
 
-We were interested in demonstrating a learning property: the ability to adjust to temporal properties of food sources. The mechanisms revealed in our experiments are bound to be present in nature. However, to form a picture of the ecological relevance of our results, it is pertinent to highlight some differences between our protocol and natural situations. First, our bats were not deprived, as we used a l arge reward size (40 $\mu$L) and supplementary food was also available. Levels of deprivation are bound to vary widely in the wild, and this may have complex effects on learning, decision making, and the balance between exploration and exploitation. Second, we offered two flowers with deterministic properties. In nature, the set of potential food sources is open and - from a forager’s perspective - vary stochastically due to fluctuations imposed among other factors by competition. These caveats are ubiquitous: laboratory experiments expose behavioural mechanisms, but do not substitute empirical research in the ecological circumstances to which behaviour is adapted.
+We were interested in demonstrating a learning property: the ability to adjust to temporal properties of food sources. The mechanisms revealed in our experiments are bound to be present in nature. However, to form a picture of the ecological relevance of our results, it is pertinent to highlight some differences between our protocol and natural situations. First, our bats were not deprived, as we used a large reward size (40 $\mu$L) and supplementary food was also available. Levels of deprivation are bound to vary widely in the wild, and this may have complex effects on learning, decision making, and the balance between exploration and exploitation. It has been shown for example that many animals, including a species of bat, show state-dependent learning, or evaluate rewards more highly when they are obtained under a state of deprivation ([@pompilio_state-dependent_2005]; [@pompilio_state-dependent_2006]; [@hemingway_state-dependent_2020]).Second, we offered two flowers with deterministic properties. In nature, the set of potential food sources is open and from a forager’s perspective varies stochastically due to fluctuations imposed, among other factors, by competition. These caveats are ubiquitous: laboratory experiments expose behavioral mechanisms, but do not substitute empirical research in the ecological circumstances to which behavior is adapted.
 
 That said, it is also noteworthy that though most flowers in nature are emptied in a single visit, there are certain plants such as species of *Agave* or *Vriesea*, that may hold large amounts of nectar. If undetected for a long time such flowers require multiple hovering visits to deplete – in other words, they are “jackpot” rewards. Nevertheless, such flowers may also be depleted suddenly due to the presence of competitors for the nectar. Thus, the ability to swiftly inhibit visiting a flower that had been rewarding for multiple visits is likely bats’ natural foraging ecology as nectar-feeding animals. 
 
-Bat behaviour and learning processes are surely adapted to fit the complexity of their environment and may reflect priors and learning processes that are effective in such scenarios. This general observation does not question the reliability of laboratory findings but is a reminder of the caution that must be shown in extrapolating to natural circumstances, especially when aspects of behaviour are, as sometimes happens, labelled as being ‘errors’ or being ‘suboptimal’.
+Bat behavior and learning processes are surely adapted to fit the complexity of their environment and may reflect priors and learning processes that are effective in such scenarios. This general observation does not question the reliability of laboratory findings but is a reminder of the caution that must be shown in extrapolating to natural circumstances, especially when aspects of behavior are, as sometimes happens, labelled as being ‘errors’ or being ‘suboptimal’.
 
-After the bats experienced no reward at a hitherto-rewarding option for the first time, the proportion of rewarded visits decreased, and never again showed the nearly exclusive preference for the rewarding flower that they displayed at the end of the first block. Bats, like most vertebrate foragers, are known to adjust their choice behaviour between different available options according to their history of reinforcement at those options [@nachev_psychophysics_2012]. If it is solely reinforcement history that dictates choice behaviour, regardless of temporal structure and dynamics, then as experience of reinforcement accumulates at both flowers over the course of a night, it should become progressively more difficult to discriminate which flower has a richer history. In this case, one would expect that the bats’ behaviour would approach random choice as the night goes on, i.e. Prop~rew~ would approach 0.5 and there would be slower modification of behavioural allocation. Even if the animals rely on only a part of their history of reinforcement at an option, and not the whole history, one would expect to see a slower switch to the rewarding option after a reversal, and then an increase in rewarded visits. This is the opposite of what was seen: with more reversal experience the bats switched to the newly rewarding option after increasingly fewer choices. However, behavioural allocation at the end of each block did show a weak trend to progressively become less extreme as reversal experience accumulated (Figure \@ref(fig:first-night-first-block-removed)b, bins 4 and 5), and the weight of cumulative past reinforcement may be a contributing factor in this. 
+After the bats experienced no reward at a hitherto-rewarding option for the first time, the proportion of rewarded visits decreased, and never again showed the nearly exclusive preference for the rewarding flower that they displayed at the end of the first block. Bats, like most vertebrate foragers, are known to adjust their choice behavior between different available options according to their history of reinforcement at those options [@nachev_psychophysics_2012]. If it is solely reinforcement history that dictates choice behavior, regardless of temporal structure and dynamics, then as experience of reinforcement accumulates at both flowers over the course of a night, it should become progressively more difficult to discriminate which flower has a richer history. In this case, one would expect that the bats’ behavior would approach random choice as the night goes on, i.e. Prop~rew~ would approach 0.5 and there would be slower modification of behavioral allocation. Even if the animals rely on only a part of their history of reinforcement at an option, and not the whole history, one would expect to see a slower switch to the rewarding option after a reversal, and then an increase in rewarded visits. This is the opposite of what was seen: with more reversal experience the bats switched to the newly rewarding option after increasingly fewer choices. However, behavioral allocation at the end of each block did show a weak trend to progressively become less extreme as reversal experience accumulated (Figure \@ref(fig:first-night-first-block-removed)b, bins 4 and 5), and the weight of cumulative past reinforcement may be a contributing factor in this. 
 
-While it is clear, therefore, that the bats’ choice behaviour was not dictated by the cumulative reinforcement history at the two options, the readiness to switch to the rewarding option reached a maximum by the end of the first night, after five reversals (see *Supplementary Material*). It is interesting that while appropriate re-allocation became swifter after successive reversals, the theoretical reward-maximizing strategy (Lose-Shift), which would incur only one unrewarded visit per block, was never reached, and both speed of switching and asymptotic commitment to the better option seemed to reach a limit towards the end of the first night. In fact, total commitment to the best option in a set is not to be expected if a forager is adapted to track changes in its environment, a point already made in the early foraging literature (e.g., [@smith_food-searching_1974]).
+While it is clear, therefore, that the bats’ choice behavior was not dictated by the cumulative reinforcement history at the two options, the readiness to switch to the rewarding option reached a maximum by the end of the first night, after five reversals (see *Supplementary Material*). It is interesting that while appropriate re-allocation became swifter after successive reversals, the theoretical reward-maximizing strategy (Lose-Shift), which would incur only one unrewarded visit per block, was never reached, and both speed of switching and asymptotic commitment to the better option seemed to reach a limit towards the end of the first night. In fact, total commitment to the best option in a set is not to be expected if a forager is adapted to track changes in its environment, a point already made in the early foraging literature (e.g., [@smith_food-searching_1974]). Indeed, we note that the bats in our experiment made approximately 10% of their visits every night to the six flowers that were not assigned to them – and were therefore always non-rewarding – out of the array of eight (Figure \@ref(fig:unassigned-flowers) and \@ref(fig:proportion-unassigned) in the *Supplementary Material*). This was despite the fact that the non-assigned flowers were only rewarding on the very first night of training, followed by several nights of being consistently non-rewarding. 
 
-What performance on the serial reversal task says about the cognitive mechanisms at work is not completely settled. Cognitive flexibility relies on processes in the brain that permit adaptive change in behaviour in response to changes in the internal or external environment, whereas behavioural flexibility is the modifiability of learned behaviour  [@dhawan_more_2019]. Cognitive flexibility cannot be directly observed; it is inferred to have occurred through behavioural flexibility [@tait_assessment_2018], and the reversal learning task has been variously considered as a test of cognitive flexibility [@izquierdo_neural_2017] and behavioural flexibility [@dhawan_more_2019].
+What performance on the serial reversal task says about the cognitive mechanisms at work is not completely settled. Cognitive flexibility relies on processes in the brain that permit adaptive change in behavior in response to changes in the internal or external environment, whereas behavioral flexibility is the modifiability of learned behavior  [@dhawan_more_2019]. Cognitive flexibility cannot be directly observed; it is inferred to have occurred through behavioral flexibility [@tait_assessment_2018], and the reversal learning task has been variously considered as a test of cognitive flexibility [@izquierdo_neural_2017] and behavioral flexibility [@dhawan_more_2019].
 
-Behavioural flexibility has been found in most species tested in reversal learning tasks regardless of whether they depend on flowers or need both spatial memory and some form of renewal of information or ‘book-keeping’ to perform adaptively. This includes our own study species [@thiele_nahrungssuchstrategien_2006], bumblebees [@strang_serial_2014; @chittka_sensorimotor_1998], honeybees [@mota_multiple_2010; @menzel_gedachtnis_1969], rats [@mackintosh_overtraining_1965; [@van_golf_racht-delatour_rule-based_1999; @dhawan_more_2019], pigeons [@williams_overtraining_1967], rabbits [@orona_cingulate_1982], corvids [@bond_serial_2007], pigeons [@diekamp_functional_1999], marmosets [@clarke_lesions_2008] and even human children [@eimas_effects_1966]. It is also present in species adapted to different spatial demands, such as hoarding species of passerines such as black-capped chickadees [@hampton_proactive_1998], Clark’s nutcrackers [@lewis_interference_2006] and high elevation mountain chickadees [@croston_predictably_2017] and in brood parasitic birds that must keep some form of ‘book-keeping’ regarding the state and availability of potential target host nests [@guigueno_female_2014; @guigueno_sex_2016; @lois-milevicich_sex_2021]. The processes and parameters of first- and second-order learning about location and state of reward sources, and other qualitative and quantitative details must adaptively reflect the biology of each species, but a common picture emerges, in which animals display remarkable abilities to pick up the relevant environmental affordances at various temporal and spatial scales.   
+Behavioral flexibility has been found in most species tested in reversal learning tasks with widely varying foraging ecologies. This includes our own study species [@thiele_nahrungssuchstrategien_2006], bumblebees [@strang_serial_2014; @chittka_sensorimotor_1998], honeybees [@mota_multiple_2010; @menzel_gedachtnis_1969], rats [@mackintosh_overtraining_1965; [@van_golf_racht-delatour_rule-based_1999; @dhawan_more_2019], pigeons [@williams_overtraining_1967], rabbits [@orona_cingulate_1982], corvids [@bond_serial_2007], pigeons [@diekamp_functional_1999], marmosets [@clarke_lesions_2008] and even human children [@eimas_effects_1966]. It is also present in species adapted to different spatial demands, such as hoarding species of passerines such as black-capped chickadees [@hampton_proactive_1998], Clark’s nutcrackers [@lewis_interference_2006] and high elevation mountain chickadees [@croston_predictably_2017] and in brood parasitic birds that must keep some form of ‘book-keeping’ regarding the state and availability of potential target host nests [@guigueno_female_2014; @guigueno_sex_2016; @lois-milevicich_sex_2021]. 
+
+The processes and parameters of first- and second-order learning about the location of reward sources, the availability and properties of rewards,  and state of reward sources, and other qualitative and quantitative details must adaptively reflect the biology of each species. However, through these differences, , but a a common picture emerges, in which animals display general and remarkable abilities to pick up the relevant environmental affordances at various temporal and spatial scales.     
 
 # Acknowledgements
 
@@ -1222,7 +1128,7 @@ samp_prop_np_mean <- samp_prop_np_nonrw %>%
 
 Only two out of the array of eight flowers were assigned uniquely to each bat but all the flowers were accessible to all the animals. The number of attempts to get a reward from all the flowers, both assigned and not assigned is shown in Figure \@ref(fig:unassigned-flowers).
 
-(ref:unassigned-flowers) Visits made by the bats to all the flowers, including the ones that were not assigned to them. Purple bars are nose-pokes at the assigned flowers, where the bats attempted to get a reward by breaking the light-barrier. Yellow bars are nose-pokes at the non-assigned flowers. 
+(ref:unassigned-flowers) Visits made by the bats to all the flowers, including the ones that were not assigned to them. Purple bars are nose-pokes at the assigned flowers, where the bats attempted to get a reward by breaking the light-barrier. Yellow bars are nose-pokes at the non-assigned flowers
 
 ```{r, unassigned-flowers, fig.cap="(ref:unassigned-flowers)", fig.width = 10, fig.height = 7}
 
@@ -1258,9 +1164,9 @@ p7 <- samp_nosepokes_nonrw %>%
 ggarrange(p6, p7, nrow = 2, ncol = 1, common.legend = TRUE)
 ```
 
-The number of attempts to get a reward at the non-assigned flowers was a small proportion of the overall number of approaches and reward-attempts at the flowers, less than 10% every night on average as Figure  \@ref(fig:proportion-unassigned) shows.
+The number of attempts to get a reward at the non-assigned flowers was a small proportion of the overall number of approaches and reward-attempts at the flowers, less than 10% every night on average as Figure \@ref(fig:proportion-unassigned) shows.
 
-(ref:proportion-unassigned) Proportion of visits to the un-assigned flowers out of the total number of visits to flowers. Coloured points are data from individual bats. Black points are the mean proportion per night and the error bars are 89% CIs.
+(ref:proportion-unassigned) Proportion of visits to the un-assigned flowers out of the total number of visits to flowers. Colored points are data from individual bats. Black points are the mean proportion per night and the error bars are 89% CIs
 
 ```{r, proportion-unassigned, fig.cap = "(ref:proportion-unassigned)", fig.width=5, fig.height= 4}
 
@@ -1293,6 +1199,103 @@ p8
 Weakly informative priors were used for the GLMMs in `brms`. All the models were estimated using 4 chains with a thinning interval of 3, with 1500 warm-up samples and 3000 post-warm-up samples for all the models except the one fitted to the data from the second and third nights, which had 1000 warm-up samples and 3000 post-warm-up samples. The response variable was the proportion of visits to the rewarding option, and a Bernoulli likelihood function was used. For the model of the first experimental night, the reversal number, 10-visit bin within each block, and their interaction were the fixed effects. Slopes and intercepts were allowed to vary for each animal. For the model of the second and third experimental nights, the experimental night, reversal number, 10-visit bin within each block, night-reversal interaction and reversal-bin interaction were the fixed effects. Slopes and intercepts were allowed to vary for each animal. 
 
 Visual inspection of the trace plots, the effective sample size, the Gelman-Rubin convergence diagnostic ($\hat R$) and the calculation of posterior predictions for the same clusters were all used to assess the fit of the models. In all the models the $\hat R$ was equal to 1 for all the chains. 
+
+(ref:pers-visits) Proportion of visits to the rewarding option out of the first 10 visits after each reversal. Thin lines are individual data, and the thick line is the average proportion of rewarded visits over all bats.  
+
+# Perseverative visits
+
+The number of visits made after a reversal to the previously rewarding flower, i.e., the number of perseverative visits, declined with each successive experience of a reversal on the first experimental night. The raw data from the individual bats on the first night are depicted in Figure \@ref(fig:pers-visits) showing this trend.
+
+(ref:pers-visits) Proportion of visits to the rewarding option out of the first 10 visits after each reversal. Thin lines are individual data, and the thick line is the average proportion of rewarded visits over all bats
+
+```{r pers-visits, fig.cap = "(ref:pers-visits)", fig.width = 5, fig.height = 4.5}
+
+# setting a different binsize to group the data
+binsize_five <- 5
+breaks_five <- seq(0, 3000, binsize_five)
+
+# creating a separate dataframe with the data from the first night
+pers_visits <- rev_learning %>% 
+  # filtering out the first night
+  filter(Day == "Day 1") %>%
+  # binning the data
+  mutate(bin_five = as.numeric(cut(block_vis, breaks_five, include.lowest = TRUE))) %>% 
+  ungroup() %>% 
+  select(Bat, block, bin, reward_status, block_vis, bin_five) %>% 
+  # grouping by block
+  group_by(Bat, block) %>% 
+  # calculating the average proportion of visits to rewarding flower for each bat and each block
+  mutate(block_average = mean(reward_status)) %>% 
+  ungroup() %>% 
+  group_by(Bat, block, block_average, bin_five) 
+
+pers_bin_number <- 10
+
+pers_visits <- pers_visits %>% 
+  ungroup() %>% 
+  filter(block > 1, 
+         block_vis <= pers_bin_number) %>% 
+  ungroup() %>%
+  group_by(Bat, block, bin_five) %>% 
+  mutate(bin_five_average = mean(reward_status)) %>% 
+  # selecting the required columns
+  select(Bat, block, bin_five, bin_five_average) %>% 
+  ungroup() %>% 
+  group_by(Bat, block) %>% 
+  # calculating the proportion of rewarded visits per bat per block
+  mutate(block_bat_mean = mean(bin_five_average)) %>% 
+  ungroup() %>% 
+  group_by(block) %>% 
+  # calculating the proportion of rewarded visits per block averaged all bats 
+  mutate(block_mean = mean(bin_five_average))
+
+# pers_visits_first_night <- rev_learning %>% 
+#   filter(Day == "Day 1", 
+#          bin == 1, 
+#          block > 1) %>% 
+#   ungroup() %>% 
+#   group_by (Bat, block) %>% 
+#   mutate(mean_per_bat = mean(reward_status)) %>% 
+#   ungroup() %>% 
+#   group_by(block) %>% 
+#   mutate(mean_overall = mean(reward_status))
+
+# pers_visits <- pers_visits %>% 
+#   ungroup() %>% 
+#   filter(block > 1, 
+#          block_vis <= pers_bin_number) %>% 
+#   ungroup() %>%
+#   group_by(Bat, block, bin_five) %>% 
+#   mutate(bin_five_average = mean(reward_status)) %>% 
+#   # selecting the required columns
+#   select(Bat, block, bin_five, bin_five_average) %>% 
+#   ungroup() %>% 
+#   group_by(Bat, block) %>% 
+#   # calculating the proportion of rewarded visits per bat per block
+#   mutate(block_bat_mean = mean(bin_five_average)) %>% 
+#   ungroup() %>% 
+#   group_by(block) %>% 
+#   # calculating the proportion of rewarded visits per block averaged all bats 
+#   mutate(block_mean = mean(bin_five_average))
+
+# plotting it out
+p3 <- pers_visits %>%
+  ggplot() + 
+  geom_line(aes(block, block_bat_mean, group = Bat, colour = Bat), linetype = "dashed") + 
+  geom_line(aes(block, block_mean), colour = "black", size = 2) + 
+  ylim(0, 1) + 
+  ylab("Rewards in the first 10 visits") + 
+  xlab("Block") +
+  scale_colour_viridis_d() + 
+  theme_srl() + 
+  theme(legend.position = "top", 
+        legend.title = element_blank(),
+        legend.text = element_text(size = 10),
+        legend.margin=margin(0,0,0,0)
+        )
+
+p3
+```
 
 ## The effect of reversal is not driven solely by the effect of the first reversal on the first night 
 
@@ -1446,7 +1449,7 @@ At the very start of the second and third nights, in the first bin of visits bef
 
 A GLMM similar to the ones fit to the data from the first night was fit to the data from the second and third nights. Excluding this first block, there was no effect of reversal on the Prop~rew~, although there was a strong effect of 10-visit bin within each block. That is, the proportion of visits to the rewarded flower only increased within each block as the block progressed (Figure \@ref(fig:overall-summary-last-two-nights) and Figure \@ref(fig:second-and-third-nights-analysis)).  
 
-(ref:overall-summary-last-two-nights) Visits to the rewarding one of two options over second and third experimental nights. Data are average proportions for bins of ten visits averaged over all the individuals that made visits in each bin. Numbers indicate the bats that participated in a block. Shading shows 95% confidence intervals. Dashed lines show reversals. 
+(ref:overall-summary-last-two-nights) Visits to the rewarding one of two options over second and third experimental nights. Data are average proportions for bins of ten visits averaged over all the individuals that made visits in each bin. Numbers indicate the bats that participated in a block. Shading shows 95% confidence intervals. Dashed lines show reversals
 
 ```{r, overall-summary-last-two-nights, fig.cap = "(ref:overall-summary-last-two-nights)", fig.width = 6, fig.height = 3}
 
@@ -1485,7 +1488,7 @@ p11 <- rev_learning_avg %>%
 p11
 ```
 
-(ref:second-and-third-nights-analysis) a) Forest plot of the regression coefficients from a model of the effect of experimental night, reversal and 10-visit bin on the visits to the rewarding flower, excluding the first night. Circles represent the means of the posterior distributions of the slope coefficients, thick horizontal lines represent 50% credible intervals, and thin horizontal lines 89% credible intervals. The numbers in bold are the means of the posterior distributions and 89% credible intervals b) Conditional effects plot from the model of the effect of experimental night, reversal and 10-visit bin on the visits to the rewarding flower - excluding the first night - showing the two-way interaction between reversal and bin, sampling from the posterior distribution.
+(ref:second-and-third-nights-analysis) a) Forest plot of the regression coefficients from a model of the effect of experimental night, reversal and 10-visit bin on the visits to the rewarding flower, excluding the first night. Circles represent the means of the posterior distributions of the slope coefficients, thick horizontal lines represent 50% credible intervals, and thin horizontal lines 89% credible intervals. The numbers in bold are the means of the posterior distributions and 89% credible intervals b) Conditional effects plot from the model of the effect of experimental night, reversal and 10-visit bin on the visits to the rewarding flower - excluding the first night - showing the two-way interaction between reversal and bin, sampling from the posterior distribution
 
 ```{r second-and-third-nights-analysis, fig.cap = "(ref:second-and-third-nights-analysis)", fig.width = 6, fig.height = 8}
 
